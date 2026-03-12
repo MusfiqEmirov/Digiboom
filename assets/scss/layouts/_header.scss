@@ -1,0 +1,177 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-height: 72px;
+    padding: 0;
+    z-index: 1050;
+    transition: all 0.5s ease-in-out;
+    animation: 0.5s ease-in-out 0s normal none 1 running fadeInDown;
+
+    .container {
+        height: 100%;
+    }
+
+    .header-wrapper {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+
+        a {
+            display: flex;
+            align-items: center;
+        }
+
+        img {
+            max-height: 42px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+    }
+
+    @include media-breakpoint-down(lg) {
+        min-height: 64px;
+
+        .header-wrapper {
+            min-height: 64px;
+        }
+
+        .logo img {
+            max-height: 36px;
+        }
+    }
+
+    // Menyu (dropdown) desktopda da eyni formada görünsün, header dropdown üstündə qalsın
+    .btn-group .dropdown-menu {
+        z-index: 1060;
+    }
+
+    &.fixed-header {
+        min-height: 72px;
+        background-color: var(--bs-primary);
+
+        .header-wrapper {
+            min-height: 72px;
+        }
+
+        @include media-breakpoint-down(lg) {
+            min-height: 64px;
+
+            .header-wrapper {
+                min-height: 64px;
+            }
+        }
+
+        .logo {
+            .logo-dark {
+                display: block;
+            }
+
+            .logo-white {
+                display: none;
+            }
+        }
+
+        .light-dark {
+            color: var(--bs-dark) !important;
+        }
+
+        .toggle-menu {
+            background-color: var(--bs-dark) !important;
+
+            .menu-icon {
+                color: var(--bs-white) !important;
+            }
+        }
+    }
+
+    .logo {
+        .logo-dark {
+            display: none;
+        }
+    }
+
+    // Desktop nav - üfüqi menyu (lg+) + animate-spin (hover və active)
+    .header-nav-desktop-link {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: color 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+
+        .animate-spin {
+            transition: 0.5s;
+            opacity: 0;
+            width: 0;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        &:hover,
+        &.active {
+            color: #fff;
+
+            .animate-spin {
+                opacity: 1;
+                width: 20px;
+            }
+        }
+    }
+
+    &.fixed-header .header-nav-desktop-link {
+        color: var(--bs-dark);
+
+        &:hover,
+        &.active {
+            color: var(--bs-dark);
+        }
+    }
+
+    &.fixed-header .header-nav-desktop-btns .btn-outline-light {
+        border-color: var(--bs-dark);
+        color: var(--bs-dark);
+
+        &:hover {
+            background-color: var(--bs-dark);
+            color: #fff;
+        }
+    }
+
+    .header-menu {
+
+        .header-item {
+            .header-link {
+                .animate-spin {
+                    transition: 0.5s;
+                }
+
+                .animate-spin {
+                    opacity: 0;
+                    width: 0;
+                }
+
+                &:hover,
+                &.active {
+                    .animate-spin {
+                        opacity: 1;
+                        width: 20px;
+                        margin-inline-end: 5px;
+                    }
+                }
+            }
+        }
+    }
+
+}
