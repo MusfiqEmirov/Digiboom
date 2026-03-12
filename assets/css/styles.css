@@ -16500,6 +16500,7 @@ textarea.form-control-lg {
   width: 0;
   overflow: hidden;
   flex-shrink: 0;
+  filter: brightness(0) invert(1);
 }
 .header .header-nav-desktop-link:hover,
 .header .header-nav-desktop-link.active {
