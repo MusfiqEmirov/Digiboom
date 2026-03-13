@@ -16797,39 +16797,68 @@ textarea.form-control-lg {
   padding: 0.65rem 0.9rem !important;
 }
 /* Ətraflı düyməsi – kiçik, sadə; kliklə projects-detail səhifəsinə keçid */
-/* Şəkil overlay Ətraflı (projects-detail) – kiçik, hover tamamilə söndürülüb */
+/* Şəkil overlay Ətraflı (projects-detail) – yaşıl fon, qara mətn, heç bir hover yox */
 .portfolio-overlay--team-style .portfolio-overlay-btn {
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  padding: 0.22rem 0.4rem;
-  border-width: 1px;
-  border-radius: 4px;
+  padding: 0.18rem 0.2rem 0.18rem 0.2rem;
+  border: none;
+  border-radius: 3px;
   text-decoration: none;
   transition: none !important;
+  background: var(--bs-primary) !important;
+  background-color: var(--bs-primary) !important;
+  color: #000 !important;
+  width: fit-content;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
 }
 .portfolio-overlay--team-style .portfolio-overlay-btn:hover,
 .portfolio-overlay--team-style .portfolio-overlay-btn:focus,
 .portfolio-overlay--team-style .portfolio-overlay-btn:active {
-  opacity: 1 !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  color: #fff !important;
-  border-color: rgba(255, 255, 255, 0.8) !important;
+  background: var(--bs-primary) !important;
+  background-color: var(--bs-primary) !important;
+  color: #000 !important;
+  border: none !important;
   box-shadow: none !important;
   transform: none !important;
+  opacity: 1 !important;
 }
 .portfolio-overlay--team-style .portfolio-overlay-btn iconify-icon {
-  font-size: 0.65rem;
+  font-size: 0.4rem;
+  width: 0.5em;
+  height: 0.5em;
+  color: #000 !important;
 }
-/* Haqqımızda səhifəsi: overlay Ətraflı – en/hündürlük kiçik */
+/* Overlay Ətraflı: .btn-text hərəkət və rəng dəyişməsinin qarşısını al */
+.portfolio-overlay--team-style .portfolio-overlay-btn .btn-text,
+.portfolio-overlay--team-style .portfolio-overlay-btn:hover .btn-text,
+.portfolio-overlay--team-style .portfolio-overlay-btn:focus .btn-text,
+.portfolio-overlay--team-style .portfolio-overlay-btn:active .btn-text {
+  color: #000 !important;
+  transform: none !important;
+}
+.portfolio-overlay--team-style .portfolio-overlay-btn .btn-icon,
+.portfolio-overlay--team-style .portfolio-overlay-btn:hover .btn-icon,
+.portfolio-overlay--team-style .portfolio-overlay-btn:focus .btn-icon,
+.portfolio-overlay--team-style .portfolio-overlay-btn:active .btn-icon {
+  transform: none !important;
+}
+/* Haqqımızda səhifəsi: overlay Ətraflı – bir az daha kiçik, eni mətnə uyğun */
 .page-about .portfolio-overlay--team-style .portfolio-overlay-btn {
-  font-size: 0.6rem;
-  padding: 0.22rem 0.38rem;
-  border-radius: 4px;
+  font-size: 0.5rem;
+  padding: 0.15rem 0.18rem 0.15rem 0.18rem;
+  border-radius: 3px;
+  width: fit-content;
+  min-width: 0;
 }
 .page-about .portfolio-overlay--team-style .portfolio-overlay-btn iconify-icon {
-  font-size: 0.65rem;
+  font-size: 0.36rem;
+  width: 0.5em;
+  height: 0.5em;
 }
 /* Sosial ikonlar – kiçik dairə, səliqəli */
 .portfolio-overlay-social {
