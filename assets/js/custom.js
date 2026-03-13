@@ -36,6 +36,37 @@ $(function () {
         }
     });
 
+    // Xidmətlər carousel – telefon 1 kart, sürüşdürmə, öz-özünə dəyişən, sol/sağ oxlar
+    var $servicesSlider = $('.services-section .services-slider');
+    $servicesSlider.owlCarousel({
+        loop: true,
+        margin: 24,
+        nav: false,
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 2800,
+        autoplayHoverPause: true,
+        touchDrag: true,
+        pullDrag: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            992: {
+                items: 3
+            }
+        }
+    });
+    $('.services-nav-prev').on('click', function () {
+        $servicesSlider.trigger('prev.owl.carousel', [300]);
+    });
+    $('.services-nav-next').on('click', function () {
+        $servicesSlider.trigger('next.owl.carousel', [300]);
+    });
+
     // Testimonial: desktop 1,2,3 → 4,5,6 → 7,8,9 (icon 3-3), mobil 1-1
     var $testimonialSlider = $('.testimonial-slider');
     if ($testimonialSlider.length) {

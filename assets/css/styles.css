@@ -14835,8 +14835,8 @@ textarea.form-control-lg {
     padding-bottom: 96px !important;
   }
   .py-xl-12 {
-    padding-top: 160px !important;
-    padding-bottom: 160px !important;
+    padding-top: 100px !important;
+    padding-bottom: 30px !important;
   }
   .pt-xl-0 {
     padding-top: 0 !important;
@@ -15028,7 +15028,7 @@ textarea.form-control-lg {
     gap: 80px !important;
   }
   .gap-xl-11 {
-    gap: 96px !important;
+    gap: 30px !important;
   }
   .gap-xl-12 {
     gap: 160px !important;
@@ -16242,7 +16242,7 @@ textarea.form-control-lg {
     gap: 96px !important;
   }
   .gap-xxl-12 {
-    gap: 160px !important;
+    gap: 50px !important;
   }
   .row-gap-xxl-0 {
     row-gap: 0 !important;
@@ -16785,6 +16785,76 @@ textarea.form-control-lg {
   transition: all 0.4s ease-in-out;
   background-color: rgba(0, 0, 0, 0.7);
 }
+/* Gördüyümüz işlər – team tipli overlay: altdan çıxır, solda Ətraflı, sağda sosial ikonlar */
+.portfolio-img .portfolio-overlay--team-style {
+  transform: translateY(100%);
+}
+.portfolio-img:hover .portfolio-overlay--team-style {
+  transform: translateY(0);
+}
+/* Overlay içi: kiçik padding, səliqəli */
+.portfolio-overlay--team-style {
+  padding: 0.65rem 0.9rem !important;
+}
+/* Ətraflı düyməsi – kiçik, sadə; kliklə projects-detail səhifəsinə keçid */
+/* Şəkil overlay Ətraflı (projects-detail) – kiçik, hover tamamilə söndürülüb */
+.portfolio-overlay--team-style .portfolio-overlay-btn {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.22rem 0.4rem;
+  border-width: 1px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: none !important;
+}
+.portfolio-overlay--team-style .portfolio-overlay-btn:hover,
+.portfolio-overlay--team-style .portfolio-overlay-btn:focus,
+.portfolio-overlay--team-style .portfolio-overlay-btn:active {
+  opacity: 1 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+.portfolio-overlay--team-style .portfolio-overlay-btn iconify-icon {
+  font-size: 0.65rem;
+}
+/* Haqqımızda səhifəsi: overlay Ətraflı – en/hündürlük kiçik */
+.page-about .portfolio-overlay--team-style .portfolio-overlay-btn {
+  font-size: 0.6rem;
+  padding: 0.22rem 0.38rem;
+  border-radius: 4px;
+}
+.page-about .portfolio-overlay--team-style .portfolio-overlay-btn iconify-icon {
+  font-size: 0.65rem;
+}
+/* Sosial ikonlar – kiçik dairə, səliqəli */
+.portfolio-overlay-social {
+  gap: 0.35rem !important;
+}
+.portfolio-overlay-social .btn {
+  width: 26px;
+  height: 26px;
+  padding: 0 !important;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.portfolio-overlay-social .btn iconify-icon {
+  font-size: 0.8rem !important;
+}
+.portfolio-overlay-social .btn:hover {
+  background-color: var(--bs-primary) !important;
+  transform: scale(1.08);
+}
+.portfolio-overlay-social .btn:hover iconify-icon {
+  color: #fff !important;
+}
 
 .meet-team-img {
   position: relative;
@@ -17017,6 +17087,45 @@ textarea.form-control-lg {
     padding-top: 3.5rem;
     padding-bottom: 3.5rem;
   }
+}
+
+/* Xidmətlər carousel nöqtələri – tünd fon üçün ağ */
+.services-section .owl-dots .owl-dot span {
+  background: rgba(255, 255, 255, 0.5);
+}
+.services-section .owl-dots .owl-dot.active span,
+.services-section .owl-dots .owl-dot:hover span {
+  background: #fff;
+}
+
+/* Xidmətlər carousel sol/sağ ox düymələri */
+.services-nav-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--bs-dark);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.services-nav-btn:hover {
+  background: var(--bs-primary);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+.services-nav-prev { left: -8px; }
+.services-nav-next { right: -8px; }
+@media (max-width: 575.98px) {
+  .services-nav-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .services-nav-prev { left: 0; }
+  .services-nav-next { right: 0; }
 }
 
 /* Xidmətlər header: sol 02+Xidmetler, mərkəzdə başlıq+mətn (tam orta) */
@@ -17554,11 +17663,17 @@ ul {
   background: transparent;
   transition: all 0.4s ease;
 }
-.pricing-section .pricing-card .btn:hover,
-.pricing-section .pricing-card .btn:hover .btn-text {
+.pricing-section .pricing-card .btn .btn-text {
+  background: none !important;
+}
+.pricing-section .pricing-card .btn:hover {
   color: #fff !important;
   border-color: #fd7e14;
   background: #fd7e14;
+}
+.pricing-section .pricing-card .btn:hover .btn-text {
+  color: #fff !important;
+  background: transparent !important;
 }
 .pricing-section .pricing-card--popular {
   border-top-color: #ff9800;
@@ -17568,9 +17683,15 @@ ul {
   border-color: #ff9800;
   background: #ff9800;
 }
+.pricing-section .pricing-card--popular .btn .btn-text {
+  background: none !important;
+}
 .pricing-section .pricing-card--popular .btn:hover {
   border-color: #e85d04;
   background: #e85d04;
+}
+.pricing-section .pricing-card--popular .btn:hover .btn-text {
+  background: transparent !important;
 }
 /* --- Xususi paketlər: hover – rəng yalnız yuxarı sağ küncdə, qəhvəyi --- */
 .pricing-section .pricing-card:hover {
@@ -17585,6 +17706,88 @@ ul {
   border-top: 3px solid transparent;
   box-shadow: 0 12px 40px rgba(120, 80, 50, 0.3);
   transform: scale(1.03);
+}
+
+/* Haqqımızda – əsas şəkil hündürlüyü kiçildilmiş */
+.about-main-image-wrapper {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.about-main-image {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+@media (min-width: 992px) {
+  .about-main-image {
+    height: 340px;
+  }
+}
+
+.about-main-image-wrapper:hover .about-main-image {
+  transform: scale(1.05);
+}
+
+.about-stats .stats-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  padding-top: 2.25rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.about-stats .stats-card__icon {
+  position: absolute;
+  top: 0.75rem;
+  left: 1.5rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(132, 209, 65, 0.15);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #111827;
+}
+
+.about-stats .stats-card__number {
+  font-size: 1.75rem;
+  text-align: center;
+}
+
+.about-stats .stats-card__text {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+.about-stats .stats-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(132, 209, 65, 0.18), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.about-stats .stats-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+  border-color: rgba(132, 209, 65, 0.4);
+}
+
+.about-stats .stats-card:hover::after {
+  opacity: 1;
 }
 
 /*# sourceMappingURL=styles.css.map */
