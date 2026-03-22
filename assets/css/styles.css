@@ -124,6 +124,34 @@
   --bs-form-invalid-border-color: #dc3545;
 }
 
+/* portfolio.html – hər grid kartı üçün (Featured Collection tipli hover) */
+.portfolio-list-row .portfolio-list-card {
+  position: relative;
+  border-radius: 18px;
+  background: radial-gradient(circle at top left, rgba(193, 255, 114, 0.18), transparent 55%), #ffffff;
+  border: 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.16);
+  transform: scale(1) translateY(0);
+  transform-origin: center center;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+  overflow: hidden;
+}
+
+.portfolio-list-row .portfolio-list-card:hover {
+  transform: scale(1.008) translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18), 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.portfolio-intro h2 {
+  letter-spacing: 0.02em;
+}
+
+.portfolio-intro p {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 [data-bs-theme=dark] {
   color-scheme: dark;
   --bs-body-color: rgba(31, 42, 46, 0.6);
@@ -16699,6 +16727,23 @@ textarea.form-control-lg {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+/* services.html – statik grid: mobil 2 sütun (col-6), desktop 3 (col-lg-4) */
+@media (max-width: 991.98px) {
+  .services .service-grid .row.g-4 > .col-6.col-lg-4 .service-card,
+  .services .service-grid .row.g-4 > .col-6.col-lg-4 .service-card__content {
+    min-height: 220px;
+  }
+  .services .service-grid .row.g-4 > .col-6.col-lg-4 .service-card__content {
+    padding: 1.25rem !important;
+  }
+  .services .service-grid .row.g-4 > .col-6.col-lg-4 .service-card__title {
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+  }
+  .services .service-grid .row.g-4 > .col-6.col-lg-4 .service-card__text {
+    font-size: 0.8rem;
+  }
+}
+
 /* Stats row – 5 yan-yana, balaca */
 .stats-card__number {
   font-size: clamp(1.25rem, 2.5vw, 1.75rem);
@@ -16885,6 +16930,453 @@ textarea.form-control-lg {
   color: #fff !important;
 }
 
+/* projects.html – Gördüyümüz işlər grid: mobil 2, desktop 4 sütun; çoğaldıqca altdan */
+.projects-page-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  grid-auto-flow: row;
+  width: 100%;
+  max-width: 100%;
+}
+@media (max-width: 575.98px) {
+  /* Telefon üçün kart ölçülərini bir az kiçilt */
+  .projects-page-grid .portfolio-details h3 {
+    font-size: 0.9rem;
+  }
+  .projects-page-grid .portfolio-details .badge {
+    font-size: 0.7rem;
+    padding: 0.08rem 0.4rem;
+  }
+  .projects-page-grid .portfolio {
+    gap: 0.75rem;
+  }
+}
+
+/* projects grid: 2 sütun (tablet/mobil) – overlay içində Ətraflı tam görünsün, ikonlar balaca və səliqəli */
+@media (max-width: 991.98px) {
+  .projects-page-grid .portfolio-overlay--team-style {
+    padding: 0.5rem 0.6rem !important;
+  }
+  /* Ətraflı + sosial: alt-alta, sıxışma yox */
+  .projects-page-grid .portfolio-overlay--team-style > .d-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.4rem;
+  }
+  .projects-page-grid .portfolio-overlay--team-style .portfolio-overlay-btn {
+    font-size: clamp(0.7rem, 2.8vw, 0.8125rem) !important;
+    padding: 0.3rem 0.5rem !important;
+    align-self: flex-start;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  .projects-page-grid .portfolio-overlay-social {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+    column-gap: 0.28rem !important;
+  }
+  .projects-page-grid .portfolio-overlay-social .btn {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    min-height: 22px;
+  }
+  .projects-page-grid .portfolio-overlay-social .btn iconify-icon {
+    font-size: 0.62rem !important;
+    width: 1em;
+    height: 1em;
+  }
+  /* Aşağıdakı teqlər: kəsmə yox, tam mətn */
+  .projects-page-grid .portfolio-details .hstack {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    row-gap: 0.35rem;
+  }
+  .projects-page-grid .portfolio-details .badge {
+    white-space: normal;
+    word-break: break-word;
+    text-align: left;
+    line-height: 1.3;
+    max-width: 100%;
+  }
+}
+@media (min-width: 576px) {
+  .projects-page-grid {
+    gap: 1.1rem;
+  }
+}
+@media (min-width: 992px) {
+  .projects-page-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+@media (min-width: 1200px) {
+  .projects-page-grid {
+    gap: 1.75rem;
+  }
+}
+
+.projects-page-grid .portfolio-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.projects-page-grid .portfolio-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* projects.html – kart hover: yalnız kartın özü (ölçü scale yox – kölgə + kiçik qaldırma) */
+.projects-page-grid .portfolio {
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.16);
+  transform: translateY(0);
+  transform-origin: center center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.projects-page-grid .portfolio:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* projects.html – custom pagination (Inter, #087f5b – yalnız bu blokda) */
+.projects-pagination-ui {
+  font-family: "Inter", sans-serif;
+  color: #343a40;
+}
+
+/* Bootstrap .pagination sinfi YOX – əks halda .page-link və --bs-pagination* əzir */
+.projects-pagination-ui .projects-pagination-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.projects-pagination-ui .projects-pagination-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.projects-pagination-ui .projects-pagination-prev,
+.projects-pagination-ui .projects-pagination-next {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: 0;
+  background-color: #fff !important;
+  border: 1px solid #087f5b !important;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #087f5b !important;
+  line-height: 1;
+  box-shadow: none !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
+    transform 0.15s ease;
+}
+
+/* native disabled = brauzer hover vermir; JS ilə .projects-pagination-nav--disabled istifadə olunur */
+.projects-pagination-ui .projects-pagination-prev:hover,
+.projects-pagination-ui .projects-pagination-next:hover {
+  background-color: #087f5b !important;
+  border-color: #087f5b !important;
+  color: #fff !important;
+  transform: scale(1.05);
+}
+
+.projects-pagination-ui .projects-pagination-prev:hover .btn-icon,
+.projects-pagination-ui .projects-pagination-next:hover .btn-icon,
+.projects-pagination-ui .projects-pagination-prev:hover svg,
+.projects-pagination-ui .projects-pagination-next:hover svg {
+  stroke: #fff !important;
+}
+
+.projects-pagination-ui .projects-pagination-prev:focus-visible,
+.projects-pagination-ui .projects-pagination-next:focus-visible {
+  outline: 2px solid #087f5b;
+  outline-offset: 2px;
+}
+
+.projects-pagination-ui .projects-pagination-prev.projects-pagination-nav--disabled,
+.projects-pagination-ui .projects-pagination-next.projects-pagination-nav--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.projects-pagination-ui .projects-pagination-prev.projects-pagination-nav--disabled:hover,
+.projects-pagination-ui .projects-pagination-next.projects-pagination-nav--disabled:hover {
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.projects-pagination-ui .btn-icon {
+  height: 16px;
+  width: 16px;
+  flex-shrink: 0;
+  stroke: currentColor;
+  transition: stroke 0.2s ease, color 0.2s ease;
+}
+
+.projects-pagination-ui .projects-pagination-prev svg path,
+.projects-pagination-ui .projects-pagination-next svg path {
+  stroke: currentColor;
+}
+
+/* Rəqəmlər: Bootstrap .page-link İSTİFADƏ ETMİRİK — yalnız .projects-pg-num */
+.projects-pagination-ui .projects-pagination-links a.projects-pg-num {
+  box-sizing: border-box !important;
+  text-decoration: none !important;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  color: #343a40 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  max-width: 36px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(8, 127, 91, 0.45) !important;
+  background-color: #fff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.15s ease, -webkit-text-fill-color 0.2s ease;
+}
+
+/* Hover = sol/sağ ox (ümumi a:hover-dan sonra da işləsin — yüksək spesifiklik + !important) */
+.projects-pagination-ui .projects-pagination-links a.projects-pg-num:hover,
+.projects-pagination-ui .projects-pagination-links a.projects-pg-num:active {
+  z-index: 2;
+  background-color: #087f5b !important;
+  background-image: none !important;
+  border-color: #087f5b !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  transform: scale(1.05);
+  box-shadow: none !important;
+}
+
+.projects-pagination-ui .projects-pagination-links a.projects-pg-num:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.projects-pagination-ui .projects-pagination-links a.projects-pg-num:focus-visible {
+  outline: 2px solid #087f5b !important;
+  outline-offset: 2px;
+}
+
+.projects-pagination-ui .projects-pagination-links a.projects-pg-num.projects-pg-num--current {
+  background-color: #087f5b !important;
+  border-color: #087f5b !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+.projects-pagination-ui .projects-pagination-links a.projects-pg-num.projects-pg-num--current:hover {
+  background-color: #087f5b !important;
+  border-color: #087f5b !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  transform: scale(1.05);
+  box-shadow: none !important;
+}
+
+/* Mövcud olmayan səhifə (2–6): span — pointer-events:none HOVER VERMİR, ona görə götürülüb */
+.projects-pagination-ui .projects-pagination-links span.projects-pg-num.projects-pg-num--disabled {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  max-width: 36px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  border: 1px solid rgba(8, 127, 91, 0.2) !important;
+  background-color: #fff !important;
+  opacity: 0.45;
+  cursor: not-allowed;
+  color: #adb5bd !important;
+  flex-shrink: 0;
+  user-select: none;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    opacity 0.2s ease, transform 0.15s ease, -webkit-text-fill-color 0.2s ease;
+}
+
+.projects-pagination-ui .projects-pagination-links span.projects-pg-num.projects-pg-num--disabled:hover {
+  opacity: 1 !important;
+  background-color: #087f5b !important;
+  border-color: #087f5b !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  transform: scale(1.05);
+  cursor: not-allowed;
+}
+
+.projects-pagination-ui .dots {
+  color: #343a40;
+  font-size: 18px;
+  user-select: none;
+  padding: 0 4px;
+}
+
+/* Featured Collection (scoped, no side effects) */
+.featured-collection-demo {
+  --fc-primary: #424c3d;
+  --fc-text: #252923;
+  --fc-border: #928c8c;
+  color: var(--fc-text);
+}
+
+.featured-collection-demo h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+}
+
+.featured-collection-demo .featured-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  width: 80%;
+  margin: 0 auto;
+  transition: transform 250ms ease;
+}
+
+.featured-collection-demo .featured-cards:hover {
+  transform: scale(1.01);
+}
+
+.featured-collection-demo .featured-card {
+  background: #fff;
+  border: 2px solid var(--fc-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.featured-collection-demo .featured-card__img {
+  height: 220px;
+  background: transparent; /* image yok */
+}
+
+.featured-collection-demo .featured-card__body {
+  padding: 20px 32px 0;
+}
+
+.featured-collection-demo .featured-card__color-picker {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.featured-collection-demo .featured-card__color-picker span {
+  height: 25px;
+  width: 25px;
+  border-radius: 150px;
+  display: inline-block;
+  border: 2px solid #fff;
+  transition: transform 100ms ease;
+}
+
+.featured-collection-demo .featured-card__color-picker span:nth-child(1) {
+  background: #c4807d;
+}
+
+.featured-collection-demo .featured-card__color-picker span:nth-child(2) {
+  background: #6c7464;
+  margin-left: -8px;
+}
+
+.featured-collection-demo .featured-card__color-picker span:nth-child(3) {
+  background: #000;
+  margin-left: -18px;
+}
+
+.featured-collection-demo .featured-card__color-picker span:hover {
+  transform: scale(1.09);
+}
+
+.featured-collection-demo .featured-card__title {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.featured-collection-demo .featured-card__desc {
+  opacity: 0.75;
+}
+
+.featured-collection-demo .featured-card__footer {
+  padding: 10px 32px 20px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.featured-collection-demo .featured-card__price {
+  font-weight: 700;
+}
+
+.featured-collection-demo .featured-card__buy {
+  border: 0 !important;
+  background: var(--fc-primary) !important;
+  color: #fff !important;
+  padding: 6px 12px !important;
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  text-transform: uppercase;
+  font-size: 14px;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.featured-collection-demo .featured-card__buy:hover {
+  background: #3a4437 !important;
+}
+
+@media (max-width: 992px) {
+  .featured-collection-demo .featured-cards {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .featured-collection-demo .featured-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 8px;
+  }
+}
+
 .meet-team-img {
   position: relative;
   overflow: hidden;
@@ -16993,9 +17485,16 @@ textarea.form-control-lg {
   box-shadow: unset;
 }
 
+/* FAQ – kompakt əsas accordion (28px → daha səliqəli) */
+.faq #accordionFlushExample > .accordion-item > .accordion-header .accordion-button {
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+}
+
 /* FAQ – əsas sual açılanda içəridə alt suallar (sub-accordion) */
 .faq-sub-accordion {
-  padding-left: 0.5rem;
+  padding-left: 0;
+  margin-left: 0;
   border-left: 2px solid var(--bs-primary);
   margin-top: 0.25rem;
 }
@@ -17100,8 +17599,9 @@ textarea.form-control-lg {
 }
 
 /* Xidmətlər başlığı – ortada */
-/* #services bölməsi – çox qalın olmasın */
+/* #services bölməsi – çox qalın olmasın; overflow: visible – carousel kart kölgəsi kəsilməsin */
 #services.services-section {
+  overflow: visible;
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
@@ -17116,6 +17616,57 @@ textarea.form-control-lg {
     padding-top: 3.5rem;
     padding-bottom: 3.5rem;
   }
+}
+
+/* Ana səhifə #services carousel – kartlar services.html grid ilə eyni: ölçü, hover, kölgə, qalxma */
+#services .service-grid.position-relative {
+  overflow: visible;
+}
+#services .services-slider.owl-carousel,
+#services .services-slider.owl-carousel .owl-stage-outer {
+  overflow: visible;
+}
+/* Kölgə və translateY kəsilməsin – Owl default hidden overflow */
+#services .services-slider.owl-carousel .owl-stage-outer {
+  padding-top: 10px;
+  padding-bottom: 28px;
+  margin-top: -6px;
+  margin-bottom: -12px;
+}
+
+#services .services-slider.owl-carousel .owl-stage {
+  display: flex;
+  align-items: stretch;
+}
+
+#services .services-slider.owl-carousel .owl-item {
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+#services .services-slider.owl-carousel .owl-item:hover {
+  z-index: 12;
+}
+
+#services .services-slider.owl-carousel .owl-item .item {
+  width: 100%;
+  display: flex;
+  flex: 1;
+}
+
+/* service-card – .service-card ümumi qaydaları + carousel üçün eyni hover (Owl transform üstün gəlməsin) */
+#services .services-slider .service-card {
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 320px;
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+#services .services-slider .service-card:hover,
+#services .services-slider .service-card:focus-visible {
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.4), 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
 }
 
 /* Xidmətlər carousel nöqtələri – tünd fon üçün ağ */
@@ -17155,6 +17706,56 @@ textarea.form-control-lg {
   }
   .services-nav-prev { left: 0; }
   .services-nav-next { right: 0; }
+}
+
+/* Gördüyümüz işlər karuseli – yalnız mobil/tablet (<lg): sol/sağ ox (Xidmətlər oxları ilə eyni üslub) */
+.featured-projects-nav-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--bs-dark);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  padding: 0;
+}
+.featured-projects-nav-btn:hover {
+  background: var(--bs-primary);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+}
+.featured-projects-nav-btn:hover iconify-icon {
+  color: #fff;
+}
+.featured-projects-carousel-wrap .featured-projects-nav-prev {
+  left: 4px;
+}
+.featured-projects-carousel-wrap .featured-projects-nav-next {
+  right: 4px;
+}
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .featured-projects-carousel-wrap .featured-projects-nav-prev {
+    left: 0;
+  }
+  .featured-projects-carousel-wrap .featured-projects-nav-next {
+    right: 0;
+  }
+}
+@media (max-width: 575.98px) {
+  .featured-projects-nav-btn {
+    width: 38px;
+    height: 38px;
+  }
+  .featured-projects-carousel-wrap .featured-projects-nav-prev {
+    left: 2px;
+  }
+  .featured-projects-carousel-wrap .featured-projects-nav-next {
+    right: 2px;
+  }
 }
 
 /* Xidmətlər header: sol 02+Xidmetler, mərkəzdə başlıq+mətn (tam orta) */
@@ -17656,7 +18257,11 @@ ul {
   }
 }
 
-/* Xüsusi paketlər – ağ fon, qara grid, narıncı aksent */
+/* Xüsusi paketlər – kök aksent narıncı (yaşıl --bs-primary bu bölmədə istifadə olunmur) */
+.pricing-section {
+  --pricing-accent-rgb: 232, 93, 4;
+  --pricing-accent-soft-rgb: 255, 152, 0;
+}
 .pricing-section .round-36.bg-primary,
 .pricing-section .card .round-32.bg-primary {
   background: #e85d04 !important;
@@ -17706,7 +18311,7 @@ ul {
 }
 .pricing-section .pricing-card--popular {
   border-top-color: #ff9800;
-  background: linear-gradient(180deg, rgba(255, 152, 0, 0.12) 0%, #18191b 50%, #111 100%);
+  background: linear-gradient(180deg, rgba(var(--pricing-accent-soft-rgb), 0.12) 0%, #18191b 50%, #111 100%);
 }
 .pricing-section .pricing-card--popular .btn {
   border-color: #ff9800;
@@ -17722,19 +18327,28 @@ ul {
 .pricing-section .pricing-card--popular .btn:hover .btn-text {
   background: transparent !important;
 }
-/* --- Xususi paketlər: hover – rəng yalnız yuxarı sağ küncdə, qəhvəyi --- */
+/* Hover: yuxarı sağ künc – narıncı kök rəng */
 .pricing-section .pricing-card:hover {
-  background: radial-gradient(ellipse 120% 100% at 100% 0%, rgba(120, 80, 50, 0.55) 0%, rgba(120, 80, 50, 0.15) 45%, transparent 70%), #18191b;
-  border-top: 3px solid transparent;
-  border-top-right-radius: 22px;
-  box-shadow: 0 12px 40px rgba(120, 80, 50, 0.25);
-  transform: scale(1.03);
+  background:
+    radial-gradient(130% 100% at 100% 0%, rgba(var(--pricing-accent-rgb), 0.34) 0%, rgba(var(--pricing-accent-rgb), 0.11) 38%, transparent 62%),
+    #18191b;
+  border-color: rgba(var(--pricing-accent-rgb), 0.26);
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(var(--pricing-accent-rgb), 0.12),
+    -6px -6px 36px rgba(var(--pricing-accent-rgb), 0.14);
+  transform: scale(1.008) translateY(-5px);
 }
 .pricing-section .pricing-card--popular:hover {
-  background: radial-gradient(ellipse 120% 100% at 100% 0%, rgba(120, 80, 50, 0.6) 0%, rgba(120, 80, 50, 0.2) 50%, transparent 72%), #18191b;
-  border-top: 3px solid transparent;
-  box-shadow: 0 12px 40px rgba(120, 80, 50, 0.3);
-  transform: scale(1.03);
+  background:
+    radial-gradient(130% 100% at 100% 0%, rgba(var(--pricing-accent-soft-rgb), 0.3) 0%, rgba(var(--pricing-accent-soft-rgb), 0.09) 38%, transparent 62%),
+    linear-gradient(180deg, rgba(var(--pricing-accent-soft-rgb), 0.14) 0%, #18191b 50%, #111 100%);
+  border-color: rgba(var(--pricing-accent-soft-rgb), 0.22);
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(var(--pricing-accent-soft-rgb), 0.1),
+    -6px -6px 36px rgba(var(--pricing-accent-soft-rgb), 0.12);
+  transform: scale(1.008) translateY(-5px);
 }
 
 /* Haqqımızda – əsas şəkil hündürlüyü kiçildilmiş */
@@ -17817,6 +18431,295 @@ ul {
 
 .about-stats .stats-card:hover::after {
   opacity: 1;
+}
+
+/* projects.html pagination – faylda sonrakı `a:hover` / Bootstrap .page-link təsirlərini sıradan çıxarmaq */
+.projects-pagination-ui .projects-pagination-links a.projects-pg-num:hover,
+.projects-pagination-ui .projects-pagination-links a.projects-pg-num:active {
+  background-color: #087f5b !important;
+  border-color: #087f5b !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+.projects-pagination-ui .projects-pagination-links span.projects-pg-num.projects-pg-num--disabled:hover {
+  background-color: #087f5b !important;
+  border-color: #087f5b !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  opacity: 1 !important;
+}
+
+/* Müraciət / əlaqə: yığcam siyahı, şaquli ayırıcı, kiçik tipqrafiya */
+.get-in-touch-split-row,
+.contact-page-split {
+  --gti-row-pad: 0.15rem;
+}
+
+@media (min-width: 992px) {
+  .contact-page-split .contact-page-form-aside {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+    width: auto;
+  }
+}
+
+.get-in-touch-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.get-in-touch-channels .gti-row {
+  gap: 0.45rem;
+  padding: var(--gti-row-pad) 0;
+  align-items: center;
+}
+
+.get-in-touch-channels .get-in-touch-channel-icon {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: transform 0.28s cubic-bezier(0.33, 1, 0.68, 1), box-shadow 0.28s ease,
+    background-color 0.28s ease, border-color 0.28s ease;
+  border: 1px solid transparent;
+}
+
+.get-in-touch-channels .gti-row:hover .get-in-touch-channel-icon,
+.get-in-touch-channels .gti-row:focus-visible .get-in-touch-channel-icon {
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 8px 20px rgba(8, 127, 91, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+  background-color: #f6faf8 !important;
+  border-color: rgba(8, 127, 91, 0.12);
+}
+
+.get-in-touch-channels .gti-row:focus-visible {
+  outline: none;
+}
+
+.get-in-touch-channels .gti-row:focus-visible .gti-text,
+.get-in-touch-channels .gti-row:focus-visible .gti-social-name,
+.get-in-touch-channels .gti-row:focus-visible .gti-detail {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.get-in-touch-channels .gti-text {
+  line-height: 1.15;
+  min-width: 0;
+}
+
+.get-in-touch-channels .gti-platform {
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--bs-secondary-color, #6c757d);
+}
+
+.get-in-touch-channels .gti-detail {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--bs-body-color, #212529);
+}
+
+.get-in-touch-channels .gti-text--social {
+  display: flex;
+  align-items: center;
+}
+
+.get-in-touch-channels .gti-social-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--bs-body-color, #212529);
+}
+
+@media (max-width: 991.98px) {
+  .contact-page-zone--blue {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .contact-page-left-composite {
+    padding-right: 0.25rem;
+  }
+
+  .get-in-touch-vrule-wrap {
+    flex: 0 0 auto;
+    width: auto;
+    padding: 0 1.35rem;
+  }
+
+  .get-in-touch-vrule {
+    position: relative;
+    width: 1px;
+    align-self: stretch;
+    min-height: 14rem;
+    border-radius: 1px;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 127, 91, 0) 0%,
+      rgba(8, 127, 91, 0.1) 22%,
+      rgba(8, 127, 91, 0.22) 50%,
+      rgba(8, 127, 91, 0.1) 78%,
+      rgba(8, 127, 91, 0) 100%
+    );
+    box-shadow: 2px 0 0 rgba(255, 255, 255, 0.85), -1px 0 0 rgba(8, 127, 91, 0.04);
+  }
+
+  .get-in-touch-vrule::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(8, 127, 91, 0.35);
+    box-shadow: 0 0 0 4px rgba(8, 127, 91, 0.06);
+  }
+
+  .get-in-touch-vrule::after {
+    content: "";
+    position: absolute;
+    inset: 12% -6px;
+    border-radius: 999px;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgba(8, 127, 91, 0.04) 50%,
+      transparent
+    );
+    pointer-events: none;
+  }
+}
+
+.contact-page-zone {
+  padding: 0.65rem 0.65rem 0.65rem 1rem;
+  border-radius: 12px;
+}
+
+.contact-page-zone--blue {
+  border-left: 3px solid rgba(37, 99, 235, 0.5);
+  background: rgba(37, 99, 235, 0.04);
+}
+
+.contact-page-zone--red {
+  border-left: 3px solid rgba(220, 38, 38, 0.45);
+  background: rgba(220, 38, 38, 0.035);
+}
+
+.contact-page-zone--green {
+  padding: 0.45rem;
+  border-radius: 14px;
+  border: 1px solid rgba(22, 163, 74, 0.4);
+  background: rgba(22, 163, 74, 0.05);
+}
+
+.contact-page-zone--green .contact-page-map {
+  border: none;
+  box-shadow: none;
+}
+
+.contact-page-map {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.contact-page-map--compact {
+  height: 200px;
+  max-height: 220px;
+}
+
+.contact-page-map--compact.contact-page-map {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.contact-page-map-iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* index – əlaqə kanalları: marka rəngləri + zəng/poçt yaşıl */
+.get-in-touch-channels iconify-icon.gti-icon-phone,
+.get-in-touch-channels iconify-icon.gti-icon-mail {
+  color: #15803d;
+}
+
+.get-in-touch-channels iconify-icon.gti-icon-wa {
+  color: #25d366;
+}
+
+.get-in-touch-channels iconify-icon.gti-icon-fb {
+  color: #1877f2;
+}
+
+.get-in-touch-channels iconify-icon.gti-icon-ig {
+  color: #e4405f;
+}
+
+.get-in-touch-channels iconify-icon.gti-icon-tt {
+  color: #000000;
+}
+
+.get-in-touch-channels iconify-icon.gti-icon-li {
+  color: #0a66c2;
+}
+
+.get-in-touch-channels iconify-icon.gti-icon-yt {
+  color: #ff0000;
+}
+
+.get-in-touch-channels iconify-icon.gti-icon-address {
+  color: #087f5b;
+}
+
+/* Ana səhifə — bölmələr arası ayırıcı (kompakt, boş yer əvəzinə vizual ritm) */
+.home-section-divider {
+  display: block;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+@media (min-width: 992px) {
+  .home-section-divider {
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+  }
+}
+
+.home-section-divider__line {
+  height: 1px;
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(var(--bs-body-color-rgb), 0.1) 12%,
+    rgba(var(--bs-primary-rgb), 0.45) 50%,
+    rgba(var(--bs-body-color-rgb), 0.1) 88%,
+    transparent 100%
+  );
+}
+
+/* Video hero sonu — ağ fonda oxunaqlı, eyni üslubda bir az güclü aksent */
+.home-section-divider--after-hero .home-section-divider__line {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(var(--bs-body-color-rgb), 0.14) 10%,
+    rgba(var(--bs-primary-rgb), 0.55) 50%,
+    rgba(var(--bs-body-color-rgb), 0.14) 90%,
+    transparent 100%
+  );
 }
 
 /*# sourceMappingURL=styles.css.map */

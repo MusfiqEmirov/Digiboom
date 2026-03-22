@@ -23,7 +23,6 @@
           </a>
           <a href="index.html" class="logo-dark">
             <img src="../assets/images/logos/digi-boom-logo.png" alt="logo" class="img-fluid">
-          <!-- Desktop nav - görünür yalnız lg və yuxarı -->
           </a>
         </div>
         <div class="d-flex align-items-center gap-4">
@@ -31,7 +30,7 @@
             <ul class="header-nav-desktop-list list-unstyled mb-0 d-flex align-items-center gap-4">
               <li><a href="index.html" class="header-nav-desktop-link active"><img src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20" class="img-fluid animate-spin">Ana səhifə</a></li>
               <li><a href="about-us.html" class="header-nav-desktop-link"><img src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20" class="img-fluid animate-spin">Haqqımızda</a></li>
-              <li><a href="projects.html" class="header-nav-desktop-link"><img src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20" class="img-fluid animate-spin">Portfolio</a></li>
+              <li><a href="portfolio.html" class="header-nav-desktop-link"><img src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20" class="img-fluid animate-spin">Portfolio</a></li>
               <li><a href="services.html" class="header-nav-desktop-link"><img src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20" class="img-fluid animate-spin">Xidmətlər</a></li>
               <li><a href="services.html" class="header-nav-desktop-link"><img src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20" class="img-fluid animate-spin">Təlim</a></li>
               <li><a href="blog.html" class="header-nav-desktop-link"><img src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20" class="img-fluid animate-spin">Blog</a></li>
@@ -70,7 +69,7 @@
                           class="img-fluid animate-spin">Haqqımızda</a>
                     </li>
                     <li class="header-item">
-                      <a href="projects.html" class="header-link hstack gap-2 fs-7 fw-bold text-dark"><img
+                      <a href="portfolio.html" class="header-link hstack gap-2 fs-7 fw-bold text-dark"><img
                           src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
                           class="img-fluid animate-spin">Portfolio</a>
                     </li>
@@ -159,10 +158,14 @@
       </div>
     </section>
 
-    
+    <div class="home-section-divider home-section-divider--after-hero" aria-hidden="true">
+      <div class="container">
+        <div class="home-section-divider__line"></div>
+      </div>
+    </div>
 
     <!--  About Section -->
-    <section class="stats-facts about-stats py-5 py-lg-11 py-xl-12 position-relative overflow-hidden">
+    <section class="stats-facts about-stats py-5 py-lg-8 py-xl-9 position-relative overflow-hidden">
       <div class="container">
         <div class="row gap-7 gap-xl-0">
           <div class="col-xl-4 col-xxl-4">
@@ -240,7 +243,7 @@
         <img src="../assets/images/backgrounds/stats-facts-bg.svg" alt="" class="img-fluid">
       </div>
       <!-- Tərəfdaş və müştərilər – Haqqımızda bölməsinin altında -->
-      <div class="container pt-8 pt-lg-11 pt-xl-12">
+      <div class="container pt-6 pt-lg-8 pt-xl-9">
         <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
           <p class="marquee-title mb-0 text-center text-dark">Tərəfdaş və müştərilər</p>
           <div class="marquee w-100 d-flex align-items-center overflow-hidden">
@@ -281,8 +284,14 @@
       </div>
     </section>
 
+    <div class="home-section-divider" aria-hidden="true">
+      <div class="container">
+        <div class="home-section-divider__line"></div>
+      </div>
+    </div>
+
     <!--   Projects Section - Gördüyümüz işlər -->
-    <section class="featured-projects py-5 py-lg-11 py-xl-12 bg-light-gray">
+    <section class="featured-projects py-5 py-lg-8 py-xl-9 bg-light-gray">
       <div class="d-flex flex-column gap-5 gap-xl-11">
         <div class="container">
           <div class="row gap-7 gap-xl-0">
@@ -308,7 +317,18 @@
             </div>
           </div>
         </div>
-        <div class="featured-projects-slider px-3">
+        <div class="featured-projects-carousel-wrap position-relative">
+          <button type="button"
+            class="featured-projects-nav-btn featured-projects-nav-prev d-lg-none position-absolute top-50 start-0 translate-middle-y z-2 border-0"
+            aria-label="Əvvəlki layihə">
+            <iconify-icon icon="lucide:chevron-left" class="fs-4"></iconify-icon>
+          </button>
+          <button type="button"
+            class="featured-projects-nav-btn featured-projects-nav-next d-lg-none position-absolute top-50 end-0 translate-middle-y z-2 border-0"
+            aria-label="Növbəti layihə">
+            <iconify-icon icon="lucide:chevron-right" class="fs-4"></iconify-icon>
+          </button>
+          <div class="featured-projects-slider px-3">
           <div class="owl-carousel owl-theme">
             <div class="item">
               <div class="portfolio d-flex flex-column gap-6">
@@ -322,12 +342,13 @@
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
+                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="portfolio-details d-flex flex-column gap-3">
-                  <h3 class="mb-0">Temizxali</h3>
+                  <h3 class="mb-0">Layihə 1</h3>
                   <div class="hstack gap-2">
                     <span class="badge text-dark border">UX Strategy</span>
                     <span class="badge text-dark border">UI Design</span>
@@ -347,12 +368,13 @@
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
+                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="portfolio-details d-flex flex-column gap-3">
-                  <h3 class="mb-0">Pendir sirketi</h3>
+                  <h3 class="mb-0">Layihə 2</h3>
                   <div class="hstack gap-2">
                     <span class="badge text-dark border">Web development</span>
                     <span class="badge text-dark border">Digital design</span>
@@ -372,12 +394,13 @@
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
+                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="portfolio-details d-flex flex-column gap-3">
-                  <h3 class="mb-0">Businesscup</h3>
+                  <h3 class="mb-0">Layihə 3</h3>
                   <div class="hstack gap-2">
                     <span class="badge text-dark border">UI/UX design</span>
                     <span class="badge text-dark border">Web development</span>
@@ -397,12 +420,13 @@
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
+                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="portfolio-details d-flex flex-column gap-3">
-                  <h3 class="mb-0">Snaks</h3>
+                  <h3 class="mb-0">Layihə 4</h3>
                   <div class="hstack gap-2">
                     <span class="badge text-dark border">Brand identity</span>
                     <span class="badge text-dark border">Digital design</span>
@@ -422,12 +446,13 @@
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
+                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="portfolio-details d-flex flex-column gap-3">
-                  <h3 class="mb-0">Telim</h3>
+                  <h3 class="mb-0">Layihə 5</h3>
                   <div class="hstack gap-2">
                     <span class="badge text-dark border">Photography</span>
                     <span class="badge text-dark border">Studio</span>
@@ -447,12 +472,13 @@
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
+                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="portfolio-details d-flex flex-column gap-3">
-                  <h3 class="mb-0">Brokili</h3>
+                  <h3 class="mb-0">Layihə 6</h3>
                   <div class="hstack gap-2">
                     <span class="badge text-dark border">Digital design</span>
                     <span class="badge text-dark border">Web development</span>
@@ -460,6 +486,7 @@
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
         <div class="d-flex justify-content-center pt-3 pt-lg-4 pb-3 pb-lg-4">
@@ -472,8 +499,14 @@
       </div>
     </section>
 
-    <!--  Xidmətlər Section - 6 kart -->
-    <section class="services services-section bg-dark" id="services">
+    <div class="home-section-divider" aria-hidden="true">
+      <div class="container">
+        <div class="home-section-divider__line"></div>
+      </div>
+    </div>
+
+    <!--  Xidmətlər Section – carousel, bir sırada, sol/sağ ox -->
+    <section class="services services-section bg-dark py-5 py-lg-8 py-xl-9" id="services">
       <div class="container">
         <div class="d-flex flex-column gap-4 gap-xl-6">
           <div class="row services-header align-items-center position-relative">
@@ -493,7 +526,7 @@
               </div>
             </div>
           </div>
-          <div class="service-grid position-relative">
+          <div class="service-grid position-relative px-3 px-sm-4 px-md-5">
             <button type="button" class="services-nav-btn services-nav-prev position-absolute top-50 start-0 translate-middle-y z-2" aria-label="Əvvəlki">
               <iconify-icon icon="lucide:chevron-left" class="fs-4"></iconify-icon>
             </button>
@@ -502,17 +535,17 @@
             </button>
             <div class="services-slider owl-carousel owl-theme">
               <div class="item">
-                <a href="services.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
+                <a href="projects.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-1.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end">
-                    <h1 class="service-card__title text-white mb-2">enenevi marketing</h1>
+                    <h1 class="service-card__title text-white mb-2">enenevi marketing </h1>
                     <p class="service-card__text text-white mb-0 opacity-90">adet enene onemli elbetde</p>
                   </div>
                 </a>
               </div>
               <div class="item">
-                <a href="services.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
+                <a href="projects.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-2.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end">
@@ -522,7 +555,7 @@
                 </a>
               </div>
               <div class="item">
-                <a href="services.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
+                <a href="projects.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-3.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end">
@@ -532,7 +565,7 @@
                 </a>
               </div>
               <div class="item">
-                <a href="services.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
+                <a href="projects.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-4.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end">
@@ -542,7 +575,7 @@
                 </a>
               </div>
               <div class="item">
-                <a href="services.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
+                <a href="projects.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-1.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end">
@@ -551,8 +584,8 @@
                   </div>
                 </a>
               </div>
-              <div class="item">
-                <a href="services.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
+              <div class="item" id="training">
+                <a href="projects.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-2.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end">
@@ -567,8 +600,14 @@
       </div>
     </section>
 
+    <div class="home-section-divider" aria-hidden="true">
+      <div class="container">
+        <div class="home-section-divider__line"></div>
+      </div>
+    </div>
+
     <!--  Testimonial Section -->
-    <section class="testimonial py-5 py-lg-11 py-xl-12 bg-light-gray">
+    <section class="testimonial py-5 py-lg-8 py-xl-9 bg-light-gray">
       <div class="container">
         <div class="d-flex flex-column gap-5 gap-xl-11">
           <div class="row gap-7 gap-xl-0">
@@ -781,6 +820,12 @@
       </div>
     </section>
 
+    <div class="home-section-divider" aria-hidden="true">
+      <div class="container">
+        <div class="home-section-divider__line"></div>
+      </div>
+    </div>
+
     <!--  Rəy bildir modal – kiçik və səliqəli -->
     <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered review-modal-dialog">
@@ -831,7 +876,7 @@
     </div>
 
     <!--  Pricing Section -->
-    <section class="pricing-section py-5 py-lg-11 py-xl-12 bg-light-gray">
+    <section class="pricing-section py-5 py-lg-8 py-xl-9 bg-light-gray">
       <div class="container">
         <div class="d-flex flex-column gap-5 gap-xl-10">
           <div class="d-flex flex-column gap-5 gap-xl-11">
@@ -1009,13 +1054,19 @@
       </div>
     </section>
 
-    <!--  FAQ Section -->
-    <section class="faq py-5 py-lg-11 py-xl-12">
+    <div class="home-section-divider" aria-hidden="true">
       <div class="container">
-        <div class="d-flex flex-column gap-5 gap-xl-11">
-          <div class="row gap-7 gap-xl-0">
+        <div class="home-section-divider__line"></div>
+      </div>
+    </div>
+
+    <!--  FAQ Section -->
+    <section class="faq py-5 py-lg-8 py-xl-9">
+      <div class="container">
+        <div class="d-flex flex-column gap-4 gap-lg-6">
+          <div class="row gap-4 gap-xl-0">
             <div class="col-xl-4 col-xxl-4">
-              <div class="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100"
+              <div class="d-flex align-items-center gap-4 py-2" data-aos="fade-right" data-aos-delay="100"
                 data-aos-duration="1000">
                 <span
                   class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">08</span>
@@ -1026,7 +1077,7 @@
             <div class="col-xl-8 col-xxl-7">
               <div class="row">
                 <div class="col-xxl-9">
-                  <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100"
+                  <div class="d-flex flex-column gap-3" data-aos="fade-up" data-aos-delay="100"
                     data-aos-duration="1000">
                     <h2 class="mb-0">Tez tez verilen suallar</h2>
                     <p class="fs-5 mb-0 text-opacity-70">her hasnisa metn qalada biler silede bilerem</p>
@@ -1035,8 +1086,8 @@
               </div>
             </div>
           </div>
-          <div class="row justify-content-end">
-            <div class="col-xl-8">
+          <div class="row">
+            <div class="col-12">
               <div class="accordion accordion-flush" id="accordionFlushExample" data-aos="fade-up" data-aos-delay="200"
                 data-aos-duration="1000">
                 <div class="accordion-item">
@@ -1301,18 +1352,20 @@
       </div>
     </section>
 
+    <div class="home-section-divider" aria-hidden="true">
+      <div class="container">
+        <div class="home-section-divider__line"></div>
+      </div>
+    </div>
+
     <!--  Get in touch Section -->
-    <section id="get-in-touch" class="get-in-touch py-5 py-lg-11 py-xl-12">
+    <section id="get-in-touch" class="get-in-touch py-5 py-lg-8 py-xl-9">
       <div class="container">
         <div class="d-flex flex-column gap-5 gap-xl-10">
           <div class="row gap-7 gap-xl-0">
             <div class="col-xl-4 col-xxl-4">
               <div class="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100"
                 data-aos-duration="1000">
-                <span
-                  class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">10</span>
-                <hr class="border-line bg-white">
-                <span class="badge text-bg-dark">Contact us</span>
               </div>
             </div>
             <div class="col-xl-8 col-xxl-7">
@@ -1326,39 +1379,35 @@
               </div>
             </div>
           </div>
-          <div class="row justify-content-between gap-7 gap-xl-0">
-            <div class="col-xl-3">
-              <p class="mb-0 fs-5" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">Let’s collaborate
-                and create something amazing! Tell me about your project—I’m all
-                ears.</p>
-            </div>
-            <div class="col-xl-8">
-              <form class="d-flex flex-column gap-7" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+          <div class="row justify-content-center">
+            <div class="col-12 col-xl-10 col-xxl-8">
+              <form id="home-contact-form" class="d-flex flex-column gap-7" data-aos="fade-up" data-aos-delay="200"
+                data-aos-duration="1000">
                 <div>
-                  <label for="contact-name" class="form-label visually-hidden">Ad və soyad</label>
-                  <input type="text" class="form-control border-bottom border-dark" id="contact-name" name="name"
+                  <label for="home-contact-name" class="form-label visually-hidden">Ad və soyad</label>
+                  <input type="text" class="form-control border-bottom border-dark" id="home-contact-name" name="name"
                     placeholder="Ad və soyad" required>
                 </div>
                 <div class="row g-4">
                   <div class="col-md-6">
-                    <label for="contact-phone" class="form-label visually-hidden">Nömrə</label>
-                    <input type="tel" class="form-control border-bottom border-dark" id="contact-phone" name="phone"
+                    <label for="home-contact-phone" class="form-label visually-hidden">Nömrə</label>
+                    <input type="tel" class="form-control border-bottom border-dark" id="home-contact-phone" name="phone"
                       placeholder="Nömrə" required>
                   </div>
                   <div class="col-md-6">
-                    <label for="contact-email" class="form-label visually-hidden">Email</label>
-                    <input type="email" class="form-control border-bottom border-dark" id="contact-email" name="email"
+                    <label for="home-contact-email" class="form-label visually-hidden">Email</label>
+                    <input type="email" class="form-control border-bottom border-dark" id="home-contact-email" name="email"
                       placeholder="Email" required>
                   </div>
                 </div>
                 <div>
-                  <label for="contact-company" class="form-label visually-hidden">Şirkət adı</label>
-                  <input type="text" class="form-control border-bottom border-dark" id="contact-company" name="company"
+                  <label for="home-contact-company" class="form-label visually-hidden">Şirkət adı</label>
+                  <input type="text" class="form-control border-bottom border-dark" id="home-contact-company" name="company"
                     placeholder="Şirkət adı">
                 </div>
                 <div>
-                  <label for="contact-message" class="form-label visually-hidden">Mesaj</label>
-                  <textarea class="form-control border-bottom border-dark" id="contact-message" name="message"
+                  <label for="home-contact-message" class="form-label visually-hidden">Mesaj</label>
+                  <textarea class="form-control border-bottom border-dark" id="home-contact-message" name="message"
                     placeholder="Mesaj" rows="4" required></textarea>
                 </div>
                 <button type="submit" class="btn w-100 justify-content-center">
@@ -1372,6 +1421,12 @@
         </div>
       </div>
     </section>
+
+    <div class="home-section-divider" aria-hidden="true">
+      <div class="container">
+        <div class="home-section-divider__line"></div>
+      </div>
+    </div>
 
   </div>
 
