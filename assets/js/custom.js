@@ -180,87 +180,10 @@ $(function () {
 	});
 
 
-    // ScrollToTop
-    function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    const btn = document.getElementById("scrollToTopBtn");
-    btn.addEventListener("click", scrollToTop);
-
-    window.onscroll = function () {
-        const btn = document.getElementById("scrollToTopBtn");
-        if (document.documentElement.scrollTop > 100 || document.body.scrollTop > 100) {
-            btn.style.display = "flex";
-        } else {
-            btn.style.display = "none";
-        }
-    };
-
-
     // Aos
 	AOS.init({
 		once: true,
 	});
-
-	// Bomb: səhifə yüklənəndə 3-2-1 sayım, sonra partlama (klik yoxdur)
-	(function () {
-		var countdownEl = document.querySelector('.bomb-countdown');
-		var numEl = countdownEl ? countdownEl.querySelector('.bomb-num') : null;
-		var explosionEl = document.querySelector('.bomb-explosion');
-		var particlesEl = document.querySelector('.bomb-particles');
-		if (!countdownEl || !numEl || !explosionEl || !particlesEl) return;
-
-		var countdownMs = 520;
-
-		function createParticles() {
-			particlesEl.innerHTML = '';
-			for (var i = 0; i < 12; i++) {
-				var dot = document.createElement('span');
-				dot.className = 'bomb-dot';
-				particlesEl.appendChild(dot);
-			}
-		}
-
-		function showNum(n, next) {
-			numEl.textContent = n;
-			numEl.style.animation = 'none';
-			numEl.offsetHeight;
-			numEl.style.animation = 'bomb-pop 0.45s ease-out';
-			if (n > 1) {
-				setTimeout(next, countdownMs);
-			} else {
-				setTimeout(fireExplosion, countdownMs);
-			}
-		}
-
-		function fireExplosion() {
-			countdownEl.classList.remove('is-active');
-			countdownEl.setAttribute('aria-hidden', 'true');
-			createParticles();
-			explosionEl.classList.add('is-exploding');
-			particlesEl.classList.add('is-exploding');
-			setTimeout(function () {
-				explosionEl.classList.remove('is-exploding');
-				particlesEl.classList.remove('is-exploding');
-			}, 680);
-		}
-
-		function startBomb() {
-			countdownEl.classList.add('is-active');
-			countdownEl.setAttribute('aria-hidden', 'false');
-			showNum(3, function () {
-				showNum(2, function () {
-					showNum(1);
-				});
-			});
-		}
-
-		setTimeout(startBomb, 600);
-	})();
 
 	// Rəy bildir modal – form göndərildikdə səhifə yenilənmir, modal bağlanır (backend əlavə edəndə burada göndərmə yazılır)
 	$('#reviewForm').on('submit', function (e) {

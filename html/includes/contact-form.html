@@ -1,0 +1,35 @@
+<form id="{{formId}}" class="contact-form-modern {{formClass}}" {{aosAttrs}} novalidate>
+  <div class="contact-form-modern__fields">
+    <div class="contact-form-modern__field contact-form-modern__field--full">
+      <label for="{{prefix}}-name" class="contact-form-modern__label">Ad və soyad</label>
+      <input type="text" class="contact-form-modern__input" id="{{prefix}}-name" name="name"
+        placeholder="Adınız və soyadınız" autocomplete="name" required>
+    </div>
+    <div class="contact-form-modern__field">
+      <label for="{{prefix}}-phone" class="contact-form-modern__label">Telefon</label>
+      <input type="tel" class="contact-form-modern__input" id="{{prefix}}-phone" name="phone"
+        placeholder="+994 50 000 00 00" autocomplete="tel" required>
+    </div>
+    <div class="contact-form-modern__field">
+      <label for="{{prefix}}-email" class="contact-form-modern__label">E-poçt</label>
+      <input type="email" class="contact-form-modern__input" id="{{prefix}}-email" name="email"
+        placeholder="email@example.com" autocomplete="email" required>
+    </div>
+    <div class="contact-form-modern__field contact-form-modern__field--full">
+      <label for="{{prefix}}-company" class="contact-form-modern__label">Şirkət adı <span class="contact-form-modern__optional">(istəyə görə)</span></label>
+      <input type="text" class="contact-form-modern__input" id="{{prefix}}-company" name="company"
+        placeholder="Şirkət və ya brend adı" autocomplete="organization">
+    </div>
+    <div class="contact-form-modern__field contact-form-modern__field--full">
+      <label for="{{prefix}}-message" class="contact-form-modern__label">Mesaj</label>
+      <textarea class="contact-form-modern__input contact-form-modern__textarea" id="{{prefix}}-message" name="message"
+        placeholder="Layihəniz və ya sualınız haqqında qısaca yazın..." rows="4" required></textarea>
+    </div>
+  </div>
+  <button type="submit" class="contact-form-modern__submit {{btnClass}}">
+    <span class="contact-form-modern__submit-text">Göndər</span>
+    <span class="contact-form-modern__submit-icon" aria-hidden="true">
+      <iconify-icon icon="lucide:send"></iconify-icon>
+    </span>
+  </button>
+</form>
