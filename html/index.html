@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="az">
 
 <head>
   <meta charset="utf-8">
@@ -9,9 +9,32 @@
   <link rel="stylesheet" href="../assets/libs/owl.carousel/dist/assets/owl.carousel.min.css">
   <link rel="stylesheet" href="../assets/libs/aos-master/dist/aos.css">
   <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="../assets/css/digiboom-additions.css" />
+  <script>
+    (function () {
+      try {
+        if (!sessionStorage.getItem('digiboom_session_started')) {
+          document.documentElement.classList.add('is-splash-loading');
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 
-<body>
+<body data-active-page="index">
+
+  <!-- Splash Screen -->
+  <div id="siteSplash" class="site-splash" role="dialog" aria-label="Yüklənir" aria-hidden="false">
+    <div class="site-splash__inner">
+      <img src="../assets/images/logos/digi-boom-logo.png" alt="DigiBoom" class="site-splash__logo">
+      <div class="bomb-countdown is-active" id="splashCountdown">
+        <span class="bomb-num">3</span>
+      </div>
+      <div class="bomb-explosion site-splash__explosion"></div>
+      <div class="bomb-particles site-splash__particles"></div>
+    </div>
+  </div>
+  <script src="../assets/js/splash.js"></script>
 
   <!-- Header -->
   <header class="header position-fixed start-0 top-0 w-100">
@@ -26,103 +49,42 @@
           </a>
         </div>
         <div class="d-flex align-items-center gap-4">
-          <nav class="header-nav-desktop d-none d-lg-flex align-items-center">
-            <ul class="header-nav-desktop-list list-unstyled mb-0 d-flex align-items-center gap-4">
-              <li><a href="index.html" class="header-nav-desktop-link active"><img src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20" class="img-fluid animate-spin">Ana səhifə</a></li>
-              <li><a href="about-us.html" class="header-nav-desktop-link"><img src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20" class="img-fluid animate-spin">Haqqımızda</a></li>
-              <li><a href="portfolio.html" class="header-nav-desktop-link"><img src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20" class="img-fluid animate-spin">Portfolio</a></li>
-              <li><a href="services.html" class="header-nav-desktop-link"><img src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20" class="img-fluid animate-spin">Xidmətlər</a></li>
-              <li><a href="services.html" class="header-nav-desktop-link"><img src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20" class="img-fluid animate-spin">Təlim</a></li>
-              <li><a href="blog.html" class="header-nav-desktop-link"><img src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20" class="img-fluid animate-spin">Blog</a></li>
-              <li><a href="contact.html" class="header-nav-desktop-link"><img src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20" class="img-fluid animate-spin">Əlaqə və müraciətlər</a></li>
-            </ul>
-            <div class="header-nav-desktop-btns hstack gap-2 ms-4">
-              <a href="sign-in.html" class="btn btn-outline-light btn-sm border-white text-white">Sign In</a>
-          <!-- Toggle - yalnız mobil/planşetdə -->
-              <a href="sign-up.html" class="btn btn-dark btn-sm text-white">Sign Up</a>
-            </div>
-          </nav>
-          <div class="btn-group d-lg-none">
-            <button
-              class="btn btn-secondary toggle-menu round-45 p-2 d-flex align-items-center justify-content-center bg-white rounded-circle"
-              type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-              <iconify-icon icon="solar:hamburger-menu-line-duotone" class="menu-icon fs-8 text-dark"></iconify-icon>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end p-4">
-              <div class="d-flex flex-column gap-6">
-                <div class="hstack justify-content-between border-bottom pb-6">
-                  <p class="mb-0 fs-5 text-dark">Menu</p>
-                  <button type="button" class="btn-close opacity-75" aria-label="Close"></button>
-                </div>
-                <div class="d-flex flex-column gap-3">
-                  <ul class="header-menu list-unstyled mb-0 d-flex flex-column gap-2">
-                    <li class="header-item">
-                      <a href="index.html" aria-current="true"
-                        class="header-link active hstack gap-2 fs-7 fw-bold text-dark"><img
-                          src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
-                          class="img-fluid animate-spin">Ana səhifə</a>
-                    </li>
-                    <li class="header-item">
-                      <a href="about-us.html"
-                        class="header-link hstack gap-2 fs-7 fw-bold text-dark"><img
-                          src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
-                          class="img-fluid animate-spin">Haqqımızda</a>
-                    </li>
-                    <li class="header-item">
-                      <a href="portfolio.html" class="header-link hstack gap-2 fs-7 fw-bold text-dark"><img
-                          src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
-                          class="img-fluid animate-spin">Portfolio</a>
-                    </li>
-                    <li class="header-item">
-                      <a href="services.html" class="header-link hstack gap-2 fs-7 fw-bold text-dark"><img
-                          src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
-                          class="img-fluid animate-spin">Xidmətlər</a>
-                    </li>
-                    <li class="header-item">
-                      <a href="services.html" class="header-link hstack gap-2 fs-7 fw-bold text-dark"><img
-                          src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
-                          class="img-fluid animate-spin">Təlim</a>
-                    </li>
-                    <li class="header-item">
-                      <a href="blog.html" class="header-link hstack gap-2 fs-7 fw-bold text-dark"><img
-                          src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
-                          class="img-fluid animate-spin">Blog</a>
-                    </li>
-                    <li class="header-item">
-                      <a href="contact.html" class="header-link hstack gap-2 fs-7 fw-bold text-dark"><img
-                          src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
-                          class="img-fluid animate-spin">Əlaqə və müraciətlər</a>
-                    </li>
-                  </ul>
-                  <div class="hstack gap-3">
-                    <a href="sign-in.html"
-                      class="btn btn-outline-light fs-6 bg-white px-3 py-2 text-dark w-50 hstack justify-content-center">Sign
-                      In</a>
-                    <a href="sign-up.html"
-                      class="btn btn-dark text-white fs-6 bg-dark px-3 py-2 w-50 hstack justify-content-center">Sign
-                      Up</a>
-                  </div>
-                </div>
-                <div>
-                  <a class="text-dark" href="tel:+1-212-456-7890">+1-212-456-7890</a>
-                  <a class="fs-8 text-dark fw-bold" href="mailto:info@wrappixel.com">info@wrappixel.com</a>
-                </div>
-              </div>
-            </ul>
-          </div>
+          <div data-include="navbar"></div>
+          <div data-include="sidebar"></div>
         </div>
       </div>
     </div>
   </header>
-
-  <!--  Page Wrapper -->
+<!--  Page Wrapper -->
   <div class="page-wrapper overflow-hidden">
 
     <!--  Banner Section -->
     <section class="banner-section position-relative d-flex align-items-end min-vh-100">
-      <video class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" autoplay muted loop playsinline>
-        <source src="../assets/images/backgrounds/banner-video.mp4" type="video/mp4" />
-      </video>
+      <!-- Hero media slides -->
+      <div class="hero-banner-media">
+        <div class="hero-banner-slide is-active">
+          <video autoplay muted loop playsinline>
+            <source src="../assets/images/backgrounds/banner-video.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="hero-banner-slide">
+          <img src="../assets/images/portfolio/portfolio-img-1.jpg" alt="DigiBoom — Layihə 1">
+        </div>
+        <div class="hero-banner-slide">
+          <img src="../assets/images/portfolio/portfolio-img-3.jpg" alt="DigiBoom — Layihə 3">
+        </div>
+        <div class="hero-banner-slide">
+          <img src="../assets/images/portfolio/portfolio-img-5.jpg" alt="DigiBoom — Layihə 5">
+        </div>
+      </div>
+      <!-- Banner nav -->
+      <button type="button" class="hero-banner-nav hero-banner-nav--prev hero-banner-nav--hidden hero-banner-nav--disabled"
+        aria-label="Əvvəlki slayd" aria-disabled="true" aria-hidden="true" tabindex="-1">
+        <iconify-icon icon="lucide:chevron-left" class="fs-4"></iconify-icon>
+      </button>
+      <button type="button" class="hero-banner-nav hero-banner-nav--next" aria-label="Növbəti slayd">
+        <iconify-icon icon="lucide:chevron-right" class="fs-4"></iconify-icon>
+      </button>
       <div class="container">
         <div class="d-flex flex-column gap-4 pb-8 position-relative z-1">
           <div class="row align-items-center">
@@ -137,22 +99,6 @@
           </div>
           <div class="d-flex align-items-end gap-3" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
             <h1 class="mb-0 fs-16 text-white lh-1">Esas basliq</h1>
-            <div class="bomb-btn-wrapper position-relative d-inline-block">
-              <div class="bomb-countdown position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center overflow-hidden" aria-hidden="true">
-                <span class="bomb-num text-white fw-bold">3</span>
-              </div>
-              <div class="bomb-explosion position-absolute top-50 start-50 translate-middle rounded-circle" aria-hidden="true"></div>
-              <div class="bomb-particles position-absolute top-50 start-50 translate-middle" aria-hidden="true"></div>
-              <div class="bomb-trigger-btn position-relative d-inline-block">
-                <span class="bomb-icon-wrap round-52 rounded-circle d-flex align-items-center justify-content-center">
-                  <span class="bomb-icon">
-                    <span class="bomb-body"></span>
-                    <span class="bomb-fuse"></span>
-                    <span class="bomb-spark"></span>
-                  </span>
-                </span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -167,30 +113,49 @@
     <!--  About Section -->
     <section class="stats-facts about-stats py-5 py-lg-8 py-xl-9 position-relative overflow-hidden">
       <div class="container">
-        <div class="row gap-7 gap-xl-0">
-          <div class="col-xl-4 col-xxl-4">
-            <div class="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100"
-              data-aos-duration="1000">
-              <span
-                class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">01</span>
-              <hr class="border-line">
-              <span class="badge text-bg-dark">Haqqimizda</span>
-            </div>
+        <div class="d-flex flex-column gap-9">
+          <div class="d-flex align-items-center gap-7 py-2 about-stats__badge" data-aos="fade-right" data-aos-delay="100"
+            data-aos-duration="1000">
+            <span
+              class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">01</span>
+            <hr class="border-line flex-grow-1 mb-0">
           </div>
-          <div class="col-xl-8 col-xxl-7">
-            <div class="d-flex flex-column gap-9">
-              <div class="row">
-                <div class="col-xxl-8">
-                  <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100"
-                    data-aos-duration="1000">
-                    <h2 class="mb-0">Esas basliq</h2>
-                    <p class="fs-5 mb-0">Ana metn</p>
+
+          <div class="row align-items-start g-5 g-xl-6 about-intro">
+            <div class="col-md-6 col-lg-5 col-xl-5">
+              <div class="about-image-carousel-wrap" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
+                <div class="about-image-carousel-viewport">
+                  <div class="about-image-carousel-track">
+                    <div class="about-image-carousel-slide">
+                      <img src="../assets/images/portfolio/portfolio-img-2.jpg" alt="DigiBoom ofis 1" class="about-carousel-img">
+                    </div>
+                    <div class="about-image-carousel-slide">
+                      <img src="../assets/images/portfolio/portfolio-img-4.jpg" alt="DigiBoom ofis 2" class="about-carousel-img">
+                    </div>
+                    <div class="about-image-carousel-slide">
+                      <img src="../assets/images/portfolio/portfolio-img-6.jpg" alt="DigiBoom ofis 3" class="about-carousel-img">
+                    </div>
                   </div>
                 </div>
+                <button type="button" class="about-carousel-nav about-carousel-nav--prev" aria-label="Əvvəlki şəkil">
+                  <iconify-icon icon="lucide:chevron-left" class="fs-5"></iconify-icon>
+                </button>
+                <button type="button" class="about-carousel-nav about-carousel-nav--next" aria-label="Növbəti şəkil">
+                  <iconify-icon icon="lucide:chevron-right" class="fs-5"></iconify-icon>
+                </button>
               </div>
-              <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
-                <div class="col">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+            </div>
+            <div class="col-md-6 col-lg-7 col-xl-6">
+              <div class="d-flex flex-column about-intro__content" data-aos="fade-left" data-aos-delay="150" data-aos-duration="1000">
+                <h2 class="mb-0 about-intro__title">Esas basliq</h2>
+                <p class="fs-5 mb-0 about-intro__desc">Ana metn</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4 about-stats__cards">
+                <div class="col" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
                     <span class="stats-card__icon">
                       <iconify-icon icon="lucide:users" class="fs-6"></iconify-icon>
                     </span>
@@ -198,8 +163,8 @@
                     <p class="mb-0 stats-card__text">Formlar</p>
                   </div>
                 </div>
-                <div class="col">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top" data-aos="fade-up" data-aos-delay="220" data-aos-duration="1000">
+                <div class="col" data-aos="fade-up" data-aos-delay="220" data-aos-duration="1000">
+                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
                     <span class="stats-card__icon">
                       <iconify-icon icon="lucide:mic" class="fs-6"></iconify-icon>
                     </span>
@@ -207,8 +172,8 @@
                     <p class="mb-0 stats-card__text">Seminarlar</p>
                   </div>
                 </div>
-                <div class="col">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top" data-aos="fade-up" data-aos-delay="240" data-aos-duration="1000">
+                <div class="col" data-aos="fade-up" data-aos-delay="240" data-aos-duration="1000">
+                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
                     <span class="stats-card__icon">
                       <iconify-icon icon="lucide:presentation" class="fs-6"></iconify-icon>
                     </span>
@@ -216,8 +181,8 @@
                     <p class="mb-0 stats-card__text">Konfranslar</p>
                   </div>
                 </div>
-                <div class="col">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top" data-aos="fade-up" data-aos-delay="260" data-aos-duration="1000">
+                <div class="col" data-aos="fade-up" data-aos-delay="260" data-aos-duration="1000">
+                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
                     <span class="stats-card__icon">
                       <iconify-icon icon="lucide:smile-plus" class="fs-6"></iconify-icon>
                     </span>
@@ -225,8 +190,8 @@
                     <p class="mb-0 stats-card__text">Müştərilər</p>
                   </div>
                 </div>
-                <div class="col">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top" data-aos="fade-up" data-aos-delay="280" data-aos-duration="1000">
+                <div class="col" data-aos="fade-up" data-aos-delay="280" data-aos-duration="1000">
+                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
                     <span class="stats-card__icon">
                       <iconify-icon icon="lucide:award" class="fs-6"></iconify-icon>
                     </span>
@@ -234,8 +199,6 @@
                     <p class="mb-0 stats-card__text">Layihələr</p>
                   </div>
                 </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -301,7 +264,6 @@
                 <span
                   class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">02</span>
                 <hr class="border-line">
-                <span class="badge text-bg-dark">Portfolio</span>
               </div>
             </div>
             <div class="col-xl-8 col-xxl-7">
@@ -331,7 +293,7 @@
           <div class="featured-projects-slider px-3">
           <div class="owl-carousel owl-theme">
             <div class="item">
-              <div class="portfolio d-flex flex-column gap-6">
+              <div class="portfolio portfolio-card-modern d-flex flex-column gap-6">
                 <div class="portfolio-img position-relative overflow-hidden">
                   <img src="../assets/images/portfolio/portfolio-img-1.jpg" alt="" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
@@ -357,7 +319,7 @@
               </div>
             </div>
             <div class="item">
-              <div class="portfolio d-flex flex-column gap-6">
+              <div class="portfolio portfolio-card-modern d-flex flex-column gap-6">
                 <div class="portfolio-img position-relative overflow-hidden">
                   <img src="../assets/images/portfolio/portfolio-img-2.jpg" alt="" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
@@ -383,7 +345,7 @@
               </div>
             </div>
             <div class="item">
-              <div class="portfolio d-flex flex-column gap-6">
+              <div class="portfolio portfolio-card-modern d-flex flex-column gap-6">
                 <div class="portfolio-img position-relative overflow-hidden">
                   <img src="../assets/images/portfolio/portfolio-img-3.jpg" alt="" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
@@ -409,7 +371,7 @@
               </div>
             </div>
             <div class="item">
-              <div class="portfolio d-flex flex-column gap-6">
+              <div class="portfolio portfolio-card-modern d-flex flex-column gap-6">
                 <div class="portfolio-img position-relative overflow-hidden">
                   <img src="../assets/images/portfolio/portfolio-img-4.jpg" alt="" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
@@ -435,7 +397,7 @@
               </div>
             </div>
             <div class="item">
-              <div class="portfolio d-flex flex-column gap-6">
+              <div class="portfolio portfolio-card-modern d-flex flex-column gap-6">
                 <div class="portfolio-img position-relative overflow-hidden">
                   <img src="../assets/images/portfolio/portfolio-img-5.jpg" alt="" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
@@ -461,7 +423,7 @@
               </div>
             </div>
             <div class="item">
-              <div class="portfolio d-flex flex-column gap-6">
+              <div class="portfolio portfolio-card-modern d-flex flex-column gap-6">
                 <div class="portfolio-img position-relative overflow-hidden">
                   <img src="../assets/images/portfolio/portfolio-img-6.jpg" alt="" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
@@ -516,7 +478,6 @@
                 <span
                   class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">03</span>
                 <hr class="border-line bg-white">
-                <span class="badge text-dark bg-white">Xidmətlər</span>
               </div>
             </div>
             <div class="col services-header__center position-absolute start-0 end-0 d-flex justify-content-center align-items-center">
@@ -535,64 +496,70 @@
             </button>
             <div class="services-slider owl-carousel owl-theme">
               <div class="item">
-                <a href="projects.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
+                <div class="service-card position-relative overflow-hidden rounded-3">
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-1.jpg');"></span>
                   <span class="service-card__overlay"></span>
-                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end">
-                    <h1 class="service-card__title text-white mb-2">enenevi marketing </h1>
-                    <p class="service-card__text text-white mb-0 opacity-90">adet enene onemli elbetde</p>
+                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
+                    <h1 class="service-card__title text-white mb-0">Ənənəvi marketinq</h1>
+                    <p class="service-card__text text-white mb-0 opacity-90">Adet-ənənə üzərindən güclü brend qurmaq.</p>
+                    <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
                   </div>
-                </a>
+                </div>
               </div>
               <div class="item">
-                <a href="projects.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
+                <div class="service-card position-relative overflow-hidden rounded-3">
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-2.jpg');"></span>
                   <span class="service-card__overlay"></span>
-                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end">
-                    <h1 class="service-card__title text-white mb-2">konsultasiya</h1>
-                    <p class="service-card__text text-white mb-0 opacity-90">isimiz gucumuz ele agil fikir vermekdir</p>
+                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
+                    <h1 class="service-card__title text-white mb-0">Konsultasiya</h1>
+                    <p class="service-card__text text-white mb-0 opacity-90">Müvafiq sahə üzrə mütəxəssis məsləhəti.</p>
+                    <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
                   </div>
-                </a>
+                </div>
               </div>
               <div class="item">
-                <a href="projects.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
+                <div class="service-card position-relative overflow-hidden rounded-3">
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-3.jpg');"></span>
                   <span class="service-card__overlay"></span>
-                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end">
-                    <h1 class="service-card__title text-white mb-2">Reqemsal marketing</h1>
-                    <p class="service-card__text text-white mb-0 opacity-90">reqemlerle aramiz yaxiwid bize arxayn olun tanis reqemlerimizde var</p>
+                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
+                    <h1 class="service-card__title text-white mb-0">Rəqəmsal marketinq</h1>
+                    <p class="service-card__text text-white mb-0 opacity-90">SEO, SMM, reklam kampaniyaları.</p>
+                    <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
                   </div>
-                </a>
+                </div>
               </div>
               <div class="item">
-                <a href="projects.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
+                <div class="service-card position-relative overflow-hidden rounded-3">
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-4.jpg');"></span>
                   <span class="service-card__overlay"></span>
-                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end">
-                    <h1 class="service-card__title text-white mb-2">Biznes avtomatlasdirilmasi</h1>
-                    <p class="service-card__text text-white mb-0 opacity-90">avtamotdi kombayindi hamisi bizlikdi avatamat kimiyik masallah</p>
+                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
+                    <h1 class="service-card__title text-white mb-0">Biznes avtomatlaşdırması</h1>
+                    <p class="service-card__text text-white mb-0 opacity-90">Proseslərin optimallaşdırılması və CRM.</p>
+                    <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
                   </div>
-                </a>
+                </div>
               </div>
               <div class="item">
-                <a href="projects.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
+                <div class="service-card position-relative overflow-hidden rounded-3">
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-1.jpg');"></span>
                   <span class="service-card__overlay"></span>
-                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end">
-                    <h1 class="service-card__title text-white mb-2">her hansisa bir xidmet</h1>
-                    <p class="service-card__text text-white mb-0 opacity-90">her hansisa bir xidmet haqqinda fikirler</p>
+                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
+                    <h1 class="service-card__title text-white mb-0">Brending və dizayn</h1>
+                    <p class="service-card__text text-white mb-0 opacity-90">Loqo, vizual identitet, brendinq kitabı.</p>
+                    <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
                   </div>
-                </a>
+                </div>
               </div>
               <div class="item" id="training">
-                <a href="projects.html" class="service-card position-relative overflow-hidden rounded-3 d-block text-decoration-none">
+                <div class="service-card position-relative overflow-hidden rounded-3">
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-2.jpg');"></span>
                   <span class="service-card__overlay"></span>
-                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end">
-                    <h1 class="service-card__title text-white mb-2">Telim</h1>
-                    <p class="service-card__text text-white mb-0 opacity-90">telim ve tedris haqqinda reyler </p>
+                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
+                    <h1 class="service-card__title text-white mb-0">Təlim</h1>
+                    <p class="service-card__text text-white mb-0 opacity-90">Korporativ və individual təlim proqramları.</p>
+                    <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
                   </div>
-                </a>
+                </div>
               </div>
             </div>
           </div>
@@ -617,7 +584,6 @@
                 <span
                   class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">05</span>
                 <hr class="border-line bg-white">
-                <span class="badge text-bg-dark">Testimonial</span>
               </div>
             </div>
             <div class="col-xl-8 col-xxl-7">
@@ -642,17 +608,15 @@
             <div class="testimonial-slider owl-carousel">
               <!-- 1 -->
               <div class="item d-flex align-items-stretch">
-                <div class="card bg-primary w-100 h-100">
-                  <div class="card-body d-flex flex-column gap-5 gap-xl-11 justify-content-between">
-                    <div class="d-flex flex-column gap-4">
-                      <h4 class="mb-0">Test rəy 1. Qısa nümunə mətn.</h4>
-                    </div>
+                <div class="testimonial-card testimonial-card--light w-100 h-100">
+                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
+                    <p class="testimonial-quote mb-0">Test rəy 1. Qısa nümunə mətn.</p>
                     <div class="hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-1.jpg" alt=""
-                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="60" height="60">
+                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
-                        <h5 class="mb-1 fw-normal">Şirkətin adı 1</h5>
-                        <p class="mb-0">Rəqəmsal marketinq</p>
+                        <h5 class="mb-1 fw-semibold">Şirkətin adı 1</h5>
+                        <p class="mb-0 text-muted small">Rəqəmsal marketinq</p>
                       </div>
                     </div>
                   </div>
@@ -660,19 +624,15 @@
               </div>
               <!-- 2 -->
               <div class="item d-flex align-items-stretch">
-                <div class="card bg-dark w-100 h-100 text-white">
-                  <div class="card-body d-flex flex-column gap-5 gap-xl-11 justify-content-between">
-                    <div class="d-flex flex-column gap-4">
-                      <h4 class="mb-0 text-white pe-xl-2">Test rəy 2. Qısa nümunə mətn.</h4>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-between">
-                      <div class="hstack gap-3">
-                        <img src="../assets/images/testimonial/testimonial-2.jpg" alt=""
-                          class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="60" height="60">
-                        <div>
-                          <h5 class="mb-1 fw-normal text-white">Şirkətin adı 2</h5>
-                          <p class="mb-0 text-white text-opacity-70">Veb development</p>
-                        </div>
+                <div class="testimonial-card testimonial-card--dark w-100 h-100">
+                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
+                    <p class="testimonial-quote mb-0">Test rəy 2. Qısa nümunə mətn.</p>
+                    <div class="hstack gap-3">
+                      <img src="../assets/images/testimonial/testimonial-2.jpg" alt=""
+                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
+                      <div>
+                        <h5 class="mb-1 fw-semibold">Şirkətin adı 2</h5>
+                        <p class="mb-0 small">Veb development</p>
                       </div>
                     </div>
                   </div>
@@ -680,17 +640,15 @@
               </div>
               <!-- 3 -->
               <div class="item d-flex align-items-stretch">
-                <div class="card w-100 h-100">
-                  <div class="card-body d-flex flex-column gap-5 gap-xl-11 justify-content-between">
-                    <div class="d-flex flex-column gap-4">
-                      <h4 class="mb-0">Test rəy 3. Qısa nümunə mətn.</h4>
-                    </div>
+                <div class="testimonial-card w-100 h-100">
+                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
+                    <p class="testimonial-quote mb-0">Test rəy 3. Qısa nümunə mətn.</p>
                     <div class="hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-3.jpg" alt=""
-                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="60" height="60">
+                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
-                        <h5 class="mb-1 fw-normal">Şirkətin adı 3</h5>
-                        <p class="mb-0">Brending və dizayn</p>
+                        <h5 class="mb-1 fw-semibold">Şirkətin adı 3</h5>
+                        <p class="mb-0 text-muted small">Brending və dizayn</p>
                       </div>
                     </div>
                   </div>
@@ -698,17 +656,15 @@
               </div>
               <!-- 4 -->
               <div class="item d-flex align-items-stretch">
-                <div class="card bg-primary w-100 h-100">
-                  <div class="card-body d-flex flex-column gap-5 gap-xl-11 justify-content-between">
-                    <div class="d-flex flex-column gap-4">
-                      <h4 class="mb-0">Test rəy 4. Qısa nümunə mətn.</h4>
-                    </div>
+                <div class="testimonial-card testimonial-card--light w-100 h-100">
+                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
+                    <p class="testimonial-quote mb-0">Test rəy 4. Qısa nümunə mətn.</p>
                     <div class="hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-1.jpg" alt=""
-                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="60" height="60">
+                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
-                        <h5 class="mb-1 fw-normal">Şirkətin adı 4</h5>
-                        <p class="mb-0">Konsultasiya</p>
+                        <h5 class="mb-1 fw-semibold">Şirkətin adı 4</h5>
+                        <p class="mb-0 text-muted small">Konsultasiya</p>
                       </div>
                     </div>
                   </div>
@@ -716,19 +672,15 @@
               </div>
               <!-- 5 -->
               <div class="item d-flex align-items-stretch">
-                <div class="card bg-dark w-100 h-100 text-white">
-                  <div class="card-body d-flex flex-column gap-5 gap-xl-11 justify-content-between">
-                    <div class="d-flex flex-column gap-4">
-                      <h4 class="mb-0 text-white pe-xl-2">Test rəy 5. Qısa nümunə mətn.</h4>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-between">
-                      <div class="hstack gap-3">
-                        <img src="../assets/images/testimonial/testimonial-2.jpg" alt=""
-                          class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="60" height="60">
-                        <div>
-                          <h5 class="mb-1 fw-normal text-white">Şirkətin adı 5</h5>
-                          <p class="mb-0 text-white text-opacity-70">Ənənəvi marketinq</p>
-                        </div>
+                <div class="testimonial-card testimonial-card--dark w-100 h-100">
+                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
+                    <p class="testimonial-quote mb-0">Test rəy 5. Qısa nümunə mətn.</p>
+                    <div class="hstack gap-3">
+                      <img src="../assets/images/testimonial/testimonial-2.jpg" alt=""
+                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
+                      <div>
+                        <h5 class="mb-1 fw-semibold">Şirkətin adı 5</h5>
+                        <p class="mb-0 small">Ənənəvi marketinq</p>
                       </div>
                     </div>
                   </div>
@@ -736,17 +688,15 @@
               </div>
               <!-- 6 -->
               <div class="item d-flex align-items-stretch">
-                <div class="card w-100 h-100">
-                  <div class="card-body d-flex flex-column gap-5 gap-xl-11 justify-content-between">
-                    <div class="d-flex flex-column gap-4">
-                      <h4 class="mb-0">Test rəy 6. Qısa nümunə mətn.</h4>
-                    </div>
+                <div class="testimonial-card w-100 h-100">
+                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
+                    <p class="testimonial-quote mb-0">Test rəy 6. Qısa nümunə mətn.</p>
                     <div class="hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-3.jpg" alt=""
-                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="60" height="60">
+                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
-                        <h5 class="mb-1 fw-normal">Şirkətin adı 6</h5>
-                        <p class="mb-0">Biznes avtomatlaşdırılması</p>
+                        <h5 class="mb-1 fw-semibold">Şirkətin adı 6</h5>
+                        <p class="mb-0 text-muted small">Biznes avtomatlaşdırılması</p>
                       </div>
                     </div>
                   </div>
@@ -754,17 +704,15 @@
               </div>
               <!-- 7 -->
               <div class="item d-flex align-items-stretch">
-                <div class="card bg-primary w-100 h-100">
-                  <div class="card-body d-flex flex-column gap-5 gap-xl-11 justify-content-between">
-                    <div class="d-flex flex-column gap-4">
-                      <h4 class="mb-0">Test rəy 7. Qısa nümunə mətn.</h4>
-                    </div>
+                <div class="testimonial-card testimonial-card--light w-100 h-100">
+                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
+                    <p class="testimonial-quote mb-0">Test rəy 7. Qısa nümunə mətn.</p>
                     <div class="hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-1.jpg" alt=""
-                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="60" height="60">
+                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
-                        <h5 class="mb-1 fw-normal">Şirkətin adı 7</h5>
-                        <p class="mb-0">Təlim</p>
+                        <h5 class="mb-1 fw-semibold">Şirkətin adı 7</h5>
+                        <p class="mb-0 text-muted small">Təlim</p>
                       </div>
                     </div>
                   </div>
@@ -772,19 +720,15 @@
               </div>
               <!-- 8 -->
               <div class="item d-flex align-items-stretch">
-                <div class="card bg-dark w-100 h-100 text-white">
-                  <div class="card-body d-flex flex-column gap-5 gap-xl-11 justify-content-between">
-                    <div class="d-flex flex-column gap-4">
-                      <h4 class="mb-0 text-white pe-xl-2">Test rəy 8. Qısa nümunə mətn.</h4>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-between">
-                      <div class="hstack gap-3">
-                        <img src="../assets/images/testimonial/testimonial-2.jpg" alt=""
-                          class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="60" height="60">
-                        <div>
-                          <h5 class="mb-1 fw-normal text-white">Şirkətin adı 8</h5>
-                          <p class="mb-0 text-white text-opacity-70">Rəqəmsal marketinq</p>
-                        </div>
+                <div class="testimonial-card testimonial-card--dark w-100 h-100">
+                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
+                    <p class="testimonial-quote mb-0">Test rəy 8. Qısa nümunə mətn.</p>
+                    <div class="hstack gap-3">
+                      <img src="../assets/images/testimonial/testimonial-2.jpg" alt=""
+                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
+                      <div>
+                        <h5 class="mb-1 fw-semibold">Şirkətin adı 8</h5>
+                        <p class="mb-0 small">Rəqəmsal marketinq</p>
                       </div>
                     </div>
                   </div>
@@ -792,17 +736,15 @@
               </div>
               <!-- 9 -->
               <div class="item d-flex align-items-stretch">
-                <div class="card w-100 h-100">
-                  <div class="card-body d-flex flex-column gap-5 gap-xl-11 justify-content-between">
-                    <div class="d-flex flex-column gap-4">
-                      <h4 class="mb-0">Test rəy 9. Qısa nümunə mətn.</h4>
-                    </div>
+                <div class="testimonial-card w-100 h-100">
+                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
+                    <p class="testimonial-quote mb-0">Test rəy 9. Qısa nümunə mətn.</p>
                     <div class="hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-3.jpg" alt=""
-                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="60" height="60">
+                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
-                        <h5 class="mb-1 fw-normal">Şirkətin adı 9</h5>
-                        <p class="mb-0">Veb development</p>
+                        <h5 class="mb-1 fw-semibold">Şirkətin adı 9</h5>
+                        <p class="mb-0 text-muted small">Veb development</p>
                       </div>
                     </div>
                   </div>
@@ -1061,7 +1003,7 @@
     </div>
 
     <!--  FAQ Section -->
-    <section class="faq py-5 py-lg-8 py-xl-9">
+    <section class="faq faq-section-modern py-5 py-lg-8 py-xl-9">
       <div class="container">
         <div class="d-flex flex-column gap-4 gap-lg-6">
           <div class="row gap-4 gap-xl-0">
@@ -1071,7 +1013,6 @@
                 <span
                   class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">08</span>
                 <hr class="border-line bg-white">
-                <span class="badge text-bg-dark">FAQs</span>
               </div>
             </div>
             <div class="col-xl-8 col-xxl-7">
@@ -1086,261 +1027,94 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="accordion accordion-flush" id="accordionFlushExample" data-aos="fade-up" data-aos-delay="200"
+          <div class="row justify-content-center"><div class="col-12 col-xxl-10"><div class="accordion accordion-flush faq-modern" id="accordionFlushExample" data-aos="fade-up" data-aos-delay="200"
                 data-aos-duration="1000">
-                <div class="accordion-item">
+                <div class="accordion-item faq-modern__item">
                   <h2 class="accordion-header">
-                    <button class="accordion-button collapsed fs-8 fw-bold" type="button" data-bs-toggle="collapse"
+                    <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                      What services does your agency offer?
+                      Hansı xidmətləri təklif edirsiniz?
                     </button>
                   </h2>
                   <div id="flush-collapseOne" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body pt-0">
-                      <div class="accordion accordion-flush faq-sub-accordion" id="subAccordionOne">
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-one-1" data-bs-parent="#subAccordionOne">Rəqəmsal marketinq</button>
-                          </h3>
-                          <div id="sub-one-1" class="accordion-collapse collapse" data-bs-parent="#subAccordionOne">
-                            <div class="accordion-body small text-body-secondary">Sosial media idarəetməsi, reklam kampaniyaları, SEO və məzmun stratejiyası – brendinizi onlayn gücləndiririk.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-one-2" data-bs-parent="#subAccordionOne">Veb development</button>
-                          </h3>
-                          <div id="sub-one-2" class="accordion-collapse collapse" data-bs-parent="#subAccordionOne">
-                            <div class="accordion-body small text-body-secondary">Müasir, sürətli və mobil uyğun saytlar, e-ticarət həlləri və xüsusi proqram təminatı hazırlayırıq.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-one-3" data-bs-parent="#subAccordionOne">Brending və dizayn</button>
-                          </h3>
-                          <div id="sub-one-3" class="accordion-collapse collapse" data-bs-parent="#subAccordionOne">
-                            <div class="accordion-body small text-body-secondary">Loqo, vizual identitet, ünvanlıq və materiallar – brendinizi vahid və tanınan edirik.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-one-4" data-bs-parent="#subAccordionOne">Konsultasiya</button>
-                          </h3>
-                          <div id="sub-one-4" class="accordion-collapse collapse" data-bs-parent="#subAccordionOne">
-                            <div class="accordion-body small text-body-secondary">Strategiya, rəqəmsal transformasiya və layihə idarəetməsi üzrə mütəxəssis məsləhətləri təqdim edirik.</div>
-                          </div>
-                        </div>
+                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Rəqəmsal marketinq</h3><p class="faq-modern__text">Sosial media idarəetməsi, reklam kampaniyaları, SEO və məzmun stratejiyası – brendinizi onlayn gücləndiririk.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Veb development</h3><p class="faq-modern__text">Müasir, sürətli və mobil uyğun saytlar, e-ticarət həlləri və xüsusi proqram təminatı hazırlayırıq.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Brending və dizayn</h3><p class="faq-modern__text">Loqo, vizual identitet, ünvanlıq və materiallar – brendinizi vahid və tanınan edirik.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Konsultasiya</h3><p class="faq-modern__text">Strategiya, rəqəmsal transformasiya və layihə idarəetməsi üzrə mütəxəssis məsləhətləri təqdim edirik.</p></article>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item">
+                <div class="accordion-item faq-modern__item">
                   <h2 class="accordion-header">
-                    <button class="accordion-button collapsed fs-8 fw-bold" type="button" data-bs-toggle="collapse"
+                    <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                      How long does a typical project take?
+                      Layihə adətən nə qədər vaxt aparır?
                     </button>
                   </h2>
                   <div id="flush-collapseTwo" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body pt-0">
-                      <div class="accordion accordion-flush faq-sub-accordion" id="subAccordionTwo">
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-two-1" data-bs-parent="#subAccordionTwo">Kiçik sayt (vizitka)</button>
-                          </h3>
-                          <div id="sub-two-1" class="accordion-collapse collapse" data-bs-parent="#subAccordionTwo">
-                            <div class="accordion-body small text-body-secondary">Təxminən 2–4 həftə: dizayn, məzmun və texniki quraşdırma daxildir.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-two-2" data-bs-parent="#subAccordionTwo">Korporativ sayt</button>
-                          </h3>
-                          <div id="sub-two-2" class="accordion-collapse collapse" data-bs-parent="#subAccordionTwo">
-                            <div class="accordion-body small text-body-secondary">1–3 ay: səhifələr çoxluğu, inteqrasiyalar və test mərhələsi nəzərə alınır.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-two-3" data-bs-parent="#subAccordionTwo">E-ticarət platforması</button>
-                          </h3>
-                          <div id="sub-two-3" class="accordion-collapse collapse" data-bs-parent="#subAccordionTwo">
-                            <div class="accordion-body small text-body-secondary">2–4 ay: ödəniş, inventar, çatdırılma və təhlükəsizlik konfiqurasiyası ilə.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-two-4" data-bs-parent="#subAccordionTwo">Brending layihəsi</button>
-                          </h3>
-                          <div id="sub-two-4" class="accordion-collapse collapse" data-bs-parent="#subAccordionTwo">
-                            <div class="accordion-body small text-body-secondary">3–8 həftə: araşdırma, konseptlər, son loqo və vizual tətbiqetmə.</div>
-                          </div>
-                        </div>
+                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Kiçik sayt (vizitka)</h3><p class="faq-modern__text">Təxminən 2–4 həftə: dizayn, məzmun və texniki quraşdırma daxildir.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Korporativ sayt</h3><p class="faq-modern__text">1–3 ay: səhifələr çoxluğu, inteqrasiyalar və test mərhələsi nəzərə alınır.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">E-ticarət platforması</h3><p class="faq-modern__text">2–4 ay: ödəniş, inventar, çatdırılma və təhlükəsizlik konfiqurasiyası ilə.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Brending layihəsi</h3><p class="faq-modern__text">3–8 həftə: araşdırma, konseptlər, son loqo və vizual tətbiqetmə.</p></article>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item">
+                <div class="accordion-item faq-modern__item">
                   <h2 class="accordion-header">
-                    <button class="accordion-button collapsed fs-8 fw-bold" type="button" data-bs-toggle="collapse"
+                    <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                      Do you offer custom designs, or do you use templates?
+                      Xüsusi dizayn təklif edirsiniz, yoxsa şablon?
                     </button>
                   </h2>
                   <div id="flush-collapseThree" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body pt-0">
-                      <div class="accordion accordion-flush faq-sub-accordion" id="subAccordionThree">
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-three-1" data-bs-parent="#subAccordionThree">Tam xüsusi dizayn</button>
-                          </h3>
-                          <div id="sub-three-1" class="accordion-collapse collapse" data-bs-parent="#subAccordionThree">
-                            <div class="accordion-body small text-body-secondary">Sıfırdan, yalnız sizin brendiniz üçün unikal UI/UX və vizual stil hazırlanır.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-three-2" data-bs-parent="#subAccordionThree">Şablon əsaslı uyğunlaşdırma</button>
-                          </h3>
-                          <div id="sub-three-2" class="accordion-collapse collapse" data-bs-parent="#subAccordionThree">
-                            <div class="accordion-body small text-body-secondary">Seçilmiş şablon rənglər, məzmun və bəzək elementləri ilə tam sizinə uyğunlaşdırılır.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-three-3" data-bs-parent="#subAccordionThree">Hibrid yanaşma</button>
-                          </h3>
-                          <div id="sub-three-3" class="accordion-collapse collapse" data-bs-parent="#subAccordionThree">
-                            <div class="accordion-body small text-body-secondary">Bəzi səhifələr xüsusi, bəziləri şablondan – büdcə və sürətə görə seçim edirik.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-three-4" data-bs-parent="#subAccordionThree">Rəng və tipografiya seçimi</button>
-                          </h3>
-                          <div id="sub-three-4" class="accordion-collapse collapse" data-bs-parent="#subAccordionThree">
-                            <div class="accordion-body small text-body-secondary">Brend qaydalarınıza uyğun palitra və fontlar bütün materiallarda tətbiq olunur.</div>
-                          </div>
-                        </div>
+                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Tam xüsusi dizayn</h3><p class="faq-modern__text">Sıfırdan, yalnız sizin brendiniz üçün unikal UI/UX və vizual stil hazırlanır.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Şablon əsaslı uyğunlaşdırma</h3><p class="faq-modern__text">Seçilmiş şablon rənglər, məzmun və bəzək elementləri ilə tam sizinə uyğunlaşdırılır.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Hibrid yanaşma</h3><p class="faq-modern__text">Bəzi səhifələr xüsusi, bəziləri şablondan – büdcə və sürətə görə seçim edirik.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Rəng və tipografiya seçimi</h3><p class="faq-modern__text">Brend qaydalarınıza uyğun palitra və fontlar bütün materiallarda tətbiq olunur.</p></article>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item">
+                <div class="accordion-item faq-modern__item">
                   <h2 class="accordion-header">
-                    <button class="accordion-button collapsed fs-8 fw-bold" type="button" data-bs-toggle="collapse"
+                    <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                      What’s the cost of a project?
+                      Layihənin qiyməti nə qədərdir?
                     </button>
                   </h2>
                   <div id="flush-collapseFour" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body pt-0">
-                      <div class="accordion accordion-flush faq-sub-accordion" id="subAccordionFour">
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-four-1" data-bs-parent="#subAccordionFour">Başlanğıc paketlər</button>
-                          </h3>
-                          <div id="sub-four-1" class="accordion-collapse collapse" data-bs-parent="#subAccordionFour">
-                            <div class="accordion-body small text-body-secondary">Vizitka sayt və sadə brending üçün sabit qiymətlər; qiymət təklifi ilə başlayırıq.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-four-2" data-bs-parent="#subAccordionFour">Orta və böyük layihələr</button>
-                          </h3>
-                          <div id="sub-four-2" class="accordion-collapse collapse" data-bs-parent="#subAccordionFour">
-                            <div class="accordion-body small text-body-secondary">E-ticarət və korporativ saytlar üçün səhifə sayı, funksionallıq və inteqrasiyaya əsasən qiymət.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-four-3" data-bs-parent="#subAccordionFour">Aylıq dəstək paketləri</button>
-                          </h3>
-                          <div id="sub-four-3" class="accordion-collapse collapse" data-bs-parent="#subAccordionFour">
-                            <div class="accordion-body small text-body-secondary">Yeniləmə, hostinq, texniki dəstək və kiçik dəyişikliklər üçün aylıq abunə variantları.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-four-4" data-bs-parent="#subAccordionFour">Rəqəmsal marketinq büdcəsi</button>
-                          </h3>
-                          <div id="sub-four-4" class="accordion-collapse collapse" data-bs-parent="#subAccordionFour">
-                            <div class="accordion-body small text-body-secondary">Kampaniya məqsədlərinə görə reklam büdcəsi və xidmət haqları ayrıca müzakirə olunur.</div>
-                          </div>
-                        </div>
+                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Başlanğıc paketlər</h3><p class="faq-modern__text">Vizitka sayt və sadə brending üçün sabit qiymətlər; qiymət təklifi ilə başlayırıq.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Orta və böyük layihələr</h3><p class="faq-modern__text">E-ticarət və korporativ saytlar üçün səhifə sayı, funksionallıq və inteqrasiyaya əsasən qiymət.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Aylıq dəstək paketləri</h3><p class="faq-modern__text">Yeniləmə, hostinq, texniki dəstək və kiçik dəyişikliklər üçün aylıq abunə variantları.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Rəqəmsal marketinq büdcəsi</h3><p class="faq-modern__text">Kampaniya məqsədlərinə görə reklam büdcəsi və xidmət haqları ayrıca müzakirə olunur.</p></article>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="accordion-item border-bottom">
                   <h2 class="accordion-header">
-                    <button class="accordion-button collapsed fs-8 fw-bold" type="button" data-bs-toggle="collapse"
+                    <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-                      Do you provide ongoing support after project completion?
+                      Layihə bitdikdən sonra dəstək göstərilir?
                     </button>
                   </h2>
                   <div id="flush-collapseFive" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body pt-0">
-                      <div class="accordion accordion-flush faq-sub-accordion" id="subAccordionFive">
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-five-1" data-bs-parent="#subAccordionFive">Texniki dəstək</button>
-                          </h3>
-                          <div id="sub-five-1" class="accordion-collapse collapse" data-bs-parent="#subAccordionFive">
-                            <div class="accordion-body small text-body-secondary">Sayt və sistemlərdə xəta, yeniləmə və kiçik dəyişikliklər üçün reaksiya müddəti ilə dəstək.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-five-2" data-bs-parent="#subAccordionFive">Məzmun yeniləmələri</button>
-                          </h3>
-                          <div id="sub-five-2" class="accordion-collapse collapse" data-bs-parent="#subAccordionFive">
-                            <div class="accordion-body small text-body-secondary">Mətn, şəkil və səhifə əlavəsi; CMS üzərindən və ya bizim tərəfimizdən edilə bilər.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-five-3" data-bs-parent="#subAccordionFive">Hostinq və SSL</button>
-                          </h3>
-                          <div id="sub-five-3" class="accordion-collapse collapse" data-bs-parent="#subAccordionFive">
-                            <div class="accordion-body small text-body-secondary">Hostinq, domain və SSL sertifikatının saxlanması üçün aylıq/illik paket təklifləri.</div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-sub-item">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#sub-five-4" data-bs-parent="#subAccordionFive">Prioritet dəstək</button>
-                          </h3>
-                          <div id="sub-five-4" class="accordion-collapse collapse" data-bs-parent="#subAccordionFive">
-                            <div class="accordion-body small text-body-secondary">Kritik məsələlər üçün qısa reaksiya müddəti və müntəzəm yoxlamalar daxil ola bilər.</div>
-                          </div>
-                        </div>
+                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Texniki dəstək</h3><p class="faq-modern__text">Sayt və sistemlərdə xəta, yeniləmə və kiçik dəyişikliklər üçün reaksiya müddəti ilə dəstək.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Məzmun yeniləmələri</h3><p class="faq-modern__text">Mətn, şəkil və səhifə əlavəsi; CMS üzərindən və ya bizim tərəfimizdən edilə bilər.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Hostinq və SSL</h3><p class="faq-modern__text">Hostinq, domain və SSL sertifikatının saxlanması üçün aylıq/illik paket təklifləri.</p></article>
+                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Prioritet dəstək</h3><p class="faq-modern__text">Kritik məsələlər üçün qısa reaksiya müddəti və müntəzəm yoxlamalar daxil ola bilər.</p></article>
                       </div>
                     </div>
                   </div>
@@ -1359,63 +1133,34 @@
     </div>
 
     <!--  Get in touch Section -->
-    <section id="get-in-touch" class="get-in-touch py-5 py-lg-8 py-xl-9">
+    <section id="get-in-touch" class="get-in-touch get-in-touch--home py-5 py-lg-8 py-xl-9">
       <div class="container">
-        <div class="d-flex flex-column gap-5 gap-xl-10">
-          <div class="row gap-7 gap-xl-0">
-            <div class="col-xl-4 col-xxl-4">
-              <div class="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100"
-                data-aos-duration="1000">
+        <div class="contact-form-modern__layout">
+          <div class="row g-4 g-xl-5 align-items-stretch">
+            <div class="col-lg-5">
+              <div class="contact-form-modern__info" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
+                <div class="d-flex align-items-center gap-4 mb-4">
+                  <span class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">09</span>
+                  <hr class="border-line flex-grow-1 mb-0">
+                </div>
+                <h2 class="contact-form-modern__title mb-0">Müraciət et</h2>
+                <p class="contact-form-modern__lead">Layihəniz, sualınız və ya təklifiniz var? Formu doldurun — komandamız tezliklə sizinlə əlaqə saxlayacaq.</p>
+                <ul class="contact-form-modern__perks list-unstyled mb-0">
+                  <li><iconify-icon icon="lucide:clock-3"></iconify-icon> 24 saat ərzində cavab</li>
+                  <li><iconify-icon icon="lucide:shield-check"></iconify-icon> Məlumatlarınız qorunur</li>
+                  <li><iconify-icon icon="lucide:message-circle"></iconify-icon> Pulsuz ilkin məsləhət</li>
+                </ul>
               </div>
             </div>
-            <div class="col-xl-8 col-xxl-7">
-              <div class="row">
-                <div class="col-xxl-8">
-                  <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100"
-                    data-aos-duration="1000">
-                    <h2 class="mb-0">Müraciət et</h2>
-                  </div>
-                </div>
+            <div class="col-lg-7">
+              <div class="contact-form-modern__card" data-aos="fade-left" data-aos-delay="150" data-aos-duration="1000">
+                <div data-include="contact-form"
+                  data-form-id="home-contact-form"
+                  data-form-prefix="home-contact"
+                  data-aos="fade-up"
+                  data-aos-delay="200"
+                  data-aos-duration="1000"></div>
               </div>
-            </div>
-          </div>
-          <div class="row justify-content-center">
-            <div class="col-12 col-xl-10 col-xxl-8">
-              <form id="home-contact-form" class="d-flex flex-column gap-7" data-aos="fade-up" data-aos-delay="200"
-                data-aos-duration="1000">
-                <div>
-                  <label for="home-contact-name" class="form-label visually-hidden">Ad və soyad</label>
-                  <input type="text" class="form-control border-bottom border-dark" id="home-contact-name" name="name"
-                    placeholder="Ad və soyad" required>
-                </div>
-                <div class="row g-4">
-                  <div class="col-md-6">
-                    <label for="home-contact-phone" class="form-label visually-hidden">Nömrə</label>
-                    <input type="tel" class="form-control border-bottom border-dark" id="home-contact-phone" name="phone"
-                      placeholder="Nömrə" required>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="home-contact-email" class="form-label visually-hidden">Email</label>
-                    <input type="email" class="form-control border-bottom border-dark" id="home-contact-email" name="email"
-                      placeholder="Email" required>
-                  </div>
-                </div>
-                <div>
-                  <label for="home-contact-company" class="form-label visually-hidden">Şirkət adı</label>
-                  <input type="text" class="form-control border-bottom border-dark" id="home-contact-company" name="company"
-                    placeholder="Şirkət adı">
-                </div>
-                <div>
-                  <label for="home-contact-message" class="form-label visually-hidden">Mesaj</label>
-                  <textarea class="form-control border-bottom border-dark" id="home-contact-message" name="message"
-                    placeholder="Mesaj" rows="4" required></textarea>
-                </div>
-                <button type="submit" class="btn w-100 justify-content-center">
-                  <span class="btn-text">Göndər</span>
-                  <iconify-icon icon="lucide:arrow-up-right"
-                    class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
-                </button>
-              </form>
             </div>
           </div>
         </div>
@@ -1430,58 +1175,20 @@
 
   </div>
 
-  <footer class="footer bg-dark py-5 py-lg-11 py-xl-12">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-5 mb-8 mb-xl-0">
-          <div class="d-flex flex-column gap-8 pe-xl-5">
-            <h2 class="mb-0 text-white">Build something together?</h2>
-            <div class="d-flex flex-column gap-2">
-              <a href="https://www.wrappixel.com/" target="_blank" class="link-hover hstack gap-3 text-white fs-5">
-                <iconify-icon icon="lucide:arrow-up-right" class="fs-7 text-primary"></iconify-icon>
-                info@wrappixel.com
-              </a>
-              <a href="https://maps.app.goo.gl/hpDp81fqzGt5y4bC8" target="_blank"
-                class="link-hover hstack gap-3 text-white fs-5">
-                <iconify-icon icon="lucide:map-pin" class="fs-7 text-primary"></iconify-icon>
-                info@wrappixel.com
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-xl-2 mb-8 mb-xl-0">
-          <ul class="footer-menu list-unstyled mb-0 d-flex flex-column gap-2">
-            <li><a class="link-hover fs-5 text-white" href="index.html">Home</a></li>
-            <li><a class="link-hover fs-5 text-white" href="about-us.html">About</a></li>
-            <li><a class="link-hover fs-5 text-white" href="services.html">Services</a></li>
-            <li><a class="link-hover fs-5 text-white" href="projects.html">Work</a></li>
-            <li><a class="link-hover fs-5 text-white" href="terms-and-conditions.html">Terms</a></li>
-            <li><a class="link-hover fs-5 text-white" href="privacy-policy.html">Privacy Policy</a></li>
-            <li><a class="link-hover fs-5 text-white" href="404.html">Error 404</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4 col-xl-2 mb-8 mb-xl-0">
-          <ul class="footer-menu list-unstyled mb-0 d-flex flex-column gap-2">
-            <li><a class="link-hover fs-5 text-white" href="#!">Web</a></li>
-            <li><a class="link-hover fs-5 text-white" href="#!">Instagram</a></li>
-            <li><a class="link-hover fs-5 text-white" href="#!">Facebook</a></li>
-            <li><a class="link-hover fs-5 text-white" href="#!">TikTok</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4 col-xl-3 mb-8 mb-xl-0">
-          <p class="mb-0 text-white text-opacity-70 text-md-end">© Studiova copyright 2025</p>
-        </div>
-      </div>
-    </div>
-  <p class="mb-0 text-white text-opacity-70 text-md-center mt-10">Distributed by <a class="text-white" href="https://www.themewagon.com" target="_blank">ThemeWagon</a></p>
-  </footer>
+  <div data-include="footer"></div>
 
-  <div class="get-template hstack gap-2">
-    <button class="btn bg-primary p-2 round-52 rounded-circle hstack justify-content-center flex-shrink-0"
-      id="scrollToTopBtn">
-      <iconify-icon icon="lucide:arrow-up" class="fs-7 text-dark"></iconify-icon>
+<!-- Floating Widgets -->
+  <aside class="floating-widgets" aria-label="Sürətli əlaqə">
+    <a href="tel:+994501234567" class="floating-widget-btn floating-widget-btn--call" aria-label="Zəng et">
+      <iconify-icon icon="lucide:phone"></iconify-icon>
+    </a>
+    <a href="https://wa.me/994501234567" target="_blank" rel="noopener" class="floating-widget-btn floating-widget-btn--whatsapp" aria-label="WhatsApp">
+      <iconify-icon icon="mdi:whatsapp"></iconify-icon>
+    </a>
+    <button type="button" class="floating-widget-btn floating-widget-btn--top" id="scrollToTopBtn" aria-label="Başa qayıt">
+      <iconify-icon icon="lucide:arrow-up"></iconify-icon>
     </button>
-  </div>
+  </aside>
 
 
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
@@ -1489,6 +1196,9 @@
   <script src="../assets/libs/owl.carousel/dist/owl.carousel.min.js"></script>
   <script src="../assets/libs/aos-master/dist/aos.js"></script>
   <script src="../assets/js/custom.js"></script>
+  <script src="../assets/js/includes.js" defer></script>
+  <script src="../assets/js/i18n.js"></script>
+  <script src="../assets/js/digiboom.js"></script>
   <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
