@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DigiBoom — Haqqımızda</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/libs/owl.carousel/dist/assets/owl.carousel.min.css">
   <link rel="stylesheet" href="../assets/libs/aos-master/dist/aos.css">
   <link rel="stylesheet" href="../assets/css/styles.css" />
@@ -46,98 +49,131 @@
               <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100"
                 data-aos-duration="1000">
                 <img src="../assets/images/svgs/primary-leaf.svg" alt="" class="img-fluid animate-spin">
-                <p class="mb-0 text-white fs-5 text-opacity-70">We craft <span class="text-primary">innovative
-                    digital</span> designs that amplify brand identity and drive meaningful results</p>
+                <p class="mb-0 text-white fs-5 text-opacity-70">Biz <span class="text-primary">innovativ rəqəmsal</span> həllər yaradırıq — brendinizi gücləndirir, real nəticələr gətiririk</p>
               </div>
             </div>
-          </div>
-          <div class="d-flex align-items-end gap-3" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-            <h1 class="mb-0 fs-16 text-white lh-1">About us</h1>
-            <a href="javascript:void(0)" class="p-1 ps-7 bg-primary rounded-pill">
-              <span class="bg-white round-52 rounded-circle d-flex align-items-center justify-content-center">
-                <iconify-icon icon="lucide:arrow-up-right" class="fs-8 text-dark"></iconify-icon>
-              </span>
-            </a>
           </div>
         </div>
       </div>
     </section>
 
     <!--  About Content Section -->
-    <section class="about-content pt-3 pt-lg-3 pt-xl-4 pb-3 pb-lg-4 pb-xl-5">
+    <section class="about-content about-page pt-4 pt-lg-5 pt-xl-6 pb-4 pb-lg-5 pb-xl-6">
       <div class="container">
-        <div class="d-flex flex-column gap-3 gap-lg-4 gap-xl-5">
-          <!-- 1. Şəkil -->
-          <div class="row mb-2 mb-lg-3">
-            <div class="col-12">
-              <div class="about-main-image-wrapper" data-aos="fade-up" data-aos-delay="150" data-aos-duration="1000">
-                <img src="../assets/images/about/about-img.jpg" alt="DigiBoom haqqında" class="about-main-image">
+        <div class="d-flex flex-column gap-5 gap-lg-6 gap-xl-7">
+
+          <!-- 1. Tək böyük vizual şəkil (admin paneldən dinamik) -->
+          <div class="about-hero-visual" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+            <div class="about-hero-visual__frame">
+              <img
+                src="../assets/images/about/about-img.jpg"
+                alt="DigiBoom haqqında"
+                class="about-hero-visual__img"
+              >
+              <div class="about-hero-visual__overlay" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <!-- 2. Şirkət tanıtım videosu (HTML5 / YouTube / Vimeo — admin idarəetməsi) -->
+          <div class="about-promo-video" data-aos="fade-up" data-aos-delay="150" data-aos-duration="1000">
+            <div class="row about-promo-video__row g-3 g-lg-2 align-items-stretch">
+              <div class="col-lg-5 order-2 order-lg-1">
+                <div class="about-promo-video__intro">
+                  <h2 class="about-promo-video__title mb-0">DigiBoom-u yaxından tanıyın</h2>
+                  <p class="about-promo-video__desc mb-0">
+                    Komandamızın iş prinsipləri, gündəlik fəaliyyətimiz və müştərilərə
+                    yaratdığımız dəyər bu videoda qısa və vizual şəkildə təqdim olunur.
+                  </p>
+                </div>
+              </div>
+              <div class="col-lg-7 order-1 order-lg-2">
+                <!-- HTML5 video (admin: src, poster dəyişdirilir) -->
+                <div class="about-promo-video__player" data-video-type="html5">
+                  <div class="about-promo-video__ratio ratio ratio-16x9">
+                    <video
+                      class="about-promo-video__el"
+                      src="../assets/images/backgrounds/banner-video.mp4"
+                      poster="../assets/images/about/about-img.jpg"
+                      playsinline
+                      preload="metadata"
+                    ></video>
+                    <button type="button" class="about-promo-video__play" aria-label="Videonu oynat">
+                      <span class="about-promo-video__play-pulse" aria-hidden="true"></span>
+                      <span class="about-promo-video__play-pulse about-promo-video__play-pulse--delay" aria-hidden="true"></span>
+                      <span class="about-promo-video__play-btn" aria-hidden="true">
+                        <iconify-icon icon="lucide:play"></iconify-icon>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <!-- YouTube/Vimeo embed nümunəsi (admin paneldən aktiv edilə bilər):
+                <div class="about-promo-video__player" data-video-type="embed">
+                  <div class="about-promo-video__ratio ratio ratio-16x9">
+                    <iframe
+                      class="about-promo-video__embed"
+                      src="https://www.youtube.com/embed/VIDEO_ID?rel=0"
+                      title="DigiBoom tanıtım videosu"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                </div>
+                -->
               </div>
             </div>
           </div>
-          <!-- 2. İki kreativ mətn bloku (hər biri CKEditor ilə gələcək) -->
-          <div class="row gy-4">
-            <div class="col-md-6 col-xl-4">
-              <div class="about-digiboom-editor card h-100 border-0 shadow-sm p-4 d-flex flex-column gap-3" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                <!-- CKEditor blok 1 -->
-                <div class="d-flex align-items-center gap-3 mb-1">
-                  <span class="round-32 bg-primary d-inline-flex align-items-center justify-content-center flex-shrink-0">
-                    <iconify-icon icon="lucide:briefcase" class="fs-6 text-dark"></iconify-icon>
-                  </span>
-                  <h3 class="mb-0">Agentlik</h3>
-                </div>
-                <p class="mb-2">
-                  Bu hissəyə admin paneldən CKEditor vasitəsilə Agentlik haqqında
-                  mətn əlavə ediləcək. Burada xidmətləriniz, müştəri yanaşmanız və
-                  əsas fərqləndirici üstünlükləriniz qeyd oluna bilər.
-                </p>
-                <p class="mb-0">
-                  Nümunə: strategiya, rəqəmsal marketinq, brendinq, veb layihələr və
-                  digər agentlik həlləri haqqında qısa, amma təsirli təsvir.
-                </p>
+
+          <!-- 3. Mətndən ibarət kartlar (ikon + CKEditor mətni) -->
+          <div class="about-info-cards">
+            <div class="row g-4">
+              <div class="col-md-6 col-xl-4">
+                <article class="about-info-card" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                  <div class="about-info-card__icon" data-icon="lucide:briefcase">
+                    <iconify-icon icon="lucide:briefcase"></iconify-icon>
+                  </div>
+                  <div class="about-info-card__body about-digiboom-editor">
+                    <h3>Agentlik</h3>
+                    <p>
+                      Strategiya, rəqəmsal marketinq, brendinq və veb layihələr üzrə
+                      tam dövriyyə agentlik xidmətləri təqdim edirik. Hər müştəriyə
+                      fərdi yanaşma və ölçülə bilən nəticələr prioritetdir.
+                    </p>
+                  </div>
+                </article>
               </div>
-            </div>
-            <div class="col-md-6 col-xl-4">
-              <div class="about-digiboom-editor card h-100 border-0 shadow-sm p-4 d-flex flex-column gap-3" data-aos="fade-up" data-aos-delay="250" data-aos-duration="1000">
-                <!-- CKEditor blok 2 -->
-                <div class="d-flex align-items-center gap-3 mb-1">
-                  <span class="round-32 bg-primary d-inline-flex align-items-center justify-content-center flex-shrink-0">
-                    <iconify-icon icon="lucide:graduation-cap" class="fs-6 text-dark"></iconify-icon>
-                  </span>
-                  <h3 class="mb-0">DigiBoom Academy</h3>
-                </div>
-                <p class="mb-2">
-                  Bu hissəyə isə CKEditor-dan təlimlər, proqramlar və Academy
-                  istiqaməti üçün mətn gələcək. Tədris istiqamətləri, hədəf auditoriya
-                  və nəticələr barədə məlumat yaza bilərsiniz.
-                </p>
-                <p class="mb-0">
-                  Nümunə: rəqəmsal bacarıqlar, marketing, dizayn və texnoloji
-                  sahələr üzrə praktiki təlim proqramlarından bəhs edən mətn.
-                </p>
+              <div class="col-md-6 col-xl-4">
+                <article class="about-info-card" data-aos="fade-up" data-aos-delay="250" data-aos-duration="1000">
+                  <div class="about-info-card__icon" data-icon="lucide:graduation-cap">
+                    <iconify-icon icon="lucide:graduation-cap"></iconify-icon>
+                  </div>
+                  <div class="about-info-card__body about-digiboom-editor">
+                    <h3>DigiBoom Academy</h3>
+                    <p>
+                      Rəqəmsal bacarıqlar, marketing, dizayn və texnologiya sahələrində
+                      praktiki təlim proqramları. Real layihələr üzərində işləyərək
+                      peşəkar bacarıqlar qazanın.
+                    </p>
+                  </div>
+                </article>
               </div>
-            </div>
-            <div class="col-md-12 col-xl-4">
-              <div class="about-digiboom-editor card h-100 border-0 shadow-sm p-4 d-flex flex-column gap-3" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
-                <!-- CKEditor blok 3: Missiya və dəyərlər -->
-                <div class="d-flex align-items-center gap-3 mb-2">
-                  <span class="round-32 bg-primary d-inline-flex align-items-center justify-content-center flex-shrink-0">
-                    <iconify-icon icon="lucide:sparkles" class="fs-6 text-dark"></iconify-icon>
-                  </span>
-                  <h3 class="mb-0">Missiya və dəyərlər</h3>
-                </div>
-                <p class="mb-1 small text-muted">
-                  Bu blokda CKEditor vasitəsilə yanaşma, baxış və prinsiplər haqqında
-                  mətn yerləşdiriləcək.
-                </p>
-                <ul class="mb-0 ps-3 small">
-                  <li>Missiya: müştərilərə davamlı dəyər yaradan rəqəmsal həllər.</li>
-                  <li>Baxış: regional və qlobal miqyasda tanınan ekosistem olmaq.</li>
-                  <li>Prinsiplər: şəffaflıq, məsuliyyət və uzunmüddətli əməkdaşlıq.</li>
-                </ul>
+              <div class="col-md-6 col-xl-4">
+                <article class="about-info-card" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+                  <div class="about-info-card__icon" data-icon="lucide:sparkles">
+                    <iconify-icon icon="lucide:sparkles"></iconify-icon>
+                  </div>
+                  <div class="about-info-card__body about-digiboom-editor">
+                    <h3>Missiya və dəyərlər</h3>
+                    <ul>
+                      <li><strong>Missiya:</strong> müştərilərə davamlı dəyər yaradan rəqəmsal həllər.</li>
+                      <li><strong>Baxış:</strong> regional və qlobal miqyasda tanınan ekosistem olmaq.</li>
+                      <li><strong>Prinsiplər:</strong> şəffaflıq, məsuliyyət və uzunmüddətli əməkdaşlıq.</li>
+                    </ul>
+                  </div>
+                </article>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -156,63 +192,61 @@
             </div>
           </div>
           <div class="col-xl-8 col-xxl-7">
-            <div class="d-flex flex-column gap-9">
-              <div class="row">
-                <div class="col-xxl-8">
-                  <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100"
-                    data-aos-duration="1000">
-                    <h2 class="mb-0">DigiBoom rəqəmlərlə</h2>
-                    <p class="fs-5 mb-0">Buradakı rəqəmlər sonradan admin paneldən dinamik ola bilər, hazırda nümunə kimi göstərilir.</p>
-                  </div>
+            <div class="row">
+              <div class="col-xxl-8">
+                <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100"
+                  data-aos-duration="1000">
+                  <h2 class="mb-0">DigiBoom rəqəmlərlə</h2>
+                  <p class="fs-5 mb-0">Buradakı rəqəmlər sonradan admin paneldən dinamik ola bilər, hazırda nümunə kimi göstərilir.</p>
                 </div>
               </div>
-              <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
-                <div class="col" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
-                    <span class="stats-card__icon">
-                      <iconify-icon icon="lucide:users" class="fs-6"></iconify-icon>
-                    </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="40">25</span></h2>
-                    <p class="mb-0 stats-card__text">Formlar</p>
-                  </div>
-                </div>
-                <div class="col" data-aos="fade-up" data-aos-delay="220" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
-                    <span class="stats-card__icon">
-                      <iconify-icon icon="lucide:mic" class="fs-6"></iconify-icon>
-                    </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="40">25</span></h2>
-                    <p class="mb-0 stats-card__text">Seminarlar</p>
-                  </div>
-                </div>
-                <div class="col" data-aos="fade-up" data-aos-delay="240" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
-                    <span class="stats-card__icon">
-                      <iconify-icon icon="lucide:presentation" class="fs-6"></iconify-icon>
-                    </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="40">25</span></h2>
-                    <p class="mb-0 stats-card__text">Konfranslar</p>
-                  </div>
-                </div>
-                <div class="col" data-aos="fade-up" data-aos-delay="260" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
-                    <span class="stats-card__icon">
-                      <iconify-icon icon="lucide:smile-plus" class="fs-6"></iconify-icon>
-                    </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="40">25</span></h2>
-                    <p class="mb-0 stats-card__text">Müştərilər</p>
-                  </div>
-                </div>
-                <div class="col" data-aos="fade-up" data-aos-delay="280" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
-                    <span class="stats-card__icon">
-                      <iconify-icon icon="lucide:award" class="fs-6"></iconify-icon>
-                    </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="40">25</span></h2>
-                    <p class="mb-0 stats-card__text">Layihələr</p>
-                  </div>
-                </div>
-              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4 about-stats__cards mt-4 mt-xl-6 justify-content-lg-center">
+          <div class="col" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+            <div class="stats-card d-flex flex-column align-items-center gap-2">
+              <span class="stats-card__icon">
+                <iconify-icon icon="lucide:users" class="fs-6"></iconify-icon>
+              </span>
+              <h2 class="mb-0 stats-card__number"><span class="count" data-target="40">0</span></h2>
+              <p class="mb-0 stats-card__text">Formlar</p>
+            </div>
+          </div>
+          <div class="col" data-aos="fade-up" data-aos-delay="220" data-aos-duration="1000">
+            <div class="stats-card d-flex flex-column align-items-center gap-2">
+              <span class="stats-card__icon">
+                <iconify-icon icon="lucide:mic" class="fs-6"></iconify-icon>
+              </span>
+              <h2 class="mb-0 stats-card__number"><span class="count" data-target="35">0</span></h2>
+              <p class="mb-0 stats-card__text">Seminarlar</p>
+            </div>
+          </div>
+          <div class="col" data-aos="fade-up" data-aos-delay="240" data-aos-duration="1000">
+            <div class="stats-card d-flex flex-column align-items-center gap-2">
+              <span class="stats-card__icon">
+                <iconify-icon icon="lucide:presentation" class="fs-6"></iconify-icon>
+              </span>
+              <h2 class="mb-0 stats-card__number"><span class="count" data-target="28">0</span></h2>
+              <p class="mb-0 stats-card__text">Konfranslar</p>
+            </div>
+          </div>
+          <div class="col" data-aos="fade-up" data-aos-delay="260" data-aos-duration="1000">
+            <div class="stats-card d-flex flex-column align-items-center gap-2">
+              <span class="stats-card__icon">
+                <iconify-icon icon="lucide:smile-plus" class="fs-6"></iconify-icon>
+              </span>
+              <h2 class="mb-0 stats-card__number"><span class="count" data-target="120">0</span></h2>
+              <p class="mb-0 stats-card__text">Müştərilər</p>
+            </div>
+          </div>
+          <div class="col" data-aos="fade-up" data-aos-delay="280" data-aos-duration="1000">
+            <div class="stats-card d-flex flex-column align-items-center gap-2">
+              <span class="stats-card__icon">
+                <iconify-icon icon="lucide:award" class="fs-6"></iconify-icon>
+              </span>
+              <h2 class="mb-0 stats-card__number"><span class="count" data-target="85">0</span></h2>
+              <p class="mb-0 stats-card__text">Layihələr</p>
             </div>
           </div>
         </div>

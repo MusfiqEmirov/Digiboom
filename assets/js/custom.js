@@ -19,7 +19,7 @@ $(function () {
         dots: false,
         autoplay: true,
         autoplayTimeout: 5000,
-        autoplayHoverPause: false,
+        autoplayHoverPause: true,
         responsive: {
             0: {
                 items: 1
@@ -34,6 +34,11 @@ $(function () {
                 items: 4
             }
         }
+    });
+    $('.featured-projects-carousel-wrap').on('mouseenter', function () {
+        $(this).find('.owl-carousel').trigger('stop.owl.autoplay');
+    }).on('mouseleave', function () {
+        $(this).find('.owl-carousel').trigger('play.owl.autoplay');
     });
     // Gördüyümüz işlər – mobil/tablet sol/sağ ox (ana səhifə, haqqımızda)
     $('.featured-projects-nav-prev').on('click', function () {
@@ -100,6 +105,7 @@ $(function () {
             }
         }
         startServicesAutoplay();
+        $('.services-carousel-shell').on('mouseenter', stopServicesAutoplay).on('mouseleave', startServicesAutoplay);
         $(window).on('resize', function () {
             clearTimeout(window._servicesResizeT);
             window._servicesResizeT = setTimeout(function () {
@@ -159,25 +165,72 @@ $(function () {
             testimonialAutoplayTimer = setInterval(goTestimonialNext, 5000);
         }
         function stopAutoplay() {
-            clearInterval(testimonialAutoplayTimer);
+            if (testimonialAutoplayTimer) {
+                clearInterval(testimonialAutoplayTimer);
+                testimonialAutoplayTimer = null;
+            }
         }
         startAutoplay();
         $('.testimonial-slider-wrapper').on('mouseenter', stopAutoplay).on('mouseleave', startAutoplay);
     }
 
 
-    // Count
-    $('.count').each(function () {
-		$(this).prop('Counter', 0).animate({
-			Counter: $(this).text()
-		}, {
-			duration: 1000,
-			easing: 'swing',
-			step: function (now) {
-				$(this).text(Math.ceil(now));
-			}
-		});
-	});
+    // Stats count-up (ana səhifə & haqqımızda)
+    function animateStatCount($el) {
+        if ($el.data('counted')) return;
+        $el.data('counted', true);
+
+        var target = parseInt($el.attr('data-target'), 10);
+        if (isNaN(target)) {
+            target = parseInt($el.text(), 10) || 0;
+        }
+
+        $el.text('0');
+        $({ value: 0 }).animate({ value: target }, {
+            duration: 1800,
+            easing: 'swing',
+            step: function (now) {
+                $el.text(Math.floor(now));
+            },
+            complete: function () {
+                $el.text(target);
+            }
+        });
+    }
+
+    var $statCounts = $('.about-stats .count');
+    $statCounts.each(function () {
+        $(this).text('0');
+    });
+
+    if ($statCounts.length && 'IntersectionObserver' in window) {
+        var statsObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                $(entry.target).find('.count').each(function () {
+                    animateStatCount($(this));
+                });
+                statsObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.35, rootMargin: '0px 0px -40px 0px' });
+
+        $('.about-stats__cards').each(function () {
+            statsObserver.observe(this);
+        });
+
+        $('.about-stats').each(function () {
+            if (!this.querySelector('.about-stats__cards')) {
+                var cardsRow = this.querySelector('.stats-card');
+                if (cardsRow) {
+                    statsObserver.observe(cardsRow.closest('.row'));
+                }
+            }
+        });
+    } else {
+        $statCounts.each(function () {
+            animateStatCount($(this));
+        });
+    }
 
 
     // Aos

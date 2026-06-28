@@ -1,4 +1,5 @@
-<form id="{{formId}}" class="contact-form-modern {{formClass}}" {{aosAttrs}} novalidate>
+<form id="{{formId}}" class="contact-form-modern {{formClass}}" {{aosAttrs}} method="post"
+  action="{{smtpAction}}" data-smtp-form novalidate>
   <div class="contact-form-modern__fields">
     <div class="contact-form-modern__field contact-form-modern__field--full">
       <label for="{{prefix}}-name" class="contact-form-modern__label">Ad və soyad</label>
@@ -26,10 +27,9 @@
         placeholder="Layihəniz və ya sualınız haqqında qısaca yazın..." rows="4" required></textarea>
     </div>
   </div>
-  <button type="submit" class="contact-form-modern__submit {{btnClass}}">
-    <span class="contact-form-modern__submit-text">Göndər</span>
-    <span class="contact-form-modern__submit-icon" aria-hidden="true">
-      <iconify-icon icon="lucide:send"></iconify-icon>
-    </span>
+  <p class="contact-form-modern__status" data-form-status hidden role="status" aria-live="polite"></p>
+  <button type="submit" class="btn contact-form-modern__submit w-100 justify-content-center {{btnClass}}">
+    <span class="btn-text">Göndər</span>
+    <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm" aria-hidden="true"></iconify-icon>
   </button>
 </form>

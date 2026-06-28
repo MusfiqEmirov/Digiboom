@@ -32,7 +32,7 @@
     padding: 0.5rem 1.5rem;
     overflow: hidden;
     text-decoration: none;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     width: fit-content;
     padding: 16px 58px 16px 30px;
 
@@ -46,7 +46,7 @@
         font-size: 18px;
         font-weight: 700;
         color: var(--bs-secondary);
-        transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+        transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         padding-inline-end: 15px;
     }
 
@@ -61,7 +61,8 @@
         top: 50%;
         transform: translate(-115%, -50%);
         z-index: 0;
-        transition: transform 0.4s ease, left 0.4s ease;
+        transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), left 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform, left;
     }
 
     &:hover .btn-icon {

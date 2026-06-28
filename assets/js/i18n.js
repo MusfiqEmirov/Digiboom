@@ -43,13 +43,19 @@
       }
       if (label) label.textContent = meta.label;
       if (toggle) toggle.setAttribute('aria-label', 'Dil: ' + meta.name);
+    });
 
-      switcher.querySelectorAll('.lang-switcher__option').forEach(function (opt) {
-        var active = opt.getAttribute('data-lang') === code;
-        opt.classList.toggle('is-active', active);
-        if (active) opt.setAttribute('aria-current', 'true');
-        else opt.removeAttribute('aria-current');
-      });
+    document.querySelectorAll('.lang-switcher__option').forEach(function (opt) {
+      var optCode = opt.getAttribute('data-lang');
+      var optMeta = LANG_META[optCode];
+      if (optMeta) {
+        var optLabel = opt.querySelector('span');
+        if (optLabel) optLabel.textContent = optMeta.label;
+      }
+      var active = optCode === code;
+      opt.classList.toggle('is-active', active);
+      if (active) opt.setAttribute('aria-current', 'true');
+      else opt.removeAttribute('aria-current');
     });
 
     syncDropdownWidths();

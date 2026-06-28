@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DigiBoom</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/libs/owl.carousel/dist/assets/owl.carousel.min.css">
   <link rel="stylesheet" href="../assets/libs/aos-master/dist/aos.css">
   <link rel="stylesheet" href="../assets/css/styles.css" />
@@ -80,10 +83,10 @@
       <!-- Banner nav -->
       <button type="button" class="hero-banner-nav hero-banner-nav--prev hero-banner-nav--hidden hero-banner-nav--disabled"
         aria-label="Əvvəlki slayd" aria-disabled="true" aria-hidden="true" tabindex="-1">
-        <iconify-icon icon="lucide:chevron-left" class="fs-4"></iconify-icon>
+        <iconify-icon icon="lucide:chevron-left"></iconify-icon>
       </button>
       <button type="button" class="hero-banner-nav hero-banner-nav--next" aria-label="Növbəti slayd">
-        <iconify-icon icon="lucide:chevron-right" class="fs-4"></iconify-icon>
+        <iconify-icon icon="lucide:chevron-right"></iconify-icon>
       </button>
       <div class="container">
         <div class="d-flex flex-column gap-4 pb-8 position-relative z-1">
@@ -114,7 +117,7 @@
     <section class="stats-facts about-stats py-5 py-lg-8 py-xl-9 position-relative overflow-hidden">
       <div class="container">
         <div class="d-flex flex-column gap-9">
-          <div class="d-flex align-items-center gap-7 py-2 about-stats__badge" data-aos="fade-right" data-aos-delay="100"
+          <div class="home-section-badge about-stats__badge" data-aos="fade-right" data-aos-delay="100"
             data-aos-duration="1000">
             <span
               class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">01</span>
@@ -126,7 +129,7 @@
               <div class="about-image-carousel-wrap" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
                 <div class="about-image-carousel-viewport">
                   <div class="about-image-carousel-track">
-                    <div class="about-image-carousel-slide">
+                    <div class="about-image-carousel-slide is-active">
                       <img src="../assets/images/portfolio/portfolio-img-2.jpg" alt="DigiBoom ofis 1" class="about-carousel-img">
                     </div>
                     <div class="about-image-carousel-slide">
@@ -138,64 +141,70 @@
                   </div>
                 </div>
                 <button type="button" class="about-carousel-nav about-carousel-nav--prev" aria-label="Əvvəlki şəkil">
-                  <iconify-icon icon="lucide:chevron-left" class="fs-5"></iconify-icon>
+                  <iconify-icon icon="lucide:chevron-left"></iconify-icon>
                 </button>
                 <button type="button" class="about-carousel-nav about-carousel-nav--next" aria-label="Növbəti şəkil">
-                  <iconify-icon icon="lucide:chevron-right" class="fs-5"></iconify-icon>
+                  <iconify-icon icon="lucide:chevron-right"></iconify-icon>
                 </button>
               </div>
             </div>
-            <div class="col-md-6 col-lg-7 col-xl-6">
+            <div class="col-md-6 col-lg-7 col-xl-7">
               <div class="d-flex flex-column about-intro__content" data-aos="fade-left" data-aos-delay="150" data-aos-duration="1000">
-                <h2 class="mb-0 about-intro__title">Esas basliq</h2>
-                <p class="fs-5 mb-0 about-intro__desc">Ana metn</p>
+                <h2 class="mb-0 about-intro__title">Rəqəmsal dünyada səsinizi eşidilir edirik</h2>
+                <p class="fs-5 mb-0 about-intro__desc">DigiBoom — brendlərin rəqəmsal ekosistemdə güclü mövqe qazanması üçün strategiya, dizayn və texnologiyanı birləşdirən yaradıcı komandadır.</p>
+                <p class="fs-5 mb-0 about-intro__desc">Veb, mobil, dizayn və rəqəmsal marketinq sahələrində təcrübə ilə tərəfdaşlarımızın biznesinə real dəyər qatırıq.</p>
+                <a href="about-us.html" class="btn about-intro__btn" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
+                  <span class="btn-text">Ətraflı</span>
+                  <iconify-icon icon="lucide:arrow-up-right"
+                    class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+                </a>
               </div>
             </div>
           </div>
 
-          <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4 about-stats__cards">
+          <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4 about-stats__cards justify-content-lg-center">
                 <div class="col" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
+                  <div class="stats-card d-flex flex-column align-items-center gap-2">
                     <span class="stats-card__icon">
                       <iconify-icon icon="lucide:users" class="fs-6"></iconify-icon>
                     </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="40">25</span></h2>
+                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="40">0</span></h2>
                     <p class="mb-0 stats-card__text">Formlar</p>
                   </div>
                 </div>
                 <div class="col" data-aos="fade-up" data-aos-delay="220" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
+                  <div class="stats-card d-flex flex-column align-items-center gap-2">
                     <span class="stats-card__icon">
                       <iconify-icon icon="lucide:mic" class="fs-6"></iconify-icon>
                     </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="40">25</span></h2>
+                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="35">0</span></h2>
                     <p class="mb-0 stats-card__text">Seminarlar</p>
                   </div>
                 </div>
                 <div class="col" data-aos="fade-up" data-aos-delay="240" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
+                  <div class="stats-card d-flex flex-column align-items-center gap-2">
                     <span class="stats-card__icon">
                       <iconify-icon icon="lucide:presentation" class="fs-6"></iconify-icon>
                     </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="40">25</span></h2>
+                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="28">0</span></h2>
                     <p class="mb-0 stats-card__text">Konfranslar</p>
                   </div>
                 </div>
                 <div class="col" data-aos="fade-up" data-aos-delay="260" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
+                  <div class="stats-card d-flex flex-column align-items-center gap-2">
                     <span class="stats-card__icon">
                       <iconify-icon icon="lucide:smile-plus" class="fs-6"></iconify-icon>
                     </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="40">25</span></h2>
+                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="120">0</span></h2>
                     <p class="mb-0 stats-card__text">Müştərilər</p>
                   </div>
                 </div>
                 <div class="col" data-aos="fade-up" data-aos-delay="280" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column gap-3 pt-5 border-top">
+                  <div class="stats-card d-flex flex-column align-items-center gap-2">
                     <span class="stats-card__icon">
                       <iconify-icon icon="lucide:award" class="fs-6"></iconify-icon>
                     </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="40">25</span></h2>
+                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="85">0</span></h2>
                     <p class="mb-0 stats-card__text">Layihələr</p>
                   </div>
                 </div>
@@ -254,16 +263,17 @@
     </div>
 
     <!--   Projects Section - Gördüyümüz işlər -->
-    <section class="featured-projects py-5 py-lg-8 py-xl-9 bg-light-gray">
-      <div class="d-flex flex-column gap-5 gap-xl-11">
+    <section class="featured-projects featured-projects--showcase py-5 py-lg-8 py-xl-9">
+      <div class="featured-projects__atmosphere" aria-hidden="true"></div>
+      <div class="d-flex flex-column gap-5 gap-xl-11 position-relative">
         <div class="container">
           <div class="row gap-7 gap-xl-0">
             <div class="col-xl-4 col-xxl-4">
-              <div class="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100"
+              <div class="home-section-badge" data-aos="fade-right" data-aos-delay="100"
                 data-aos-duration="1000">
                 <span
                   class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">02</span>
-                <hr class="border-line">
+                <hr class="border-line flex-grow-1 mb-0">
               </div>
             </div>
             <div class="col-xl-8 col-xxl-7">
@@ -279,26 +289,22 @@
             </div>
           </div>
         </div>
-        <div class="featured-projects-carousel-wrap position-relative">
-          <button type="button"
-            class="featured-projects-nav-btn featured-projects-nav-prev d-lg-none position-absolute top-50 start-0 translate-middle-y z-2 border-0"
-            aria-label="Əvvəlki layihə">
-            <iconify-icon icon="lucide:chevron-left" class="fs-4"></iconify-icon>
+        <div class="featured-projects-carousel-wrap">
+          <button type="button" class="featured-projects-nav-btn featured-projects-nav-prev" aria-label="Əvvəlki layihə">
+            <iconify-icon icon="lucide:chevron-left"></iconify-icon>
           </button>
-          <button type="button"
-            class="featured-projects-nav-btn featured-projects-nav-next d-lg-none position-absolute top-50 end-0 translate-middle-y z-2 border-0"
-            aria-label="Növbəti layihə">
-            <iconify-icon icon="lucide:chevron-right" class="fs-4"></iconify-icon>
+          <button type="button" class="featured-projects-nav-btn featured-projects-nav-next" aria-label="Növbəti layihə">
+            <iconify-icon icon="lucide:chevron-right"></iconify-icon>
           </button>
-          <div class="featured-projects-slider px-3">
+          <div class="featured-projects-slider">
           <div class="owl-carousel owl-theme">
             <div class="item">
-              <div class="portfolio portfolio-card-modern d-flex flex-column gap-6">
-                <div class="portfolio-img position-relative overflow-hidden">
-                  <img src="../assets/images/portfolio/portfolio-img-1.jpg" alt="" class="img-fluid">
+              <article class="portfolio portfolio-showcase-card">
+                <div class="portfolio-showcase-card__frame">
+                  <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
+                    <img src="../assets/images/portfolio/portfolio-img-1.jpg" alt="Layihə 1" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                    <div class="d-flex align-items-center justify-content-between w-100">
-                      <a href="projects-detail.html" class="portfolio-overlay-btn btn btn-sm"><span class="btn-text">Ətraflı</span></a>
+                    <div class="d-flex align-items-center justify-content-end w-100">
                       <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
@@ -309,22 +315,28 @@
                     </div>
                   </div>
                 </div>
-                <div class="portfolio-details d-flex flex-column gap-3">
-                  <h3 class="mb-0">Layihə 1</h3>
-                  <div class="hstack gap-2">
-                    <span class="badge text-dark border">UX Strategy</span>
-                    <span class="badge text-dark border">UI Design</span>
+                <div class="portfolio-showcase-card__meta">
+                  <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
+                    <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
+                    <h3 class="mb-0">Layihə 1</h3>
+                    <div class="portfolio-showcase-card__tags hstack gap-2">
+                      <span class="badge text-dark border">UX Strategy</span>
+                      <span class="badge text-dark border">UI Design</span>
+                    </div>
                   </div>
+                  <a href="projects-detail.html" class="portfolio-showcase-card__cta service-card__btn">Ətraflı</a>
+
                 </div>
-              </div>
+                </div>
+              </article>
             </div>
             <div class="item">
-              <div class="portfolio portfolio-card-modern d-flex flex-column gap-6">
-                <div class="portfolio-img position-relative overflow-hidden">
-                  <img src="../assets/images/portfolio/portfolio-img-2.jpg" alt="" class="img-fluid">
+              <article class="portfolio portfolio-showcase-card">
+                <div class="portfolio-showcase-card__frame">
+                  <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
+                    <img src="../assets/images/portfolio/portfolio-img-2.jpg" alt="Layihə 2" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                    <div class="d-flex align-items-center justify-content-between w-100">
-                      <a href="projects-detail.html" class="portfolio-overlay-btn btn btn-sm"><span class="btn-text">Ətraflı</span></a>
+                    <div class="d-flex align-items-center justify-content-end w-100">
                       <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
@@ -335,22 +347,28 @@
                     </div>
                   </div>
                 </div>
-                <div class="portfolio-details d-flex flex-column gap-3">
-                  <h3 class="mb-0">Layihə 2</h3>
-                  <div class="hstack gap-2">
-                    <span class="badge text-dark border">Web development</span>
-                    <span class="badge text-dark border">Digital design</span>
+                <div class="portfolio-showcase-card__meta">
+                  <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
+                    <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
+                    <h3 class="mb-0">Layihə 2</h3>
+                    <div class="portfolio-showcase-card__tags hstack gap-2">
+                      <span class="badge text-dark border">Web development</span>
+                      <span class="badge text-dark border">Digital design</span>
+                    </div>
                   </div>
+                  <a href="projects-detail.html" class="portfolio-showcase-card__cta service-card__btn">Ətraflı</a>
+
                 </div>
-              </div>
+                </div>
+              </article>
             </div>
             <div class="item">
-              <div class="portfolio portfolio-card-modern d-flex flex-column gap-6">
-                <div class="portfolio-img position-relative overflow-hidden">
-                  <img src="../assets/images/portfolio/portfolio-img-3.jpg" alt="" class="img-fluid">
+              <article class="portfolio portfolio-showcase-card">
+                <div class="portfolio-showcase-card__frame">
+                  <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
+                    <img src="../assets/images/portfolio/portfolio-img-3.jpg" alt="Layihə 3" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                    <div class="d-flex align-items-center justify-content-between w-100">
-                      <a href="projects-detail.html" class="portfolio-overlay-btn btn btn-sm"><span class="btn-text">Ətraflı</span></a>
+                    <div class="d-flex align-items-center justify-content-end w-100">
                       <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
@@ -361,22 +379,28 @@
                     </div>
                   </div>
                 </div>
-                <div class="portfolio-details d-flex flex-column gap-3">
-                  <h3 class="mb-0">Layihə 3</h3>
-                  <div class="hstack gap-2">
-                    <span class="badge text-dark border">UI/UX design</span>
-                    <span class="badge text-dark border">Web development</span>
+                <div class="portfolio-showcase-card__meta">
+                  <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
+                    <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
+                    <h3 class="mb-0">Layihə 3</h3>
+                    <div class="portfolio-showcase-card__tags hstack gap-2">
+                      <span class="badge text-dark border">UI/UX design</span>
+                      <span class="badge text-dark border">Web development</span>
+                    </div>
                   </div>
+                  <a href="projects-detail.html" class="portfolio-showcase-card__cta service-card__btn">Ətraflı</a>
+
                 </div>
-              </div>
+                </div>
+              </article>
             </div>
             <div class="item">
-              <div class="portfolio portfolio-card-modern d-flex flex-column gap-6">
-                <div class="portfolio-img position-relative overflow-hidden">
-                  <img src="../assets/images/portfolio/portfolio-img-4.jpg" alt="" class="img-fluid">
+              <article class="portfolio portfolio-showcase-card">
+                <div class="portfolio-showcase-card__frame">
+                  <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
+                    <img src="../assets/images/portfolio/portfolio-img-4.jpg" alt="Layihə 4" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                    <div class="d-flex align-items-center justify-content-between w-100">
-                      <a href="projects-detail.html" class="portfolio-overlay-btn btn btn-sm"><span class="btn-text">Ətraflı</span></a>
+                    <div class="d-flex align-items-center justify-content-end w-100">
                       <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
@@ -387,22 +411,28 @@
                     </div>
                   </div>
                 </div>
-                <div class="portfolio-details d-flex flex-column gap-3">
-                  <h3 class="mb-0">Layihə 4</h3>
-                  <div class="hstack gap-2">
-                    <span class="badge text-dark border">Brand identity</span>
-                    <span class="badge text-dark border">Digital design</span>
+                <div class="portfolio-showcase-card__meta">
+                  <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
+                    <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
+                    <h3 class="mb-0">Layihə 4</h3>
+                    <div class="portfolio-showcase-card__tags hstack gap-2">
+                      <span class="badge text-dark border">Brand identity</span>
+                      <span class="badge text-dark border">Digital design</span>
+                    </div>
                   </div>
+                  <a href="projects-detail.html" class="portfolio-showcase-card__cta service-card__btn">Ətraflı</a>
+
                 </div>
-              </div>
+                </div>
+              </article>
             </div>
             <div class="item">
-              <div class="portfolio portfolio-card-modern d-flex flex-column gap-6">
-                <div class="portfolio-img position-relative overflow-hidden">
-                  <img src="../assets/images/portfolio/portfolio-img-5.jpg" alt="" class="img-fluid">
+              <article class="portfolio portfolio-showcase-card">
+                <div class="portfolio-showcase-card__frame">
+                  <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
+                    <img src="../assets/images/portfolio/portfolio-img-5.jpg" alt="Layihə 5" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                    <div class="d-flex align-items-center justify-content-between w-100">
-                      <a href="projects-detail.html" class="portfolio-overlay-btn btn btn-sm"><span class="btn-text">Ətraflı</span></a>
+                    <div class="d-flex align-items-center justify-content-end w-100">
                       <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
@@ -413,22 +443,28 @@
                     </div>
                   </div>
                 </div>
-                <div class="portfolio-details d-flex flex-column gap-3">
-                  <h3 class="mb-0">Layihə 5</h3>
-                  <div class="hstack gap-2">
-                    <span class="badge text-dark border">Photography</span>
-                    <span class="badge text-dark border">Studio</span>
+                <div class="portfolio-showcase-card__meta">
+                  <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
+                    <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
+                    <h3 class="mb-0">Layihə 5</h3>
+                    <div class="portfolio-showcase-card__tags hstack gap-2">
+                      <span class="badge text-dark border">Photography</span>
+                      <span class="badge text-dark border">Studio</span>
+                    </div>
                   </div>
+                  <a href="projects-detail.html" class="portfolio-showcase-card__cta service-card__btn">Ətraflı</a>
+
                 </div>
-              </div>
+                </div>
+              </article>
             </div>
             <div class="item">
-              <div class="portfolio portfolio-card-modern d-flex flex-column gap-6">
-                <div class="portfolio-img position-relative overflow-hidden">
-                  <img src="../assets/images/portfolio/portfolio-img-6.jpg" alt="" class="img-fluid">
+              <article class="portfolio portfolio-showcase-card">
+                <div class="portfolio-showcase-card__frame">
+                  <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
+                    <img src="../assets/images/portfolio/portfolio-img-6.jpg" alt="Layihə 6" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                    <div class="d-flex align-items-center justify-content-between w-100">
-                      <a href="projects-detail.html" class="portfolio-overlay-btn btn btn-sm"><span class="btn-text">Ətraflı</span></a>
+                    <div class="d-flex align-items-center justify-content-end w-100">
                       <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
                         <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
@@ -439,20 +475,26 @@
                     </div>
                   </div>
                 </div>
-                <div class="portfolio-details d-flex flex-column gap-3">
-                  <h3 class="mb-0">Layihə 6</h3>
-                  <div class="hstack gap-2">
-                    <span class="badge text-dark border">Digital design</span>
-                    <span class="badge text-dark border">Web development</span>
+                <div class="portfolio-showcase-card__meta">
+                  <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
+                    <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
+                    <h3 class="mb-0">Layihə 6</h3>
+                    <div class="portfolio-showcase-card__tags hstack gap-2">
+                      <span class="badge text-dark border">Digital design</span>
+                      <span class="badge text-dark border">Web development</span>
+                    </div>
                   </div>
+                  <a href="projects-detail.html" class="portfolio-showcase-card__cta service-card__btn">Ətraflı</a>
+
                 </div>
-              </div>
+                </div>
+              </article>
             </div>
           </div>
           </div>
         </div>
         <div class="d-flex justify-content-center pt-3 pt-lg-4 pb-3 pb-lg-4">
-          <a href="about-us.html" class="btn" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
+          <a href="portfolio.html" class="btn" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
             <span class="btn-text">Ətraflı</span>
             <iconify-icon icon="lucide:arrow-up-right"
               class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
@@ -468,16 +510,17 @@
     </div>
 
     <!--  Xidmətlər Section – carousel, bir sırada, sol/sağ ox -->
-    <section class="services services-section bg-dark py-5 py-lg-8 py-xl-9" id="services">
-      <div class="container">
+    <section class="services services-section services-section--cinema bg-dark py-5 py-lg-8 py-xl-9" id="services">
+      <div class="services-section__mesh" aria-hidden="true"></div>
+      <div class="container position-relative">
         <div class="d-flex flex-column gap-4 gap-xl-6">
           <div class="row services-header align-items-center position-relative">
             <div class="col-auto">
-              <div class="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100"
+              <div class="home-section-badge home-section-badge--dark" data-aos="fade-right" data-aos-delay="100"
                 data-aos-duration="1000">
                 <span
                   class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">03</span>
-                <hr class="border-line bg-white">
+                <hr class="border-line flex-grow-1 mb-0">
               </div>
             </div>
             <div class="col services-header__center position-absolute start-0 end-0 d-flex justify-content-center align-items-center">
@@ -487,81 +530,113 @@
               </div>
             </div>
           </div>
-          <div class="service-grid position-relative px-3 px-sm-4 px-md-5">
-            <button type="button" class="services-nav-btn services-nav-prev position-absolute top-50 start-0 translate-middle-y z-2" aria-label="Əvvəlki">
-              <iconify-icon icon="lucide:chevron-left" class="fs-4"></iconify-icon>
+          <div class="services-carousel-shell">
+            <button type="button" class="services-nav-btn services-nav-prev" aria-label="Əvvəlki">
+              <iconify-icon icon="lucide:chevron-left"></iconify-icon>
             </button>
-            <button type="button" class="services-nav-btn services-nav-next position-absolute top-50 end-0 translate-middle-y z-2" aria-label="Növbəti">
-              <iconify-icon icon="lucide:chevron-right" class="fs-4"></iconify-icon>
+            <button type="button" class="services-nav-btn services-nav-next" aria-label="Növbəti">
+              <iconify-icon icon="lucide:chevron-right"></iconify-icon>
             </button>
+            <div class="service-grid position-relative">
             <div class="services-slider owl-carousel owl-theme">
               <div class="item">
-                <div class="service-card position-relative overflow-hidden rounded-3">
+                <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
+                  <span class="service-card__glow" aria-hidden="true"></span>
+                  <span class="service-card__index" aria-hidden="true">01</span>
+                  <span class="service-card__icon-wrap" aria-hidden="true">
+                    <iconify-icon icon="lucide:megaphone"></iconify-icon>
+                  </span>
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-1.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
-                    <h1 class="service-card__title text-white mb-0">Ənənəvi marketinq</h1>
+                    <h3 class="service-card__title text-white mb-0">Ənənəvi marketinq</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Adet-ənənə üzərindən güclü brend qurmaq.</p>
                     <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
                   </div>
-                </div>
+                </article>
               </div>
               <div class="item">
-                <div class="service-card position-relative overflow-hidden rounded-3">
+                <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
+                  <span class="service-card__glow" aria-hidden="true"></span>
+                  <span class="service-card__index" aria-hidden="true">02</span>
+                  <span class="service-card__icon-wrap" aria-hidden="true">
+                    <iconify-icon icon="lucide:messages-square"></iconify-icon>
+                  </span>
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-2.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
-                    <h1 class="service-card__title text-white mb-0">Konsultasiya</h1>
+                    <h3 class="service-card__title text-white mb-0">Konsultasiya</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Müvafiq sahə üzrə mütəxəssis məsləhəti.</p>
                     <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
                   </div>
-                </div>
+                </article>
               </div>
               <div class="item">
-                <div class="service-card position-relative overflow-hidden rounded-3">
+                <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
+                  <span class="service-card__glow" aria-hidden="true"></span>
+                  <span class="service-card__index" aria-hidden="true">03</span>
+                  <span class="service-card__icon-wrap" aria-hidden="true">
+                    <iconify-icon icon="lucide:trending-up"></iconify-icon>
+                  </span>
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-3.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
-                    <h1 class="service-card__title text-white mb-0">Rəqəmsal marketinq</h1>
+                    <h3 class="service-card__title text-white mb-0">Rəqəmsal marketinq</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">SEO, SMM, reklam kampaniyaları.</p>
                     <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
                   </div>
-                </div>
+                </article>
               </div>
               <div class="item">
-                <div class="service-card position-relative overflow-hidden rounded-3">
+                <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
+                  <span class="service-card__glow" aria-hidden="true"></span>
+                  <span class="service-card__index" aria-hidden="true">04</span>
+                  <span class="service-card__icon-wrap" aria-hidden="true">
+                    <iconify-icon icon="lucide:settings-2"></iconify-icon>
+                  </span>
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-4.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
-                    <h1 class="service-card__title text-white mb-0">Biznes avtomatlaşdırması</h1>
+                    <h3 class="service-card__title text-white mb-0">Biznes avtomatlaşdırması</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Proseslərin optimallaşdırılması və CRM.</p>
                     <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
                   </div>
-                </div>
+                </article>
               </div>
               <div class="item">
-                <div class="service-card position-relative overflow-hidden rounded-3">
+                <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
+                  <span class="service-card__glow" aria-hidden="true"></span>
+                  <span class="service-card__index" aria-hidden="true">05</span>
+                  <span class="service-card__icon-wrap" aria-hidden="true">
+                    <iconify-icon icon="lucide:palette"></iconify-icon>
+                  </span>
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-1.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
-                    <h1 class="service-card__title text-white mb-0">Brending və dizayn</h1>
+                    <h3 class="service-card__title text-white mb-0">Brending və dizayn</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Loqo, vizual identitet, brendinq kitabı.</p>
                     <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
                   </div>
-                </div>
+                </article>
               </div>
               <div class="item" id="training">
-                <div class="service-card position-relative overflow-hidden rounded-3">
+                <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
+                  <span class="service-card__glow" aria-hidden="true"></span>
+                  <span class="service-card__index" aria-hidden="true">06</span>
+                  <span class="service-card__icon-wrap" aria-hidden="true">
+                    <iconify-icon icon="lucide:graduation-cap"></iconify-icon>
+                  </span>
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-2.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
-                    <h1 class="service-card__title text-white mb-0">Təlim</h1>
+                    <h3 class="service-card__title text-white mb-0">Təlim</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Korporativ və individual təlim proqramları.</p>
                     <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
                   </div>
-                </div>
+                </article>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -579,11 +654,11 @@
         <div class="d-flex flex-column gap-5 gap-xl-11">
           <div class="row gap-7 gap-xl-0">
             <div class="col-xl-4 col-xxl-4">
-              <div class="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100"
+              <div class="home-section-badge" data-aos="fade-right" data-aos-delay="100"
                 data-aos-duration="1000">
                 <span
                   class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">05</span>
-                <hr class="border-line bg-white">
+                <hr class="border-line flex-grow-1 mb-0">
               </div>
             </div>
             <div class="col-xl-8 col-xxl-7">
@@ -824,11 +899,11 @@
           <div class="d-flex flex-column gap-5 gap-xl-11">
             <div class="row gap-7 gap-xl-0">
               <div class="col-xl-4 col-xxl-4">
-                <div class="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100"
+                <div class="home-section-badge" data-aos="fade-right" data-aos-delay="100"
                   data-aos-duration="1000">
                   <span
                     class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">07</span>
-                  <hr class="border-line bg-white">
+                  <hr class="border-line flex-grow-1 mb-0">
 
                 </div>
               </div>
@@ -1006,13 +1081,13 @@
     <section class="faq faq-section-modern py-5 py-lg-8 py-xl-9">
       <div class="container">
         <div class="d-flex flex-column gap-4 gap-lg-6">
-          <div class="row gap-4 gap-xl-0">
+          <div class="row gap-7 gap-xl-0">
             <div class="col-xl-4 col-xxl-4">
-              <div class="d-flex align-items-center gap-4 py-2" data-aos="fade-right" data-aos-delay="100"
+              <div class="home-section-badge" data-aos="fade-right" data-aos-delay="100"
                 data-aos-duration="1000">
                 <span
                   class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">08</span>
-                <hr class="border-line bg-white">
+                <hr class="border-line flex-grow-1 mb-0">
               </div>
             </div>
             <div class="col-xl-8 col-xxl-7">
@@ -1135,16 +1210,25 @@
     <!--  Get in touch Section -->
     <section id="get-in-touch" class="get-in-touch get-in-touch--home py-5 py-lg-8 py-xl-9">
       <div class="container">
+        <div class="d-flex flex-column gap-5 gap-xl-8">
+          <div class="row gap-7 gap-xl-0">
+            <div class="col-xl-4 col-xxl-4">
+              <div class="home-section-badge" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
+                <span class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">09</span>
+                <hr class="border-line flex-grow-1 mb-0">
+              </div>
+            </div>
+            <div class="col-xl-8 col-xxl-7">
+              <div class="d-flex flex-column gap-3" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+                <h2 class="contact-form-modern__title mb-0">Müraciət et</h2>
+                <p class="contact-form-modern__lead mb-0">Layihəniz, sualınız və ya təklifiniz var? Formu doldurun — komandamız tezliklə sizinlə əlaqə saxlayacaq.</p>
+              </div>
+            </div>
+          </div>
         <div class="contact-form-modern__layout">
           <div class="row g-4 g-xl-5 align-items-stretch">
             <div class="col-lg-5">
-              <div class="contact-form-modern__info" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
-                <div class="d-flex align-items-center gap-4 mb-4">
-                  <span class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">09</span>
-                  <hr class="border-line flex-grow-1 mb-0">
-                </div>
-                <h2 class="contact-form-modern__title mb-0">Müraciət et</h2>
-                <p class="contact-form-modern__lead">Layihəniz, sualınız və ya təklifiniz var? Formu doldurun — komandamız tezliklə sizinlə əlaqə saxlayacaq.</p>
+              <div class="contact-form-modern__info" data-aos="fade-right" data-aos-delay="150" data-aos-duration="1000">
                 <ul class="contact-form-modern__perks list-unstyled mb-0">
                   <li><iconify-icon icon="lucide:clock-3"></iconify-icon> 24 saat ərzində cavab</li>
                   <li><iconify-icon icon="lucide:shield-check"></iconify-icon> Məlumatlarınız qorunur</li>
@@ -1163,6 +1247,7 @@
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </section>
