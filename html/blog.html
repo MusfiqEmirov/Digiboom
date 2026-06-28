@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DigiBoom — Blog</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/libs/owl.carousel/dist/assets/owl.carousel.min.css">
   <link rel="stylesheet" href="../assets/libs/aos-master/dist/aos.css">
   <link rel="stylesheet" href="../assets/css/styles.css" />
@@ -51,14 +54,6 @@
               </div>
             </div>
           </div>
-          <div class="d-flex align-items-end gap-3" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-            <h1 class="mb-0 fs-16 text-white lh-1">Blog</h1>
-            <a href="javascript:void(0)" class="p-1 ps-7 bg-primary rounded-pill">
-              <span class="bg-white round-52 rounded-circle d-flex align-items-center justify-content-center">
-                <iconify-icon icon="lucide:arrow-up-right" class="fs-8 text-dark"></iconify-icon>
-              </span>
-            </a>
-          </div>
         </div>
       </div>
     </section>
@@ -66,60 +61,241 @@
     <!--  Blog Section -->
     <section class="blog-section py-5 py-lg-11 py-xl-12">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-6 mb-7">
-            <div class="resources d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100"
-              data-aos-duration="1000">
-              <a href="blog-detail.html"
-                class="resources-img resources-img-blog position-relative overflow-hidden d-block">
-                <img src="../assets/images/resources/resources-1.jpg" alt="resources" class="img-fluid">
-              </a>
-              <div class="resources-details">
-                <p class="mb-0">Dec 24, 2025</p>
-                <h4 class="mb-0">A campaign that connects</h4>
+        <div class="blog-page-grid mx-auto">
+
+          <article class="blog-card blog-card-modern">
+            <a href="blog-detail.html" class="blog-card__media">
+              <img src="../assets/images/resources/resources-1.jpg" alt="A campaign that connects" class="img-fluid">
+              <span class="blog-card__overlay" aria-hidden="true"></span>
+              <span class="blog-card__category">Marketinq</span>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <time class="blog-card__date" datetime="2025-12-24">24 Dek 2025</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-detail.html">A campaign that connects</a></h3>
+              <p class="blog-card__excerpt">Auditoriyanızla emosional əlaqə qurmaq üçün strategiyalar və real nəticələr.</p>
+              <div class="blog-card__footer">
+                <a href="blog-detail.html" class="blog-card__btn"><span class="blog-card__btn-text">Oxu</span></a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 mb-7">
-            <div class="resources d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="200"
-              data-aos-duration="1000">
-              <a href="blog-detail.html"
-                class="resources-img resources-img-blog position-relative overflow-hidden d-block">
-                <img src="../assets/images/resources/resources-2.jpg" alt="resources" class="img-fluid">
-              </a>
-              <div class="resources-details">
-                <p class="mb-0">Dec 24, 2025</p>
-                <h4 class="mb-0">An breaking boundaries our latest brand redesign</h4>
+          </article>
+
+          <article class="blog-card blog-card-modern">
+            <a href="blog-detail.html" class="blog-card__media">
+              <img src="../assets/images/resources/resources-2.jpg" alt="Breaking boundaries brand redesign" class="img-fluid">
+              <span class="blog-card__overlay" aria-hidden="true"></span>
+              <span class="blog-card__category">Brendinq</span>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <time class="blog-card__date" datetime="2025-12-20">20 Dek 2025</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-detail.html">Breaking boundaries: our latest brand redesign</a></h3>
+              <p class="blog-card__excerpt">Köhnə vizual identiklikdən müasir, güclü brend təcrübəsinə keçid hekayəsi.</p>
+              <div class="blog-card__footer">
+                <a href="blog-detail.html" class="blog-card__btn"><span class="blog-card__btn-text">Oxu</span></a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 mb-7">
-            <div class="resources d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="300"
-              data-aos-duration="1000">
-              <a href="blog-detail.html"
-                class="resources-img resources-img-blog position-relative overflow-hidden d-block">
-                <img src="../assets/images/resources/resources-3.jpg" alt="resources" class="img-fluid">
-              </a>
-              <div class="resources-details">
-                <p class="mb-0">Dec 24, 2025</p>
-                <h4 class="mb-0">Recognized for design</h4>
+          </article>
+
+          <article class="blog-card blog-card-modern">
+            <a href="blog-detail.html" class="blog-card__media">
+              <img src="../assets/images/resources/resources-3.jpg" alt="Recognized for design" class="img-fluid">
+              <span class="blog-card__overlay" aria-hidden="true"></span>
+              <span class="blog-card__category">Dizayn</span>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <time class="blog-card__date" datetime="2025-12-15">15 Dek 2025</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-detail.html">Recognized for design</a></h3>
+              <p class="blog-card__excerpt">Mükafat qazanan layihələrimiz və dizayn prosesinin arxasındakı düşüncə.</p>
+              <div class="blog-card__footer">
+                <a href="blog-detail.html" class="blog-card__btn"><span class="blog-card__btn-text">Oxu</span></a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 mb-7">
-            <div class="resources d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="400"
-              data-aos-duration="1000">
-              <a href="blog-detail.html"
-                class="resources-img resources-img-blog position-relative overflow-hidden d-block">
-                <img src="../assets/images/services/services-img-1.jpg" alt="resources" class="img-fluid">
-              </a>
-              <div class="resources-details">
-                <p class="mb-0">Dec 24, 2025</p>
-                <h4 class="mb-0">The Modern Lens Perspectives on Culture & Trends</h4>
+          </article>
+
+          <article class="blog-card blog-card-modern">
+            <a href="blog-detail.html" class="blog-card__media">
+              <img src="../assets/images/services/services-img-1.jpg" alt="The Modern Lens" class="img-fluid">
+              <span class="blog-card__overlay" aria-hidden="true"></span>
+              <span class="blog-card__category">Trendlər</span>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <time class="blog-card__date" datetime="2025-12-10">10 Dek 2025</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-detail.html">The Modern Lens: Perspectives on Culture &amp; Trends</a></h3>
+              <p class="blog-card__excerpt">2026-cı ilin vizual trendləri və rəqəmsal mədəniyyətə təsir edən faktorlar.</p>
+              <div class="blog-card__footer">
+                <a href="blog-detail.html" class="blog-card__btn"><span class="blog-card__btn-text">Oxu</span></a>
               </div>
             </div>
-          </div>
+          </article>
+
+          <article class="blog-card blog-card-modern">
+            <a href="blog-detail.html" class="blog-card__media">
+              <img src="../assets/images/services/services-img-2.jpg" alt="Sosial media strategiyası" class="img-fluid">
+              <span class="blog-card__overlay" aria-hidden="true"></span>
+              <span class="blog-card__category">Sosial media</span>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <time class="blog-card__date" datetime="2025-12-05">5 Dek 2025</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-detail.html">Sosial mediada organik böyümə strategiyası</a></h3>
+              <p class="blog-card__excerpt">Reklam büdcəsi olmadan auditoriya qurmaq üçün sübut olunmuş üsullar.</p>
+              <div class="blog-card__footer">
+                <a href="blog-detail.html" class="blog-card__btn"><span class="blog-card__btn-text">Oxu</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card blog-card-modern">
+            <a href="blog-detail.html" class="blog-card__media">
+              <img src="../assets/images/services/services-img-3.jpg" alt="UX təcrübəsi" class="img-fluid">
+              <span class="blog-card__overlay" aria-hidden="true"></span>
+              <span class="blog-card__category">UX/UI</span>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <time class="blog-card__date" datetime="2025-11-28">28 Noy 2025</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-detail.html">İstifadəçi mərkəzli dizayn: 5 əsas prinsip</a></h3>
+              <p class="blog-card__excerpt">Məhsulunuzun konversiyasını artıran UX yanaşmaları və praktik nümunələr.</p>
+              <div class="blog-card__footer">
+                <a href="blog-detail.html" class="blog-card__btn"><span class="blog-card__btn-text">Oxu</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card blog-card-modern">
+            <a href="blog-detail.html" class="blog-card__media">
+              <img src="../assets/images/services/services-img-4.jpg" alt="Video marketinq" class="img-fluid">
+              <span class="blog-card__overlay" aria-hidden="true"></span>
+              <span class="blog-card__category">Video</span>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <time class="blog-card__date" datetime="2025-11-20">20 Noy 2025</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-detail.html">Qısa video formatında brend hekayəsi</a></h3>
+              <p class="blog-card__excerpt">Reels və TikTok üçün effektiv kontent yaratmaq üsulları.</p>
+              <div class="blog-card__footer">
+                <a href="blog-detail.html" class="blog-card__btn"><span class="blog-card__btn-text">Oxu</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card blog-card-modern">
+            <a href="blog-detail.html" class="blog-card__media">
+              <img src="../assets/images/portfolio/portfolio-img-1.jpg" alt="E-ticarət optimallaşdırması" class="img-fluid">
+              <span class="blog-card__overlay" aria-hidden="true"></span>
+              <span class="blog-card__category">E-ticarət</span>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <time class="blog-card__date" datetime="2025-11-12">12 Noy 2025</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-detail.html">Onlayn mağazanızın satışlarını artırmaq</a></h3>
+              <p class="blog-card__excerpt">Checkout prosesindən SEO-ya qədər e-ticarət optimallaşdırma bələdçisi.</p>
+              <div class="blog-card__footer">
+                <a href="blog-detail.html" class="blog-card__btn"><span class="blog-card__btn-text">Oxu</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card blog-card-modern">
+            <a href="blog-detail.html" class="blog-card__media">
+              <img src="../assets/images/portfolio/portfolio-img-2.jpg" alt="Kontent marketinqi" class="img-fluid">
+              <span class="blog-card__overlay" aria-hidden="true"></span>
+              <span class="blog-card__category">Kontent</span>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <time class="blog-card__date" datetime="2025-11-05">5 Noy 2025</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-detail.html">Kontent planı necə qurulur?</a></h3>
+              <p class="blog-card__excerpt">Aylıq redaksiya təqvimi və məzmun strategiyası üçün addım-addım plan.</p>
+              <div class="blog-card__footer">
+                <a href="blog-detail.html" class="blog-card__btn"><span class="blog-card__btn-text">Oxu</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card blog-card-modern">
+            <a href="blog-detail.html" class="blog-card__media">
+              <img src="../assets/images/portfolio/portfolio-img-3.jpg" alt="SEO əsasları" class="img-fluid">
+              <span class="blog-card__overlay" aria-hidden="true"></span>
+              <span class="blog-card__category">SEO</span>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <time class="blog-card__date" datetime="2025-10-28">28 Okt 2025</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-detail.html">SEO-nun əsasları: 2025 bələdçisi</a></h3>
+              <p class="blog-card__excerpt">Axtarış motorlarında yüksəlmək üçün texniki və kontent SEO tövsiyələri.</p>
+              <div class="blog-card__footer">
+                <a href="blog-detail.html" class="blog-card__btn"><span class="blog-card__btn-text">Oxu</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card blog-card-modern">
+            <a href="blog-detail.html" class="blog-card__media">
+              <img src="../assets/images/portfolio/portfolio-img-4.jpg" alt="Brend səsi" class="img-fluid">
+              <span class="blog-card__overlay" aria-hidden="true"></span>
+              <span class="blog-card__category">Brendinq</span>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <time class="blog-card__date" datetime="2025-10-20">20 Okt 2025</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-detail.html">Brend səsinizi necə formalaşdırmaq olar</a></h3>
+              <p class="blog-card__excerpt">Müştərilərinizlə eyni dildə danışmaq üçün ton və üslub bələdçisi.</p>
+              <div class="blog-card__footer">
+                <a href="blog-detail.html" class="blog-card__btn"><span class="blog-card__btn-text">Oxu</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card blog-card-modern">
+            <a href="blog-detail.html" class="blog-card__media">
+              <img src="../assets/images/portfolio/portfolio-img-5.jpg" alt="Rəqəmsal transformasiya" class="img-fluid">
+              <span class="blog-card__overlay" aria-hidden="true"></span>
+              <span class="blog-card__category">Strategiya</span>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <time class="blog-card__date" datetime="2025-10-12">12 Okt 2025</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-detail.html">Kiçik biznes üçün rəqəmsal transformasiya</a></h3>
+              <p class="blog-card__excerpt">Məhdud resurslarla rəqəmsal dünyada rəqabət aparmaq yolları.</p>
+              <div class="blog-card__footer">
+                <a href="blog-detail.html" class="blog-card__btn"><span class="blog-card__btn-text">Oxu</span></a>
+              </div>
+            </div>
+          </article>
+
         </div>
+
+        <nav class="projects-pagination-ui blog-pagination-ui mt-5 d-flex justify-content-center" aria-label="Blog pagination">
+          <div class="projects-pagination-row">
+            <button type="button" class="projects-pagination-prev" aria-label="Əvvəlki səhifə">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="btn-icon" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+              </svg>
+            </button>
+            <div class="projects-pagination-links"></div>
+            <button type="button" class="projects-pagination-next" aria-label="Növbəti səhifə">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="btn-icon" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+            </button>
+          </div>
+        </nav>
       </div>
     </section>
 
@@ -142,6 +318,97 @@
   <script src="../assets/js/includes.js" defer></script>
   <script src="../assets/js/i18n.js"></script>
   <script src="../assets/js/digiboom.js"></script>
+  <script>
+    $(function () {
+      var $grid = $('.blog-page-grid');
+      var $items = $grid.find('.blog-card');
+      var perPage = 9;
+      var total = $items.length;
+      var totalPages = Math.max(1, Math.ceil(total / perPage));
+      var $ui = $('.blog-pagination-ui');
+      var $links = $ui.find('.projects-pagination-links');
+      var $prev = $ui.find('.projects-pagination-prev');
+      var $next = $ui.find('.projects-pagination-next');
+
+      function setNavDisabled($btn, isDisabled) {
+        if (isDisabled) {
+          $btn.addClass('projects-pagination-nav--disabled').attr({ 'aria-disabled': 'true', tabindex: '-1' });
+        } else {
+          $btn.removeClass('projects-pagination-nav--disabled').attr({ 'aria-disabled': 'false', tabindex: '0' });
+        }
+      }
+
+      function renderPagination(currentPage) {
+        $links.empty();
+        setNavDisabled($prev, currentPage <= 1);
+        setNavDisabled($next, currentPage >= totalPages);
+
+        var i;
+        for (i = 1; i <= 6; i++) {
+          var cls = 'projects-pg-num';
+          if (i === currentPage && i <= totalPages) cls += ' projects-pg-num--current';
+          if (i > totalPages) {
+            cls += ' projects-pg-num--disabled';
+            $links.append('<span class="' + cls + '" aria-disabled="true">' + i + '</span>');
+          } else {
+            $links.append('<a href="#" class="' + cls + '" data-page="' + i + '">' + i + '</a>');
+          }
+        }
+
+        if (totalPages > 6) {
+          $links.append('<span class="dots" aria-hidden="true">...</span>');
+          var lastCls = 'projects-pg-num';
+          if (currentPage === totalPages) lastCls += ' projects-pg-num--current';
+          $links.append('<a href="#" class="' + lastCls + '" data-page="' + totalPages + '">' + totalPages + '</a>');
+        }
+      }
+
+      function showPage(page) {
+        if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
+
+        var start = (page - 1) * perPage;
+        var end = start + perPage;
+
+        $items.hide().slice(start, end).show();
+        renderPagination(page);
+      }
+
+      if (totalPages <= 1) {
+        $ui.hide();
+      } else {
+        showPage(1);
+      }
+
+      $links.on('click', 'a.projects-pg-num', function (e) {
+        e.preventDefault();
+        if ($(this).hasClass('projects-pg-num--disabled')) return;
+        var p = parseInt($(this).data('page'), 10);
+        if (!isNaN(p) && p >= 1 && p <= totalPages) {
+          showPage(p);
+          $('html, body').animate({ scrollTop: $('.blog-section').offset().top - 120 }, 250);
+        }
+      });
+
+      $prev.on('click', function () {
+        if ($prev.hasClass('projects-pagination-nav--disabled')) return;
+        var cur = parseInt($links.find('a.projects-pg-num--current').data('page'), 10) || 1;
+        if (cur > 1) {
+          showPage(cur - 1);
+          $('html, body').animate({ scrollTop: $('.blog-section').offset().top - 120 }, 250);
+        }
+      });
+
+      $next.on('click', function () {
+        if ($next.hasClass('projects-pagination-nav--disabled')) return;
+        var cur = parseInt($links.find('a.projects-pg-num--current').data('page'), 10) || 1;
+        if (cur < totalPages) {
+          showPage(cur + 1);
+          $('html, body').animate({ scrollTop: $('.blog-section').offset().top - 120 }, 250);
+        }
+      });
+    });
+  </script>
   <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>

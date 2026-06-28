@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     width: 100%;
-    min-height: 72px;
+    min-height: 88px;
     padding: 0;
     z-index: 1050;
     transition: all 0.5s ease-in-out;
@@ -15,7 +15,7 @@
     }
 
     .header-wrapper {
-        min-height: 72px;
+        min-height: 88px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -31,7 +31,7 @@
         }
 
         img {
-            max-height: 42px;
+            max-height: 52px;
             width: auto;
             object-fit: contain;
             display: block;
@@ -39,14 +39,14 @@
     }
 
     @include media-breakpoint-down(lg) {
-        min-height: 64px;
+        min-height: 76px;
 
         .header-wrapper {
-            min-height: 64px;
+            min-height: 76px;
         }
 
         .logo img {
-            max-height: 36px;
+            max-height: 44px;
         }
     }
 
@@ -56,18 +56,18 @@
     }
 
     &.fixed-header {
-        min-height: 72px;
+        min-height: 88px;
         background-color: var(--bs-primary);
 
         .header-wrapper {
-            min-height: 72px;
+            min-height: 88px;
         }
 
         @include media-breakpoint-down(lg) {
-            min-height: 64px;
+            min-height: 76px;
 
             .header-wrapper {
-                min-height: 64px;
+                min-height: 76px;
             }
         }
 
@@ -101,37 +101,158 @@
     }
 
     // Desktop nav - üfüqi menyu (lg+) + animate-spin (hover və active)
+    .header-nav-desktop-list {
+        gap: 2rem !important;
+    }
+
     .header-nav-desktop-link {
         color: rgba(255, 255, 255, 0.9);
         text-decoration: none;
         font-weight: 600;
-        font-size: 0.95rem;
-        transition: color 0.2s;
+        font-size: 1.05rem;
         display: inline-flex;
         align-items: center;
-        gap: 0.35rem;
+        position: relative;
+        padding-left: 0;
+        transition: color 0.2s, padding-left 0.5s;
 
         .animate-spin {
-            transition: 0.5s;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -12px;
+            width: 24px;
+            height: 24px;
             opacity: 0;
-            width: 0;
-            overflow: hidden;
+            transition: opacity 0.5s, filter 0.5s;
             flex-shrink: 0;
+            pointer-events: none;
+            filter: brightness(0) invert(1);
         }
 
         &:hover,
         &.active {
             color: #fff;
+            padding-left: calc(24px + 0.4rem);
 
             .animate-spin {
                 opacity: 1;
-                width: 20px;
             }
+        }
+    }
+
+    .header-nav-desktop-btns {
+        .btn {
+            font-size: 0.95rem;
+            padding: 0.5rem 1.1rem;
+        }
+    }
+
+    .header-contact-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        font-weight: 600;
+        line-height: 1.2;
+        padding: 0.5rem 1.1rem;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        background-color: var(--bs-primary);
+        color: var(--bs-dark);
+        text-decoration: none;
+        white-space: nowrap;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.5s ease, color 0.5s ease;
+
+        &:hover,
+        &:focus {
+            transform: scale(1.04) translateY(-1px);
+            box-shadow: 0 8px 22px rgba(31, 42, 46, 0.22);
+        }
+
+        &:active {
+            transform: scale(0.98) translateY(0);
+            box-shadow: 0 4px 12px rgba(31, 42, 46, 0.16);
+        }
+    }
+
+    .dropdown-menu .header-contact-btn {
+        width: 100%;
+        white-space: normal;
+        text-align: center;
+    }
+
+    .lang-switcher-host--desktop {
+        .lang-switcher__toggle {
+            font-size: 0.92rem;
+            padding: 0.45rem 0.8rem;
+        }
+
+        .lang-switcher__current-flag {
+            width: 24px;
+            height: 18px;
+        }
+    }
+
+    .toggle-menu {
+        width: 50px !important;
+        height: 50px !important;
+
+        .menu-icon {
+            font-size: 1.35rem !important;
+        }
+    }
+
+    // Mobile nav toggle (hamburger)
+    .mobile-nav-toggle {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        padding: 0;
+        border: 1.5px solid rgba(255, 255, 255, 0.55);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        cursor: pointer;
+        transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+
+        &:hover,
+        &:focus-visible {
+            background: rgba(255, 255, 255, 0.22);
+            border-color: rgba(255, 255, 255, 0.75);
+            outline: none;
+        }
+
+        &:active {
+            transform: scale(0.94);
+        }
+    }
+
+    &.fixed-header .mobile-nav-toggle {
+        border-color: rgba(31, 42, 46, 0.2);
+        background: rgba(31, 42, 46, 0.06);
+
+        .mobile-nav-toggle__bars span {
+            background-color: var(--bs-dark);
+        }
+
+        &:hover,
+        &:focus-visible {
+            background: rgba(31, 42, 46, 0.1);
+            border-color: rgba(31, 42, 46, 0.35);
         }
     }
 
     &.fixed-header .header-nav-desktop-link {
         color: var(--bs-dark);
+
+        .animate-spin {
+            filter: none;
+        }
 
         &:hover,
         &.active {
@@ -149,11 +270,30 @@
         }
     }
 
+    &.fixed-header .lang-switcher-host--desktop .lang-switcher__toggle {
+        color: var(--bs-dark);
+        border-color: rgba(31, 42, 46, 0.45);
+    }
+
+    &.fixed-header .header-contact-btn {
+        background-color: var(--bs-dark);
+        color: #fff;
+
+        &:hover,
+        &:focus {
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+        }
+    }
+
     .header-menu {
 
         .header-item {
             .header-link {
+                font-size: 1.05rem;
+
                 .animate-spin {
+                    width: 24px;
+                    height: 24px;
                     transition: 0.5s;
                 }
 
@@ -166,8 +306,8 @@
                 &.active {
                     .animate-spin {
                         opacity: 1;
-                        width: 20px;
-                        margin-inline-end: 5px;
+                        width: 24px;
+                        margin-inline-end: 6px;
                     }
                 }
             }
