@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="../assets/libs/aos-master/dist/aos.css">
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="../assets/css/digiboom-additions.css" />
+  <link rel="stylesheet" href="../assets/css/contact-page.css" />
 </head>
 
 <body data-active-page="contact">
@@ -36,241 +37,229 @@
       </div>
     </div>
   </header>
-<!--  Page Wrapper -->
+
   <div class="page-wrapper overflow-hidden">
 
-    <!--  Banner Section -->
-    <section class="banner-section banner-inner-section position-relative overflow-hidden d-flex align-items-end"
+    <!-- Banner -->
+    <section class="banner-section banner-inner-section cp-banner position-relative overflow-hidden d-flex align-items-end"
       style="background-image: url(../assets/images/backgrounds/contact-banner.jpg);">
       <div class="container">
-        <div class="d-flex flex-column gap-4 pb-5 pb-xl-10 position-relative z-1">
-          <div class="row align-items-center">
-            <div class="col-xl-4">
-              <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100"
-                data-aos-duration="1000">
-                <img src="../assets/images/svgs/primary-leaf.svg" alt="" class="img-fluid animate-spin">
-                <p class="mb-0 text-white fs-5 text-opacity-70">Ready to <span class="text-primary">start
-                    something</span> great? Reach out we’d love to hear from you.</p>
-              </div>
-            </div>
-          </div>
+        <div class="cp-banner__inner d-flex flex-column gap-4 pb-5 pb-xl-10 position-relative z-1" data-aos="fade-up" data-aos-delay="80" data-aos-duration="900">
+          <span class="cp-banner__eyebrow">DigiBoom</span>
+          <h1 class="cp-banner__title">Əlaqə və müraciət</h1>
+          <p class="cp-banner__lead">Layihə, əməkdaşlıq və ya sualınız var? Komandamızla əlaqə saxlayın — sizə ən uyğun kanalı seçin və ya formu doldurun.</p>
         </div>
       </div>
     </section>
 
-    <!--  Get in touch Section -->
-    <section id="get-in-touch" class="get-in-touch py-5 py-lg-11 py-xl-12">
+    <!-- Əsas məzmun -->
+    <section id="get-in-touch" class="cp-page">
       <div class="container">
-        <div class="d-flex flex-column gap-5 gap-xl-10">
-          <div class="row gap-7 gap-xl-0">
-            <div class="col-xl-4 col-xxl-4">
-              <div class="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100"
-                data-aos-duration="1000">
-                
-              </div>
+
+        <div class="cp-page__intro" data-aos="fade-up" data-aos-delay="60" data-aos-duration="900">
+          <h2 class="cp-page__intro-title">Bizimlə əlaqə saxlamaq çox asandır</h2>
+          <p class="cp-page__intro-text">Telefon, WhatsApp, e-poçt və ya sosial şəbəkələr vasitəsilə birbaşa yazın. Əgər ətraflı müraciət göndərmək istəyirsinizsə, sağdakı formu doldurun — ən gec 24 saat ərzində sizə qayıdacağıq.</p>
+        </div>
+
+        <!-- Sürətli əlaqə -->
+        <div class="cp-channels" data-aos="fade-up" data-aos-delay="100" data-aos-duration="900">
+          <h3 class="cp-channels__title">Sürətli əlaqə</h3>
+          <ul class="cp-channels__grid">
+            <li>
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=%C6%9Fhm%C9%99d+R%C9%99c%C9%99bli+49B%2C+Bak%C4%B1"
+                target="_blank" rel="noopener noreferrer"
+                class="cp-channel cp-channel--address"
+                aria-label="Ünvan: Əhməd Rəcəbli 49B, Bakı">
+                <span class="cp-channel__icon" aria-hidden="true">
+                  <iconify-icon icon="lucide:map-pin"></iconify-icon>
+                </span>
+                <span class="cp-channel__body">
+                  <span class="cp-channel__label">Ünvan</span>
+                  <span class="cp-channel__value">Əhməd Rəcəbli 49B, Bakı</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="tel:+994501234567"
+                class="cp-channel cp-channel--phone"
+                aria-label="Birbaşa zəng: +994 50 123 45 67">
+                <span class="cp-channel__icon" aria-hidden="true">
+                  <iconify-icon icon="lucide:phone"></iconify-icon>
+                </span>
+                <span class="cp-channel__body">
+                  <span class="cp-channel__label">Telefon</span>
+                  <span class="cp-channel__value">+994 50 123 45 67</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="https://wa.me/994501234567" target="_blank" rel="noopener noreferrer"
+                class="cp-channel cp-channel--whatsapp"
+                aria-label="WhatsApp: +994 50 123 45 67">
+                <span class="cp-channel__icon" aria-hidden="true">
+                  <iconify-icon icon="mdi:whatsapp"></iconify-icon>
+                </span>
+                <span class="cp-channel__body">
+                  <span class="cp-channel__label">WhatsApp</span>
+                  <span class="cp-channel__value">+994 50 123 45 67</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="https://wa.me/994551234567" target="_blank" rel="noopener noreferrer"
+                class="cp-channel cp-channel--whatsapp"
+                aria-label="WhatsApp: +994 55 987 65 43">
+                <span class="cp-channel__icon" aria-hidden="true">
+                  <iconify-icon icon="mdi:whatsapp"></iconify-icon>
+                </span>
+                <span class="cp-channel__body">
+                  <span class="cp-channel__label">WhatsApp</span>
+                  <span class="cp-channel__value">+994 55 987 65 43</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:info@digiboom.az"
+                class="cp-channel cp-channel--email"
+                aria-label="E-poçt: info@digiboom.az">
+                <span class="cp-channel__icon" aria-hidden="true">
+                  <iconify-icon icon="lucide:mail"></iconify-icon>
+                </span>
+                <span class="cp-channel__body">
+                  <span class="cp-channel__label">E-poçt</span>
+                  <span class="cp-channel__value">info@digiboom.az</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Sol: sosial + xəritə | Sağ: forma -->
+        <div class="cp-layout">
+          <div class="cp-stack" data-aos="fade-right" data-aos-delay="120" data-aos-duration="900">
+            <div class="cp-card">
+              <h3 class="cp-card__title">Sosial şəbəkələr</h3>
+              <p class="cp-card__subtitle">Bizi izləyin və birbaşa mesaj göndərin.</p>
+              <ul class="cp-social">
+                <li>
+                  <a href="https://www.facebook.com/digiboom" target="_blank" rel="noopener noreferrer"
+                    class="cp-social__link cp-social__link--facebook" aria-label="Facebook — Digiboom">
+                    <span class="cp-social__icon" aria-hidden="true">
+                      <iconify-icon icon="mdi:facebook"></iconify-icon>
+                    </span>
+                    <span class="cp-social__text">
+                      <span class="cp-social__name">Facebook</span>
+                      <span class="cp-social__handle">/digiboom</span>
+                    </span>
+                    <span class="cp-social__arrow" aria-hidden="true">
+                      <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.instagram.com/digiboom" target="_blank" rel="noopener noreferrer"
+                    class="cp-social__link cp-social__link--instagram" aria-label="Instagram — Digiboom">
+                    <span class="cp-social__icon" aria-hidden="true">
+                      <iconify-icon icon="mdi:instagram"></iconify-icon>
+                    </span>
+                    <span class="cp-social__text">
+                      <span class="cp-social__name">Instagram</span>
+                      <span class="cp-social__handle">@digiboom</span>
+                    </span>
+                    <span class="cp-social__arrow" aria-hidden="true">
+                      <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.tiktok.com/@digiboom" target="_blank" rel="noopener noreferrer"
+                    class="cp-social__link cp-social__link--tiktok" aria-label="TikTok — Digiboom">
+                    <span class="cp-social__icon" aria-hidden="true">
+                      <iconify-icon icon="fa-brands:tiktok"></iconify-icon>
+                    </span>
+                    <span class="cp-social__text">
+                      <span class="cp-social__name">TikTok</span>
+                      <span class="cp-social__handle">@digiboom</span>
+                    </span>
+                    <span class="cp-social__arrow" aria-hidden="true">
+                      <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.linkedin.com/company/digiboom" target="_blank" rel="noopener noreferrer"
+                    class="cp-social__link cp-social__link--linkedin" aria-label="LinkedIn — Digiboom">
+                    <span class="cp-social__icon" aria-hidden="true">
+                      <iconify-icon icon="mdi:linkedin"></iconify-icon>
+                    </span>
+                    <span class="cp-social__text">
+                      <span class="cp-social__name">LinkedIn</span>
+                      <span class="cp-social__handle">Digiboom</span>
+                    </span>
+                    <span class="cp-social__arrow" aria-hidden="true">
+                      <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.youtube.com/@digiboom" target="_blank" rel="noopener noreferrer"
+                    class="cp-social__link cp-social__link--youtube" aria-label="YouTube — Digiboom">
+                    <span class="cp-social__icon" aria-hidden="true">
+                      <iconify-icon icon="mdi:youtube"></iconify-icon>
+                    </span>
+                    <span class="cp-social__text">
+                      <span class="cp-social__name">YouTube</span>
+                      <span class="cp-social__handle">@digiboom</span>
+                    </span>
+                    <span class="cp-social__arrow" aria-hidden="true">
+                      <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
+                    </span>
+                  </a>
+                </li>
+              </ul>
             </div>
-            <div class="col-xl-8 col-xxl-7">
-              <div class="row">
-                <div class="col-xxl-8">
-                  <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100"
-                    data-aos-duration="1000">
-                    <h2 class="mb-0">Əlaqə və müraciət</h2>
-                  </div>
-                </div>
+
+            <div class="cp-card cp-card--map">
+              <h3 class="cp-card__title">Ofisimiz</h3>
+              <p class="cp-card__subtitle">Bakı şəhəri, Əhməd Rəcəbli prospekti.</p>
+              <div class="cp-map">
+                <iframe
+                  src="https://www.google.com/maps?q=%C6%9Fhm%C9%99d+R%C9%99c%C9%99bli+49B%2C+Bak%C4%B1&amp;output=embed"
+                  title="Əhməd Rəcəbli 49B, Bakı xəritəsi" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
               </div>
-            </div>
-          </div>
-          <div class="contact-page-channels contact-page-zone contact-page-zone--blue mb-4 mb-lg-5"
-            data-aos="fade-up" data-aos-delay="60" data-aos-duration="900">
-            <ul class="contact-page-channels__list contact-channels-grid list-unstyled mb-0">
-              <li>
+              <div class="cp-map__footer">
+                <p class="cp-map__address">Əhməd Rəcəbli 49B, Bakı</p>
                 <a href="https://www.google.com/maps/search/?api=1&amp;query=%C6%9Fhm%C9%99d+R%C9%99c%C9%99bli+49B%2C+Bak%C4%B1"
-                  target="_blank" rel="noopener noreferrer"
-                  class="contact-channel-card contact-channel-card--address"
-                  aria-label="Ünvan: Əhməd Rəcəbli 49B, Bakı">
-                  <span class="contact-channel-card__icon" aria-hidden="true">
-                    <iconify-icon icon="lucide:map-pin"></iconify-icon>
-                  </span>
-                  <span class="contact-channel-card__body">
-                    <span class="contact-channel-card__label">Ünvan</span>
-                    <span class="contact-channel-card__value">Əhməd Rəcəbli 49B</span>
-                  </span>
+                  target="_blank" rel="noopener noreferrer" class="cp-map__link">
+                  Xəritədə aç
+                  <iconify-icon icon="lucide:external-link"></iconify-icon>
                 </a>
-              </li>
-              <li>
-                <a href="https://wa.me/994501234567" target="_blank" rel="noopener noreferrer"
-                  class="contact-channel-card contact-channel-card--whatsapp"
-                  aria-label="WhatsApp: +994 50 123 45 67">
-                  <span class="contact-channel-card__icon" aria-hidden="true">
-                    <iconify-icon icon="mdi:whatsapp"></iconify-icon>
-                  </span>
-                  <span class="contact-channel-card__body">
-                    <span class="contact-channel-card__label">WhatsApp</span>
-                    <span class="contact-channel-card__value">+994 50 123 45 67</span>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://wa.me/994551234567" target="_blank" rel="noopener noreferrer"
-                  class="contact-channel-card contact-channel-card--whatsapp"
-                  aria-label="WhatsApp: +994 55 987 65 43">
-                  <span class="contact-channel-card__icon" aria-hidden="true">
-                    <iconify-icon icon="mdi:whatsapp"></iconify-icon>
-                  </span>
-                  <span class="contact-channel-card__body">
-                    <span class="contact-channel-card__label">WhatsApp</span>
-                    <span class="contact-channel-card__value">+994 55 987 65 43</span>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="tel:+994501234567"
-                  class="contact-channel-card contact-channel-card--phone"
-                  aria-label="Birbaşa zəng: +994 50 123 45 67">
-                  <span class="contact-channel-card__icon" aria-hidden="true">
-                    <iconify-icon icon="lucide:phone"></iconify-icon>
-                  </span>
-                  <span class="contact-channel-card__body">
-                    <span class="contact-channel-card__label">Birbaşa zəng</span>
-                    <span class="contact-channel-card__value">+994 50 123 45 67</span>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="mailto:info@digiboom.az"
-                  class="contact-channel-card contact-channel-card--email"
-                  aria-label="E-poçt: info@digiboom.az">
-                  <span class="contact-channel-card__icon" aria-hidden="true">
-                    <iconify-icon icon="lucide:mail"></iconify-icon>
-                  </span>
-                  <span class="contact-channel-card__body">
-                    <span class="contact-channel-card__label">Korporativ e-poçt</span>
-                    <span class="contact-channel-card__value">info@digiboom.az</span>
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="contact-page-grid contact-page-split">
-            <div class="contact-page-grid__col contact-page-grid__col--left">
-              <div class="contact-page-grid__left-inner">
-                <div class="contact-page-zone contact-page-zone--red" data-aos="fade-right" data-aos-delay="80"
-                  data-aos-duration="900">
-                  <h3 class="contact-page-grid__heading">Sosial şəbəkələr</h3>
-                  <ul class="contact-social-grid list-unstyled mb-0">
-                    <li>
-                      <a href="https://www.facebook.com/digiboom" target="_blank" rel="noopener noreferrer"
-                        class="contact-social-card contact-social-card--facebook"
-                        aria-label="Facebook — Digiboom">
-                        <span class="contact-social-card__icon" aria-hidden="true">
-                          <iconify-icon icon="mdi:facebook"></iconify-icon>
-                        </span>
-                        <span class="contact-social-card__body">
-                          <span class="contact-social-card__platform">Facebook</span>
-                          <span class="contact-social-card__handle">/digiboom</span>
-                        </span>
-                        <span class="contact-social-card__arrow" aria-hidden="true">
-                          <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.instagram.com/digiboom" target="_blank" rel="noopener noreferrer"
-                        class="contact-social-card contact-social-card--instagram"
-                        aria-label="Instagram — Digiboom">
-                        <span class="contact-social-card__icon" aria-hidden="true">
-                          <iconify-icon icon="mdi:instagram"></iconify-icon>
-                        </span>
-                        <span class="contact-social-card__body">
-                          <span class="contact-social-card__platform">Instagram</span>
-                          <span class="contact-social-card__handle">@digiboom</span>
-                        </span>
-                        <span class="contact-social-card__arrow" aria-hidden="true">
-                          <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.tiktok.com/@digiboom" target="_blank" rel="noopener noreferrer"
-                        class="contact-social-card contact-social-card--tiktok"
-                        aria-label="TikTok — Digiboom">
-                        <span class="contact-social-card__icon" aria-hidden="true">
-                          <iconify-icon icon="fa-brands:tiktok"></iconify-icon>
-                        </span>
-                        <span class="contact-social-card__body">
-                          <span class="contact-social-card__platform">TikTok</span>
-                          <span class="contact-social-card__handle">@digiboom</span>
-                        </span>
-                        <span class="contact-social-card__arrow" aria-hidden="true">
-                          <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.linkedin.com/company/digiboom" target="_blank" rel="noopener noreferrer"
-                        class="contact-social-card contact-social-card--linkedin"
-                        aria-label="LinkedIn — Digiboom">
-                        <span class="contact-social-card__icon" aria-hidden="true">
-                          <iconify-icon icon="mdi:linkedin"></iconify-icon>
-                        </span>
-                        <span class="contact-social-card__body">
-                          <span class="contact-social-card__platform">LinkedIn</span>
-                          <span class="contact-social-card__handle">Digiboom</span>
-                        </span>
-                        <span class="contact-social-card__arrow" aria-hidden="true">
-                          <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.youtube.com/@digiboom" target="_blank" rel="noopener noreferrer"
-                        class="contact-social-card contact-social-card--youtube"
-                        aria-label="YouTube — Digiboom">
-                        <span class="contact-social-card__icon" aria-hidden="true">
-                          <iconify-icon icon="mdi:youtube"></iconify-icon>
-                        </span>
-                        <span class="contact-social-card__body">
-                          <span class="contact-social-card__platform">YouTube</span>
-                          <span class="contact-social-card__handle">@digiboom</span>
-                        </span>
-                        <span class="contact-social-card__arrow" aria-hidden="true">
-                          <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
-                        </span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="contact-page-zone contact-page-zone--green contact-page-grid__map" data-aos="fade-up"
-                  data-aos-delay="140" data-aos-duration="900">
-                  <h3 class="contact-page-grid__heading">Xəritədə biz</h3>
-                  <div class="contact-page-map contact-page-map--grid">
-                    <iframe class="contact-page-map-iframe"
-                      src="https://www.google.com/maps?q=%C6%9Fhm%C9%99d+R%C9%99c%C9%99bli+49B%2C+Bak%C4%B1&amp;output=embed"
-                      title="Əhməd Rəcəbli 49B, Bakı xəritəsi" loading="lazy"
-                      referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-                  </div>
-                </div>
               </div>
             </div>
+          </div>
 
-            <div class="contact-page-grid__divider" aria-hidden="true">
-              <div class="get-in-touch-vrule"></div>
-            </div>
-
-            <div class="contact-page-grid__col contact-page-grid__col--right contact-page-form-aside">
+          <div class="cp-card cp-card--form" data-aos="fade-left" data-aos-delay="140" data-aos-duration="900">
+            <header class="cp-form-head">
+              <h2 class="cp-form-head__title">Müraciət formu</h2>
+              <p class="cp-form-head__text">Layihəniz, təklifiniz və ya sualınız haqqında qısaca yazın. Bütün sahələr mütləqdir, şirkət adı isə istəyə görədir.</p>
+              <ul class="cp-form-head__perks">
+                <li><iconify-icon icon="lucide:clock-3"></iconify-icon> 24 saat ərzində cavab</li>
+                <li><iconify-icon icon="lucide:shield-check"></iconify-icon> Məlumatlar qorunur</li>
+                <li><iconify-icon icon="lucide:sparkles"></iconify-icon> Pulsuz ilkin məsləhət</li>
+              </ul>
+            </header>
+            <div class="cp-form-body">
               <div data-include="contact-form"
                 data-form-id="contact-page-form"
                 data-form-prefix="contact-page"
-                data-form-class="h-100 flex-lg-grow-1"
-                data-btn-class="mt-auto"
-                data-smtp-action="/api/contact"
-                data-aos="fade-left"
-                data-aos-delay="120"
-                data-aos-duration="900"></div>
+                data-form-class="cp-form-body__form"
+                data-btn-class=""
+                data-smtp-action="/api/contact"></div>
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -278,12 +267,11 @@
 
   <div data-include="footer"></div>
 
-<aside class="floating-widgets" aria-label="Sürətli əlaqə">
+  <aside class="floating-widgets" aria-label="Sürətli əlaqə">
     <a href="tel:+994501234567" class="floating-widget-btn floating-widget-btn--call" aria-label="Zəng et"><iconify-icon icon="lucide:phone"></iconify-icon></a>
     <a href="https://wa.me/994501234567" target="_blank" rel="noopener" class="floating-widget-btn floating-widget-btn--whatsapp" aria-label="WhatsApp"><iconify-icon icon="mdi:whatsapp"></iconify-icon></a>
     <button type="button" class="floating-widget-btn floating-widget-btn--top" id="scrollToTopBtn" aria-label="Başa qayıt"><iconify-icon icon="lucide:arrow-up"></iconify-icon></button>
   </aside>
-
 
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -293,7 +281,6 @@
   <script src="../assets/js/includes.js" defer></script>
   <script src="../assets/js/i18n.js"></script>
   <script src="../assets/js/digiboom.js"></script>
-  <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
 

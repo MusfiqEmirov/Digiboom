@@ -1,0 +1,498 @@
+/* Əlaqə səhifəsi — yalnız contact.html */
+
+body[data-active-page="contact"] .page-wrapper {
+  background: linear-gradient(180deg, #f8faf8 0%, #ffffff 28%, #f4f7f4 100%);
+}
+
+/* Banner — ölçü banner-inner-section-dan gəlir (650px / mobil 550px) */
+.cp-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 20, 0.35) 0%,
+    rgba(15, 23, 20, 0.55) 55%,
+    rgba(15, 23, 20, 0.72) 100%
+  );
+  z-index: 0;
+}
+.cp-banner .container {
+  position: relative;
+  z-index: 1;
+}
+.cp-banner__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 640px;
+}
+.cp-banner__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1f2a2e;
+  background: rgba(193, 255, 114, 0.92);
+}
+.cp-banner__title {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+.cp-banner__lead {
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 48ch;
+}
+
+/* Əsas məzmun */
+.cp-page {
+  padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(3rem, 6vw, 5rem);
+}
+.cp-page__intro {
+  max-width: 720px;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+}
+.cp-page__intro-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #3d5a28;
+}
+.cp-page__intro-label .round-36 {
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.75rem;
+}
+.cp-page__intro-title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1f2a2e;
+}
+.cp-page__intro-text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: rgba(31, 42, 46, 0.72);
+}
+
+/* Sürətli əlaqə kartları */
+.cp-channels {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.cp-channels__title {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(31, 42, 46, 0.5);
+}
+.cp-channels__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+@media (min-width: 576px) {
+  .cp-channels__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1200px) {
+  .cp-channels__grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+.cp-channel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  height: 100%;
+  padding: 1.1rem 1.15rem;
+  border-radius: 18px;
+  text-decoration: none;
+  color: #1f2a2e;
+  background: #ffffff;
+  border: 1px solid rgba(31, 42, 46, 0.08);
+  box-shadow: 0 8px 24px rgba(31, 42, 46, 0.06);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+.cp-channel:hover {
+  transform: translateY(-3px);
+  border-color: rgba(193, 255, 114, 0.45);
+  box-shadow: 0 14px 32px rgba(31, 42, 46, 0.1);
+  color: #1f2a2e;
+}
+.cp-channel:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(193, 255, 114, 0.35), 0 8px 24px rgba(31, 42, 46, 0.08);
+}
+.cp-channel__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 14px;
+  font-size: 1.2rem;
+  color: #fff;
+}
+.cp-channel__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+.cp-channel__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(31, 42, 46, 0.5);
+}
+.cp-channel__value {
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+  word-break: break-word;
+}
+.cp-channel--address .cp-channel__icon {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+.cp-channel--whatsapp .cp-channel__icon {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+}
+.cp-channel--phone .cp-channel__icon {
+  background: linear-gradient(135deg, #087f5b, #0b9b6e);
+}
+.cp-channel--email .cp-channel__icon {
+  background: linear-gradient(135deg, #1f2a2e, #3d4f56);
+}
+
+/* İki sütun: sol məlumat, sağ forma */
+.cp-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+@media (min-width: 992px) {
+  .cp-layout {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 1.75rem;
+  }
+}
+.cp-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.cp-card {
+  background: #ffffff;
+  border: 1px solid rgba(31, 42, 46, 0.08);
+  border-radius: 22px;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  box-shadow: 0 10px 32px rgba(31, 42, 46, 0.06);
+}
+.cp-card__title {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1f2a2e;
+}
+.cp-card__subtitle {
+  margin: -0.5rem 0 1rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: rgba(31, 42, 46, 0.58);
+}
+
+/* Sosial şəbəkələr */
+.cp-social {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.55rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+@media (min-width: 480px) {
+  .cp-social {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.cp-social__link {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 14px;
+  text-decoration: none;
+  color: #1f2a2e;
+  background: #f7faf7;
+  border: 1px solid rgba(31, 42, 46, 0.06);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+.cp-social__link:hover {
+  background: rgba(193, 255, 114, 0.14);
+  border-color: rgba(193, 255, 114, 0.4);
+  transform: translateX(2px);
+  color: #1f2a2e;
+}
+.cp-social__link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(193, 255, 114, 0.3);
+}
+.cp-social__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.15rem;
+  height: 2.15rem;
+  border-radius: 50%;
+  font-size: 1.05rem;
+  color: #fff;
+}
+.cp-social__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+.cp-social__name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.cp-social__handle {
+  font-size: 0.75rem;
+  color: rgba(31, 42, 46, 0.52);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cp-social__arrow {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  color: rgba(31, 42, 46, 0.28);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.cp-social__link:hover .cp-social__arrow {
+  transform: translate(2px, -2px);
+  color: #3d5a28;
+}
+.cp-social__link--facebook .cp-social__icon { background: #1877f2; }
+.cp-social__link--instagram .cp-social__icon { background: linear-gradient(135deg, #f58529, #dd2a7b); }
+.cp-social__link--tiktok .cp-social__icon { background: #111; }
+.cp-social__link--linkedin .cp-social__icon { background: #0a66c2; }
+.cp-social__link--youtube .cp-social__icon { background: #ff0000; }
+
+/* Xəritə */
+.cp-map {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(31, 42, 46, 0.08);
+  background: #eef2ee;
+  min-height: 220px;
+}
+.cp-map iframe {
+  display: block;
+  width: 100%;
+  height: clamp(220px, 28vw, 300px);
+  border: 0;
+}
+.cp-map__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.85rem;
+}
+.cp-map__address {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1f2a2e;
+}
+.cp-map__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #087f5b;
+  text-decoration: none;
+}
+.cp-map__link:hover {
+  color: #066b4c;
+  text-decoration: underline;
+}
+
+/* Forma paneli */
+.cp-card--form {
+  display: flex;
+  flex-direction: column;
+}
+.cp-form-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.cp-form-head {
+  margin-bottom: 1.35rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid rgba(31, 42, 46, 0.08);
+}
+.cp-form-head__title {
+  margin: 0 0 0.45rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1f2a2e;
+}
+.cp-form-head__text {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: rgba(31, 42, 46, 0.65);
+}
+.cp-form-head__perks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.cp-form-head__perks li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #3d5a28;
+}
+.cp-form-head__perks iconify-icon {
+  font-size: 0.95rem;
+  color: #087f5b;
+}
+
+/* Forma — kart daxilində, əlavə çərçivə olmadan */
+body[data-active-page="contact"] .cp-card--form .contact-form-modern {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+/* Desktop: forma ilə xəritə alt-xəttdə simmetrik */
+@media (min-width: 992px) {
+  .cp-stack {
+    height: 100%;
+  }
+
+  .cp-card--map {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .cp-card--map .cp-map {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .cp-card--map .cp-map iframe {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 140px;
+  }
+
+  .cp-card--form {
+    height: 100%;
+  }
+
+  body[data-active-page="contact"] .cp-card--form .cp-form-body__form,
+  body[data-active-page="contact"] .cp-card--form .contact-form-modern {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+  }
+
+  body[data-active-page="contact"] .cp-card--form .contact-form-modern__fields {
+    flex: 1 1 auto;
+    grid-template-rows: auto auto auto minmax(0, 1fr);
+    align-content: start;
+    min-height: 0;
+  }
+
+  body[data-active-page="contact"] .cp-card--form .contact-form-modern__field:has(.contact-form-modern__textarea) {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  body[data-active-page="contact"] .cp-card--form .contact-form-modern__textarea {
+    flex: 1 1 auto;
+    min-height: 4.5rem;
+    height: 100%;
+    resize: none;
+  }
+
+  body[data-active-page="contact"] .cp-card--form .contact-form-modern__submit {
+    margin-top: auto;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cp-card {
+    border-radius: 18px;
+    padding: 1.1rem;
+  }
+  .cp-channel {
+    padding: 0.95rem 1rem;
+  }
+  .cp-social {
+    grid-template-columns: 1fr;
+  }
+}
