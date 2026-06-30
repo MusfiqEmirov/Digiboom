@@ -6,10 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DigiBoom — Blog Yazısı</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/libs/owl.carousel/dist/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="../assets/css/fonts.css" />
   <link rel="stylesheet" href="../assets/libs/aos-master/dist/aos.css">
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="../assets/css/digiboom-additions.css" />
@@ -17,18 +14,10 @@
 
 <body data-active-page="blog">
 
-  <!-- Header -->
   <header class="header position-fixed start-0 top-0 w-100">
     <div class="container">
       <div class="header-wrapper d-flex align-items-center justify-content-between">
-        <div class="logo">
-          <a href="index.html" class="logo-white">
-            <img src="../assets/images/logos/digi-boom-logo.png" alt="logo" class="img-fluid">
-          </a>
-          <a href="index.html" class="logo-dark">
-            <img src="../assets/images/logos/digi-boom-logo.png" alt="logo" class="img-fluid">
-          </a>
-        </div>
+        <div data-include="logo"></div>
         <div class="d-flex align-items-center gap-4">
           <div data-include="navbar"></div>
           <div data-include="sidebar"></div>
@@ -36,22 +25,18 @@
       </div>
     </div>
   </header>
-<!--  Page Wrapper -->
+
   <div class="page-wrapper overflow-hidden">
 
-    <!--  Banner Section -->
-    <section class="banner-section banner-inner-section position-relative overflow-hidden d-flex align-items-end"
+    <section class="banner-section banner-inner-section position-relative overflow-hidden d-flex align-items-end blog-detail-banner"
       style="background-image: url(../assets/images/backgrounds/blog-detail-banner.jpg);">
       <div class="container">
         <div class="d-flex flex-column gap-4 pb-5 pb-xl-10 position-relative z-1">
           <div class="row align-items-center">
-            <div class="col-xl-4">
-              <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100"
-                data-aos-duration="1000">
+            <div class="col-xl-5">
+              <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
                 <img src="../assets/images/svgs/primary-leaf.svg" alt="" class="img-fluid animate-spin">
-                <p class="mb-0 text-white fs-5 text-opacity-70">In a <span class="text-primary">world where
-                    standing</span> still means falling behind, we
-                  knew it was time for a bold transformation..</p>
+                <p class="mb-0 text-white fs-5 text-opacity-70">Fikirlər, <span class="text-primary">trendlər</span> və rəqəmsal dünyadan ilhamverici hekayələr.</p>
               </div>
             </div>
           </div>
@@ -59,62 +44,68 @@
       </div>
     </section>
 
-    <!--  Blog Detail Section -->
-    <section class="blog-detail py-5 py-lg-11 py-xl-12">
+    <section class="blog-detail-section">
       <div class="container">
-        <div class="d-flex flex-column gap-7 gap-xl-11">
-          <div class="row gap-4 gap-lg-0">
-            <div class="col-lg-4">
-              <h2 class="fs-13 mb-0" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">Scroll to read
-              </h2>
-            </div>
+        <div class="blog-detail-inner">
+
+          <a href="blog.html" class="btn btn-back py-2 ps-3 pe-4 align-self-start" data-aos="fade-up" data-aos-delay="80" data-aos-duration="900">
+            <span class="btn-text pe-1">Geri</span>
+            <iconify-icon icon="lucide:arrow-up-right"
+              class="btn-icon bg-white text-dark round-36 rounded-circle hstack justify-content-center fs-5 shadow-sm"></iconify-icon>
+          </a>
+
+          <div class="row g-5 g-xl-6 blog-detail-layout">
             <div class="col-lg-8">
-              <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                <p class="fs-5 mb-0">
-                  At Studiova, we're always evolving, and our latest brand redesign is a bold step forward. This
-                  transformation reflects our commitment to innovation and growth, both in how we look and how we
-                  connect with you.
-                </p>
-              </div>
+              <article class="blog-detail-article" id="blogDetailArticle">
+
+                <header class="blog-detail-header">
+                  <span class="blog-detail-category" id="blogDetailCategory">Marketinq</span>
+                  <h1 class="blog-detail-title" id="blogDetailTitle">Məqalə başlığı</h1>
+                  <div class="blog-detail-meta">
+                    <time class="blog-detail-date" id="blogDetailDate" datetime="2025-12-24">
+                      <iconify-icon icon="lucide:calendar" aria-hidden="true"></iconify-icon>
+                      <span>24 Dekabr 2025</span>
+                    </time>
+                    <span class="blog-detail-meta-divider" aria-hidden="true"></span>
+                    <span class="blog-detail-views" id="blogDetailViews" aria-live="polite">
+                      <iconify-icon icon="lucide:eye" aria-hidden="true"></iconify-icon>
+                      <span class="blog-detail-views__count" id="blogViewCount">—</span>
+                      <span class="blog-detail-views__label">baxış</span>
+                    </span>
+                  </div>
+                </header>
+
+                <figure class="blog-detail-hero" id="blogDetailHero">
+                  <img src="../assets/images/resources/resources-1.jpg" alt="" class="blog-detail-hero__img" id="blogDetailImage">
+                  <figcaption class="visually-hidden" id="blogDetailImageCaption"></figcaption>
+                </figure>
+
+                <div class="blog-detail-content prose" id="blogDetailContent">
+                  <p>Məzmun yüklənir...</p>
+                </div>
+
+              </article>
             </div>
-          </div>
-          <div class="blog-detail-img" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
-            <img src="../assets/images/backgrounds/blog-detail-img.jpg" alt="blog-detail" class="img-fluid">
-          </div>
-          <div class="row justify-content-end">
-            <div class="col-lg-8">
-              <div data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-                <p class="fs-5 mb-0">
-                  Blogger outreach campaigns are strategic efforts by businesses to collaborate with influential
-                  bloggers, aiming to promote products, services, or content to a broader audience. This form of
-                  influencer marketing leverages the blogger's established credibility and reach within a specific
-                  niche.
-                </p>
-                <p class="fs-5 mb-6">
-                  Key Steps to Launch a Successful Blogger Outreach Campaign:
-                </p>
-                <h4>1. Define Your Goals:</h4>
-                <p class="fs-5 mb-6">
-                  Clearly outline what you aim to achieve, such as increasing brand awareness, driving website traffic,
-                  or boosting product sales.
-                </p>
-                <h4>2. Identify Relevant Bloggers:</h4>
-                <p class="fs-5 mb-6">
-                  Research and compile a list of bloggers whose audience aligns with your target demographic. Utilize
-                  tools like BuzzSumo to discover key influencers in your industry.
-                </p>
-                <h4>Engage Authentically:</h4>
-                <p class="fs-5 mb-0">
-                  Prior to outreach, engage with the bloggers' content by commenting on posts or sharing their articles.
-                  This establishes a genuine connection and familiarity.
-                </p>
-                <p class="fs-5 mb-0">
-                  Craft Personalized Outreach Messages: Develop tailored emails that acknowledge the blogger's work and
-                  propose a mutually beneficial collaboration. Avoid generic templates to increase response rates.
-                </p>
+
+            <aside class="col-lg-4 blog-detail-aside">
+              <div class="blog-detail-sidebar">
+                <div class="blog-detail-related">
+                  <div class="blog-detail-related__head">
+                    <span class="blog-detail-related__eyebrow">Oxumağa davam edin</span>
+                    <h2 class="blog-detail-related__title">Digər məqalələr</h2>
+                  </div>
+                  <ul class="blog-related-list" id="blogRelatedList" aria-label="Digər məqalələr">
+                    <!-- JS ilə doldurulur -->
+                  </ul>
+                  <a href="blog.html" class="blog-detail-related__all">
+                    Bütün məqalələr
+                    <iconify-icon icon="lucide:arrow-right" aria-hidden="true"></iconify-icon>
+                  </a>
+                </div>
               </div>
-            </div>
+            </aside>
           </div>
+
         </div>
       </div>
     </section>
@@ -123,22 +114,20 @@
 
   <div data-include="footer"></div>
 
-<aside class="floating-widgets" aria-label="Sürətli əlaqə">
+  <aside class="floating-widgets" aria-label="Sürətli əlaqə">
     <a href="tel:+994501234567" class="floating-widget-btn floating-widget-btn--call" aria-label="Zəng et"><iconify-icon icon="lucide:phone"></iconify-icon></a>
     <a href="https://wa.me/994501234567" target="_blank" rel="noopener" class="floating-widget-btn floating-widget-btn--whatsapp" aria-label="WhatsApp"><iconify-icon icon="mdi:whatsapp"></iconify-icon></a>
     <button type="button" class="floating-widget-btn floating-widget-btn--top" id="scrollToTopBtn" aria-label="Başa qayıt"><iconify-icon icon="lucide:arrow-up"></iconify-icon></button>
   </aside>
 
-
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/libs/owl.carousel/dist/owl.carousel.min.js"></script>
   <script src="../assets/libs/aos-master/dist/aos.js"></script>
   <script src="../assets/js/custom.js"></script>
   <script src="../assets/js/includes.js" defer></script>
-  <script src="../assets/js/i18n.js"></script>
   <script src="../assets/js/digiboom.js"></script>
-  <!-- solar icons -->
+  <script src="../assets/js/blog-articles-data.js"></script>
+  <script src="../assets/js/blog-detail.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
 

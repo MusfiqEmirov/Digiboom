@@ -142,38 +142,8 @@
   }
 
   /* =====================================================
-     CARD IMAGE LINKS — layihə & xidmət kartları
+     CARD IMAGE LINKS — yalnız Ətraflı düyməsi keçid edir
      ===================================================== */
-  function getCardDetailHref(card, btnSelector) {
-    var btn = card.querySelector(btnSelector);
-    if (!btn) return null;
-    var href = btn.getAttribute('href');
-    if (!href || href === '#!' || href === '#') return null;
-    return href;
-  }
-
-  document.addEventListener('click', function (event) {
-    var portfolioImg = event.target.closest('.portfolio-img');
-    if (portfolioImg && !event.target.closest('.portfolio-overlay a, .portfolio-overlay button')) {
-      var portfolioCard = portfolioImg.closest('.portfolio-showcase-card, .portfolio-card-modern, .portfolio');
-      var portfolioHref = getCardDetailHref(
-        portfolioCard || portfolioImg,
-        '.portfolio-showcase-card__cta[href], .service-card__btn[href], .portfolio-overlay-btn[href]'
-      );
-      if (portfolioHref) {
-        window.location.assign(portfolioHref);
-        return;
-      }
-    }
-
-    var serviceCard = event.target.closest('.service-card');
-    if (serviceCard && !event.target.closest('.service-card__btn')) {
-      var serviceHref = getCardDetailHref(serviceCard, '.service-card__btn[href]');
-      if (serviceHref) {
-        window.location.assign(serviceHref);
-      }
-    }
-  });
 
   /* =====================================================
      ABOUT PROMO VIDEO — custom play overlay

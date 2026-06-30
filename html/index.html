@@ -6,35 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DigiBoom</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/fonts.css" />
   <link rel="stylesheet" href="../assets/libs/owl.carousel/dist/assets/owl.carousel.min.css">
   <link rel="stylesheet" href="../assets/libs/aos-master/dist/aos.css">
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="../assets/css/digiboom-additions.css" />
   <script>
-    (function () {
-      try {
-        if (!sessionStorage.getItem('digiboom_session_started')) {
-          document.documentElement.classList.add('is-splash-loading');
-        }
-      } catch (e) {}
-    })();
+    document.documentElement.classList.add('is-splash-loading');
   </script>
 </head>
 
 <body data-active-page="index">
 
-  <!-- Splash Screen -->
-  <div id="siteSplash" class="site-splash" role="dialog" aria-label="Yüklənir" aria-hidden="false">
+  <!-- Load Screen -->
+  <div id="siteSplash" class="site-splash" role="status" aria-live="polite" aria-label="Yüklənir" aria-hidden="false">
     <div class="site-splash__inner">
       <img src="../assets/images/logos/digi-boom-logo.png" alt="DigiBoom" class="site-splash__logo">
-      <div class="bomb-countdown is-active" id="splashCountdown">
-        <span class="bomb-num">3</span>
-      </div>
-      <div class="bomb-explosion site-splash__explosion"></div>
-      <div class="bomb-particles site-splash__particles"></div>
+      <div class="site-splash__loader" aria-hidden="true"></div>
     </div>
   </div>
   <script src="../assets/js/splash.js"></script>
@@ -43,14 +31,7 @@
   <header class="header position-fixed start-0 top-0 w-100">
     <div class="container">
       <div class="header-wrapper d-flex align-items-center justify-content-between">
-        <div class="logo">
-          <a href="index.html" class="logo-white">
-            <img src="../assets/images/logos/digi-boom-logo.png" alt="logo" class="img-fluid">
-          </a>
-          <a href="index.html" class="logo-dark">
-            <img src="../assets/images/logos/digi-boom-logo.png" alt="logo" class="img-fluid">
-          </a>
-        </div>
+        <div data-include="logo"></div>
         <div class="d-flex align-items-center gap-4">
           <div data-include="navbar"></div>
           <div data-include="sidebar"></div>
@@ -95,13 +76,13 @@
               <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100"
                 data-aos-duration="1000">
                 <img src="../assets/images/svgs/primary-leaf.svg" alt="" class="img-fluid animate-spin">
-                <p class="mb-0 text-white fs-5 text-opacity-70">Ana metn</p>
+                <p class="mb-0 text-white fs-5 text-opacity-70">Ana mətn</p>
                   
               </div>
             </div>
           </div>
           <div class="d-flex align-items-end gap-3" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-            <h1 class="mb-0 fs-16 text-white lh-1">Esas basliq</h1>
+            <h1 class="mb-0 fs-16 text-white lh-1">Əsas başlıq</h1>
           </div>
         </div>
       </div>
@@ -297,8 +278,9 @@
             <iconify-icon icon="lucide:chevron-right"></iconify-icon>
           </button>
           <div class="featured-projects-slider">
-          <div class="owl-carousel owl-theme">
-            <div class="item">
+            <div class="featured-projects-marquee w-100 overflow-hidden">
+              <div class="featured-projects-marquee__track d-flex flex-nowrap align-items-stretch">
+            <div class="featured-projects-marquee__item">
               <article class="portfolio portfolio-showcase-card">
                 <div class="portfolio-showcase-card__frame">
                   <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
@@ -330,7 +312,7 @@
                 </div>
               </article>
             </div>
-            <div class="item">
+            <div class="featured-projects-marquee__item">
               <article class="portfolio portfolio-showcase-card">
                 <div class="portfolio-showcase-card__frame">
                   <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
@@ -362,7 +344,7 @@
                 </div>
               </article>
             </div>
-            <div class="item">
+            <div class="featured-projects-marquee__item">
               <article class="portfolio portfolio-showcase-card">
                 <div class="portfolio-showcase-card__frame">
                   <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
@@ -394,7 +376,7 @@
                 </div>
               </article>
             </div>
-            <div class="item">
+            <div class="featured-projects-marquee__item">
               <article class="portfolio portfolio-showcase-card">
                 <div class="portfolio-showcase-card__frame">
                   <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
@@ -426,7 +408,7 @@
                 </div>
               </article>
             </div>
-            <div class="item">
+            <div class="featured-projects-marquee__item">
               <article class="portfolio portfolio-showcase-card">
                 <div class="portfolio-showcase-card__frame">
                   <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
@@ -458,7 +440,7 @@
                 </div>
               </article>
             </div>
-            <div class="item">
+            <div class="featured-projects-marquee__item">
               <article class="portfolio portfolio-showcase-card">
                 <div class="portfolio-showcase-card__frame">
                   <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
@@ -490,7 +472,8 @@
                 </div>
               </article>
             </div>
-          </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="d-flex justify-content-center pt-3 pt-lg-4 pb-3 pb-lg-4">
@@ -538,8 +521,9 @@
               <iconify-icon icon="lucide:chevron-right"></iconify-icon>
             </button>
             <div class="service-grid position-relative">
-            <div class="services-slider owl-carousel owl-theme">
-              <div class="item">
+              <div class="services-marquee w-100 overflow-hidden">
+                <div class="services-marquee__track d-flex flex-nowrap align-items-stretch">
+              <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
                   <span class="service-card__index" aria-hidden="true">01</span>
@@ -555,7 +539,7 @@
                   </div>
                 </article>
               </div>
-              <div class="item">
+              <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
                   <span class="service-card__index" aria-hidden="true">02</span>
@@ -571,7 +555,7 @@
                   </div>
                 </article>
               </div>
-              <div class="item">
+              <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
                   <span class="service-card__index" aria-hidden="true">03</span>
@@ -587,7 +571,7 @@
                   </div>
                 </article>
               </div>
-              <div class="item">
+              <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
                   <span class="service-card__index" aria-hidden="true">04</span>
@@ -603,7 +587,7 @@
                   </div>
                 </article>
               </div>
-              <div class="item">
+              <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
                   <span class="service-card__index" aria-hidden="true">05</span>
@@ -619,7 +603,7 @@
                   </div>
                 </article>
               </div>
-              <div class="item" id="training">
+              <div class="services-marquee__item" id="training">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
                   <span class="service-card__index" aria-hidden="true">06</span>
@@ -635,7 +619,8 @@
                   </div>
                 </article>
               </div>
-            </div>
+                </div>
+              </div>
           </div>
           </div>
         </div>
@@ -685,8 +670,8 @@
               <div class="item d-flex align-items-stretch">
                 <div class="testimonial-card testimonial-card--light w-100 h-100">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Test rəy 1. Qısa nümunə mətn.</p>
-                    <div class="hstack gap-3">
+                    <p class="testimonial-quote mb-0">Peşəkar yanaşma, əla nəticə!</p>
+                    <div class="testimonial-author hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-1.jpg" alt=""
                         class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
@@ -701,8 +686,8 @@
               <div class="item d-flex align-items-stretch">
                 <div class="testimonial-card testimonial-card--dark w-100 h-100">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Test rəy 2. Qısa nümunə mətn.</p>
-                    <div class="hstack gap-3">
+                    <p class="testimonial-quote mb-0">Sosial media hesablarımızı idarə etdilər. Müştəri sayımız və onlayn görünürlüyümüz bir neçə ay ərzində gözəl artdı, komanda hər addımda dəstək oldu.</p>
+                    <div class="testimonial-author hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-2.jpg" alt=""
                         class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
@@ -717,8 +702,8 @@
               <div class="item d-flex align-items-stretch">
                 <div class="testimonial-card w-100 h-100">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Test rəy 3. Qısa nümunə mətn.</p>
-                    <div class="hstack gap-3">
+                    <p class="testimonial-quote mb-0">Veb saytımızı sıfırdan dizayn edib hazırladılar — sürətli, mobil uyğun və istifadəsi asandır. Texniki dəstək və layihə idarəetməsi bütün proses boyunca çox peşəkar idi.</p>
+                    <div class="testimonial-author hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-3.jpg" alt=""
                         class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
@@ -733,8 +718,8 @@
               <div class="item d-flex align-items-stretch">
                 <div class="testimonial-card testimonial-card--light w-100 h-100">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Test rəy 4. Qısa nümunə mətn.</p>
-                    <div class="hstack gap-3">
+                    <p class="testimonial-quote mb-0">Brening layihəmizdə loqo, korporativ stil və marketinq materiallarını tam paket şəklində təqdim etdilər. Nəticədən çox razıyıq — vizual kimliyimiz daha güclü və yaddaqalan oldu, təslim müddətlərinə də riayət etdilər.</p>
+                    <div class="testimonial-author hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-1.jpg" alt=""
                         class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
@@ -749,8 +734,8 @@
               <div class="item d-flex align-items-stretch">
                 <div class="testimonial-card testimonial-card--dark w-100 h-100">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Test rəy 5. Qısa nümunə mətn.</p>
-                    <div class="hstack gap-3">
+                    <p class="testimonial-quote mb-0">Tövsiyə edirəm!</p>
+                    <div class="testimonial-author hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-2.jpg" alt=""
                         class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
@@ -765,8 +750,8 @@
               <div class="item d-flex align-items-stretch">
                 <div class="testimonial-card w-100 h-100">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Test rəy 6. Qısa nümunə mətn.</p>
-                    <div class="hstack gap-3">
+                    <p class="testimonial-quote mb-0">Konsultasiya xidməti biznes modelimizi yenidən qurmağımıza kömək etdi. Rəqəmsal transformasiya planı hazırladılar, KPI-lar müəyyənləşdirildi və hər addımda dəstək gördük. İndi satış və marketinq proseslərimiz daha şəffaf və effektivdir.</p>
+                    <div class="testimonial-author hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-3.jpg" alt=""
                         class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
@@ -781,8 +766,8 @@
               <div class="item d-flex align-items-stretch">
                 <div class="testimonial-card testimonial-card--light w-100 h-100">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Test rəy 7. Qısa nümunə mətn.</p>
-                    <div class="hstack gap-3">
+                    <p class="testimonial-quote mb-0">Ənənəvi marketinq kampaniyalarımızı rəqəmsalla inteqrasiya etdilər — çap materialları, billbord və online reklamlar vahid strategiya altında birləşdi.</p>
+                    <div class="testimonial-author hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-1.jpg" alt=""
                         class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
@@ -797,8 +782,8 @@
               <div class="item d-flex align-items-stretch">
                 <div class="testimonial-card testimonial-card--dark w-100 h-100">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Test rəy 8. Qısa nümunə mətn.</p>
-                    <div class="hstack gap-3">
+                    <p class="testimonial-quote mb-0">Avtomatlaşdırma sistemi vaxtımızı azaltdı.</p>
+                    <div class="testimonial-author hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-2.jpg" alt=""
                         class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
@@ -813,8 +798,8 @@
               <div class="item d-flex align-items-stretch">
                 <div class="testimonial-card w-100 h-100">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Test rəy 9. Qısa nümunə mətn.</p>
-                    <div class="hstack gap-3">
+                    <p class="testimonial-quote mb-0">Təlim proqramlarında komandamız praktiki biliklər əldə etdi: SEO, məzmun marketinqi və analitika üzrə mühazirələr real layihələr üzərində keçirildi. Təlimdən sonra öz hesablarımızı daha peşəkar idarə edə bilirik. Digiboom-un yanaşması nəzəriyyə ilə praktikanı mükəmməl birləşdirir və biz artıq uzunmüddətli tərəfdaş kimi görürük.</p>
+                    <div class="testimonial-author hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-3.jpg" alt=""
                         class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
                       <div>
@@ -843,48 +828,100 @@
       </div>
     </div>
 
-    <!--  Rəy bildir modal – kiçik və səliqəli -->
+    <!--  Rəy bildir modal -->
     <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered review-modal-dialog">
-        <div class="modal-content review-modal-content rounded-3 border-0 shadow">
-          <div class="modal-header review-modal-header border-0 py-3 px-3">
-            <h3 class="modal-title fs-6 fw-bold mb-0" id="reviewModalLabel">Rəy bildir</h3>
-            <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="modal" aria-label="Bağla"></button>
+        <div class="modal-content review-modal-content border-0 shadow-lg">
+          <div class="review-modal-accent" aria-hidden="true"></div>
+          <div class="modal-header review-modal-header border-0">
+            <div class="review-modal-header-text">
+              <span class="review-modal-eyebrow">Rəyiniz bizim üçün önəmlidir</span>
+              <h3 class="modal-title mb-0" id="reviewModalLabel">Rəy bildir</h3>
+            </div>
+            <button type="button" class="btn-close review-modal-close" data-bs-dismiss="modal" aria-label="Bağla"></button>
           </div>
-          <div class="modal-body review-modal-body px-3 pb-3 pt-0">
+          <div class="modal-body review-modal-body">
             <form id="reviewForm" class="review-modal-form">
-              <div class="mb-3">
-                <label for="reviewCompany" class="form-label review-modal-label">Şirkət adı <span class="text-danger">*</span></label>
-                <input type="text" class="form-control form-control-sm border-bottom border-dark rounded-0 border-0 border-start-0 border-end-0 py-2" id="reviewCompany" name="company" placeholder="Şirkət adı" required>
+              <div class="review-field">
+                <label for="reviewCompany" class="review-modal-label">Şirkət adı <span class="text-danger">*</span></label>
+                <div class="review-input-wrap">
+                  <iconify-icon icon="lucide:building-2" class="review-input-icon" aria-hidden="true"></iconify-icon>
+                  <input type="text" class="form-control review-input" id="reviewCompany" name="company" placeholder="Şirkətinizin adı" required>
+                </div>
               </div>
-              <div class="mb-3">
-                <label for="reviewService" class="form-label review-modal-label">Xidmət <span class="text-danger">*</span></label>
-                <select class="form-select form-select-sm border-bottom border-dark rounded-0 border-0 border-start-0 border-end-0 py-2" id="reviewService" name="service" required>
-                  <option value="">Seçin</option>
-                  <option value="reqemsal-marketing">Rəqəmsal marketinq</option>
-                  <option value="veb-development">Veb development</option>
-                  <option value="brending-dizayn">Brending və dizayn</option>
-                  <option value="konsultasiya">Konsultasiya</option>
-                  <option value="enenevi-marketing">Ənənəvi marketinq</option>
-                  <option value="biznes-avtomatlasdirilmasi">Biznes avtomatlaşdırılması</option>
-                  <option value="telim">Təlim</option>
-                </select>
+              <div class="review-field">
+                <span class="review-modal-label d-block" id="reviewServiceLabel">Xidmət <span class="text-danger">*</span></span>
+                <div class="review-service-grid" role="radiogroup" aria-labelledby="reviewServiceLabel">
+                  <label class="review-service-chip">
+                    <input type="radio" name="service" value="reqemsal-marketing" required>
+                    <span class="review-service-chip__inner">
+                      <iconify-icon icon="lucide:bar-chart-3" aria-hidden="true"></iconify-icon>
+                      <span>Rəqəmsal marketinq</span>
+                    </span>
+                  </label>
+                  <label class="review-service-chip">
+                    <input type="radio" name="service" value="veb-development">
+                    <span class="review-service-chip__inner">
+                      <iconify-icon icon="lucide:code-2" aria-hidden="true"></iconify-icon>
+                      <span>Veb development</span>
+                    </span>
+                  </label>
+                  <label class="review-service-chip">
+                    <input type="radio" name="service" value="brending-dizayn">
+                    <span class="review-service-chip__inner">
+                      <iconify-icon icon="lucide:palette" aria-hidden="true"></iconify-icon>
+                      <span>Brending və dizayn</span>
+                    </span>
+                  </label>
+                  <label class="review-service-chip">
+                    <input type="radio" name="service" value="konsultasiya">
+                    <span class="review-service-chip__inner">
+                      <iconify-icon icon="lucide:message-circle" aria-hidden="true"></iconify-icon>
+                      <span>Konsultasiya</span>
+                    </span>
+                  </label>
+                  <label class="review-service-chip">
+                    <input type="radio" name="service" value="enenevi-marketing">
+                    <span class="review-service-chip__inner">
+                      <iconify-icon icon="lucide:megaphone" aria-hidden="true"></iconify-icon>
+                      <span>Ənənəvi marketinq</span>
+                    </span>
+                  </label>
+                  <label class="review-service-chip">
+                    <input type="radio" name="service" value="biznes-avtomatlasdirilmasi">
+                    <span class="review-service-chip__inner">
+                      <iconify-icon icon="lucide:settings" aria-hidden="true"></iconify-icon>
+                      <span>Biznes avtomatlaşdırılması</span>
+                    </span>
+                  </label>
+                  <label class="review-service-chip">
+                    <input type="radio" name="service" value="telim">
+                    <span class="review-service-chip__inner">
+                      <iconify-icon icon="lucide:graduation-cap" aria-hidden="true"></iconify-icon>
+                      <span>Təlim</span>
+                    </span>
+                  </label>
+                </div>
               </div>
-              <div class="mb-3">
-                <label for="reviewText" class="form-label review-modal-label">Rəy <span class="text-danger">*</span></label>
-                <textarea class="form-control form-control-sm border border-dark rounded-2" id="reviewText" name="review" placeholder="Rəyinizi yazın..." rows="3" required></textarea>
+              <div class="review-field">
+                <label for="reviewText" class="review-modal-label">Rəy <span class="text-danger">*</span></label>
+                <textarea class="form-control review-textarea" id="reviewText" name="review" placeholder="Təcrübənizi qısaca paylaşın..." rows="4" required></textarea>
               </div>
-              <div class="mb-3">
-                <label for="reviewImage" class="form-label review-modal-label">Şəkil <span class="text-danger">*</span></label>
-                <input type="file" class="form-control form-control-sm border border-dark rounded-2" id="reviewImage" name="image" accept="image/*" required>
-                <small class="text-muted small">Loqo və ya təsdiq üçün.</small>
+              <div class="review-field">
+                <span class="review-modal-label d-block" id="reviewImageLabel">Şəkil <span class="text-danger">*</span></span>
+                <label class="review-file-upload" for="reviewImage">
+                  <span class="review-file-upload__icon" aria-hidden="true">
+                    <iconify-icon icon="lucide:image-plus"></iconify-icon>
+                  </span>
+                  <span class="review-file-upload__text">Şəkil yükləyin</span>
+                  <span class="review-file-upload__hint">Loqo və ya təsdiq üçün · PNG, JPG</span>
+                  <input type="file" class="visually-hidden" id="reviewImage" name="image" accept="image/*" required aria-labelledby="reviewImageLabel">
+                </label>
+                <span class="review-file-name" aria-live="polite"></span>
               </div>
-              <div class="d-flex gap-2 justify-content-end pt-1">
-                <button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal">Ləğv et</button>
-                <button type="submit" class="btn btn-sm">
-                  <span class="btn-text">Göndər</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
-                </button>
+              <div class="review-modal-actions">
+                <button type="button" class="btn btn-outline-dark review-modal-btn-cancel" data-bs-dismiss="modal">Ləğv et</button>
+                <button type="submit" class="btn btn-dark review-modal-btn-submit">Göndər</button>
               </div>
             </form>
           </div>

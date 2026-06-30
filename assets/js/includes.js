@@ -84,7 +84,10 @@
     return fetch(resolveIncludePath(name))
       .then(function (res) {
         if (!res.ok) throw new Error('Include not found: ' + name);
-        return res.text();
+        return res.arrayBuffer();
+      })
+      .then(function (buffer) {
+        return new TextDecoder('utf-8').decode(buffer);
       })
       .then(function (html) {
         if (name === 'contact-form') {

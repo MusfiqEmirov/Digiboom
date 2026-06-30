@@ -6,10 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DigiBoom — Xidmət Ətraflı</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/libs/owl.carousel/dist/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="../assets/css/fonts.css" />
   <link rel="stylesheet" href="../assets/libs/aos-master/dist/aos.css">
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="../assets/css/digiboom-additions.css" />
@@ -17,18 +14,10 @@
 
 <body data-active-page="services">
 
-  <!-- Header -->
   <header class="header position-fixed start-0 top-0 w-100">
     <div class="container">
       <div class="header-wrapper d-flex align-items-center justify-content-between">
-        <div class="logo">
-          <a href="index.html" class="logo-white">
-            <img src="../assets/images/logos/digi-boom-logo.png" alt="logo" class="img-fluid">
-          </a>
-          <a href="index.html" class="logo-dark">
-            <img src="../assets/images/logos/digi-boom-logo.png" alt="logo" class="img-fluid">
-          </a>
-        </div>
+        <div data-include="logo"></div>
         <div class="d-flex align-items-center gap-4">
           <div data-include="navbar"></div>
           <div data-include="sidebar"></div>
@@ -36,17 +25,16 @@
       </div>
     </div>
   </header>
-<!--  Page Wrapper -->
+
   <div class="page-wrapper overflow-hidden">
 
-    <!--  Banner Section -->
     <section class="banner-section banner-inner-section position-relative overflow-hidden d-flex align-items-end"
       style="background-image: url(../assets/images/services/services-img-3.jpg);">
       <div class="container">
         <div class="d-flex flex-column gap-4 pb-5 pb-xl-10 position-relative z-1">
           <div class="row align-items-center">
-            <div class="col-xl-4">
-              <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+            <div class="col-xl-5">
+              <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="80" data-aos-duration="900">
                 <img src="../assets/images/svgs/primary-leaf.svg" alt="" class="img-fluid animate-spin">
                 <p class="mb-0 text-white fs-5 text-opacity-70">Hər xidmət üçün <span class="text-primary">xüsusi həll</span> — brendinizi irəli aparırıq.</p>
               </div>
@@ -56,107 +44,180 @@
       </div>
     </section>
 
-    <!--  Service Detail Section -->
-    <section class="project-detail project-detail-section">
-      <div class="container">
-        <div class="project-detail-inner">
-          <a href="services.html" class="btn btn-back py-2 ps-3 pe-4 align-self-start" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+    <section class="service-detail-section">
+      <div class="service-detail__mesh" aria-hidden="true"></div>
+      <div class="container position-relative">
+        <div class="service-detail-inner">
+
+          <a href="services.html" class="btn btn-back py-2 ps-3 pe-4 align-self-start" data-aos="fade-up" data-aos-delay="60" data-aos-duration="900">
             <span class="btn-text pe-1">Geri</span>
             <iconify-icon icon="lucide:arrow-up-right"
               class="btn-icon bg-white text-dark round-36 rounded-circle hstack justify-content-center fs-5 shadow-sm"></iconify-icon>
           </a>
 
-          <!-- Xidmət adı -->
-          <h2 class="project-detail-name" data-aos="fade-up" data-aos-delay="150" data-aos-duration="1000">Rəqəmsal marketinq xidməti</h2>
-
-          <!-- Xidmət haqqında description -->
-          <div class="project-detail-description" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-            <p class="project-detail-description__text">
-              Bu xidmətimiz brendinizin rəqəmsal aləmdə güclü bir mövqe tutmasına kömək edir. SEO optimallaşdırması,
-              sosial media idarəçiliyi, ödənişli reklam kampaniyaları və məzmun marketinqi — hamısı vahid bir strategiya
-              çərçivəsində həyata keçirilir. Müştərilərin ehtiyaclarına uyğun fərdi yanaşma ilə real nəticələr əldə edirsiniz.
-            </p>
-          </div>
-
-          <!-- Xidmət ehtiva etdikləri -->
-          <div class="project-detail-services" data-aos="fade-up" data-aos-delay="220" data-aos-duration="1000">
-            <h3 class="project-detail-services__title">Xidmətə daxildir</h3>
-            <div class="project-detail-services__list">
-              <span class="project-detail-service-tag">SEO optimallaşdırması</span>
-              <span class="project-detail-service-tag">Sosial media idarəçiliyi</span>
-              <span class="project-detail-service-tag">Ödənişli reklamlar</span>
-              <span class="project-detail-service-tag">Məzmun marketinqi</span>
-              <span class="project-detail-service-tag">Analitika hesabatı</span>
-              <span class="project-detail-service-tag">E-mail marketinq</span>
+          <!-- 1. Ad + Video — split hero -->
+          <header class="service-detail-hero" data-aos="fade-up" data-aos-delay="100" data-aos-duration="900">
+            <div class="service-detail-hero__copy">
+              <span class="service-detail-hero__eyebrow">
+                <iconify-icon icon="lucide:sparkles" aria-hidden="true"></iconify-icon>
+                Xidmət
+              </span>
+              <h1 class="service-detail-hero__title" id="serviceDetailName">Rəqəmsal marketinq xidməti</h1>
+              <p class="service-detail-hero__lead">
+                Brendinizin rəqəmsal ekosistemdə görünürlüyünü artırmaq, hədəf auditoriyaya çatmaq və ölçülə bilən nəticələr əldə etmək üçün tam dövriyyə marketinq həlli.
+              </p>
+              <ul class="service-detail-hero__tags list-unstyled mb-0">
+                <li><iconify-icon icon="lucide:search" aria-hidden="true"></iconify-icon> SEO</li>
+                <li><iconify-icon icon="lucide:share-2" aria-hidden="true"></iconify-icon> Sosial media</li>
+                <li><iconify-icon icon="lucide:megaphone" aria-hidden="true"></iconify-icon> Reklam</li>
+              </ul>
             </div>
-          </div>
 
-          <!-- Nümunə nəticələr -->
-          <div class="row g-4 my-2" data-aos="fade-up" data-aos-delay="240" data-aos-duration="1000">
-            <div class="col-md-4">
-              <div class="p-4 rounded-3 bg-light-gray text-center">
-                <h3 class="text-primary mb-1 fw-bold">+240%</h3>
-                <p class="mb-0 small">Orqanik trafik artımı</p>
+            <div class="service-detail-hero__media">
+              <div class="service-detail-video" id="serviceVideoPlayer">
+                <div class="service-detail-video__ratio ratio ratio-16x9">
+                  <video
+                    class="service-detail-video__el"
+                    id="serviceDetailVideo"
+                    src="../assets/images/backgrounds/banner-video.mp4"
+                    poster="../assets/images/services/services-img-3.jpg"
+                    loop
+                    playsinline
+                    preload="metadata"
+                  ></video>
+                  <button type="button" class="service-detail-video__play" id="serviceVideoPlay" aria-label="Xidmət videosunu oynat">
+                    <span class="service-detail-video__pulse" aria-hidden="true"></span>
+                    <span class="service-detail-video__pulse service-detail-video__pulse--delay" aria-hidden="true"></span>
+                    <span class="service-detail-video__play-btn">
+                      <iconify-icon icon="lucide:play" aria-hidden="true"></iconify-icon>
+                    </span>
+                  </button>
+                </div>
+                <span class="service-detail-video__badge" aria-hidden="true">
+                  <iconify-icon icon="lucide:film"></iconify-icon>
+                  Tanıtım videosu
+                </span>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="p-4 rounded-3 bg-light-gray text-center">
-                <h3 class="text-primary mb-1 fw-bold">3.2×</h3>
-                <p class="mb-0 small">ROAS (reklam gəliri)</p>
+          </header>
+
+          <!-- 2. CKEditor mətn + checklist -->
+          <div class="service-detail-content" data-aos="fade-up" data-aos-delay="160" data-aos-duration="900">
+            <div class="service-detail-content__panel">
+              <div class="service-detail-editor service-digiboom-editor" id="serviceDetailContent">
+                <p class="service-detail-editor__lead">
+                  Bu xidmətimiz brendinizin rəqəmsal aləmdə güclü bir mövqe tutmasına kömək edir. SEO optimallaşdırması,
+                  sosial media idarəçiliyi, ödənişli reklam kampaniyaları və məzmun marketinqi — hamısı vahid bir strategiya
+                  çərçivəsində həyata keçirilir.
+                </p>
+                <p>
+                  Hər layihəyə başlamazdan əvvəl bazar araşdırması, rəqib analizi və mövcud rəqəmsal aktivlərin
+                  auditini aparırıq. Bu mərhələdə brend tonu, kanal prioritetləri və KPI-lar birgə müəyyənləşdirilir.
+                  Daha sonra fərdi marketinq planı hazırlanır və hər kanal üçün aydın məzmun təqvimi qurulur.
+                </p>
+                <p>
+                  Kampaniyaların gedişatı real vaxtda izlənilir, aylıq hesabatlar təqdim olunur və nəticələrə əsasən
+                  strategiya çevik şəkildə optimallaşdırılır. Məqsəd sadəcə trafik yaratmaq deyil — keyfiyyətli
+                  lead, satış və brend tanınması artımı təmin etməkdir.
+                </p>
+
+                <h3>Xidmətə daxildir</h3>
+                <ul class="service-detail-checklist">
+                  <li>SEO audit və açar söz strategiyası</li>
+                  <li>Sosial media məzmun planı və idarəçilik</li>
+                  <li>Meta, Google və digər ödənişli reklam kampaniyaları</li>
+                  <li>Blog, video və vizual məzmun istehsalı</li>
+                  <li>E-mail marketinq və avtomatlaşdırma</li>
+                  <li>Aylıq analitika hesabatı və KPI izləmə</li>
+                </ul>
+
+                <p>
+                  Komandamız hər müştəriyə fərdi menecer təyin edir — strategiyadan icraya qədər bütün proseslərdə
+                  birbaşa əlaqədə qalırsınız. İstənilən mərhələdə əlavə kanallar və ya xüsusi kampaniyalar
+                  inteqrasiya oluna bilər.
+                </p>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="p-4 rounded-3 bg-light-gray text-center">
-                <h3 class="text-primary mb-1 fw-bold">50+</h3>
-                <p class="mb-0 small">Uğurlu layihə</p>
+
+            <aside class="service-detail-aside" aria-label="Xidmət üstünlükləri">
+              <div class="service-detail-aside__card">
+                <span class="service-detail-aside__label">Niyə bu xidmət?</span>
+                <ul class="service-detail-aside__list list-unstyled mb-0">
+                  <li>
+                    <span class="service-detail-aside__icon"><iconify-icon icon="lucide:trending-up"></iconify-icon></span>
+                    <span>Ölçülə bilən trafik və konversiya artımı</span>
+                  </li>
+                  <li>
+                    <span class="service-detail-aside__icon"><iconify-icon icon="lucide:users"></iconify-icon></span>
+                    <span>Təcrübəli marketinq komandası</span>
+                  </li>
+                  <li>
+                    <span class="service-detail-aside__icon"><iconify-icon icon="lucide:bar-chart-3"></iconify-icon></span>
+                    <span>Şəffaf hesabat və real vaxt izləmə</span>
+                  </li>
+                  <li>
+                    <span class="service-detail-aside__icon"><iconify-icon icon="lucide:layers"></iconify-icon></span>
+                    <span>Çevik paket və kanal inteqrasiyası</span>
+                  </li>
+                </ul>
+                <a href="contact.html" class="service-detail-aside__cta">
+                  Pulsuz məsləhət al
+                  <iconify-icon icon="lucide:arrow-right" aria-hidden="true"></iconify-icon>
+                </a>
               </div>
-            </div>
+            </aside>
           </div>
 
-          <div class="project-detail-video-wrapper" data-aos="fade-up" data-aos-delay="260" data-aos-duration="1000">
-            <div class="project-detail-video ratio ratio-16x9 rounded-3 overflow-hidden position-relative">
-              <video
-                class="project-detail-video-el"
-                src="../assets/images/backgrounds/banner-video.mp4"
-                poster="../assets/images/services/services-img-3.jpg"
-                controls
-                loop
-                playsinline
-                muted
-                preload="metadata"
-              ></video>
-            </div>
-          </div>
+        </div>
+      </div>
 
-          <div class="project-detail-gallery position-relative" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
-            <button type="button" class="project-gallery-arrow project-gallery-arrow--prev" aria-label="Əvvəlki" title="Əvvəlki">
-              <iconify-icon icon="lucide:chevron-left" class="fs-4"></iconify-icon>
+      <!-- 3. Bento qalereya -->
+      <div class="service-detail-gallery" data-aos="fade-up" data-aos-delay="200" data-aos-duration="900">
+        <div class="container">
+          <div class="service-detail-gallery__head">
+            <span class="service-detail-gallery__eyebrow">Vizual nümunələr</span>
+            <h2 class="service-detail-gallery__title">İş prosesindən kadrlar</h2>
+            <p class="service-detail-gallery__desc">Kampaniya, məzmun və nəticələrdən seçilmiş anlar — şəkillərə klikləyərək böyüdə bilərsiniz.</p>
+          </div>
+        </div>
+
+        <div class="container container--gallery">
+          <div class="service-detail-bento" id="serviceGallery">
+            <button type="button" class="service-detail-bento__item service-detail-bento__item--tall" data-gallery-index="0" aria-label="Şəkil 1 — böyüt">
+              <img src="../assets/images/services/services-img-1.jpg" alt="Marketinq kampaniyası" loading="lazy">
+              <span class="service-detail-bento__zoom" aria-hidden="true"><iconify-icon icon="lucide:zoom-in"></iconify-icon></span>
             </button>
-            <div class="project-gallery-viewport rounded-3 overflow-hidden">
-              <div class="project-gallery-track">
-                <div class="project-gallery-item">
-                  <img src="../assets/images/services/services-img-1.jpg" class="project-gallery-img" alt="Xidmət 1" data-img-src="../assets/images/services/services-img-1.jpg">
-                </div>
-                <div class="project-gallery-item">
-                  <img src="../assets/images/services/services-img-2.jpg" class="project-gallery-img" alt="Xidmət 2" data-img-src="../assets/images/services/services-img-2.jpg">
-                </div>
-                <div class="project-gallery-item">
-                  <img src="../assets/images/services/services-img-3.jpg" class="project-gallery-img" alt="Xidmət 3" data-img-src="../assets/images/services/services-img-3.jpg">
-                </div>
-                <div class="project-gallery-item">
-                  <img src="../assets/images/services/services-img-4.jpg" class="project-gallery-img" alt="Xidmət 4" data-img-src="../assets/images/services/services-img-4.jpg">
-                </div>
-              </div>
-            </div>
-            <button type="button" class="project-gallery-arrow project-gallery-arrow--next" aria-label="Növbəti" title="Növbəti">
-              <iconify-icon icon="lucide:chevron-right" class="fs-4"></iconify-icon>
+            <button type="button" class="service-detail-bento__item" data-gallery-index="1" aria-label="Şəkil 2 — böyüt">
+              <img src="../assets/images/services/services-img-2.jpg" alt="Sosial media məzmunu" loading="lazy">
+              <span class="service-detail-bento__zoom" aria-hidden="true"><iconify-icon icon="lucide:zoom-in"></iconify-icon></span>
+            </button>
+            <button type="button" class="service-detail-bento__item" data-gallery-index="2" aria-label="Şəkil 3 — böyüt">
+              <img src="../assets/images/services/services-img-3.jpg" alt="Reklam strategiyası" loading="lazy">
+              <span class="service-detail-bento__zoom" aria-hidden="true"><iconify-icon icon="lucide:zoom-in"></iconify-icon></span>
+            </button>
+            <button type="button" class="service-detail-bento__item service-detail-bento__item--wide" data-gallery-index="3" aria-label="Şəkil 4 — böyüt">
+              <img src="../assets/images/services/services-img-4.jpg" alt="Analitika hesabatı" loading="lazy">
+              <span class="service-detail-bento__zoom" aria-hidden="true"><iconify-icon icon="lucide:zoom-in"></iconify-icon></span>
+            </button>
+            <button type="button" class="service-detail-bento__item" data-gallery-index="4" aria-label="Şəkil 5 — böyüt">
+              <img src="../assets/images/services/services-img-1.jpg" alt="Məzmun istehsalı" loading="lazy">
+              <span class="service-detail-bento__zoom" aria-hidden="true"><iconify-icon icon="lucide:zoom-in"></iconify-icon></span>
+            </button>
+            <button type="button" class="service-detail-bento__item" data-gallery-index="5" aria-label="Şəkil 6 — böyüt">
+              <img src="../assets/images/services/services-img-2.jpg" alt="Komanda işi" loading="lazy">
+              <span class="service-detail-bento__zoom" aria-hidden="true"><iconify-icon icon="lucide:zoom-in"></iconify-icon></span>
             </button>
           </div>
+        </div>
+      </div>
 
-          <!-- CTA Müraciət bloku -->
-          <div class="mt-8 p-6 rounded-4 bg-dark text-white text-center" data-aos="fade-up" data-aos-delay="320" data-aos-duration="1000">
-            <h3 class="mb-2">Bu xidmətə marağınız var?</h3>
-            <p class="text-white text-opacity-70 mb-4">Bizimlə əlaqə saxlayın — pulsuz məsləhət alın.</p>
+      <div class="container">
+        <div class="service-detail-cta" data-aos="fade-up" data-aos-delay="220" data-aos-duration="900">
+          <div class="service-detail-cta__inner">
+            <div class="service-detail-cta__copy">
+              <h3>Bu xidmətə marağınız var?</h3>
+              <p>Bizimlə əlaqə saxlayın — pulsuz məsləhət və fərdi təklif alın.</p>
+            </div>
             <a href="contact.html" class="btn">
               <span class="btn-text">Əlaqə saxla</span>
               <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
@@ -164,27 +225,36 @@
           </div>
         </div>
       </div>
+
     </section>
 
-    <!-- Şəkil açılan modal -->
-    <div class="modal fade" id="projectImageModal" tabindex="-1" aria-labelledby="projectImageModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content border-0 bg-transparent">
-          <div class="modal-header border-0 position-absolute top-0 end-0 z-2 p-3">
-            <button type="button" class="btn-close btn-close-white bg-dark bg-opacity-50 rounded-circle p-3" data-bs-dismiss="modal" aria-label="Bağla"></button>
-          </div>
-          <div class="modal-body p-0 text-center">
-            <img id="projectModalImage" src="" alt="" class="img-fluid rounded">
-          </div>
+  </div>
+
+  <div class="modal fade service-gallery-modal" id="serviceImageModal" tabindex="-1" aria-labelledby="serviceImageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content border-0 bg-transparent">
+        <div class="modal-header border-0 position-absolute top-0 end-0 z-3 p-3 w-100 justify-content-between">
+          <span class="service-gallery-modal__counter text-white" id="serviceGalleryCounter" aria-live="polite">1 / 6</span>
+          <button type="button" class="service-gallery-modal__close" data-bs-dismiss="modal" aria-label="Bağla">
+            <iconify-icon icon="lucide:x" aria-hidden="true"></iconify-icon>
+          </button>
+        </div>
+        <div class="modal-body p-0 position-relative">
+          <button type="button" class="service-gallery-modal__nav service-gallery-modal__nav--prev" id="serviceGalleryPrev" aria-label="Əvvəlki şəkil">
+            <iconify-icon icon="lucide:chevron-left"></iconify-icon>
+          </button>
+          <img id="serviceModalImage" src="" alt="" class="service-gallery-modal__img">
+          <button type="button" class="service-gallery-modal__nav service-gallery-modal__nav--next" id="serviceGalleryNext" aria-label="Növbəti şəkil">
+            <iconify-icon icon="lucide:chevron-right"></iconify-icon>
+          </button>
         </div>
       </div>
     </div>
-
   </div>
 
   <div data-include="footer"></div>
 
-<aside class="floating-widgets" aria-label="Sürətli əlaqə">
+  <aside class="floating-widgets" aria-label="Sürətli əlaqə">
     <a href="tel:+994501234567" class="floating-widget-btn floating-widget-btn--call" aria-label="Zəng et"><iconify-icon icon="lucide:phone"></iconify-icon></a>
     <a href="https://wa.me/994501234567" target="_blank" rel="noopener" class="floating-widget-btn floating-widget-btn--whatsapp" aria-label="WhatsApp"><iconify-icon icon="mdi:whatsapp"></iconify-icon></a>
     <button type="button" class="floating-widget-btn floating-widget-btn--top" id="scrollToTopBtn" aria-label="Başa qayıt"><iconify-icon icon="lucide:arrow-up"></iconify-icon></button>
@@ -192,43 +262,13 @@
 
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/libs/owl.carousel/dist/owl.carousel.min.js"></script>
   <script src="../assets/libs/aos-master/dist/aos.js"></script>
   <script src="../assets/js/custom.js"></script>
   <script src="../assets/js/includes.js" defer></script>
   <script src="../assets/js/i18n.js"></script>
   <script src="../assets/js/digiboom.js"></script>
-  <!-- solar icons -->
+  <script src="../assets/js/services-detail.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
-  <script>
-    (function () {
-      var modalEl = document.getElementById('projectImageModal');
-      var modalImg = document.getElementById('projectModalImage');
-      var track = document.querySelector('.project-gallery-track');
-      var prevBtn = document.querySelector('.project-gallery-arrow--prev');
-      var nextBtn = document.querySelector('.project-gallery-arrow--next');
-      var currentIndex = 0;
-      var totalPages = 2;
-
-      document.querySelectorAll('.project-gallery-img').forEach(function (el) {
-        el.addEventListener('click', function () {
-          var src = this.getAttribute('data-img-src') || this.src;
-          modalImg.src = src;
-          modalImg.alt = this.alt || 'Şəkil';
-          new bootstrap.Modal(modalEl).show();
-        });
-      });
-
-      if (track && prevBtn && nextBtn) {
-        function goTo(index) {
-          currentIndex = Math.max(0, Math.min(index, totalPages - 1));
-          track.style.transform = 'translateX(-' + (currentIndex * 50) + '%)';
-        }
-        prevBtn.addEventListener('click', function () { goTo(currentIndex - 1); });
-        nextBtn.addEventListener('click', function () { goTo(currentIndex + 1); });
-      }
-    })();
-  </script>
 </body>
 
 </html>
