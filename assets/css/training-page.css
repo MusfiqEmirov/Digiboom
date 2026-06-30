@@ -77,6 +77,8 @@ body[data-active-page="training"] .training-page {
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: -0.03em;
+  color: #ffffff;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
 }
 .training-hero__lead {
   margin: 0 0 1.75rem;
@@ -856,11 +858,12 @@ body[data-active-page="training"] .page-wrapper:not(.training-page) {
   margin: 0;
   font-size: 1.25rem;
   font-weight: 700;
+  color: #ffffff;
 }
 .training-detail__cta p {
   margin: 0;
   font-size: 0.92rem;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--tp-on-dark-muted);
   max-width: 42ch;
 }
 .training-curriculum__preview-modal .modal-content {
