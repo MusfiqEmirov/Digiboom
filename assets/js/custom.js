@@ -10,123 +10,232 @@ $(function () {
     });
 
 
-    // Featured Owl Carousel
-    var $featuredProjectsCarousel = $('.featured-projects-slider .owl-carousel');
-    if ($featuredProjectsCarousel.length) {
-        $featuredProjectsCarousel.owlCarousel({
-            center: true,
-            loop: true,
-            margin: 30,
-            nav: false,
-            dots: false,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            autoplayHoverPause: true,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 2
-                },
-                1000: {
-                    items: 3
-                },
-                1200: {
-                    items: 4
+    // İnteraktiv marquee
+    function initInteractiveMarquee(config) {
+        var trackEl = document.querySelector(config.track);
+        if (!trackEl) return;
+        var viewportEl = trackEl.closest(config.viewport);
+        if (!viewportEl) return;
+
+        var flow      = config.flow || 'left';
+        var speed     = config.speed || 0.45;
+        var loopWidth = 0;
+        var offset    = 0;
+        var paused    = false;
+        var visible   = true;
+        var dragging  = false;
+        var dragStartX = 0;
+        var dragStartOffset = 0;
+        var dragMoved = false;
+        var animating = false;
+        var animRaf   = null;
+
+        // Klonla: sonsuz loop üçün 1 əlavə nüsxə
+        var origChildren = Array.from(trackEl.children);
+        origChildren.forEach(function (child) {
+            trackEl.appendChild(child.cloneNode(true));
+        });
+        trackEl.style.animation = 'none';
+
+        function easeOutQuart(t) {
+            return 1 - Math.pow(1 - t, 4);
+        }
+
+        function normalize(v) {
+            if (loopWidth <= 0) return v;
+            return ((v % loopWidth) + loopWidth) % loopWidth;
+        }
+
+        // transform həmişə normalize edilmiş dəyərlə — animasiya bitişindəki sıçrayış yoxdur
+        function setTransform(raw) {
+            var x = loopWidth > 0 ? normalize(raw) : raw;
+            trackEl.style.transform = 'translate3d(' + (-x) + 'px,0,0)';
+        }
+
+        function measure() {
+            loopWidth = trackEl.scrollWidth / 2;
+            // sağ axış: ikinci kopyanın ortasından başla
+            if (flow === 'right' && offset === 0) {
+                offset = loopWidth * 0.5;
+            }
+            offset = normalize(offset);
+            setTransform(offset);
+        }
+
+        function getItemWidth() {
+            var first = trackEl.firstElementChild;
+            if (!first) return 320;
+            var style = getComputedStyle(trackEl);
+            var gap = parseFloat(style.columnGap || style.gap || 0) || 0;
+            return first.offsetWidth + gap;
+        }
+
+        function getStep() {
+            return getItemWidth() * (config.stepCards || 1);
+        }
+
+        function getAnimDuration() {
+            var n = config.stepCards || 1;
+            return Math.min(300 + n * 180, 900);
+        }
+
+        function animateNudge(delta) {
+            if (animating || loopWidth <= 0) return;
+            if (animRaf) cancelAnimationFrame(animRaf);
+            animating = true;
+
+            // Normalize başlanğıc nöqtəsini
+            var start = normalize(offset);
+            var end   = start + delta;
+
+            // Animasiya boyunca hər iki tərəf eyni "kopya"da qalsın — wrap baş verməsin
+            // Əgər end bütöv dövrü keçirsə, start-ı uyğunlaşdırırıq
+            if (end >= loopWidth)  start = start - loopWidth;
+            if (end < 0)           start = start + loopWidth;
+            end = start + delta;
+
+            var duration = getAnimDuration();
+            var t0 = null;
+
+            function frame(now) {
+                if (!t0) t0 = now;
+                var p = Math.min((now - t0) / duration, 1);
+                var cur = start + (end - start) * easeOutQuart(p);
+                setTransform(cur);
+                if (p < 1) {
+                    animRaf = requestAnimationFrame(frame);
+                } else {
+                    offset = normalize(end);
+                    setTransform(offset);
+                    animating = false;
                 }
             }
+            animRaf = requestAnimationFrame(frame);
+        }
+
+        function tick() {
+            if (visible && !paused && !dragging && !animating && loopWidth > 0) {
+                offset += flow === 'right' ? -speed : speed;
+                offset = normalize(offset);
+                setTransform(offset);
+            }
+            requestAnimationFrame(tick);
+        }
+
+        // IntersectionObserver: görünmədikdə CPU-nu boş yükləmirik
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                visible = entries[0].isIntersecting;
+            }, { threshold: 0 });
+            io.observe(viewportEl);
+        }
+
+        measure();
+        tick();
+
+        window.addEventListener('resize', function () {
+            clearTimeout(config._resizeT);
+            config._resizeT = setTimeout(measure, 200);
         });
-        $(window).on('resize', function () {
-            clearTimeout(window._featuredProjectsResizeT);
-            window._featuredProjectsResizeT = setTimeout(function () {
-                if ($featuredProjectsCarousel.data('owl.carousel')) {
-                    $featuredProjectsCarousel.trigger('refresh.owl.carousel');
-                }
-            }, 200);
+
+        // Ox düymələri
+        if (config.prev) {
+            document.querySelectorAll(config.prev).forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    animateNudge(flow === 'right' ? getStep() : -getStep());
+                });
+            });
+        }
+        if (config.next) {
+            document.querySelectorAll(config.next).forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    animateNudge(flow === 'right' ? -getStep() : getStep());
+                });
+            });
+        }
+
+        // Hover — dur
+        viewportEl.addEventListener('mouseenter', function () { paused = true; });
+        viewportEl.addEventListener('mouseleave', function () {
+            paused = false;
+            if (dragging) {
+                dragging = false;
+                viewportEl.classList.remove('is-dragging');
+            }
         });
+
+        // Mouse drag
+        viewportEl.addEventListener('mousedown', function (e) {
+            if (e.button !== 0) return;
+            e.preventDefault();
+            dragging   = true;
+            dragMoved  = false;
+            dragStartX = e.clientX;
+            dragStartOffset = normalize(offset);
+            viewportEl.classList.add('is-dragging');
+        });
+        window.addEventListener('mousemove', function (e) {
+            if (!dragging) return;
+            var delta = e.clientX - dragStartX;
+            if (Math.abs(delta) > 4) dragMoved = true;
+            offset = normalize(dragStartOffset - delta);
+            setTransform(offset);
+        });
+        window.addEventListener('mouseup', function () {
+            if (!dragging) return;
+            dragging = false;
+            viewportEl.classList.remove('is-dragging');
+        });
+
+        // Touch drag (passive: true → scroll-u bloklamır)
+        viewportEl.addEventListener('touchstart', function (e) {
+            if (!e.touches.length) return;
+            dragging   = true;
+            dragMoved  = false;
+            dragStartX = e.touches[0].clientX;
+            dragStartOffset = normalize(offset);
+        }, { passive: true });
+        viewportEl.addEventListener('touchmove', function (e) {
+            if (!dragging || !e.touches.length) return;
+            var delta = e.touches[0].clientX - dragStartX;
+            if (Math.abs(delta) > 4) dragMoved = true;
+            offset = normalize(dragStartOffset - delta);
+            setTransform(offset);
+        }, { passive: true });
+        viewportEl.addEventListener('touchend',    function () { dragging = false; });
+        viewportEl.addEventListener('touchcancel', function () { dragging = false; });
+
+        // Drag zamanı linklərə kliku bloklayırıq
+        trackEl.addEventListener('click', function (e) {
+            if (dragMoved) {
+                e.preventDefault();
+                e.stopPropagation();
+                dragMoved = false;
+            }
+        }, true);
     }
-    $('.featured-projects-carousel-wrap').on('mouseenter', function () {
-        $(this).find('.owl-carousel').trigger('stop.owl.autoplay');
-    }).on('mouseleave', function () {
-        $(this).find('.owl-carousel').trigger('play.owl.autoplay');
-    });
-    // Gördüyümüz işlər – mobil/tablet sol/sağ ox (ana səhifə, haqqımızda)
-    $('.featured-projects-nav-prev').on('click', function () {
-        $(this).closest('.featured-projects-carousel-wrap').find('.owl-carousel').trigger('prev.owl.carousel', [350]);
-    });
-    $('.featured-projects-nav-next').on('click', function () {
-        $(this).closest('.featured-projects-carousel-wrap').find('.owl-carousel').trigger('next.owl.carousel', [350]);
+
+    initInteractiveMarquee({
+        id: 'featured',
+        track: '.featured-projects-marquee__track',
+        viewport: '.featured-projects-marquee',
+        flow: 'right',
+        speed: 0.45,
+        stepCards: 1,
+        prev: '.featured-projects-nav-prev',
+        next: '.featured-projects-nav-next'
     });
 
-    // Ana səhifə – Xidmətlər carousel: mobil/tablet (<992) 1 kart/sətir, ox+autoplay 1-1; desktop (≥992) 3 kart, 3-3
-    // Qeyd: Owl-un next() 1 addım atır; desktop üçün carousel.to(relative ± step) istifadə olunur.
-    var $servicesSlider = $('.services-slider');
-    if ($servicesSlider.length) {
-        function servicesIsDesktop() {
-            return $(window).width() >= 992;
-        }
-        function servicesGoRelative(deltaPages) {
-            var carousel = $servicesSlider.data('owl.carousel');
-            if (!carousel) return;
-            if (servicesIsDesktop()) {
-                var step = 3 * deltaPages;
-                var rel = carousel.relative(carousel.current());
-                carousel.to(rel + step, 550);
-            } else {
-                $servicesSlider.trigger(deltaPages > 0 ? 'next.owl.carousel' : 'prev.owl.carousel', [400]);
-            }
-        }
-        $servicesSlider.owlCarousel({
-            loop: true,
-            margin: 16,
-            nav: false,
-            dots: true,
-            slideBy: 'page',
-            autoplay: false,
-            smartSpeed: 450,
-            checkVisibility: false,
-            responsive: {
-                0: { items: 1, margin: 14 },
-                992: { items: 3, margin: 24 }
-            }
-        });
-        $('.services-nav-prev').on('click', function () {
-            servicesGoRelative(-1);
-        });
-        $('.services-nav-next').on('click', function () {
-            servicesGoRelative(1);
-        });
-        var servicesAutoplayTimer = null;
-        function startServicesAutoplay() {
-            stopServicesAutoplay();
-            servicesAutoplayTimer = setInterval(function () {
-                try {
-                    servicesGoRelative(1);
-                } catch (err) {
-                    /* eslint no-console: off */
-                    if (window.console && console.warn) console.warn('services autoplay', err);
-                }
-            }, 3000);
-        }
-        function stopServicesAutoplay() {
-            if (servicesAutoplayTimer) {
-                clearInterval(servicesAutoplayTimer);
-                servicesAutoplayTimer = null;
-            }
-        }
-        startServicesAutoplay();
-        $('.services-carousel-shell').on('mouseenter', stopServicesAutoplay).on('mouseleave', startServicesAutoplay);
-        $(window).on('resize', function () {
-            clearTimeout(window._servicesResizeT);
-            window._servicesResizeT = setTimeout(function () {
-                if ($servicesSlider.data('owl.carousel')) {
-                    stopServicesAutoplay();
-                    startServicesAutoplay();
-                }
-            }, 250);
-        });
-    }
+    initInteractiveMarquee({
+        id: 'services',
+        track: '.services-marquee__track',
+        viewport: '.services-marquee',
+        flow: 'left',
+        speed: 0.45,
+        stepCards: 4,
+        prev: '.services-nav-prev',
+        next: '.services-nav-next'
+    });
 
     // Testimonial: desktop 1,2,3 → 4,5,6 → 7,8,9 (icon 3-3), mobil 1-1
     var $testimonialSlider = $('.testimonial-slider');
@@ -249,8 +358,40 @@ $(function () {
 		once: true,
 	});
 
-	// Rəy bildir modal – form göndərildikdə səhifə yenilənmir, modal bağlanır (backend əlavə edəndə burada göndərmə yazılır)
-	$('#reviewForm').on('submit', function (e) {
+	// Rəy bildir modal – xidmət çipləri və fayl adı
+	var $reviewForm = $('#reviewForm');
+	var $reviewModal = $('#reviewModal');
+
+	function syncReviewServiceChip($chip) {
+		$chip.closest('.review-service-grid').find('.review-service-chip').removeClass('is-selected');
+		$chip.addClass('is-selected');
+	}
+
+	$reviewForm.on('change', '.review-service-chip input[type="radio"]', function () {
+		syncReviewServiceChip($(this).closest('.review-service-chip'));
+	});
+
+	$reviewForm.on('change', '#reviewImage', function () {
+		var file = this.files && this.files[0];
+		var $name = $reviewForm.find('.review-file-name');
+		var $upload = $reviewForm.find('.review-file-upload');
+		if (file) {
+			$name.text(file.name);
+			$upload.addClass('has-file');
+		} else {
+			$name.text('');
+			$upload.removeClass('has-file');
+		}
+	});
+
+	$reviewModal.on('hidden.bs.modal', function () {
+		$reviewForm[0].reset();
+		$reviewForm.find('.review-service-chip').removeClass('is-selected');
+		$reviewForm.find('.review-file-upload').removeClass('has-file');
+		$reviewForm.find('.review-file-name').text('');
+	});
+
+	$reviewForm.on('submit', function (e) {
 		e.preventDefault();
 		var modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
 		if (modal) modal.hide();
