@@ -11,21 +11,9 @@
   <link rel="stylesheet" href="../assets/libs/aos-master/dist/aos.css">
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="../assets/css/digiboom-additions.css" />
-  <script>
-    document.documentElement.classList.add('is-splash-loading');
-  </script>
 </head>
 
 <body data-active-page="index">
-
-  <!-- Load Screen -->
-  <div id="siteSplash" class="site-splash" role="status" aria-live="polite" aria-label="Yüklənir" aria-hidden="false">
-    <div class="site-splash__inner">
-      <img src="../assets/images/logos/digi-boom-logo.png" alt="DigiBoom" class="site-splash__logo">
-      <div class="site-splash__loader" aria-hidden="true"></div>
-    </div>
-  </div>
-  <script src="../assets/js/splash.js"></script>
 
   <!-- Header -->
   <header class="header position-fixed start-0 top-0 w-100">
@@ -76,13 +64,27 @@
               <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100"
                 data-aos-duration="1000">
                 <img src="../assets/images/svgs/primary-leaf.svg" alt="" class="img-fluid animate-spin">
-                <p class="mb-0 text-white fs-5 text-opacity-70">Ana mətn</p>
-                  
+                <p class="mb-0 text-white fs-6 text-opacity-80 hero-banner-tagline">Ana mətn</p>
+                <div class="hero-banner-bomb" id="heroBannerBomb" aria-hidden="true">
+                  <div class="hero-banner-bomb__inner">
+                    <div class="hero-banner-bomb__count-track" aria-live="polite">
+                      <span class="hero-banner-bomb__num">3</span>
+                    </div>
+                    <div class="hero-banner-bomb__bomb-wrap">
+                      <span class="hero-banner-bomb__bomb">
+                        <span class="hero-banner-bomb__fuse">
+                          <span class="hero-banner-bomb__fuse-line"></span>
+                          <span class="hero-banner-bomb__fuse-fire"></span>
+                        </span>
+                        <span class="hero-banner-bomb__body"></span>
+                      </span>
+                      <div class="hero-banner-bomb__burst" aria-hidden="true"></div>
+                      <div class="hero-banner-bomb__sparks" aria-hidden="true"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="d-flex align-items-end gap-3" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-            <h1 class="mb-0 fs-16 text-white lh-1">Əsas başlıq</h1>
           </div>
         </div>
       </div>
@@ -1310,6 +1312,7 @@
   <script src="../assets/libs/owl.carousel/dist/owl.carousel.min.js"></script>
   <script src="../assets/libs/aos-master/dist/aos.js"></script>
   <script src="../assets/js/custom.js"></script>
+  <script src="../assets/js/banner-bomb.js"></script>
   <script src="../assets/js/includes.js" defer></script>
   <script src="../assets/js/i18n.js"></script>
   <script src="../assets/js/digiboom.js"></script>
