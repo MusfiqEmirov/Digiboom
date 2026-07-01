@@ -21,8 +21,8 @@ body[data-active-page="training"] .training-page {
   inset: 0;
   opacity: 0.35;
   background-image:
-    linear-gradient(rgba(193, 255, 114, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(193, 255, 114, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(237, 79, 36, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(237, 79, 36, 0.06) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
 }
@@ -37,7 +37,7 @@ body[data-active-page="training"] .training-page {
   height: 420px;
   top: -120px;
   right: -80px;
-  background: rgba(193, 255, 114, 0.18);
+  background: rgba(237, 79, 36, 0.18);
 }
 .training-hero__glow--2 {
   width: 280px;
@@ -64,8 +64,8 @@ body[data-active-page="training"] .training-page {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.9);
-  background: rgba(193, 255, 114, 0.12);
-  border: 1px solid rgba(193, 255, 114, 0.28);
+  background: rgba(237, 79, 36, 0.12);
+  border: 1px solid rgba(237, 79, 36, 0.28);
 }
 .training-hero__eyebrow iconify-icon {
   font-size: 1rem;
@@ -230,7 +230,7 @@ body[data-active-page="training"] .training-page {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #3d5a28;
-  background: rgba(193, 255, 114, 0.25);
+  background: rgba(237, 79, 36, 0.25);
 }
 .training-spotlight__title {
   margin: 0;
@@ -368,12 +368,12 @@ body[data-active-page="training"] .training-page {
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 .training-filters__chip:hover {
-  background: rgba(193, 255, 114, 0.12);
+  background: rgba(237, 79, 36, 0.12);
   color: #1f2a2e;
 }
 .training-filters__chip.is-active {
-  background: rgba(193, 255, 114, 0.22);
-  border-color: rgba(193, 255, 114, 0.45);
+  background: rgba(237, 79, 36, 0.22);
+  border-color: rgba(237, 79, 36, 0.45);
   color: #1f2a2e;
 }
 .training-filters__note {
@@ -416,7 +416,7 @@ body[data-active-page="training"] .training-page {
 }
 .training-course:hover {
   transform: translateY(-3px);
-  border-color: rgba(193, 255, 114, 0.4);
+  border-color: rgba(237, 79, 36, 0.4);
   box-shadow: 0 14px 36px rgba(31, 42, 46, 0.1);
 }
 .training-course.is-hidden {
@@ -559,7 +559,7 @@ body[data-active-page="training"] .training-page {
 }
 .training-course__btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(193, 255, 114, 0.45);
+  box-shadow: 0 6px 16px rgba(237, 79, 36, 0.45);
   color: #1f2a2e;
 }
 
@@ -588,8 +588,8 @@ body[data-active-page="training"] .training-page {
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 .training-pagination__btn:hover:not(:disabled) {
-  border-color: rgba(193, 255, 114, 0.55);
-  background: rgba(193, 255, 114, 0.15);
+  border-color: rgba(237, 79, 36, 0.55);
+  background: rgba(237, 79, 36, 0.15);
 }
 .training-pagination__btn.is-active {
   background: var(--bs-primary, #c1ff72);
@@ -733,8 +733,8 @@ body[data-active-page="training"] .page-wrapper:not(.training-page) {
   font-size: 0.82rem;
   font-weight: 600;
   color: #3d5a28;
-  background: rgba(193, 255, 114, 0.2);
-  border: 1px solid rgba(193, 255, 114, 0.35);
+  background: rgba(237, 79, 36, 0.2);
+  border: 1px solid rgba(237, 79, 36, 0.35);
 }
 .training-detail__meta-item iconify-icon {
   font-size: 1rem;
@@ -768,7 +768,7 @@ body[data-active-page="training"] .page-wrapper:not(.training-page) {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .training-curriculum__item:hover {
-  border-color: rgba(193, 255, 114, 0.35);
+  border-color: rgba(237, 79, 36, 0.35);
   box-shadow: 0 8px 24px rgba(31, 42, 46, 0.08);
 }
 .training-curriculum__thumb {
