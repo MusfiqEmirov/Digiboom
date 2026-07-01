@@ -39,7 +39,7 @@ body[data-active-page="contact"] .page-wrapper {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #1f2a2e;
-  background: rgba(193, 255, 114, 0.92);
+  background: rgba(237, 79, 36, 0.92);
 }
 .cp-banner__title {
   margin: 0;
@@ -144,13 +144,13 @@ body[data-active-page="contact"] .page-wrapper {
 }
 .cp-channel:hover {
   transform: translateY(-3px);
-  border-color: rgba(193, 255, 114, 0.45);
+  border-color: rgba(237, 79, 36, 0.45);
   box-shadow: 0 14px 32px rgba(31, 42, 46, 0.1);
   color: #1f2a2e;
 }
 .cp-channel:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(193, 255, 114, 0.35), 0 8px 24px rgba(31, 42, 46, 0.08);
+  box-shadow: 0 0 0 3px rgba(237, 79, 36, 0.35), 0 8px 24px rgba(31, 42, 46, 0.08);
 }
 .cp-channel__icon {
   display: inline-flex;
@@ -263,14 +263,14 @@ body[data-active-page="contact"] .page-wrapper {
     transform 0.2s ease;
 }
 .cp-social__link:hover {
-  background: rgba(193, 255, 114, 0.14);
-  border-color: rgba(193, 255, 114, 0.4);
+  background: rgba(237, 79, 36, 0.14);
+  border-color: rgba(237, 79, 36, 0.4);
   transform: translateX(2px);
   color: #1f2a2e;
 }
 .cp-social__link:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(193, 255, 114, 0.3);
+  box-shadow: 0 0 0 3px rgba(237, 79, 36, 0.3);
 }
 .cp-social__icon {
   display: inline-flex;
