@@ -71,6 +71,35 @@
     }
   }
 
+  function bindDesktopLangHover() {
+    if (!window.bootstrap || !window.bootstrap.Dropdown) return;
+
+    document.querySelectorAll('.lang-switcher-host--desktop .lang-switcher').forEach(function (switcher) {
+      if (switcher.dataset.hoverBound === '1') return;
+
+      var toggle = switcher.querySelector('.lang-switcher__toggle');
+      if (!toggle) return;
+
+      switcher.dataset.hoverBound = '1';
+      var instance = window.bootstrap.Dropdown.getOrCreateInstance(toggle);
+      var closeTimer = null;
+
+      switcher.addEventListener('mouseenter', function () {
+        if (closeTimer) {
+          clearTimeout(closeTimer);
+          closeTimer = null;
+        }
+        instance.show();
+      });
+
+      switcher.addEventListener('mouseleave', function () {
+        closeTimer = setTimeout(function () {
+          instance.hide();
+        }, 120);
+      });
+    });
+  }
+
   function bindEvents() {
     if (eventsBound) return;
     eventsBound = true;
@@ -95,6 +124,7 @@
     setLang(lang);
     updateUI(lang);
     bindEvents();
+    bindDesktopLangHover();
     syncDropdownWidths();
     window.addEventListener('resize', syncDropdownWidths);
   }

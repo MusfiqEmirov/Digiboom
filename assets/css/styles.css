@@ -16499,6 +16499,16 @@ textarea.form-control-lg {
 .header.fixed-header .logo .logo-white {
   display: none;
 }
+.header.fixed-header .logo a {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 14px;
+  padding: 0.35rem 0.7rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+.header.fixed-header .logo a:hover {
+  background: #ffffff;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.16);
+}
 .header.fixed-header .light-dark {
   color: var(--bs-dark) !important;
 }
@@ -16548,26 +16558,26 @@ textarea.form-control-lg {
   opacity: 1;
 }
 .header.fixed-header .header-nav-desktop-link {
-  color: var(--bs-dark);
+  color: rgba(255, 255, 255, 0.9);
 }
 .header.fixed-header .header-nav-desktop-link .animate-spin {
-  filter: none;
+  filter: brightness(0) invert(1);
 }
 .header.fixed-header .header-nav-desktop-link:hover,
 .header.fixed-header .header-nav-desktop-link.active {
-  color: var(--bs-dark);
-}
-.header.fixed-header .header-nav-desktop-btns .btn-outline-light {
-  border-color: var(--bs-dark);
-  color: var(--bs-dark);
-}
-.header.fixed-header .header-nav-desktop-btns .btn-outline-light:hover {
-  background-color: var(--bs-dark);
   color: #fff;
 }
+.header.fixed-header .header-nav-desktop-btns .btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+}
+.header.fixed-header .header-nav-desktop-btns .btn-outline-light:hover {
+  background-color: #fff;
+  color: var(--bs-primary);
+}
 .header.fixed-header .lang-switcher-host--desktop .lang-switcher__toggle {
-  color: var(--bs-dark);
-  border-color: rgba(31, 42, 46, 0.45);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
 }
 .header .header-contact-btn {
   display: inline-flex;
@@ -16600,12 +16610,13 @@ textarea.form-control-lg {
   text-align: center;
 }
 .header.fixed-header .header-contact-btn {
-  background-color: var(--bs-dark);
+  background-color: var(--db-accent);
   color: #fff;
 }
 .header.fixed-header .header-contact-btn:hover,
 .header.fixed-header .header-contact-btn:focus {
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+  background-color: var(--db-accent-hover);
+  box-shadow: 0 8px 22px rgba(237, 79, 36, 0.35);
 }
 .header .header-nav-desktop-btns .btn {
   font-size: 0.95rem;

@@ -28,9 +28,10 @@
   function buildSparks() {
     if (!sparksEl) return;
     sparksEl.innerHTML = '';
-    for (var i = 0; i < 9; i++) {
+    for (var i = 0; i < 16; i++) {
       var spark = document.createElement('span');
       spark.className = 'hero-banner-bomb__spark';
+      spark.style.setProperty('--hero-bomb-spark-dist', (3.2 + (i % 4) * 0.45) + 'rem');
       sparksEl.appendChild(spark);
     }
   }
@@ -48,7 +49,7 @@
     if (burstEl) burstEl.classList.add('is-exploding');
     if (sparksEl) sparksEl.classList.add('is-exploding');
 
-    setTimeout(done, 780);
+    setTimeout(done, 980);
   }
 
   function finish() {

@@ -228,6 +228,24 @@
     if (type) statusEl.classList.add('contact-form-modern__status--' + type);
   }
 
+  var contactSuccessTimer = null;
+
+  function showContactSuccessAlert() {
+    var alertEl = document.getElementById('contactSuccessAlert');
+    if (!alertEl) return;
+    if (contactSuccessTimer) clearTimeout(contactSuccessTimer);
+    alertEl.hidden = false;
+    requestAnimationFrame(function () {
+      alertEl.classList.add('is-visible');
+    });
+    contactSuccessTimer = setTimeout(function () {
+      alertEl.classList.remove('is-visible');
+      setTimeout(function () {
+        alertEl.hidden = true;
+      }, 320);
+    }, 2800);
+  }
+
   function bindSmtpContactForms() {
     document.querySelectorAll('form[data-smtp-form]').forEach(function (form) {
       if (form.dataset.smtpBound === 'true') return;
@@ -266,8 +284,9 @@
             });
           })
           .then(function () {
-            showFormStatus(form, 'Mesajınız uğurla göndərildi. Tezliklə sizinlə əlaqə saxlayacağıq.', 'success');
+            showFormStatus(form, '', '');
             form.reset();
+            showContactSuccessAlert();
           })
           .catch(function (err) {
             showFormStatus(form, err.message || 'Xəta baş verdi. Birbaşa info@digiboom.az ünvanına yazın.', 'error');
