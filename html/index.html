@@ -684,7 +684,7 @@
                     <h2 class="mb-0">Sizdən gələn rəylər</h2>
                   </div>
                 </div>
-                <div class="col-xxl-4 mt-4 mt-xxl-0 d-flex justify-content-xxl-end">
+                <div class="col-xxl-4 mt-4 mt-xxl-0 d-none d-lg-flex justify-content-xxl-end">
                   <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#reviewModal" data-aos="fade-left" data-aos-delay="150" data-aos-duration="1000">
                     <span class="btn-text">Rəy bildir</span>
                     <iconify-icon icon="lucide:arrow-up-right"
@@ -846,6 +846,13 @@
             </button>
             <button type="button" class="testimonial-nav-btn testimonial-nav-next" aria-label="Növbəti">
               <iconify-icon icon="lucide:chevron-right" class="fs-4"></iconify-icon>
+            </button>
+          </div>
+          <div class="testimonial-review-cta d-lg-none">
+            <button type="button" class="btn testimonial-review-cta__btn" data-bs-toggle="modal" data-bs-target="#reviewModal">
+              <span class="btn-text">Rəy bildir</span>
+              <iconify-icon icon="lucide:arrow-up-right"
+                class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
             </button>
           </div>
         </div>
@@ -1159,19 +1166,16 @@
     <section id="get-in-touch" class="get-in-touch get-in-touch--home py-5 py-lg-8 py-xl-9">
       <div class="container">
         <div class="d-flex flex-column gap-5 gap-xl-7">
-          <div class="row gap-7 gap-xl-0">
-            <div class="col-xl-4 col-xxl-4">
-              <div class="home-section-badge" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
+          <div class="d-flex flex-column gap-3 gap-xl-4">
+            <div class="home-contact__header" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+              <div class="home-contact__header-left">
                 <span class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">07</span>
-                <hr class="border-line flex-grow-1 mb-0">
+                <hr class="border-line mb-0">
               </div>
+              <h2 class="home-contact__title mb-0">Müraciət et</h2>
+              <div class="home-contact__header-right" aria-hidden="true"></div>
             </div>
-            <div class="col-xl-8 col-xxl-7">
-              <div class="d-flex flex-column gap-3" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                <h2 class="home-contact__title mb-0">Müraciət et</h2>
-                <p class="home-contact__lead mb-0">Layihə, sual və ya əməkdaşlıq təklifiniz var? Qısa formu doldurun — komandamız tezliklə sizə qayıdacaq.</p>
-              </div>
-            </div>
+            <p class="home-contact__lead mb-0" data-aos="fade-up" data-aos-delay="120" data-aos-duration="1000">Layihə, sual və ya əməkdaşlıq təklifiniz var? Qısa formu doldurun — komandamız tezliklə sizə qayıdacaq.</p>
           </div>
 
           <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="120" data-aos-duration="1000">

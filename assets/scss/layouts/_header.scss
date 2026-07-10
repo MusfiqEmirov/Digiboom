@@ -240,17 +240,17 @@
     }
 
     &.fixed-header .mobile-nav-toggle {
-        border-color: rgba(31, 42, 46, 0.2);
-        background: rgba(31, 42, 46, 0.06);
+        border-color: rgba(255, 255, 255, 0.95);
+        background: #fff;
 
         .mobile-nav-toggle__bars span {
-            background-color: var(--bs-dark);
+            background-color: var(--db-primary, #37075B);
         }
 
         &:hover,
         &:focus-visible {
-            background: rgba(31, 42, 46, 0.1);
-            border-color: rgba(31, 42, 46, 0.35);
+            background: #fff;
+            border-color: #fff;
         }
     }
 
