@@ -36,7 +36,7 @@
             <div class="col-xl-5">
               <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
                 <img src="../assets/images/svgs/primary-leaf.svg" alt="" class="img-fluid animate-spin">
-                <p class="mb-0 text-white fs-5 text-opacity-70">Yaradıcılıq, <span class="text-primary">strategiya</span> və nəticələr — bizi fərqləndirən layihələr.</p>
+                <p class="mb-0 fs-5 page-banner-tagline">Layihənin həll yolu, hədəflər və əldə etdiyimiz konkret nəticələr.</p>
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@
       </div>
     </section>
 
-    <section class="project-detail project-detail-section project-detail--showcase">
+    <section class="project-detail project-detail-section project-detail--showcase project-detail-page">
       <div class="project-detail__atmosphere" aria-hidden="true"></div>
       <div class="container position-relative">
         <div class="project-detail-inner">
@@ -55,51 +55,55 @@
               class="btn-icon bg-white text-dark round-36 rounded-circle hstack justify-content-center fs-5 shadow-sm"></iconify-icon>
           </a>
 
-          <!-- 1. Ad -->
-          <header class="project-detail-hero project-detail-block" data-aos="fade-up" data-aos-delay="100" data-aos-duration="900">
-            <h1 class="project-detail-name" id="projectDetailName">Brend kimliyi, veb platforma və rəqəmsal marketinq strategiyası</h1>
-            <div class="project-detail-services">
-              <ul class="project-detail-tags list-unstyled mb-0">
-                <li class="project-detail-tags__item">
-                  <iconify-icon icon="lucide:palette" aria-hidden="true"></iconify-icon>
-                  <span>Brand identity</span>
-                </li>
-                <li class="project-detail-tags__item">
-                  <iconify-icon icon="lucide:code-2" aria-hidden="true"></iconify-icon>
-                  <span>Web development</span>
-                </li>
-                <li class="project-detail-tags__item">
-                  <iconify-icon icon="lucide:layout-template" aria-hidden="true"></iconify-icon>
-                  <span>UI/UX design</span>
-                </li>
-                <li class="project-detail-tags__item">
-                  <iconify-icon icon="lucide:pen-line" aria-hidden="true"></iconify-icon>
-                  <span>Content creation</span>
-                </li>
-              </ul>
-            </div>
-          </header>
+          <h1 class="project-detail-name project-detail-name--centered" id="projectDetailName" data-aos="fade-up" data-aos-delay="100" data-aos-duration="900">TemizXalı</h1>
 
-          <!-- 2. Video -->
-          <div class="project-detail-block project-detail-video-block" data-aos="fade-up" data-aos-delay="140" data-aos-duration="900">
-            <div class="project-detail-video-player" id="projectVideoPlayer">
-              <div class="project-detail-video-player__ratio ratio ratio-16x9">
-                <video
-                  class="project-detail-video-el"
-                  id="projectDetailVideo"
-                  src="../assets/images/backgrounds/banner-video.mp4"
-                  poster="../assets/images/portfolio/portfolio-img-1.jpg"
-                  loop
-                  playsinline
-                  preload="metadata"
-                ></video>
-                <button type="button" class="project-detail-video-play" id="projectVideoPlay" aria-label="Videonu oynat">
-                  <span class="project-detail-video-play__pulse" aria-hidden="true"></span>
-                  <span class="project-detail-video-play__pulse project-detail-video-play__pulse--delay" aria-hidden="true"></span>
-                  <span class="project-detail-video-play__btn">
-                    <iconify-icon icon="lucide:play" aria-hidden="true"></iconify-icon>
-                  </span>
-                </button>
+          <div class="project-detail-hero-grid project-detail-block" data-aos="fade-up" data-aos-delay="140" data-aos-duration="900">
+            <header class="project-detail-hero">
+              <p class="project-detail-hero__subtitle mb-0" id="projectDetailSubtitle">
+                Brend kimliyi, veb platforma və rəqəmsal marketinq strategiyası
+              </p>
+              <div class="project-detail-services">
+                <ul class="project-detail-tags list-unstyled mb-0">
+                  <li class="project-detail-tags__item">
+                    <iconify-icon icon="lucide:palette" aria-hidden="true"></iconify-icon>
+                    <span>Brand identity</span>
+                  </li>
+                  <li class="project-detail-tags__item">
+                    <iconify-icon icon="lucide:code-2" aria-hidden="true"></iconify-icon>
+                    <span>Web development</span>
+                  </li>
+                  <li class="project-detail-tags__item">
+                    <iconify-icon icon="lucide:layout-template" aria-hidden="true"></iconify-icon>
+                    <span>UI/UX design</span>
+                  </li>
+                  <li class="project-detail-tags__item">
+                    <iconify-icon icon="lucide:pen-line" aria-hidden="true"></iconify-icon>
+                    <span>Content creation</span>
+                  </li>
+                </ul>
+              </div>
+            </header>
+
+            <div class="project-detail-video-block">
+              <div class="project-detail-video-player" id="projectVideoPlayer">
+                <div class="project-detail-video-player__ratio ratio ratio-16x9">
+                  <video
+                    class="project-detail-video-el"
+                    id="projectDetailVideo"
+                    src="../assets/images/backgrounds/banner-video.mp4"
+                    poster="../assets/images/portfolio/portfolio-img-1.jpg"
+                    loop
+                    playsinline
+                    preload="metadata"
+                  ></video>
+                  <button type="button" class="project-detail-video-play" id="projectVideoPlay" aria-label="Videonu oynat">
+                    <span class="project-detail-video-play__pulse" aria-hidden="true"></span>
+                    <span class="project-detail-video-play__pulse project-detail-video-play__pulse--delay" aria-hidden="true"></span>
+                    <span class="project-detail-video-play__btn">
+                      <iconify-icon icon="lucide:play" aria-hidden="true"></iconify-icon>
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -145,22 +149,19 @@
         </div>
       </div>
 
-      <!-- 4. Qalereya — tam enlik, sinxron 2 karusel -->
+      <!-- 4. Qalereya — tam enlik, tək karusel -->
       <div class="project-detail-gallery-fullbleed project-detail-block" data-aos="fade-up" data-aos-delay="220" data-aos-duration="900">
         <div class="container">
           <div class="project-detail-gallery-block__head">
-            <span class="project-detail-gallery-block__eyebrow">Layihə kadrları</span>
             <h2 class="project-detail-gallery-block__title">Qalereya</h2>
-            <p class="project-detail-gallery-block__desc">Seçilmiş işlərimizdən vizual anlar — şəkillərə klikləyərək böyüdə bilərsiniz.</p>
           </div>
         </div>
-
         <div class="project-gallery-carousel" id="projectGallery">
-          <div class="project-gallery-carousel__row project-gallery-carousel__row--top">
-            <button type="button" class="project-gallery-carousel__nav project-gallery-carousel__nav--prev project-gallery-carousel__nav--top-prev" aria-label="Yuxarı karusel — əvvəlki">
+          <div class="project-gallery-carousel__row">
+            <button type="button" class="project-gallery-carousel__nav project-gallery-carousel__nav--prev" aria-label="Əvvəlki şəkil">
               <iconify-icon icon="lucide:chevron-left"></iconify-icon>
             </button>
-            <div class="project-gallery-marquee project-gallery-marquee--top">
+            <div class="project-gallery-marquee">
               <div class="project-gallery-marquee__track d-flex">
                 <button type="button" class="project-gallery-marquee__item" data-gallery-index="0" aria-label="Şəkil 1 — böyüt">
                   <img src="../assets/images/portfolio/portfolio-img-1.jpg" alt="Layihə — əsas görünüş" loading="lazy">
@@ -174,19 +175,6 @@
                 <button type="button" class="project-gallery-marquee__item" data-gallery-index="3" aria-label="Şəkil 4 — böyüt">
                   <img src="../assets/images/portfolio/portfolio-img-4.jpg" alt="Layihə — vizual konsept" loading="lazy">
                 </button>
-              </div>
-            </div>
-            <button type="button" class="project-gallery-carousel__nav project-gallery-carousel__nav--next project-gallery-carousel__nav--top-next" aria-label="Yuxarı karusel — növbəti">
-              <iconify-icon icon="lucide:chevron-right"></iconify-icon>
-            </button>
-          </div>
-
-          <div class="project-gallery-carousel__row project-gallery-carousel__row--bottom">
-            <button type="button" class="project-gallery-carousel__nav project-gallery-carousel__nav--prev project-gallery-carousel__nav--bottom-prev" aria-label="Aşağı karusel — əvvəlki">
-              <iconify-icon icon="lucide:chevron-left"></iconify-icon>
-            </button>
-            <div class="project-gallery-marquee project-gallery-marquee--bottom">
-              <div class="project-gallery-marquee__track d-flex">
                 <button type="button" class="project-gallery-marquee__item" data-gallery-index="4" aria-label="Şəkil 5 — böyüt">
                   <img src="../assets/images/portfolio/portfolio-img-5.jpg" alt="Layihə — detallar" loading="lazy">
                 </button>
@@ -201,7 +189,7 @@
                 </button>
               </div>
             </div>
-            <button type="button" class="project-gallery-carousel__nav project-gallery-carousel__nav--next project-gallery-carousel__nav--bottom-next" aria-label="Aşağı karusel — növbəti">
+            <button type="button" class="project-gallery-carousel__nav project-gallery-carousel__nav--next" aria-label="Növbəti şəkil">
               <iconify-icon icon="lucide:chevron-right"></iconify-icon>
             </button>
           </div>
@@ -249,6 +237,7 @@
   <script src="../assets/js/includes.js" defer></script>
   <script src="../assets/js/i18n.js"></script>
   <script src="../assets/js/digiboom.js"></script>
+  <script src="../assets/js/projects-data.js"></script>
   <script src="../assets/js/portfolio-detail.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>

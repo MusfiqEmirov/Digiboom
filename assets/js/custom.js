@@ -325,6 +325,39 @@ $(function () {
         };
     }
 
+    // Xidmətlər səhifəsi — paketlər karuseli (autoplay yox, yalnız ox düymələri)
+    var $pricingSlider = $('.pricing-section--services .pricing-slider');
+    if ($pricingSlider.length) {
+        var pricingItemCount = $pricingSlider.children('.item').length;
+        var usePricingCarousel = pricingItemCount > 3;
+
+        $pricingSlider.owlCarousel({
+            loop: usePricingCarousel,
+            margin: 24,
+            nav: false,
+            dots: false,
+            autoplay: false,
+            mouseDrag: usePricingCarousel,
+            touchDrag: usePricingCarousel,
+            pullDrag: usePricingCarousel,
+            responsive: {
+                0: { items: 1 },
+                768: { items: 2 },
+                1200: { items: 3 }
+            }
+        });
+
+        $('.pricing-nav-prev').on('click', function () {
+            $pricingSlider.trigger('prev.owl.carousel', [300]);
+        });
+        $('.pricing-nav-next').on('click', function () {
+            $pricingSlider.trigger('next.owl.carousel', [300]);
+        });
+
+        if (!usePricingCarousel) {
+            $('.pricing-section--services .pricing-nav-btn').addClass('d-none');
+        }
+    }
 
     // Stats count-up (ana səhifə & haqqımızda)
     function animateStatCount($el) {
@@ -390,8 +423,6 @@ $(function () {
 	});
 
 	// Rəy bildir modal – dropdown, ulduz, fayl və göndərmə
-	var $reviewForm = $('#reviewForm');
-	var $reviewModal = $('#reviewModal');
 	var reviewSuccessTimer = null;
 	var reviewDropdownCloseTimer = null;
 	var REVIEW_CATEGORY_LABELS = {
@@ -417,6 +448,12 @@ $(function () {
 				alertEl.hidden = true;
 			}, 320);
 		}, 2000);
+	}
+
+	function openReviewModal() {
+		var modalEl = document.getElementById('reviewModal');
+		if (!modalEl || !window.bootstrap || !window.bootstrap.Modal) return;
+		window.bootstrap.Modal.getOrCreateInstance(modalEl).show();
 	}
 
 	function resetReviewDropdown() {
@@ -476,91 +513,96 @@ $(function () {
 		});
 	}
 
-	var $reviewDropdown = $('#reviewCategoryDropdown');
-	if ($reviewDropdown.length) {
-		$reviewDropdown.on('mouseenter', function () {
-			openReviewDropdown();
-		});
-		$reviewDropdown.on('mouseleave', function () {
-			closeReviewDropdown();
-		});
-		$reviewDropdown.on('click', '.review-dropdown__toggle', function (e) {
-			e.preventDefault();
-			if ($reviewDropdown.hasClass('is-open')) {
-				closeReviewDropdown(0);
-			} else {
+	function initReviewModal() {
+		var $reviewForm = $('#reviewForm');
+		var $reviewModal = $('#reviewModal');
+		if (!$reviewForm.length || $reviewForm.data('review-bound')) return;
+		$reviewForm.data('review-bound', true);
+
+		var $reviewDropdown = $('#reviewCategoryDropdown');
+		if ($reviewDropdown.length) {
+			$reviewDropdown.on('mouseenter', function () {
 				openReviewDropdown();
+			});
+			$reviewDropdown.on('mouseleave', function () {
+				closeReviewDropdown();
+			});
+			$reviewDropdown.on('click', '.review-dropdown__toggle', function (e) {
+				e.preventDefault();
+				if ($reviewDropdown.hasClass('is-open')) {
+					closeReviewDropdown(0);
+				} else {
+					openReviewDropdown();
+				}
+			});
+			$reviewDropdown.on('click', '.review-dropdown__option', function (e) {
+				e.preventDefault();
+				selectReviewDropdownOption($(this));
+			});
+		}
+
+		$reviewForm.on('mouseenter', '.review-star', function () {
+			var index = $(this).index() + 1;
+			syncReviewStars($(this).closest('.review-stars'), index);
+		});
+		$reviewForm.on('mouseleave', '.review-stars', function () {
+			syncReviewStars($(this));
+		});
+		$reviewForm.on('change', '.review-star input', function () {
+			syncReviewStars($(this).closest('.review-stars'));
+		});
+
+		$reviewForm.on('change', '#reviewImage', function () {
+			var file = this.files && this.files[0];
+			var $name = $reviewForm.find('.review-file-name');
+			var $upload = $reviewForm.find('.review-file-upload');
+			if (file) {
+				$name.text(file.name);
+				$upload.addClass('has-file');
+			} else {
+				$name.text('');
+				$upload.removeClass('has-file');
 			}
 		});
-		$reviewDropdown.on('click', '.review-dropdown__option', function (e) {
+
+		$reviewModal.on('hidden.bs.modal', function () {
+			$reviewForm[0].reset();
+			resetReviewDropdown();
+			syncReviewStars($reviewForm.find('.review-stars'));
+			$reviewForm.find('.review-file-upload').removeClass('has-file');
+			$reviewForm.find('.review-file-name').text('');
+		});
+
+		$reviewForm.on('submit', function (e) {
 			e.preventDefault();
-			selectReviewDropdownOption($(this));
+			if (!$('#reviewCategory').val()) {
+				openReviewDropdown();
+				return;
+			}
+			var category = $('#reviewCategory').val();
+			var payload = {
+				company: $('#reviewCompany').val(),
+				category: category,
+				categoryLabel: REVIEW_CATEGORY_LABELS[category] || category,
+				rating: $reviewForm.find('input[name="rating"]:checked').val(),
+				text: $('#reviewText').val()
+			};
+			if (typeof window.addSubmittedTestimonial === 'function') {
+				window.addSubmittedTestimonial(payload);
+			}
+			var modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
+			if (modal) modal.hide();
+			showReviewSuccessAlert();
 		});
 	}
 
-	$reviewForm.on('mouseenter', '.review-star', function () {
-		var index = $(this).index() + 1;
-		syncReviewStars($(this).closest('.review-stars'), index);
-	});
-	$reviewForm.on('mouseleave', '.review-stars', function () {
-		syncReviewStars($(this));
-	});
-	$reviewForm.on('change', '.review-star input', function () {
-		syncReviewStars($(this).closest('.review-stars'));
-	});
+	initReviewModal();
+	document.addEventListener('digiboom:includes-ready', initReviewModal);
 
-	$reviewForm.on('change', '#reviewImage', function () {
-		var file = this.files && this.files[0];
-		var $name = $reviewForm.find('.review-file-name');
-		var $upload = $reviewForm.find('.review-file-upload');
-		if (file) {
-			$name.text(file.name);
-			$upload.addClass('has-file');
-		} else {
-			$name.text('');
-			$upload.removeClass('has-file');
-		}
-	});
-
-	$reviewModal.on('hidden.bs.modal', function () {
-		$reviewForm[0].reset();
-		resetReviewDropdown();
-		syncReviewStars($reviewForm.find('.review-stars'));
-		$reviewForm.find('.review-file-upload').removeClass('has-file');
-		$reviewForm.find('.review-file-name').text('');
-	});
-
-	$reviewForm.on('submit', function (e) {
+	$(document).on('click', '[data-open-review-modal]', function (e) {
 		e.preventDefault();
-		if (!$('#reviewCategory').val()) {
-			openReviewDropdown();
-			return;
-		}
-		var category = $('#reviewCategory').val();
-		var payload = {
-			company: $('#reviewCompany').val(),
-			category: category,
-			categoryLabel: REVIEW_CATEGORY_LABELS[category] || category,
-			rating: $reviewForm.find('input[name="rating"]:checked').val(),
-			text: $('#reviewText').val()
-		};
-		if (typeof window.addSubmittedTestimonial === 'function') {
-			window.addSubmittedTestimonial(payload);
-		}
-		var modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
-		if (modal) modal.hide();
-		showReviewSuccessAlert();
+		openReviewModal();
 	});
-
-	function openReviewModalFromHash() {
-		if (window.location.hash !== '#rey') return;
-		var modalEl = document.getElementById('reviewModal');
-		if (!modalEl || !window.bootstrap || !window.bootstrap.Modal) return;
-		window.bootstrap.Modal.getOrCreateInstance(modalEl).show();
-	}
-
-	openReviewModalFromHash();
-	window.addEventListener('hashchange', openReviewModalFromHash);
 
 });
 

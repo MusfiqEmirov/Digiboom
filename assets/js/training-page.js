@@ -43,11 +43,14 @@
 
         var prev = document.createElement('button');
         prev.type = 'button';
-        prev.className = 'training-pagination__btn';
+        prev.className = 'training-pagination__btn' + (currentPage === 1 ? ' is-disabled' : '');
         prev.textContent = '‹';
         prev.setAttribute('aria-label', 'Əvvəlki səhifə');
-        prev.disabled = currentPage === 1;
-        prev.addEventListener('click', function () { renderPage(currentPage - 1); });
+        prev.setAttribute('aria-disabled', currentPage === 1 ? 'true' : 'false');
+        prev.addEventListener('click', function () {
+          if (currentPage === 1) return;
+          renderPage(currentPage - 1);
+        });
         pagination.appendChild(prev);
 
         for (var i = 1; i <= totalPages; i++) {
@@ -65,11 +68,14 @@
 
         var next = document.createElement('button');
         next.type = 'button';
-        next.className = 'training-pagination__btn';
+        next.className = 'training-pagination__btn' + (currentPage === totalPages ? ' is-disabled' : '');
         next.textContent = '›';
         next.setAttribute('aria-label', 'Növbəti səhifə');
-        next.disabled = currentPage === totalPages;
-        next.addEventListener('click', function () { renderPage(currentPage + 1); });
+        next.setAttribute('aria-disabled', currentPage === totalPages ? 'true' : 'false');
+        next.addEventListener('click', function () {
+          if (currentPage === totalPages) return;
+          renderPage(currentPage + 1);
+        });
         pagination.appendChild(next);
       }
     }

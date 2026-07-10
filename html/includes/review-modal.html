@@ -1,0 +1,82 @@
+<!--  Rəy bildir modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered review-modal-dialog">
+    <div class="modal-content review-modal-content border-0 shadow-lg">
+      <div class="review-modal-accent" aria-hidden="true"></div>
+      <div class="modal-header review-modal-header border-0">
+        <div class="review-modal-header-text">
+          <span class="review-modal-eyebrow">Rəyiniz bizim üçün önəmlidir</span>
+          <h3 class="modal-title mb-0" id="reviewModalLabel">Rəy bildir</h3>
+        </div>
+        <button type="button" class="btn-close review-modal-close" data-bs-dismiss="modal" aria-label="Bağla"></button>
+      </div>
+      <div class="modal-body review-modal-body">
+        <form id="reviewForm" class="review-modal-form">
+          <div class="review-field">
+            <label for="reviewCompany" class="review-modal-label">Temsil olunan subyekt <span class="text-danger">*</span></label>
+            <div class="review-input-wrap">
+              <iconify-icon icon="lucide:building-2" class="review-input-icon" aria-hidden="true"></iconify-icon>
+              <input type="text" class="form-control review-input" id="reviewCompany" name="company" placeholder="Şirkət, təşkilat və ya fərdi subyekt" required>
+            </div>
+          </div>
+          <div class="review-field">
+            <span class="review-modal-label" id="reviewCategoryLabel">Bölmə <span class="text-danger">*</span></span>
+            <div class="review-dropdown" id="reviewCategoryDropdown">
+              <input type="hidden" id="reviewCategory" name="category" value="" required>
+              <button type="button" class="review-dropdown__toggle" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="reviewCategoryLabel">
+                <iconify-icon icon="lucide:layers" class="review-dropdown__lead-icon" aria-hidden="true"></iconify-icon>
+                <span class="review-dropdown__label">Bölmə seçin</span>
+                <iconify-icon icon="lucide:chevron-down" class="review-dropdown__chevron" aria-hidden="true"></iconify-icon>
+              </button>
+              <ul class="review-dropdown__menu" role="listbox" aria-labelledby="reviewCategoryLabel">
+                <li><button type="button" class="review-dropdown__option" role="option" data-value="paketler" data-icon="lucide:package"><iconify-icon icon="lucide:package" aria-hidden="true"></iconify-icon><span>Paketlər</span></button></li>
+                <li><button type="button" class="review-dropdown__option" role="option" data-value="telim" data-icon="lucide:graduation-cap"><iconify-icon icon="lucide:graduation-cap" aria-hidden="true"></iconify-icon><span>Təlim</span></button></li>
+                <li><button type="button" class="review-dropdown__option" role="option" data-value="elaqe" data-icon="lucide:phone"><iconify-icon icon="lucide:phone" aria-hidden="true"></iconify-icon><span>Əlaqə</span></button></li>
+                <li><button type="button" class="review-dropdown__option" role="option" data-value="qiymetler" data-icon="lucide:tags"><iconify-icon icon="lucide:tags" aria-hidden="true"></iconify-icon><span>Qiymətlər</span></button></li>
+                <li><button type="button" class="review-dropdown__option" role="option" data-value="layiheler" data-icon="lucide:briefcase"><iconify-icon icon="lucide:briefcase" aria-hidden="true"></iconify-icon><span>Layihələr</span></button></li>
+                <li><button type="button" class="review-dropdown__option" role="option" data-value="diger" data-icon="lucide:more-horizontal"><iconify-icon icon="lucide:more-horizontal" aria-hidden="true"></iconify-icon><span>Digər</span></button></li>
+              </ul>
+            </div>
+          </div>
+          <div class="review-field">
+            <span class="review-modal-label d-block" id="reviewRatingLabel">Reytinq <span class="text-danger">*</span></span>
+            <div class="review-stars" role="radiogroup" aria-labelledby="reviewRatingLabel">
+              <label class="review-star"><input type="radio" name="rating" value="1" required><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">1 ulduz</span></label>
+              <label class="review-star"><input type="radio" name="rating" value="2"><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">2 ulduz</span></label>
+              <label class="review-star"><input type="radio" name="rating" value="3"><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">3 ulduz</span></label>
+              <label class="review-star"><input type="radio" name="rating" value="4"><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">4 ulduz</span></label>
+              <label class="review-star"><input type="radio" name="rating" value="5"><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">5 ulduz</span></label>
+            </div>
+          </div>
+          <div class="review-field">
+            <label for="reviewText" class="review-modal-label">Rəy <span class="text-danger">*</span></label>
+            <textarea class="form-control review-textarea" id="reviewText" name="review" placeholder="Təcrübənizi qısaca paylaşın..." rows="4" required></textarea>
+          </div>
+          <div class="review-field">
+            <span class="review-modal-label d-block" id="reviewImageLabel">Şəkil <span class="text-danger">*</span></span>
+            <label class="review-file-upload" for="reviewImage">
+              <span class="review-file-upload__icon" aria-hidden="true">
+                <iconify-icon icon="lucide:image-plus"></iconify-icon>
+              </span>
+              <span class="review-file-upload__text">Şəkil yükləyin</span>
+              <span class="review-file-upload__hint">Loqo və ya təsdiq üçün · PNG, JPG</span>
+              <input type="file" class="visually-hidden" id="reviewImage" name="image" accept="image/*" required aria-labelledby="reviewImageLabel">
+            </label>
+            <span class="review-file-name" aria-live="polite"></span>
+          </div>
+          <div class="review-modal-actions">
+            <button type="button" class="btn btn-outline-dark review-modal-btn-cancel" data-bs-dismiss="modal">Ləğv et</button>
+            <button type="submit" class="btn btn-dark review-modal-btn-submit">Göndər</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="reviewSuccessAlert" class="review-success-alert" hidden aria-live="polite" role="status">
+  <div class="review-success-alert__inner">
+    <iconify-icon icon="lucide:circle-check" class="review-success-alert__icon" aria-hidden="true"></iconify-icon>
+    <span class="review-success-alert__text">Rəyiniz göndərildi, təşəkkür edirik!</span>
+  </div>
+</div>
