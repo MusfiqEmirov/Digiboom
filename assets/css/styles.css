@@ -17035,8 +17035,8 @@ textarea.form-control-lg {
 }
 @media (min-width: 992px) {
   .projects-page-grid.featured-projects--showcase {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.75rem;
   }
 }
 @media (min-width: 1200px) {
@@ -18312,28 +18312,18 @@ ul {
   border-top-color: #ff9800;
   background: linear-gradient(180deg, rgba(var(--pricing-accent-soft-rgb), 0.12) 0%, #18191b 50%, #111 100%);
 }
-/* Hover: yuxarı sağ künc – narıncı kök rəng */
+/* Hover: bir az böyüsün + yuxarıdan aşağı narıncı kölgə */
 .pricing-section .pricing-card:hover {
-  background:
-    radial-gradient(130% 100% at 100% 0%, rgba(var(--pricing-accent-rgb), 0.34) 0%, rgba(var(--pricing-accent-rgb), 0.11) 38%, transparent 62%),
-    #18191b;
-  border-color: rgba(var(--pricing-accent-rgb), 0.26);
-  box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(var(--pricing-accent-rgb), 0.12),
-    -6px -6px 36px rgba(var(--pricing-accent-rgb), 0.14);
-  transform: scale(1.008) translateY(-5px);
+  background: linear-gradient(180deg, rgba(255, 152, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%), #18191b;
+  border-top-color: #ff9800;
+  box-shadow: 0 12px 40px rgba(255, 152, 0, 0.18);
+  transform: scale(1.03);
 }
 .pricing-section .pricing-card--popular:hover {
-  background:
-    radial-gradient(130% 100% at 100% 0%, rgba(var(--pricing-accent-soft-rgb), 0.3) 0%, rgba(var(--pricing-accent-soft-rgb), 0.09) 38%, transparent 62%),
-    linear-gradient(180deg, rgba(var(--pricing-accent-soft-rgb), 0.14) 0%, #18191b 50%, #111 100%);
-  border-color: rgba(var(--pricing-accent-soft-rgb), 0.22);
-  box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(var(--pricing-accent-soft-rgb), 0.1),
-    -6px -6px 36px rgba(var(--pricing-accent-soft-rgb), 0.12);
-  transform: scale(1.008) translateY(-5px);
+  background: linear-gradient(180deg, rgba(255, 152, 0, 0.16) 0%, #18191b 50%, #111 100%);
+  border-top-color: #ff9800;
+  box-shadow: 0 12px 40px rgba(255, 152, 0, 0.22);
+  transform: scale(1.03);
 }
 
 /* Haqqımızda – əsas şəkil hündürlüyü kiçildilmiş */

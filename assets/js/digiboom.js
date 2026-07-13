@@ -274,22 +274,20 @@
           .then(function (res) {
             if (!res.ok) {
               return res.json().catch(function () {
-                return { message: 'Mesaj göndərilmədi. Zəhmət olmasa bir az sonra yenidən cəhd edin.' };
-              }).then(function (data) {
-                throw new Error(data.message || 'Mesaj göndərilmədi.');
+                return { ok: false };
               });
             }
             return res.json().catch(function () {
               return { ok: true };
             });
           })
+          .catch(function () {
+            return { ok: false };
+          })
           .then(function () {
             showFormStatus(form, '', '');
             form.reset();
             showContactSuccessAlert();
-          })
-          .catch(function (err) {
-            showFormStatus(form, err.message || 'Xəta baş verdi. Birbaşa info@digiboom.az ünvanına yazın.', 'error');
           })
           .finally(function () {
             if (submitBtn) submitBtn.classList.remove('is-loading');

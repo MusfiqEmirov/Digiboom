@@ -10,7 +10,10 @@
     avertatravel: { name: 'AvertaTravel' },
     ganaqro: { name: 'Ganaqro' },
     conco: { name: 'Conco' },
-    'zefer-kursu': { name: 'Zəfər Kursu' }
+    'zefer-kursu': { name: 'Zəfər Kursu' },
+    nordcasa: { name: 'NordCasa' },
+    medibloom: { name: 'MediBloom' },
+    azercargo: { name: 'AzerCargo' }
   };
 
   var ORDER = [
@@ -22,7 +25,10 @@
     'avertatravel',
     'ganaqro',
     'conco',
-    'zefer-kursu'
+    'zefer-kursu',
+    'nordcasa',
+    'medibloom',
+    'azercargo'
   ];
 
   function getProject(slug) {

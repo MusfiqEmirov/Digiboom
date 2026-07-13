@@ -57,32 +57,48 @@
       <button type="button" class="hero-banner-nav hero-banner-nav--next" aria-label="Növbəti slayd">
         <iconify-icon icon="lucide:chevron-right"></iconify-icon>
       </button>
+      <!-- DigiBoom countdown + explosion (hero center) -->
+      <div class="hero-banner-bomb" id="heroBannerBomb" aria-hidden="true">
+        <div class="hero-banner-bomb__veil"></div>
+        <div class="hero-banner-bomb__stage">
+          <div class="hero-banner-bomb__count-track" aria-live="polite">
+            <span class="hero-banner-bomb__num">3</span>
+          </div>
+          <div class="hero-banner-bomb__bomb-wrap">
+            <span class="hero-banner-bomb__bomb">
+              <span class="hero-banner-bomb__fuse">
+                <span class="hero-banner-bomb__fuse-line"></span>
+                <span class="hero-banner-bomb__fuse-fire"></span>
+                <span class="hero-banner-bomb__fuse-spark"></span>
+              </span>
+              <span class="hero-banner-bomb__cap"></span>
+              <span class="hero-banner-bomb__body">
+                <span class="hero-banner-bomb__shine"></span>
+                <span class="hero-banner-bomb__glint"></span>
+                <span class="hero-banner-bomb__band"></span>
+              </span>
+            </span>
+          </div>
+          <div class="hero-banner-bomb__fx" aria-hidden="true">
+            <span class="hero-banner-bomb__core"></span>
+            <span class="hero-banner-bomb__ring hero-banner-bomb__ring--1"></span>
+            <span class="hero-banner-bomb__ring hero-banner-bomb__ring--2"></span>
+            <span class="hero-banner-bomb__ring hero-banner-bomb__ring--3"></span>
+            <span class="hero-banner-bomb__smoke"></span>
+            <div class="hero-banner-bomb__sparks"></div>
+            <div class="hero-banner-bomb__debris"></div>
+          </div>
+          <div class="hero-banner-bomb__word" aria-hidden="true">BOOM</div>
+        </div>
+      </div>
+
       <div class="container">
         <div class="d-flex flex-column gap-4 pb-8 position-relative z-1">
           <div class="row align-items-center">
-            <div class="col-xl-4">
+            <div class="col-xl-5 col-lg-7">
               <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100"
                 data-aos-duration="1000">
-                <img src="../assets/images/svgs/primary-leaf.svg" alt="" class="img-fluid animate-spin">
                 <p class="mb-0 fs-6 hero-banner-tagline">Rəqəmsal həllər partneriniz — brendinizi böyüdürür, nəticə gətiririk.</p>
-                <div class="hero-banner-bomb" id="heroBannerBomb" aria-hidden="true">
-                  <div class="hero-banner-bomb__inner">
-                    <div class="hero-banner-bomb__count-track" aria-live="polite">
-                      <span class="hero-banner-bomb__num">3</span>
-                    </div>
-                    <div class="hero-banner-bomb__bomb-wrap">
-                      <span class="hero-banner-bomb__bomb">
-                        <span class="hero-banner-bomb__fuse">
-                          <span class="hero-banner-bomb__fuse-line"></span>
-                          <span class="hero-banner-bomb__fuse-fire"></span>
-                        </span>
-                        <span class="hero-banner-bomb__body"></span>
-                      </span>
-                      <div class="hero-banner-bomb__burst" aria-hidden="true"></div>
-                      <div class="hero-banner-bomb__sparks" aria-hidden="true"></div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -538,10 +554,7 @@
               <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
-                  <span class="service-card__index" aria-hidden="true">01</span>
-                  <span class="service-card__icon-wrap" aria-hidden="true">
-                    <iconify-icon icon="lucide:megaphone"></iconify-icon>
-                  </span>
+
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-1.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
@@ -557,10 +570,7 @@
               <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
-                  <span class="service-card__index" aria-hidden="true">02</span>
-                  <span class="service-card__icon-wrap" aria-hidden="true">
-                    <iconify-icon icon="lucide:messages-square"></iconify-icon>
-                  </span>
+
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-2.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
@@ -576,10 +586,7 @@
               <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
-                  <span class="service-card__index" aria-hidden="true">03</span>
-                  <span class="service-card__icon-wrap" aria-hidden="true">
-                    <iconify-icon icon="lucide:trending-up"></iconify-icon>
-                  </span>
+
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-3.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
@@ -595,10 +602,7 @@
               <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
-                  <span class="service-card__index" aria-hidden="true">04</span>
-                  <span class="service-card__icon-wrap" aria-hidden="true">
-                    <iconify-icon icon="lucide:settings-2"></iconify-icon>
-                  </span>
+
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-4.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
@@ -614,10 +618,7 @@
               <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
-                  <span class="service-card__index" aria-hidden="true">05</span>
-                  <span class="service-card__icon-wrap" aria-hidden="true">
-                    <iconify-icon icon="lucide:palette"></iconify-icon>
-                  </span>
+
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-1.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
@@ -633,10 +634,7 @@
               <div class="services-marquee__item" id="training">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
-                  <span class="service-card__index" aria-hidden="true">06</span>
-                  <span class="service-card__icon-wrap" aria-hidden="true">
-                    <iconify-icon icon="lucide:graduation-cap"></iconify-icon>
-                  </span>
+
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-2.jpg');"></span>
                   <span class="service-card__overlay"></span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
@@ -920,7 +918,7 @@
                         </li>
                       </ul>
                     </div>
-                    <a href="" class="btn pricing-card__cta w-100 justify-content-center">
+                    <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal>
                       <span class="btn-text">Sifariş et</span>
                       <iconify-icon icon="lucide:arrow-up-right"
                         class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
@@ -964,7 +962,7 @@
                         </li>
                       </ul>
                     </div>
-                    <a href="" class="btn pricing-card__cta w-100 justify-content-center">
+                    <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal>
                       <span class="btn-text">Sifariş et</span>
                       <iconify-icon icon="lucide:arrow-up-right"
                         class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
@@ -1012,7 +1010,7 @@
                         </li>
                       </ul>
                     </div>
-                    <a href="" class="btn pricing-card__cta w-100 justify-content-center">
+                    <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal>
                       <span class="btn-text">Sifariş et</span>
                       <iconify-icon icon="lucide:arrow-up-right"
                         class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
@@ -1059,7 +1057,7 @@
           </div>
           <div class="row justify-content-center"><div class="col-12 col-xxl-10"><div class="accordion accordion-flush faq-modern" id="accordionFlushExample" data-aos="fade-up" data-aos-delay="200"
                 data-aos-duration="1000">
-                <div class="accordion-item faq-modern__item">
+                <div class="accordion-item faq-modern__item" data-faq-type="nested">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -1068,16 +1066,45 @@
                   </h2>
                   <div id="flush-collapseOne" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Rəqəmsal marketinq</h3><p class="faq-modern__text">Sosial media idarəetməsi, reklam kampaniyaları, SEO və məzmun stratejiyası – brendinizi onlayn gücləndiririk.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Veb development</h3><p class="faq-modern__text">Müasir, sürətli və mobil uyğun saytlar, e-ticarət həlləri və xüsusi proqram təminatı hazırlayırıq.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Brending və dizayn</h3><p class="faq-modern__text">Loqo, vizual identitet, ünvanlıq və materiallar – brendinizi vahid və tanınan edirik.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Konsultasiya</h3><p class="faq-modern__text">Strategiya, rəqəmsal transformasiya və layihə idarəetməsi üzrə mütəxəssis məsləhətləri təqdim edirik.</p></article>
+                    <div class="accordion-body faq-modern__panel">
+                      <div class="accordion faq-modern__subaccordion" id="faq-sub-one">
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-one-1" aria-expanded="false" aria-controls="faq-sub-one-1">Rəqəmsal marketinq</button>
+                          </h3>
+                          <div id="faq-sub-one-1" class="accordion-collapse collapse" data-bs-parent="#faq-sub-one">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Sosial media idarəetməsi, reklam kampaniyaları, SEO və məzmun stratejiyası – brendinizi onlayn gücləndiririk.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-one-2" aria-expanded="false" aria-controls="faq-sub-one-2">Veb development</button>
+                          </h3>
+                          <div id="faq-sub-one-2" class="accordion-collapse collapse" data-bs-parent="#faq-sub-one">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Müasir, sürətli və mobil uyğun saytlar, e-ticarət həlləri və xüsusi proqram təminatı hazırlayırıq.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-one-3" aria-expanded="false" aria-controls="faq-sub-one-3">Brending və dizayn</button>
+                          </h3>
+                          <div id="faq-sub-one-3" class="accordion-collapse collapse" data-bs-parent="#faq-sub-one">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Loqo, vizual identitet, ünvanlıq və materiallar – brendinizi vahid və tanınan edirik.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-one-4" aria-expanded="false" aria-controls="faq-sub-one-4">Konsultasiya</button>
+                          </h3>
+                          <div id="faq-sub-one-4" class="accordion-collapse collapse" data-bs-parent="#faq-sub-one">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Strategiya, rəqəmsal transformasiya və layihə idarəetməsi üzrə mütəxəssis məsləhətləri təqdim edirik.</p></div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item faq-modern__item">
+                <div class="accordion-item faq-modern__item" data-faq-type="simple">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
@@ -1086,16 +1113,14 @@
                   </h2>
                   <div id="flush-collapseTwo" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Kiçik sayt (vizitka)</h3><p class="faq-modern__text">Təxminən 2–4 həftə: dizayn, məzmun və texniki quraşdırma daxildir.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Korporativ sayt</h3><p class="faq-modern__text">1–3 ay: səhifələr çoxluğu, inteqrasiyalar və test mərhələsi nəzərə alınır.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">E-ticarət platforması</h3><p class="faq-modern__text">2–4 ay: ödəniş, inventar, çatdırılma və təhlükəsizlik konfiqurasiyası ilə.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Brending layihəsi</h3><p class="faq-modern__text">3–8 həftə: araşdırma, konseptlər, son loqo və vizual tətbiqetmə.</p></article>
+                    <div class="accordion-body faq-modern__panel">
+                      <div class="faq-modern__direct">
+                        <p class="faq-modern__text mb-0">Müddət layihənin növündən asılıdır: vizitka sayt təxminən 2–4 həftə, korporativ sayt 1–3 ay, e-ticarət 2–4 ay, brending isə adətən 3–8 həftə çəkir. Dəqiq planı məzmun və inteqrasiyalara görə birlikdə müəyyənləşdiririk.</p>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item faq-modern__item">
+                <div class="accordion-item faq-modern__item" data-faq-type="nested">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
@@ -1104,16 +1129,45 @@
                   </h2>
                   <div id="flush-collapseThree" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Tam xüsusi dizayn</h3><p class="faq-modern__text">Sıfırdan, yalnız sizin brendiniz üçün unikal UI/UX və vizual stil hazırlanır.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Şablon əsaslı uyğunlaşdırma</h3><p class="faq-modern__text">Seçilmiş şablon rənglər, məzmun və bəzək elementləri ilə tam sizinə uyğunlaşdırılır.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Hibrid yanaşma</h3><p class="faq-modern__text">Bəzi səhifələr xüsusi, bəziləri şablondan – büdcə və sürətə görə seçim edirik.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Rəng və tipografiya seçimi</h3><p class="faq-modern__text">Brend qaydalarınıza uyğun palitra və fontlar bütün materiallarda tətbiq olunur.</p></article>
+                    <div class="accordion-body faq-modern__panel">
+                      <div class="accordion faq-modern__subaccordion" id="faq-sub-three">
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-three-1" aria-expanded="false" aria-controls="faq-sub-three-1">Tam xüsusi dizayn</button>
+                          </h3>
+                          <div id="faq-sub-three-1" class="accordion-collapse collapse" data-bs-parent="#faq-sub-three">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Sıfırdan, yalnız sizin brendiniz üçün unikal UI/UX və vizual stil hazırlanır.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-three-2" aria-expanded="false" aria-controls="faq-sub-three-2">Şablon əsaslı uyğunlaşdırma</button>
+                          </h3>
+                          <div id="faq-sub-three-2" class="accordion-collapse collapse" data-bs-parent="#faq-sub-three">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Seçilmiş şablon rənglər, məzmun və bəzək elementləri ilə tam sizinə uyğunlaşdırılır.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-three-3" aria-expanded="false" aria-controls="faq-sub-three-3">Hibrid yanaşma</button>
+                          </h3>
+                          <div id="faq-sub-three-3" class="accordion-collapse collapse" data-bs-parent="#faq-sub-three">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Bəzi səhifələr xüsusi, bəziləri şablondan – büdcə və sürətə görə seçim edirik.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-three-4" aria-expanded="false" aria-controls="faq-sub-three-4">Rəng və tipografiya seçimi</button>
+                          </h3>
+                          <div id="faq-sub-three-4" class="accordion-collapse collapse" data-bs-parent="#faq-sub-three">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Brend qaydalarınıza uyğun palitra və fontlar bütün materiallarda tətbiq olunur.</p></div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item faq-modern__item">
+                <div class="accordion-item faq-modern__item" data-faq-type="simple">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
@@ -1122,16 +1176,14 @@
                   </h2>
                   <div id="flush-collapseFour" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Başlanğıc paketlər</h3><p class="faq-modern__text">Vizitka sayt və sadə brending üçün sabit qiymətlər; qiymət təklifi ilə başlayırıq.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Orta və böyük layihələr</h3><p class="faq-modern__text">E-ticarət və korporativ saytlar üçün səhifə sayı, funksionallıq və inteqrasiyaya əsasən qiymət.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Aylıq dəstək paketləri</h3><p class="faq-modern__text">Yeniləmə, hostinq, texniki dəstək və kiçik dəyişikliklər üçün aylıq abunə variantları.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Rəqəmsal marketinq büdcəsi</h3><p class="faq-modern__text">Kampaniya məqsədlərinə görə reklam büdcəsi və xidmət haqları ayrıca müzakirə olunur.</p></article>
+                    <div class="accordion-body faq-modern__panel">
+                      <div class="faq-modern__direct">
+                        <p class="faq-modern__text mb-0">Qiymət layihənin həcmindən asılıdır. Başlanğıc paketlər üçün sabit təkliflərimiz var; orta və böyük layihələrdə səhifə sayı, funksionallıq və inteqrasiyalara əsasən fərdi qiymət hazırlanır. Ətraflı təklif üçün bizimlə əlaqə saxlayın.</p>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item border-bottom">
+                <div class="accordion-item faq-modern__item" data-faq-type="nested">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
@@ -1140,11 +1192,40 @@
                   </h2>
                   <div id="flush-collapseFive" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Texniki dəstək</h3><p class="faq-modern__text">Sayt və sistemlərdə xəta, yeniləmə və kiçik dəyişikliklər üçün reaksiya müddəti ilə dəstək.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Məzmun yeniləmələri</h3><p class="faq-modern__text">Mətn, şəkil və səhifə əlavəsi; CMS üzərindən və ya bizim tərəfimizdən edilə bilər.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Hostinq və SSL</h3><p class="faq-modern__text">Hostinq, domain və SSL sertifikatının saxlanması üçün aylıq/illik paket təklifləri.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Prioritet dəstək</h3><p class="faq-modern__text">Kritik məsələlər üçün qısa reaksiya müddəti və müntəzəm yoxlamalar daxil ola bilər.</p></article>
+                    <div class="accordion-body faq-modern__panel">
+                      <div class="accordion faq-modern__subaccordion" id="faq-sub-five">
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-five-1" aria-expanded="false" aria-controls="faq-sub-five-1">Texniki dəstək</button>
+                          </h3>
+                          <div id="faq-sub-five-1" class="accordion-collapse collapse" data-bs-parent="#faq-sub-five">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Sayt və sistemlərdə xəta, yeniləmə və kiçik dəyişikliklər üçün reaksiya müddəti ilə dəstək.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-five-2" aria-expanded="false" aria-controls="faq-sub-five-2">Məzmun yeniləmələri</button>
+                          </h3>
+                          <div id="faq-sub-five-2" class="accordion-collapse collapse" data-bs-parent="#faq-sub-five">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Mətn, şəkil və səhifə əlavəsi; CMS üzərindən və ya bizim tərəfimizdən edilə bilər.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-five-3" aria-expanded="false" aria-controls="faq-sub-five-3">Hostinq və SSL</button>
+                          </h3>
+                          <div id="faq-sub-five-3" class="accordion-collapse collapse" data-bs-parent="#faq-sub-five">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Hostinq, domain və SSL sertifikatının saxlanması üçün aylıq/illik paket təklifləri.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-five-4" aria-expanded="false" aria-controls="faq-sub-five-4">Prioritet dəstək</button>
+                          </h3>
+                          <div id="faq-sub-five-4" class="accordion-collapse collapse" data-bs-parent="#faq-sub-five">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Kritik məsələlər üçün qısa reaksiya müddəti və müntəzəm yoxlamalar daxil ola bilər.</p></div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
