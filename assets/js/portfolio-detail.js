@@ -1,13 +1,37 @@
 (function () {
   'use strict';
 
-  /* — Layihə adı (URL-dən) — */
+  /* — Layihə adı + xidmətlər (URL-dən; detail-də hamısı göstərilir) — */
   if (window.DigiBoomProjects) {
     var slug = DigiBoomProjects.getProjectSlugFromUrl();
     var project = DigiBoomProjects.getProject(slug);
     var nameEl = document.getElementById('projectDetailName');
     if (nameEl) nameEl.textContent = project.name;
     document.title = 'DigiBoom — ' + project.name;
+
+    var tagsList = document.querySelector('.project-detail-tags');
+    if (tagsList && project.services && project.services.length) {
+      tagsList.innerHTML = '';
+      project.services.forEach(function (serviceName) {
+        var href = window.DigiBoomServices
+          ? DigiBoomServices.serviceDetailUrl(serviceName)
+          : 'services-detail.html';
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.className = 'project-detail-tags__item';
+        a.href = href;
+        a.setAttribute('aria-label', serviceName + ' xidmətinin ətraflı səhifəsi');
+        var icon = document.createElement('iconify-icon');
+        icon.setAttribute('icon', DigiBoomProjects.getServiceIcon(serviceName));
+        icon.setAttribute('aria-hidden', 'true');
+        var span = document.createElement('span');
+        span.textContent = serviceName;
+        a.appendChild(icon);
+        a.appendChild(span);
+        li.appendChild(a);
+        tagsList.appendChild(li);
+      });
+    }
   }
 
   /* — Video oynatma — */

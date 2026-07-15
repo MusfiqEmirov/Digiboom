@@ -611,6 +611,18 @@ body[data-active-page="training"] .training-page {
   color: #1f2a2e;
   cursor: pointer !important;
 }
+.training-pagination__dots {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 2.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(31, 42, 46, 0.45);
+  user-select: none;
+}
 
 /* Alt CTA */
 .training-bottom-cta {
@@ -767,14 +779,45 @@ body[data-active-page="training"] .page-wrapper:not(.training-page) {
   width: 100%;
   max-width: 520px;
   margin-left: auto;
+  padding: 0;
+  background: transparent;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 12px 36px rgba(31, 42, 46, 0.12);
+  color: inherit;
+}
+.training-detail__hero-video::before {
+  display: none;
+}
+.training-detail__hero-video .about-promo-video__play {
+  z-index: 5;
+  pointer-events: auto;
+  cursor: pointer;
 }
 .training-detail__hero-video .about-promo-video__play-btn {
-  width: 3.25rem;
-  height: 3.25rem;
-  font-size: 1.15rem;
+  width: 3.75rem;
+  height: 3.75rem;
+  background: #ed4f24;
+  color: #ffffff;
+  box-shadow:
+    0 8px 24px rgba(237, 79, 36, 0.45),
+    0 0 0 4px rgba(237, 79, 36, 0.22);
+}
+.training-detail__hero-video .about-promo-video__play-btn iconify-icon {
+  font-size: 1.5rem;
+  margin-left: 3px;
+  color: #ffffff !important;
+}
+.training-detail__hero-video .about-promo-video__play:hover .about-promo-video__play-btn {
+  background: #d4431c;
+  box-shadow:
+    0 12px 32px rgba(237, 79, 36, 0.5),
+    0 0 0 6px rgba(237, 79, 36, 0.28);
+}
+.training-detail__hero-video .about-promo-video__play-pulse {
+  width: 3.75rem;
+  height: 3.75rem;
+  border-color: rgba(237, 79, 36, 0.6);
 }
 .training-curriculum__title {
   margin: 0 0 1rem;
@@ -907,6 +950,105 @@ body[data-active-page="training"] .page-wrapper:not(.training-page) {
   width: 100%;
   display: block;
   background: #000;
+}
+
+/* Sifariş modal */
+.training-order-modal .modal-content {
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(31, 42, 46, 0.18);
+}
+.training-order-modal .modal-header {
+  padding: 1.35rem 1.5rem 0;
+}
+.training-order-modal .modal-body {
+  padding: 1rem 1.5rem 1.5rem;
+}
+.training-order-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.training-order-form__field {
+  display: flex;
+  flex-direction: column;
+}
+.training-order-form__label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1f2a2e;
+}
+.training-order-form__input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: #1f2a2e;
+  background: #f7faf7;
+  border: 1px solid rgba(31, 42, 46, 0.1);
+  border-radius: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.training-order-form__input::placeholder {
+  color: rgba(31, 42, 46, 0.38);
+}
+.training-order-form__input:hover:not([readonly]) {
+  border-color: rgba(237, 79, 36, 0.45);
+}
+.training-order-form__input:focus {
+  outline: none;
+  border-color: #ed4f24;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(237, 79, 36, 0.15);
+}
+.training-order-form__input[readonly] {
+  background: rgba(31, 42, 46, 0.06);
+  color: rgba(31, 42, 46, 0.85);
+  cursor: default;
+  font-weight: 600;
+}
+.training-order-form__input.is-invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.12);
+}
+.training-order-form__hint {
+  margin: 0.35rem 0 0;
+  font-size: 0.78rem;
+  color: rgba(31, 42, 46, 0.55);
+}
+.training-order-form__error {
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #dc3545;
+}
+.training-order-form__status {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.training-order-form__status--ok {
+  background: rgba(237, 79, 36, 0.12);
+  color: #1f2a2e;
+  border: 1px solid rgba(237, 79, 36, 0.28);
+}
+.training-order-form__submit.btn {
+  margin-top: 0.35rem;
+  background: #ed4f24 !important;
+  border-color: #ed4f24 !important;
+}
+.training-order-form__submit.btn .btn-text {
+  color: #ffffff !important;
+}
+.training-order-form__submit.btn:hover,
+.training-order-form__submit.btn:focus-visible {
+  background: #d4431c !important;
+  border-color: #d4431c !important;
 }
 
 @media (max-width: 991.98px) {

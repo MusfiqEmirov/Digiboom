@@ -1,6 +1,17 @@
 (function () {
   'use strict';
 
+  /* — Xidmət adı (URL ?service= slug-dan) — */
+  if (window.DigiBoomServices) {
+    var serviceSlug = DigiBoomServices.getServiceSlugFromUrl();
+    var service = DigiBoomServices.getService(serviceSlug);
+    if (service) {
+      var nameEl = document.getElementById('serviceDetailName');
+      if (nameEl) nameEl.textContent = service.name;
+      document.title = 'DigiBoom — ' + service.name;
+    }
+  }
+
   /* — Video oynatma — */
   var player = document.getElementById('serviceVideoPlayer');
   var video = document.getElementById('serviceDetailVideo');

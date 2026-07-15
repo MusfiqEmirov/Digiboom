@@ -435,7 +435,7 @@
   <script>
     $(function () {
       var $grid = $('.blog-page-grid');
-      var $items = $grid.find('.blog-card');
+      var $originals = $grid.children('.blog-card');
       var $empty = $('.blog-filter-empty');
       var $ui = $('.blog-pagination-ui');
       var $links = $ui.find('.projects-pagination-links');
@@ -443,10 +443,33 @@
       var $next = $ui.find('.projects-pagination-next');
       var $tabs = $('.blog-category-tab');
       var perPage = 6;
+      var targetTotal = perPage * 12;
       var currentFilter = 'all';
       var currentPage = 1;
       var totalPages = 1;
-      var $visibleItems = $items;
+      var $items;
+      var $visibleItems;
+
+      while ($grid.children('.blog-card').length < targetTotal) {
+        $grid.append($originals.eq($grid.children('.blog-card').length % $originals.length).clone(false));
+      }
+
+      $items = $grid.find('.blog-card');
+      $visibleItems = $items;
+
+      $grid.on('click', '.blog-card', function (e) {
+        if ($(e.target).closest('a.blog-card__btn, a.blog-card__stretch').length) return;
+        var href = $(this).find('a.blog-card__btn').attr('href') || $(this).find('a.blog-card__stretch').attr('href');
+        if (href) window.location.href = href;
+      });
+      $grid.on('keydown', '.blog-card', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        if ($(e.target).closest('a').length) return;
+        e.preventDefault();
+        var href = $(this).find('a.blog-card__btn').attr('href') || $(this).find('a.blog-card__stretch').attr('href');
+        if (href) window.location.href = href;
+      });
+      $items.attr('tabindex', '0');
 
       function getFilteredItems() {
         if (currentFilter === 'all') return $items;
@@ -470,29 +493,60 @@
         }
       }
 
+      function getPageWindow(page) {
+        var windowSize = 3;
+        var start = page;
+
+        if (page > totalPages - windowSize) {
+          start = Math.max(1, page - windowSize + 1);
+        }
+
+        var end = Math.min(start + windowSize - 1, totalPages);
+
+        if (end - start + 1 < windowSize) {
+          start = Math.max(1, end - windowSize + 1);
+        }
+
+        return { start: start, end: end, size: windowSize };
+      }
+
       function renderPagination() {
         $links.empty();
         setNavDisabled($prev, currentPage <= 1);
         setNavDisabled($next, currentPage >= totalPages);
 
-        var i;
-        for (i = 1; i <= 6; i++) {
-          var cls = 'projects-pg-num';
-          if (i === currentPage && i <= totalPages) cls += ' projects-pg-num--current';
-          if (i > totalPages) {
-            cls += ' projects-pg-num--disabled';
-            $links.append('<span class="' + cls + '" aria-disabled="true">' + i + '</span>');
-          } else {
-            $links.append('<a href="#" class="' + cls + '" data-page="' + i + '">' + i + '</a>');
+        if (totalPages <= 1) return;
+
+        var win = getPageWindow(currentPage);
+        var start = win.start;
+        var end = win.end;
+        var p;
+
+        if (start > 1 && currentPage > win.size) {
+          var firstCls = 'projects-pg-num';
+          if (currentPage === 1) firstCls += ' projects-pg-num--current';
+          $links.append('<a href="#" class="' + firstCls + '" data-page="1">1</a>');
+          if (start > 2) {
+            $links.append('<span class="dots" aria-hidden="true">...</span>');
           }
         }
 
-        if (totalPages > 6) {
+        for (p = start; p <= end; p++) {
+          var cls = 'projects-pg-num';
+          if (p === currentPage) cls += ' projects-pg-num--current';
+          $links.append('<a href="#" class="' + cls + '" data-page="' + p + '">' + p + '</a>');
+        }
+
+        if (end < totalPages) {
           $links.append('<span class="dots" aria-hidden="true">...</span>');
           var lastCls = 'projects-pg-num';
           if (currentPage === totalPages) lastCls += ' projects-pg-num--current';
           $links.append('<a href="#" class="' + lastCls + '" data-page="' + totalPages + '">' + totalPages + '</a>');
         }
+      }
+
+      function scrollToGrid() {
+        $('html, body').animate({ scrollTop: $('.blog-section').offset().top - 120 }, 250);
       }
 
       function showPage(page) {
@@ -521,13 +575,11 @@
         renderPagination();
       }
 
-      function applyFilter(filter, scrollToGrid) {
+      function applyFilter(filter, doScroll) {
         currentFilter = filter;
         currentPage = 1;
         showPage(1);
-        if (scrollToGrid) {
-          $('html, body').animate({ scrollTop: $('.blog-section').offset().top - 120 }, 250);
-        }
+        if (doScroll) scrollToGrid();
       }
 
       showPage(1);
@@ -592,23 +644,25 @@
         var p = parseInt($(this).data('page'), 10);
         if (!isNaN(p) && p >= 1 && p <= totalPages) {
           showPage(p);
-          $('html, body').animate({ scrollTop: $('.blog-section').offset().top - 120 }, 250);
+          scrollToGrid();
         }
       });
 
       $prev.on('click', function () {
         if ($prev.hasClass('projects-pagination-nav--disabled')) return;
-        if (currentPage > 1) {
-          showPage(currentPage - 1);
-          $('html, body').animate({ scrollTop: $('.blog-section').offset().top - 120 }, 250);
+        var cur = parseInt($links.find('a.projects-pg-num--current').data('page'), 10) || currentPage;
+        if (cur > 1) {
+          showPage(cur - 1);
+          scrollToGrid();
         }
       });
 
       $next.on('click', function () {
         if ($next.hasClass('projects-pagination-nav--disabled')) return;
-        if (currentPage < totalPages) {
-          showPage(currentPage + 1);
-          $('html, body').animate({ scrollTop: $('.blog-section').offset().top - 120 }, 250);
+        var cur = parseInt($links.find('a.projects-pg-num--current').data('page'), 10) || currentPage;
+        if (cur < totalPages) {
+          showPage(cur + 1);
+          scrollToGrid();
         }
       });
 

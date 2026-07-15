@@ -59,14 +59,76 @@
               </div>
             </div>
           </div>
+
+          <div class="blog-category-filter-sticky services-category-filter-sticky">
+            <div class="blog-category-filter-wrap">
+              <div class="blog-cat-panel">
+                <div class="blog-category-filter-shell">
+                  <button type="button" class="blog-cat-nav blog-cat-nav--prev" aria-label="Əvvəlki kateqoriyalar" hidden>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="m15 18-6-6 6-6" />
+                    </svg>
+                  </button>
+
+                  <div class="blog-category-filter" role="tablist" aria-label="Xidmət kateqoriyaları">
+                    <button type="button" class="blog-category-tab is-active" role="tab" aria-selected="true" data-filter="all">
+                      <span class="blog-category-tab__chip">
+                        <span class="blog-category-tab__dot" aria-hidden="true"></span>
+                        <span class="blog-category-tab__label">Hamısı</span>
+                      </span>
+                    </button>
+                    <button type="button" class="blog-category-tab" role="tab" aria-selected="false" data-filter="marketinq">
+                      <span class="blog-category-tab__chip">
+                        <span class="blog-category-tab__dot" aria-hidden="true"></span>
+                        <span class="blog-category-tab__label">Marketinq</span>
+                      </span>
+                    </button>
+                    <button type="button" class="blog-category-tab" role="tab" aria-selected="false" data-filter="konsultasiya">
+                      <span class="blog-category-tab__chip">
+                        <span class="blog-category-tab__dot" aria-hidden="true"></span>
+                        <span class="blog-category-tab__label">Konsultasiya</span>
+                      </span>
+                    </button>
+                    <button type="button" class="blog-category-tab" role="tab" aria-selected="false" data-filter="brendinq">
+                      <span class="blog-category-tab__chip">
+                        <span class="blog-category-tab__dot" aria-hidden="true"></span>
+                        <span class="blog-category-tab__label">Brendinq</span>
+                      </span>
+                    </button>
+                    <button type="button" class="blog-category-tab" role="tab" aria-selected="false" data-filter="texnologiya">
+                      <span class="blog-category-tab__chip">
+                        <span class="blog-category-tab__dot" aria-hidden="true"></span>
+                        <span class="blog-category-tab__label">Texnologiya</span>
+                      </span>
+                    </button>
+                    <button type="button" class="blog-category-tab" role="tab" aria-selected="false" data-filter="telim">
+                      <span class="blog-category-tab__chip">
+                        <span class="blog-category-tab__dot" aria-hidden="true"></span>
+                        <span class="blog-category-tab__label">Təlim</span>
+                      </span>
+                    </button>
+                  </div>
+
+                  <button type="button" class="blog-cat-nav blog-cat-nav--next" aria-label="Növbəti kateqoriyalar" hidden>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="m9 18 6-6-6-6" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="services-filter-empty d-none text-white text-center mb-0" role="status">Bu kateqoriyada xidmət tapılmadı.</p>
+
           <div class="service-grid">
-            <div class="row g-4">
-              <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+            <div class="row g-4 services-filter-grid">
+              <div class="col-6 col-lg-4 service-filter-item" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3 h-100">
                   <span class="service-card__glow" aria-hidden="true"></span>
-
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-1.jpg');"></span>
                   <span class="service-card__overlay"></span>
+                  <span class="service-card__category" data-cat="marketinq">Marketinq</span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
                     <h3 class="service-card__title text-white mb-0">Ənənəvi marketinq</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Adət-ənənə üzərindən güclü brend qurmaq.</p>
@@ -77,12 +139,12 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="150" data-aos-duration="1000">
+              <div class="col-6 col-lg-4 service-filter-item" data-aos="fade-up" data-aos-delay="150" data-aos-duration="1000">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3 h-100">
                   <span class="service-card__glow" aria-hidden="true"></span>
-
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-2.jpg');"></span>
                   <span class="service-card__overlay"></span>
+                  <span class="service-card__category" data-cat="konsultasiya">Konsultasiya</span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
                     <h3 class="service-card__title text-white mb-0">Konsultasiya</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Müvafiq sahə üzrə mütəxəssis məsləhəti.</p>
@@ -93,12 +155,12 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+              <div class="col-6 col-lg-4 service-filter-item" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3 h-100">
                   <span class="service-card__glow" aria-hidden="true"></span>
-
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-3.jpg');"></span>
                   <span class="service-card__overlay"></span>
+                  <span class="service-card__category" data-cat="marketinq">Marketinq</span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
                     <h3 class="service-card__title text-white mb-0">Rəqəmsal marketinq</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">SEO, SMM, reklam kampaniyaları.</p>
@@ -109,12 +171,12 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="250" data-aos-duration="1000">
+              <div class="col-6 col-lg-4 service-filter-item" data-aos="fade-up" data-aos-delay="250" data-aos-duration="1000">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3 h-100">
                   <span class="service-card__glow" aria-hidden="true"></span>
-
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-4.jpg');"></span>
                   <span class="service-card__overlay"></span>
+                  <span class="service-card__category" data-cat="texnologiya">Texnologiya</span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
                     <h3 class="service-card__title text-white mb-0">Biznes avtomatlaşdırması</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Proseslərin optimallaşdırılması və CRM.</p>
@@ -125,12 +187,12 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+              <div class="col-6 col-lg-4 service-filter-item" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3 h-100">
                   <span class="service-card__glow" aria-hidden="true"></span>
-
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-1.jpg');"></span>
                   <span class="service-card__overlay"></span>
+                  <span class="service-card__category" data-cat="brendinq">Brendinq</span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
                     <h3 class="service-card__title text-white mb-0">Brending və dizayn</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Loqo, vizual identitet, brendinq kitabı.</p>
@@ -141,12 +203,12 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="350" data-aos-duration="1000" id="training">
+              <div class="col-6 col-lg-4 service-filter-item" data-aos="fade-up" data-aos-delay="350" data-aos-duration="1000" id="training">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3 h-100">
                   <span class="service-card__glow" aria-hidden="true"></span>
-
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-2.jpg');"></span>
                   <span class="service-card__overlay"></span>
+                  <span class="service-card__category" data-cat="telim">Təlim</span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
                     <h3 class="service-card__title text-white mb-0">Təlim</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Korporativ və fərdi təlim proqramları.</p>
@@ -423,6 +485,80 @@
   <script src="../assets/js/i18n.js"></script>
   <script src="../assets/js/digiboom.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+  <script>
+    $(function () {
+      var $items = $('.services-filter-grid .service-filter-item');
+      var $empty = $('.services-filter-empty');
+      var $tabs = $('#services .blog-category-tab');
+      var currentFilter = 'all';
+
+      function applyFilter(filter) {
+        currentFilter = filter;
+        var visibleCount = 0;
+
+        $items.each(function () {
+          var $item = $(this);
+          var cat = $item.find('.service-card__category').data('cat');
+          var show = filter === 'all' || cat === filter;
+          $item.toggleClass('d-none', !show);
+          if (show) visibleCount += 1;
+        });
+
+        $empty.toggleClass('d-none', visibleCount > 0);
+      }
+
+      $tabs.on('click', function () {
+        var $tab = $(this);
+        var filter = $tab.data('filter');
+        if (filter === currentFilter) return;
+
+        $tabs.removeClass('is-active').attr('aria-selected', 'false');
+        $tab.addClass('is-active').attr('aria-selected', 'true');
+        applyFilter(filter);
+      });
+
+      var $filterRail = $('#services .blog-category-filter');
+      var $filterShell = $('#services .blog-category-filter-shell');
+      var $filterPrev = $('#services .blog-cat-nav--prev');
+      var $filterNext = $('#services .blog-cat-nav--next');
+      var filterScrollStep = 180;
+
+      function scrollFilterRail(direction) {
+        if (!$filterRail.length) return;
+        $filterRail[0].scrollBy({ left: direction * filterScrollStep, behavior: 'smooth' });
+      }
+
+      function updateFilterScrollState() {
+        if (!$filterRail.length || !$filterShell.length) return;
+        var rail = $filterRail[0];
+        var maxScroll = rail.scrollWidth - rail.clientWidth;
+        var canScroll = maxScroll > 4;
+        var atStart = rail.scrollLeft <= 2;
+        var atEnd = rail.scrollLeft >= maxScroll - 2;
+
+        $filterShell.toggleClass('is-scrollable', canScroll);
+        if (!canScroll) {
+          $filterShell.removeClass('can-scroll-left can-scroll-right');
+          $filterPrev.prop('hidden', true);
+          $filterNext.prop('hidden', true);
+          return;
+        }
+
+        $filterShell.toggleClass('can-scroll-left', !atStart);
+        $filterShell.toggleClass('can-scroll-right', !atEnd);
+        $filterPrev.prop('hidden', atStart);
+        $filterNext.prop('hidden', atEnd);
+      }
+
+      if ($filterRail.length) {
+        $filterRail.on('scroll.servicesFilter', updateFilterScrollState);
+        $(window).on('resize.servicesFilter', updateFilterScrollState);
+        $filterPrev.on('click', function () { scrollFilterRail(-1); });
+        $filterNext.on('click', function () { scrollFilterRail(1); });
+        updateFilterScrollState();
+      }
+    });
+  </script>
 </body>
 
 </html>

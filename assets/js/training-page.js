@@ -1,15 +1,23 @@
 (function () {
   'use strict';
 
-  /* Siyahı: səhifə başına 6 kurs */
+  /* Siyahı: səhifə başına 6 kurs — layihələr səhifəsi kimi 12 səhifə pəncərəsi */
   var grid = document.querySelector('[data-training-grid]');
   if (grid) {
-    var allCards = Array.prototype.slice.call(grid.querySelectorAll('[data-training-card]'));
+    var originals = Array.prototype.slice.call(grid.querySelectorAll('[data-training-card]'));
     var perPage = 6;
+    var targetTotal = perPage * 12;
     var currentPage = 1;
     var activeFilter = 'all';
     var pagination = document.querySelector('[data-training-pagination]');
     var filterButtons = document.querySelectorAll('[data-training-filter]');
+
+    while (grid.querySelectorAll('[data-training-card]').length < targetTotal && originals.length) {
+      var nextIndex = grid.querySelectorAll('[data-training-card]').length % originals.length;
+      grid.appendChild(originals[nextIndex].cloneNode(true));
+    }
+
+    var allCards = Array.prototype.slice.call(grid.querySelectorAll('[data-training-card]'));
 
     function getVisibleCards() {
       if (activeFilter === 'all') return allCards.slice();
@@ -20,6 +28,42 @@
 
     function getTotalPages() {
       return Math.max(1, Math.ceil(getVisibleCards().length / perPage));
+    }
+
+    function getPageWindow(page, totalPages) {
+      var windowSize = 3;
+      var start = page;
+
+      if (page > totalPages - windowSize) {
+        start = Math.max(1, page - windowSize + 1);
+      }
+
+      var end = Math.min(start + windowSize - 1, totalPages);
+
+      if (end - start + 1 < windowSize) {
+        start = Math.max(1, end - windowSize + 1);
+      }
+
+      return { start: start, end: end, size: windowSize };
+    }
+
+    function appendPageBtn(num, page) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'training-pagination__btn' + (num === page ? ' is-active' : '');
+      btn.textContent = String(num);
+      btn.setAttribute('aria-label', 'Səhifə ' + num);
+      btn.setAttribute('aria-current', num === page ? 'page' : 'false');
+      btn.addEventListener('click', function () { renderPage(num); });
+      pagination.appendChild(btn);
+    }
+
+    function appendDots() {
+      var dots = document.createElement('span');
+      dots.className = 'training-pagination__dots';
+      dots.setAttribute('aria-hidden', 'true');
+      dots.textContent = '...';
+      pagination.appendChild(dots);
     }
 
     function renderPage(page) {
@@ -53,17 +97,23 @@
         });
         pagination.appendChild(prev);
 
-        for (var i = 1; i <= totalPages; i++) {
-          (function (num) {
-            var btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'training-pagination__btn' + (num === currentPage ? ' is-active' : '');
-            btn.textContent = String(num);
-            btn.setAttribute('aria-label', 'Səhifə ' + num);
-            btn.setAttribute('aria-current', num === currentPage ? 'page' : 'false');
-            btn.addEventListener('click', function () { renderPage(num); });
-            pagination.appendChild(btn);
-          })(i);
+        var win = getPageWindow(currentPage, totalPages);
+        var winStart = win.start;
+        var winEnd = win.end;
+        var i;
+
+        if (winStart > 1 && currentPage > win.size) {
+          appendPageBtn(1, currentPage);
+          if (winStart > 2) appendDots();
+        }
+
+        for (i = winStart; i <= winEnd; i++) {
+          appendPageBtn(i, currentPage);
+        }
+
+        if (winEnd < totalPages) {
+          appendDots();
+          appendPageBtn(totalPages, currentPage);
         }
 
         var next = document.createElement('button');
@@ -113,6 +163,90 @@
       previewVideo.pause();
       previewVideo.removeAttribute('src');
       previewVideo.load();
+    });
+  }
+
+  /* Detal: sifariş modalı */
+  var orderModal = document.getElementById('trainingOrderModal');
+  var orderForm = document.getElementById('trainingOrderForm');
+  if (orderModal && orderForm) {
+    var courseInput = document.getElementById('trainingOrderCourse');
+    var nameInput = document.getElementById('trainingOrderName');
+    var phoneInput = document.getElementById('trainingOrderPhone');
+    var gmailInput = document.getElementById('trainingOrderGmail');
+    var gmailError = document.getElementById('trainingOrderGmailError');
+    var orderStatus = document.getElementById('trainingOrderStatus');
+    var gmailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/i;
+
+    function fillTrainingName() {
+      var titleEl = document.querySelector('.training-detail__title');
+      if (courseInput && titleEl) {
+        courseInput.value = (titleEl.textContent || '').trim();
+      }
+    }
+
+    function setGmailValid(isValid) {
+      if (!gmailInput) return;
+      gmailInput.classList.toggle('is-invalid', !isValid);
+      if (gmailError) gmailError.hidden = isValid;
+    }
+
+    function isGmailValid() {
+      var value = (gmailInput.value || '').trim();
+      return value.length > 0 && gmailPattern.test(value);
+    }
+
+    orderModal.addEventListener('show.bs.modal', function () {
+      fillTrainingName();
+      if (orderStatus) {
+        orderStatus.hidden = true;
+        orderStatus.textContent = '';
+        orderStatus.classList.remove('training-order-form__status--ok');
+      }
+      setGmailValid(true);
+    });
+
+    if (gmailInput) {
+      gmailInput.addEventListener('input', function () {
+        if (!(gmailInput.value || '').trim()) {
+          setGmailValid(true);
+          return;
+        }
+        setGmailValid(isGmailValid());
+      });
+      gmailInput.addEventListener('blur', function () {
+        if ((gmailInput.value || '').trim()) setGmailValid(isGmailValid());
+      });
+    }
+
+    orderForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var name = (nameInput && nameInput.value || '').trim();
+      var phone = (phoneInput && phoneInput.value || '').trim();
+      var gmailOk = isGmailValid();
+
+      setGmailValid(gmailOk);
+
+      if (!name) {
+        if (nameInput) nameInput.focus();
+        return;
+      }
+      if (!phone) {
+        if (phoneInput) phoneInput.focus();
+        return;
+      }
+      if (!gmailOk) {
+        if (gmailInput) gmailInput.focus();
+        return;
+      }
+
+      /* Ödəniş inteqrasiyası sonra əlavə olunacaq */
+      if (orderStatus) {
+        orderStatus.hidden = false;
+        orderStatus.classList.add('training-order-form__status--ok');
+        orderStatus.textContent = 'Məlumatlar qəbul olundu. Ödəniş inteqrasiyası tezliklə aktivləşəcək.';
+      }
     });
   }
 })();

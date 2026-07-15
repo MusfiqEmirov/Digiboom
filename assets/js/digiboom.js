@@ -287,6 +287,11 @@
           .then(function () {
             showFormStatus(form, '', '');
             form.reset();
+            var contactModalEl = document.getElementById('contactModal');
+            if (contactModalEl && window.bootstrap && window.bootstrap.Modal) {
+              var contactModal = window.bootstrap.Modal.getInstance(contactModalEl);
+              if (contactModal) contactModal.hide();
+            }
             showContactSuccessAlert();
           })
           .finally(function () {

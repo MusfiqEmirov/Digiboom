@@ -1,6 +1,7 @@
 <form id="{{formId}}" class="contact-form-modern {{formClass}}" {{aosAttrs}} method="post"
   action="{{smtpAction}}" data-smtp-form novalidate>
   <div class="contact-form-modern__fields">
+    {{serviceField}}
     <div class="contact-form-modern__field contact-form-modern__field--full">
       <label for="{{prefix}}-name" class="contact-form-modern__label">Ad və soyad <span class="text-danger">*</span></label>
       <input type="text" class="contact-form-modern__input" id="{{prefix}}-name" name="name"

@@ -675,6 +675,41 @@ $(function () {
 		openOrderModal(packageName);
 	});
 
+	// Konsultasiya / əlaqə modalı
+	function openContactModal(serviceName) {
+		var modalEl = document.getElementById('contactModal');
+		if (!modalEl || !window.bootstrap || !window.bootstrap.Modal) return;
+		var $service = $('#contact-modal-service');
+		if ($service.length) {
+			$service.val(serviceName || '');
+		}
+		window.bootstrap.Modal.getOrCreateInstance(modalEl).show();
+	}
+
+	function initContactModal() {
+		var $contactModal = $('#contactModal');
+		if (!$contactModal.length || $contactModal.data('contact-modal-bound')) return;
+		$contactModal.data('contact-modal-bound', true);
+
+		$contactModal.on('hidden.bs.modal', function () {
+			var form = document.getElementById('contact-modal-form');
+			if (form) form.reset();
+			$('#contact-modal-service').val('');
+		});
+	}
+
+	initContactModal();
+	document.addEventListener('digiboom:includes-ready', initContactModal);
+
+	$(document).on('click', '[data-open-contact-modal]', function (e) {
+		e.preventDefault();
+		var $btn = $(this);
+		var serviceName = $btn.attr('data-service-name') ||
+			$('#serviceDetailName').text().trim() ||
+			'';
+		openContactModal(serviceName);
+	});
+
 	// Xidmət kartı: bütün kart + Ətraflı düyməsi detal səhifəsinə keçir
 	var serviceCardPointer = { x: 0, y: 0 };
 	$(document).on('pointerdown', '#services .service-card--cinema', function (e) {

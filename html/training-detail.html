@@ -169,14 +169,14 @@
             </div>
           </div>
 
-          <!-- Sifariş (ödəniş inteqrasiyası yoxdur — əlaqə) -->
+          <!-- Sifariş -->
           <div class="training-detail__cta" data-aos="fade-up" data-aos-delay="220" data-aos-duration="900">
             <h3>Bu təlimə qoşulmaq istəyirsiniz?</h3>
-            <p>Qeydiyyat və əlavə məlumat üçün bizimlə əlaqə saxlayın — komandamız sizə uyğun formatı təklif edəcək.</p>
-            <a href="contact.html" class="btn">
+            <p>Qeydiyyat və əlavə məlumat üçün formu doldurun — sonra ödənişə keçə bilərsiniz.</p>
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#trainingOrderModal">
               <span class="btn-text">Sifariş et</span>
               <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
-            </a>
+            </button>
           </div>
 
         </div>
@@ -195,6 +195,45 @@
         </div>
         <div class="modal-body pt-2">
           <video id="trainingPreviewVideo" controls playsinline preload="metadata" class="w-100 rounded"></video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sifariş modal -->
+  <div class="modal fade training-order-modal" id="trainingOrderModal" tabindex="-1" aria-labelledby="trainingOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <h2 class="modal-title fs-5 fw-bold" id="trainingOrderModalLabel">Təlim sifarişi</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Bağla"></button>
+        </div>
+        <div class="modal-body pt-3">
+          <form id="trainingOrderForm" class="training-order-form" novalidate>
+            <div class="training-order-form__field">
+              <label for="trainingOrderCourse" class="training-order-form__label">Təlim</label>
+              <input type="text" class="training-order-form__input" id="trainingOrderCourse" name="training" readonly>
+            </div>
+            <div class="training-order-form__field">
+              <label for="trainingOrderName" class="training-order-form__label">Ad soyad <span class="text-danger">*</span></label>
+              <input type="text" class="training-order-form__input" id="trainingOrderName" name="name" placeholder="Adınız və soyadınız" required autocomplete="name">
+            </div>
+            <div class="training-order-form__field">
+              <label for="trainingOrderPhone" class="training-order-form__label">Nömrə <span class="text-danger">*</span></label>
+              <input type="tel" class="training-order-form__input" id="trainingOrderPhone" name="phone" placeholder="+994 XX XXX XX XX" required autocomplete="tel">
+            </div>
+            <div class="training-order-form__field">
+              <label for="trainingOrderGmail" class="training-order-form__label">Gmail <span class="text-danger">*</span></label>
+              <input type="email" class="training-order-form__input" id="trainingOrderGmail" name="gmail" placeholder="ad@gmail.com" required autocomplete="email" inputmode="email">
+              <p class="training-order-form__hint">Yalnız @gmail.com ünvanı qəbul olunur.</p>
+              <p class="training-order-form__error" id="trainingOrderGmailError" hidden role="alert">Zəhmət olmasa düzgün Gmail ünvanı daxil edin.</p>
+            </div>
+            <p class="training-order-form__status" id="trainingOrderStatus" hidden role="status" aria-live="polite"></p>
+            <button type="submit" class="btn training-order-form__submit w-100 justify-content-center">
+              <span class="btn-text">Ödənişə keç</span>
+              <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm" aria-hidden="true"></iconify-icon>
+            </button>
+          </form>
         </div>
       </div>
     </div>
