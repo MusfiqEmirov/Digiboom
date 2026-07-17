@@ -1549,7 +1549,7 @@ body.mobile-nav-open {
   color: var(--db-primary-hover) !important;
 }
 
-/* Header contact CTA — narıncı fon, bənövşəyi yazı */
+/* Header contact CTA — narıncı fon, ağ yazı */
 .header .header-contact-btn,
 .header.fixed-header .header-contact-btn {
   display: inline-flex;
@@ -1562,7 +1562,7 @@ body.mobile-nav-open {
   border-radius: 999px;
   border: 1px solid transparent;
   background-color: var(--db-accent) !important;
-  color: var(--db-primary) !important;
+  color: #ffffff !important;
   text-decoration: none;
   white-space: nowrap;
   transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.5s ease, color 0.5s ease;
@@ -1573,7 +1573,7 @@ body.mobile-nav-open {
 .header.fixed-header .header-contact-btn:focus {
   transform: scale(1.04) translateY(-1px);
   background-color: var(--db-accent-hover) !important;
-  color: var(--db-primary) !important;
+  color: #ffffff !important;
   box-shadow: 0 8px 22px rgba(var(--db-accent-rgb), 0.35);
 }
 .header .header-contact-btn:active {
@@ -1737,28 +1737,51 @@ body.mobile-nav-open {
   padding-top: 0.2rem;
 }
 
-.pricing-section .pricing-card__price {
+.pricing-section .pricing-card__pricing {
   grid-area: price;
   display: inline-flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 0.25rem;
-  margin-top: 0;
-  padding: 0.45rem 0.95rem;
-  border-radius: 999px;
-  background: var(--db-accent, #ED4F24);
-  border: 1px solid transparent;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
-  white-space: nowrap;
+  align-items: center;
+  gap: 0.55rem;
   flex-shrink: 0;
   position: relative;
   z-index: 1;
 }
 
+.pricing-section .pricing-card__old {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+}
+
+.pricing-section .pricing-card__price {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.28rem;
+  margin-top: 0;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background: var(--db-accent, #ED4F24);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 4px 16px rgba(237, 79, 36, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transform: scale(1.04);
+}
+
 .pricing-section .pricing-card__amount {
   font-family: var(--font-display);
-  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
-  font-weight: 600;
+  font-size: clamp(1.05rem, 1.8vw, 1.22rem);
+  font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: #fff;
@@ -1766,13 +1789,21 @@ body.mobile-nav-open {
 
 .pricing-section .pricing-card__period {
   font-size: 0.72rem;
+  font-weight: 500;
   line-height: 1.2;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .pricing-section .pricing-card:hover .pricing-card__price {
   background: #fff;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  border-color: transparent;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
+  transform: scale(1.06);
+}
+
+.pricing-section .pricing-card:hover .pricing-card__old {
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration-color: rgba(255, 255, 255, 0.95);
 }
 
 .pricing-section .pricing-card:hover .pricing-card__amount {
@@ -1880,6 +1911,102 @@ body[data-active-page="services"] .services-page-section {
     flex: 0 0 50%;
     max-width: 50%;
   }
+
+  /* Mobil: kartları bir-birindən ayıran kreativ çərçivə */
+  body[data-active-page="services"] .services-page-section .service-card--cinema {
+    border-radius: 18px !important;
+    border: none;
+    isolation: isolate;
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.42),
+      0 0 0 1px rgba(255, 255, 255, 0.12);
+    background-clip: padding-box;
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s ease,
+      filter 0.35s ease;
+  }
+  body[data-active-page="services"] .services-page-section .service-card--cinema::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(237, 79, 36, 0.75) 38%,
+      rgba(55, 7, 91, 0.9) 72%,
+      rgba(255, 255, 255, 0.35) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0.92;
+  }
+  body[data-active-page="services"] .services-page-section .service-card--cinema::after {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: 12px;
+    border: 1px dashed rgba(255, 255, 255, 0.28);
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0.7;
+  }
+  body[data-active-page="services"] .services-page-section .service-filter-item:nth-child(odd) .service-card--cinema::before {
+    background: linear-gradient(
+      225deg,
+      rgba(237, 79, 36, 0.85) 0%,
+      rgba(255, 255, 255, 0.45) 40%,
+      rgba(55, 7, 91, 0.95) 78%,
+      rgba(237, 79, 36, 0.4) 100%
+    );
+  }
+  body[data-active-page="services"] .services-page-section .service-card--cinema:hover,
+  body[data-active-page="services"] .services-page-section .service-card--cinema:focus-visible,
+  body[data-active-page="services"] .services-page-section .service-card--cinema:active {
+    transform: translateY(-6px) scale(1.025);
+    filter: brightness(1.06);
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(237, 79, 36, 0.45),
+      0 0 28px rgba(237, 79, 36, 0.35),
+      0 0 48px rgba(55, 7, 91, 0.25);
+  }
+  body[data-active-page="services"] .services-page-section .service-card--cinema:hover::before,
+  body[data-active-page="services"] .services-page-section .service-card--cinema:focus-visible::before,
+  body[data-active-page="services"] .services-page-section .service-card--cinema:active::before {
+    opacity: 1;
+    background: linear-gradient(
+      135deg,
+      #ed4f24 0%,
+      #ffffff 32%,
+      #37075B 68%,
+      #ed4f24 100%
+    );
+    background-size: 200% 200%;
+    animation: services-card-frame-shine 1.6s linear infinite;
+  }
+  body[data-active-page="services"] .services-page-section .service-card--cinema:hover::after,
+  body[data-active-page="services"] .services-page-section .service-card--cinema:focus-visible::after,
+  body[data-active-page="services"] .services-page-section .service-card--cinema:active::after {
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.55);
+    opacity: 1;
+  }
+}
+
+@keyframes services-card-frame-shine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
 }
 
 /* Xidmətlər səhifəsi — paketlər karuseli (eyni hündürlük) */
@@ -2006,18 +2133,18 @@ body[data-active-page="services"] .services-page-section {
   width: 56px;
   height: 44px;
   padding: 0;
-  border: 1px solid rgba(var(--db-primary-rgb), 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 999px;
-  background: rgba(18, 26, 29, 0.72);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  color: rgba(255, 255, 255, 0.92);
+  color: #37075B;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   box-shadow:
-    0 6px 28px rgba(0, 0, 0, 0.38),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 6px 22px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
   cursor: pointer;
   pointer-events: auto;
   transition:
@@ -2030,7 +2157,8 @@ body[data-active-page="services"] .services-page-section {
 #services .services-nav-btn iconify-icon {
   font-size: 1.35rem;
   line-height: 1;
-  transition: transform 0.28s ease;
+  color: #37075B;
+  transition: transform 0.28s ease, color 0.28s ease;
 }
 #services .services-nav-prev {
   left: 12px;
@@ -2041,13 +2169,15 @@ body[data-active-page="services"] .services-page-section {
   transform: translateY(-50%);
 }
 #services .services-nav-btn:hover {
-  background: rgba(var(--db-primary-rgb), 0.95);
-  border-color: var(--bs-primary, var(--db-primary));
+  background: #37075B;
+  border-color: #37075B;
   color: #ffffff;
   box-shadow:
     0 10px 34px rgba(0, 0, 0, 0.42),
-    0 0 0 4px rgba(var(--db-primary-rgb), 0.22),
-    0 0 24px rgba(var(--db-primary-rgb), 0.18);
+    0 0 0 4px rgba(55, 7, 91, 0.22);
+}
+#services .services-nav-btn:hover iconify-icon {
+  color: #ffffff;
 }
 #services .services-nav-prev:hover,
 #services .services-nav-next:hover {
@@ -2463,6 +2593,27 @@ body[data-active-page="services"] .services-page-section {
 @media (min-width: 1200px) {
   .featured-projects--showcase .featured-projects-marquee__item {
     width: 380px;
+  }
+}
+
+/* Mobil: layihə/xidmət — yalnız 1 kart, snap karusel */
+@media (max-width: 767.98px) {
+  .featured-projects--showcase .featured-projects-marquee.is-mobile-snap {
+    cursor: grab;
+  }
+  .featured-projects--showcase .featured-projects-marquee.is-mobile-snap .featured-projects-marquee__track {
+    gap: 0;
+  }
+  .featured-projects--showcase .featured-projects-marquee.is-mobile-snap .featured-projects-marquee__item {
+    width: 100%;
+    max-width: 100%;
+  }
+  #services .services-marquee.is-mobile-snap .services-marquee__track {
+    gap: 0;
+  }
+  #services .services-marquee.is-mobile-snap .services-marquee__item {
+    width: 100%;
+    max-width: 100%;
   }
 }
 .featured-projects--showcase .portfolio-showcase-card {
@@ -4319,6 +4470,8 @@ body[data-active-page="services"] .services-page-section {
   border: none;
   background: var(--db-dark) !important;
   box-shadow: none !important;
+  padding-left: 3.75rem !important;
+  padding-right: 1.5rem !important;
   transition: background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .contact-form-modern__submit.btn:hover,
@@ -4335,6 +4488,7 @@ body[data-active-page="services"] .services-page-section {
   transform: none !important;
   opacity: 1 !important;
   visibility: visible !important;
+  padding-inline-end: 0 !important;
 }
 .contact-form-modern__submit.btn:hover .btn-text,
 .contact-form-modern__submit.btn:focus-visible .btn-text {
@@ -4342,13 +4496,52 @@ body[data-active-page="services"] .services-page-section {
   transform: none !important;
 }
 .contact-form-modern__submit.btn .btn-icon {
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    left 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform, left;
+  left: 0 !important;
+  right: auto !important;
+  transform: translate(15%, -50%) !important;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 .contact-form-modern__submit.btn:hover .btn-icon {
-  left: 0;
-  transform: translate(15%, -50%) rotate(45deg);
+  left: 0 !important;
+  transform: translate(15%, -50%) rotate(45deg) !important;
+}
+
+/* Mobil: əlaqə / ana səhifə form düyməsi — sabit narıncı, hover yox */
+@media (max-width: 991.98px) {
+  body[data-active-page="contact"] .contact-form-modern__submit.btn,
+  body[data-active-page="index"] .contact-form-modern__submit.btn,
+  .get-in-touch--home .contact-form-modern__submit.btn {
+    background: #ed4f24 !important;
+  }
+  body[data-active-page="contact"] .contact-form-modern__submit.btn:hover,
+  body[data-active-page="contact"] .contact-form-modern__submit.btn:focus,
+  body[data-active-page="contact"] .contact-form-modern__submit.btn:focus-visible,
+  body[data-active-page="contact"] .contact-form-modern__submit.btn:active,
+  body[data-active-page="index"] .contact-form-modern__submit.btn:hover,
+  body[data-active-page="index"] .contact-form-modern__submit.btn:focus,
+  body[data-active-page="index"] .contact-form-modern__submit.btn:focus-visible,
+  body[data-active-page="index"] .contact-form-modern__submit.btn:active,
+  .get-in-touch--home .contact-form-modern__submit.btn:hover,
+  .get-in-touch--home .contact-form-modern__submit.btn:focus,
+  .get-in-touch--home .contact-form-modern__submit.btn:focus-visible,
+  .get-in-touch--home .contact-form-modern__submit.btn:active {
+    background: #ed4f24 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  body[data-active-page="contact"] .contact-form-modern__submit.btn:hover .btn-icon,
+  body[data-active-page="index"] .contact-form-modern__submit.btn:hover .btn-icon,
+  .get-in-touch--home .contact-form-modern__submit.btn:hover .btn-icon {
+    left: 0 !important;
+    transform: translate(15%, -50%) !important;
+  }
+  body[data-active-page="contact"] .contact-form-modern__submit.btn:hover .btn-text,
+  body[data-active-page="index"] .contact-form-modern__submit.btn:hover .btn-text,
+  .get-in-touch--home .contact-form-modern__submit.btn:hover .btn-text {
+    color: #ffffff !important;
+    transform: none !important;
+  }
 }
 
 /* Ana səhifə — Müraciət et bölməsi */
@@ -4677,11 +4870,11 @@ body[data-active-page="blog"] .page-wrapper {
   padding: 0.5rem calc(0.95rem + var(--hex-cut));
   border: 0;
   border-radius: 0;
-  background: #fff;
-  color: rgba(var(--db-dark-rgb), 0.68);
+  background: linear-gradient(145deg, #ffffff 0%, #f3eaf9 45%, #e8d5f5 100%);
+  color: #37075B;
   box-shadow:
-    0 2px 8px rgba(var(--db-dark-rgb), 0.06),
-    inset 0 0 0 1.5px rgba(var(--db-dark-rgb), 0.1);
+    0 4px 14px rgba(55, 7, 91, 0.12),
+    inset 0 0 0 1.5px rgba(55, 7, 91, 0.14);
   clip-path: polygon(
     var(--hex-cut) 0%,
     calc(100% - var(--hex-cut)) 0%,
@@ -4700,7 +4893,7 @@ body[data-active-page="blog"] .page-wrapper {
   width: 0.42rem;
   height: 0.42rem;
   border-radius: 50%;
-  background: rgba(var(--db-dark-rgb), 0.18);
+  background: rgba(55, 7, 91, 0.35);
   transition:
     background 0.22s ease,
     transform 0.22s ease,
@@ -4714,27 +4907,28 @@ body[data-active-page="blog"] .page-wrapper {
   white-space: nowrap;
 }
 .blog-category-tab:hover .blog-category-tab__chip {
-  color: var(--db-dark);
+  color: #37075B;
+  background: linear-gradient(145deg, #ffffff 0%, #ebe0f4 50%, #dcc6ee 100%);
   transform: translateY(-1px);
   box-shadow:
-    0 6px 16px rgba(var(--db-dark-rgb), 0.1),
-    inset 0 0 0 1.5px rgba(var(--db-dark-rgb), 0.16);
+    0 6px 18px rgba(55, 7, 91, 0.16),
+    inset 0 0 0 1.5px rgba(55, 7, 91, 0.22);
 }
 .blog-category-tab:hover .blog-category-tab__dot {
-  background: rgba(var(--db-primary-rgb), 0.85);
+  background: #37075B;
 }
 .blog-category-tab.is-active .blog-category-tab__chip {
-  color: var(--db-dark);
-  background: linear-gradient(135deg, #e8ffc0 0%, var(--db-primary) 100%);
+  color: #ffffff;
+  background: linear-gradient(145deg, #4E1282 0%, #37075B 55%, #2D0549 100%);
   box-shadow:
-    0 8px 20px rgba(var(--db-primary-rgb), 0.32),
-    inset 0 0 0 1.5px #b4f266,
-    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    0 8px 20px rgba(55, 7, 91, 0.32),
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
   transform: translateY(-1px);
 }
 .blog-category-tab.is-active .blog-category-tab__dot {
-  background: var(--db-dark);
-  box-shadow: 0 0 0 3px rgba(var(--db-accent-rgb), 0.45);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.28);
   transform: scale(1.08);
 }
 .blog-category-tab:focus-visible {
@@ -5570,17 +5764,18 @@ body[data-active-page="blog"] .page-wrapper {
   width: 52px;
   height: 52px;
   border-radius: 14px;
-  background: linear-gradient(135deg, var(--db-primary) 0%, var(--db-accent) 100%);
+  background: linear-gradient(145deg, #ffffff 0%, #f3eaf9 45%, #e8d5f5 100%);
+  border: 1px solid rgba(55, 7, 91, 0.14);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--db-white);
-  box-shadow: 0 4px 16px rgba(var(--db-primary-rgb), 0.28);
+  color: #37075B;
+  box-shadow: 0 4px 16px rgba(55, 7, 91, 0.12);
   flex-shrink: 0;
 }
 .about-info-card__icon iconify-icon {
   font-size: 1.35rem;
-  color: inherit;
+  color: #37075B;
 }
 .about-info-card__body {
   position: relative;
@@ -5673,6 +5868,13 @@ body[data-active-page="blog"] .page-wrapper {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+/* Mobil: detal səhifələrində Geri düyməsini gizlə */
+@media (max-width: 991.98px) {
+  .btn.btn-back {
+    display: none !important;
+  }
+}
+
 /* =====================================================
    RƏY BİLDİR MODAL — yenilənmiş UI
    ===================================================== */
@@ -5709,7 +5911,10 @@ body[data-active-page="blog"] .page-wrapper {
 #orderModal,
 #contactModal,
 #trainingOrderModal,
-#trainingPreviewModal {
+#trainingPreviewModal,
+#trainingImageModal,
+#serviceImageModal,
+#projectImageModal {
   z-index: 10800 !important;
 }
 .contact-modal-dialog {
@@ -5726,6 +5931,33 @@ body[data-active-page="blog"] .page-wrapper {
 }
 .contact-modal-body .contact-form-modern__submit.btn {
   margin-top: 0.35rem;
+  background: #ed4f24 !important;
+  padding-left: 3.75rem !important;
+  padding-right: 1.5rem !important;
+}
+.contact-modal-body .contact-form-modern__submit.btn:hover,
+.contact-modal-body .contact-form-modern__submit.btn:focus,
+.contact-modal-body .contact-form-modern__submit.btn:focus-visible,
+.contact-modal-body .contact-form-modern__submit.btn:active {
+  background: #ed4f24 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+.contact-modal-body .contact-form-modern__submit.btn .btn-icon {
+  left: 0 !important;
+  right: auto !important;
+  transform: translate(15%, -50%) !important;
+}
+.contact-modal-body .contact-form-modern__submit.btn:hover .btn-icon,
+.contact-modal-body .contact-form-modern__submit.btn:focus-visible .btn-icon {
+  left: 0 !important;
+  transform: translate(15%, -50%) !important;
+}
+.contact-modal-body .contact-form-modern__submit.btn .btn-text,
+.contact-modal-body .contact-form-modern__submit.btn:hover .btn-text,
+.contact-modal-body .contact-form-modern__submit.btn:focus-visible .btn-text {
+  color: #ffffff !important;
+  transform: none !important;
 }
 .contact-form-modern__input--service {
   background: rgba(var(--db-primary-rgb), 0.08);
@@ -7261,6 +7493,11 @@ body:has(.project-detail-page) .footer-modern {
 /* — Lightbox modal — */
 .project-gallery-modal .modal-content {
   background: transparent;
+  position: relative;
+}
+.project-gallery-modal .modal-header {
+  z-index: 20 !important;
+  pointer-events: none;
 }
 .project-gallery-modal__counter {
   font-size: 0.85rem;
@@ -7270,6 +7507,7 @@ body:has(.project-detail-page) .footer-modern {
   background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
 }
 .project-gallery-modal__close {
   display: inline-flex;
@@ -7284,6 +7522,10 @@ body:has(.project-detail-page) .footer-modern {
   background: var(--db-dark) !important;
   color: #fff;
   opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
+  position: relative;
+  z-index: 25;
   box-shadow:
     0 4px 18px rgba(0, 0, 0, 0.4),
     0 0 0 2px rgba(255, 255, 255, 0.85);
@@ -8037,6 +8279,11 @@ body:has(.project-detail-page) .footer-modern {
 /* — Lightbox — */
 .service-gallery-modal .modal-content {
   background: transparent;
+  position: relative;
+}
+.service-gallery-modal .modal-header {
+  z-index: 20 !important;
+  pointer-events: none;
 }
 .service-gallery-modal__counter {
   font-size: 0.85rem;
@@ -8046,6 +8293,7 @@ body:has(.project-detail-page) .footer-modern {
   background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
 }
 .service-gallery-modal__close {
   display: inline-flex;
@@ -8060,6 +8308,10 @@ body:has(.project-detail-page) .footer-modern {
   background: var(--db-dark) !important;
   color: #fff;
   opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
+  position: relative;
+  z-index: 25;
   box-shadow:
     0 4px 18px rgba(0, 0, 0, 0.4),
     0 0 0 2px rgba(255, 255, 255, 0.85);

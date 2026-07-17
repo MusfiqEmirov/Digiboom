@@ -83,16 +83,11 @@ body[data-active-page="contact"] .page-wrapper {
 /* Sosial şəbəkələr */
 .cp-social {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.55rem;
   list-style: none;
   margin: 0;
   padding: 0;
-}
-@media (min-width: 480px) {
-  .cp-social {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 .cp-social__link {
   display: flex;
@@ -313,6 +308,39 @@ body[data-active-page="contact"] .cp-card--form .contact-form-modern {
     padding: 1.1rem;
   }
   .cp-social {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  .cp-social__link {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+    padding: 0.7rem 0.65rem;
+  }
+  .cp-social__arrow {
+    display: none;
+  }
+  .cp-social__handle {
+    white-space: normal;
+  }
+}
+
+/* Mobil sıra: sosial → forma → xəritə */
+@media (max-width: 991.98px) {
+  .cp-layout {
+    display: flex;
+    flex-direction: column;
+  }
+  .cp-stack {
+    display: contents;
+  }
+  .cp-card--social {
+    order: 1;
+  }
+  .cp-card--form {
+    order: 2;
+  }
+  .cp-card--map {
+    order: 3;
   }
 }

@@ -334,8 +334,21 @@
       });
     }
 
+    var closeBtn = modalEl.querySelector('.project-gallery-modal__close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        getModal().hide();
+      });
+    }
+
     modalEl.addEventListener('keydown', function (e) {
       if (!modalEl.classList.contains('show')) return;
+      if (e.key === 'Escape') {
+        getModal().hide();
+        return;
+      }
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
         showImage(currentIndex - 1);

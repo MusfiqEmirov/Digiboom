@@ -10,7 +10,7 @@ $(function () {
     });
 
 
-    // İnteraktiv marquee
+    // İnteraktiv marquee — desktop: axıcı; mobil: 1 kart + 2s autoplay + oxlar
     function initInteractiveMarquee(config) {
         var trackEl = document.querySelector(config.track);
         if (!trackEl) return;
@@ -19,6 +19,8 @@ $(function () {
 
         var flow      = config.flow || 'left';
         var speed     = config.speed || 0.45;
+        var mobileBp  = config.mobileBreakpoint || 768;
+        var autoplayMs = config.mobileAutoplay || 2000;
         var loopWidth = 0;
         var offset    = 0;
         var paused    = false;
@@ -29,6 +31,8 @@ $(function () {
         var dragMoved = false;
         var animating = false;
         var animRaf   = null;
+        var autoplayTimer = null;
+        var isMobile  = false;
 
         // Klonla: sonsuz loop üçün 1 əlavə nüsxə
         var origChildren = Array.from(trackEl.children);
@@ -46,20 +50,41 @@ $(function () {
             return ((v % loopWidth) + loopWidth) % loopWidth;
         }
 
-        // transform həmişə normalize edilmiş dəyərlə — animasiya bitişindəki sıçrayış yoxdur
         function setTransform(raw) {
             var x = loopWidth > 0 ? normalize(raw) : raw;
             trackEl.style.transform = 'translate3d(' + (-x) + 'px,0,0)';
         }
 
+        function applyMobileItemWidths() {
+            var w = viewportEl.clientWidth;
+            Array.prototype.forEach.call(trackEl.children, function (child) {
+                if (isMobile) {
+                    child.style.width = w + 'px';
+                    child.style.flex = '0 0 ' + w + 'px';
+                    child.style.maxWidth = w + 'px';
+                } else {
+                    child.style.width = '';
+                    child.style.flex = '';
+                    child.style.maxWidth = '';
+                }
+            });
+        }
+
         function measure() {
+            var wasMobile = isMobile;
+            isMobile = window.innerWidth < mobileBp;
+            viewportEl.classList.toggle('is-mobile-snap', isMobile);
+            applyMobileItemWidths();
             loopWidth = trackEl.scrollWidth / 2;
-            // sağ axış: ikinci kopyanın ortasından başla
-            if (flow === 'right' && offset === 0) {
+            if (!wasMobile && !isMobile && flow === 'right' && offset === 0) {
                 offset = loopWidth * 0.5;
+            }
+            if (isMobile) {
+                offset = Math.round(normalize(offset) / Math.max(getItemWidth(), 1)) * getItemWidth();
             }
             offset = normalize(offset);
             setTransform(offset);
+            syncAutoplay();
         }
 
         function getItemWidth() {
@@ -75,6 +100,7 @@ $(function () {
         }
 
         function getAnimDuration() {
+            if (isMobile) return 420;
             var n = config.stepCards || 1;
             return Math.min(300 + n * 180, 900);
         }
@@ -84,12 +110,9 @@ $(function () {
             if (animRaf) cancelAnimationFrame(animRaf);
             animating = true;
 
-            // Normalize başlanğıc nöqtəsini
             var start = normalize(offset);
             var end   = start + delta;
 
-            // Animasiya boyunca hər iki tərəf eyni "kopya"da qalsın — wrap baş verməsin
-            // Əgər end bütöv dövrü keçirsə, start-ı uyğunlaşdırırıq
             if (end >= loopWidth)  start = start - loopWidth;
             if (end < 0)           start = start + loopWidth;
             end = start + delta;
@@ -113,8 +136,45 @@ $(function () {
             animRaf = requestAnimationFrame(frame);
         }
 
+        function goNext() {
+            animateNudge(flow === 'right' ? -getStep() : getStep());
+        }
+
+        function goPrev() {
+            animateNudge(flow === 'right' ? getStep() : -getStep());
+        }
+
+        function snapToNearest() {
+            var step = getItemWidth();
+            if (step <= 0) return;
+            var nearest = Math.round(normalize(offset) / step) * step;
+            animateNudge(nearest - normalize(offset));
+        }
+
+        function stopAutoplay() {
+            if (autoplayTimer) {
+                clearInterval(autoplayTimer);
+                autoplayTimer = null;
+            }
+        }
+
+        function startAutoplay() {
+            stopAutoplay();
+            if (!isMobile) return;
+            autoplayTimer = setInterval(function () {
+                if (visible && !paused && !dragging && !animating) {
+                    goNext();
+                }
+            }, autoplayMs);
+        }
+
+        function syncAutoplay() {
+            if (isMobile) startAutoplay();
+            else stopAutoplay();
+        }
+
         function tick() {
-            if (visible && !paused && !dragging && !animating && loopWidth > 0) {
+            if (!isMobile && visible && !paused && !dragging && !animating && loopWidth > 0) {
                 offset += flow === 'right' ? -speed : speed;
                 offset = normalize(offset);
                 setTransform(offset);
@@ -122,7 +182,6 @@ $(function () {
             requestAnimationFrame(tick);
         }
 
-        // IntersectionObserver: görünmədikdə CPU-nu boş yükləmirik
         if ('IntersectionObserver' in window) {
             var io = new IntersectionObserver(function (entries) {
                 visible = entries[0].isIntersecting;
@@ -138,23 +197,23 @@ $(function () {
             config._resizeT = setTimeout(measure, 200);
         });
 
-        // Ox düymələri
         if (config.prev) {
             document.querySelectorAll(config.prev).forEach(function (btn) {
                 btn.addEventListener('click', function () {
-                    animateNudge(flow === 'right' ? getStep() : -getStep());
+                    goPrev();
+                    if (isMobile) startAutoplay();
                 });
             });
         }
         if (config.next) {
             document.querySelectorAll(config.next).forEach(function (btn) {
                 btn.addEventListener('click', function () {
-                    animateNudge(flow === 'right' ? -getStep() : getStep());
+                    goNext();
+                    if (isMobile) startAutoplay();
                 });
             });
         }
 
-        // Hover — dur
         viewportEl.addEventListener('mouseenter', function () { paused = true; });
         viewportEl.addEventListener('mouseleave', function () {
             paused = false;
@@ -164,7 +223,6 @@ $(function () {
             }
         });
 
-        // Mouse drag
         viewportEl.addEventListener('mousedown', function (e) {
             if (e.button !== 0) return;
             e.preventDefault();
@@ -185,15 +243,16 @@ $(function () {
             if (!dragging) return;
             dragging = false;
             viewportEl.classList.remove('is-dragging');
+            if (isMobile && dragMoved) snapToNearest();
         });
 
-        // Touch drag (passive: true → scroll-u bloklamır)
         viewportEl.addEventListener('touchstart', function (e) {
             if (!e.touches.length) return;
             dragging   = true;
             dragMoved  = false;
             dragStartX = e.touches[0].clientX;
             dragStartOffset = normalize(offset);
+            if (isMobile) stopAutoplay();
         }, { passive: true });
         viewportEl.addEventListener('touchmove', function (e) {
             if (!dragging || !e.touches.length) return;
@@ -202,10 +261,18 @@ $(function () {
             offset = normalize(dragStartOffset - delta);
             setTransform(offset);
         }, { passive: true });
-        viewportEl.addEventListener('touchend',    function () { dragging = false; });
-        viewportEl.addEventListener('touchcancel', function () { dragging = false; });
+        viewportEl.addEventListener('touchend', function () {
+            dragging = false;
+            if (isMobile) {
+                if (dragMoved) snapToNearest();
+                startAutoplay();
+            }
+        });
+        viewportEl.addEventListener('touchcancel', function () {
+            dragging = false;
+            if (isMobile) startAutoplay();
+        });
 
-        // Drag zamanı linklərə kliku bloklayırıq
         trackEl.addEventListener('click', function (e) {
             if (dragMoved) {
                 e.preventDefault();
@@ -222,6 +289,7 @@ $(function () {
         flow: 'right',
         speed: 0.45,
         stepCards: 1,
+        mobileAutoplay: 2000,
         prev: '.featured-projects-nav-prev',
         next: '.featured-projects-nav-next'
     });
@@ -233,6 +301,7 @@ $(function () {
         flow: 'left',
         speed: 0.45,
         stepCards: 1,
+        mobileAutoplay: 2000,
         prev: '.services-nav-prev',
         next: '.services-nav-next'
     });

@@ -117,9 +117,9 @@ body[data-active-page="training"] .training-page {
 .training-hero__panel-label {
   display: block;
   margin-bottom: 0.35rem;
-  font-size: 0.75rem;
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #ed4f24;
 }
@@ -893,6 +893,10 @@ body[data-active-page="training"] .page-wrapper:not(.training-page) {
   font-weight: 700;
   color: #fff;
   background: rgba(0, 0, 0, 0.72);
+  font-variant-numeric: tabular-nums;
+}
+.training-curriculum__duration:empty {
+  display: none;
 }
 .training-curriculum__info h4 {
   margin: 0 0 0.35rem;
@@ -911,12 +915,36 @@ body[data-active-page="training"] .page-wrapper:not(.training-page) {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.75rem;
 }
-.training-detail__gallery img {
+.training-detail__gallery-item {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.training-detail__gallery-item:hover,
+.training-detail__gallery-item:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(15, 23, 20, 0.14);
+  outline: none;
+}
+.training-detail__gallery-item:focus-visible {
+  box-shadow: 0 0 0 3px rgba(237, 79, 36, 0.35), 0 10px 28px rgba(15, 23, 20, 0.14);
+}
+.training-detail__gallery img,
+.training-detail__gallery-item img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 14px;
   border: 1px solid rgba(31, 42, 46, 0.08);
+  display: block;
+  pointer-events: none;
 }
 .training-detail__cta {
   display: flex;
@@ -1065,6 +1093,52 @@ body[data-active-page="training"] .page-wrapper:not(.training-page) {
   }
   .training-curriculum__item {
     grid-template-columns: minmax(0, 140px) minmax(0, 1fr);
+  }
+
+  /* Sifariş / Ödəniş — mobil: sabit narıncı, ikon solda, hover yox */
+  .training-detail__cta .btn,
+  .training-order-form__submit.btn {
+    background: #ed4f24 !important;
+    border-color: #ed4f24 !important;
+    padding-left: 4.35rem !important;
+    padding-right: 1.5rem !important;
+  }
+  .training-detail__cta .btn:hover,
+  .training-detail__cta .btn:focus,
+  .training-detail__cta .btn:focus-visible,
+  .training-detail__cta .btn:active,
+  .training-order-form__submit.btn:hover,
+  .training-order-form__submit.btn:focus,
+  .training-order-form__submit.btn:focus-visible,
+  .training-order-form__submit.btn:active {
+    background: #ed4f24 !important;
+    border-color: #ed4f24 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  .training-detail__cta .btn .btn-icon,
+  .training-order-form__submit.btn .btn-icon {
+    left: 0 !important;
+    right: auto !important;
+    transform: translate(15%, -50%) !important;
+  }
+  .training-detail__cta .btn:hover .btn-icon,
+  .training-detail__cta .btn:focus-visible .btn-icon,
+  .training-order-form__submit.btn:hover .btn-icon,
+  .training-order-form__submit.btn:focus-visible .btn-icon {
+    left: 0 !important;
+    transform: translate(15%, -50%) !important;
+  }
+  .training-detail__cta .btn .btn-text,
+  .training-detail__cta .btn:hover .btn-text,
+  .training-detail__cta .btn:focus-visible .btn-text,
+  .training-order-form__submit.btn .btn-text,
+  .training-order-form__submit.btn:hover .btn-text,
+  .training-order-form__submit.btn:focus-visible .btn-text {
+    color: #ffffff !important;
+    transform: none !important;
+    padding-inline-start: 0.55rem !important;
+    padding-inline-end: 0 !important;
   }
 }
 @media (max-width: 575.98px) {
