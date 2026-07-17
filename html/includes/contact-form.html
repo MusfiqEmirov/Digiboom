@@ -1,35 +1,31 @@
 <form id="{{formId}}" class="contact-form-modern {{formClass}}" {{aosAttrs}} method="post"
   action="{{smtpAction}}" data-smtp-form novalidate>
   <div class="contact-form-modern__fields">
+    {{serviceField}}
     <div class="contact-form-modern__field contact-form-modern__field--full">
-      <label for="{{prefix}}-name" class="contact-form-modern__label">Ad və soyad</label>
+      <label for="{{prefix}}-name" class="contact-form-modern__label">Ad və soyad <span class="text-danger">*</span></label>
       <input type="text" class="contact-form-modern__input" id="{{prefix}}-name" name="name"
         placeholder="Adınız və soyadınız" autocomplete="name" required>
     </div>
     <div class="contact-form-modern__field">
-      <label for="{{prefix}}-phone" class="contact-form-modern__label">Telefon</label>
+      <label for="{{prefix}}-phone" class="contact-form-modern__label">Telefon <span class="text-danger">*</span></label>
       <input type="tel" class="contact-form-modern__input" id="{{prefix}}-phone" name="phone"
         placeholder="+994 50 000 00 00" autocomplete="tel" required>
     </div>
     <div class="contact-form-modern__field">
       <label for="{{prefix}}-email" class="contact-form-modern__label">E-poçt</label>
       <input type="email" class="contact-form-modern__input" id="{{prefix}}-email" name="email"
-        placeholder="email@example.com" autocomplete="email" required>
+        placeholder="email@example.com" autocomplete="email">
     </div>
     <div class="contact-form-modern__field contact-form-modern__field--full">
-      <label for="{{prefix}}-company" class="contact-form-modern__label">Şirkət adı <span class="contact-form-modern__optional">(istəyə görə)</span></label>
-      <input type="text" class="contact-form-modern__input" id="{{prefix}}-company" name="company"
-        placeholder="Şirkət və ya brend adı" autocomplete="organization">
-    </div>
-    <div class="contact-form-modern__field contact-form-modern__field--full">
-      <label for="{{prefix}}-message" class="contact-form-modern__label">Mesaj</label>
+      <label for="{{prefix}}-message" class="contact-form-modern__label">Mesaj <span class="text-danger">*</span></label>
       <textarea class="contact-form-modern__input contact-form-modern__textarea" id="{{prefix}}-message" name="message"
         placeholder="Layihəniz və ya sualınız haqqında qısaca yazın..." rows="4" required></textarea>
     </div>
   </div>
   <p class="contact-form-modern__status" data-form-status hidden role="status" aria-live="polite"></p>
   <button type="submit" class="btn contact-form-modern__submit w-100 justify-content-center {{btnClass}}">
-    <span class="btn-text">Göndər</span>
+    <span class="btn-text">Göndərin</span>
     <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm" aria-hidden="true"></iconify-icon>
   </button>
 </form>

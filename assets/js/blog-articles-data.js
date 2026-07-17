@@ -8,7 +8,8 @@
       category: 'Marketinq',
       categorySlug: 'marketinq',
       date: '2025-12-24',
-      dateFormatted: '24 Dekabr 2025',
+      dateFormatted: '24.12.2025',
+      viewsApprox: '2400',
       image: '../assets/images/resources/resources-1.jpg',
       excerpt: 'Auditoriyanızla emosional əlaqə qurmaq üçün strategiyalar və real nəticələr.',
       content: [
@@ -29,7 +30,8 @@
       category: 'Brendinq',
       categorySlug: 'brendinq',
       date: '2025-12-20',
-      dateFormatted: '20 Dekabr 2025',
+      dateFormatted: '20.12.2025',
+      viewsApprox: '1800',
       image: '../assets/images/resources/resources-2.jpg',
       excerpt: 'Köhnə vizual identiklikdən müasir, güclü brend təcrübəsinə keçid hekayəsi.',
       content: [
@@ -46,7 +48,8 @@
       category: 'Dizayn',
       categorySlug: 'dizayn',
       date: '2025-12-15',
-      dateFormatted: '15 Dekabr 2025',
+      dateFormatted: '15.12.2025',
+      viewsApprox: '3100',
       image: '../assets/images/resources/resources-3.jpg',
       excerpt: 'Mükafat qazanan layihələrimiz və dizayn prosesinin arxasındakı düşüncə.',
       content: [
@@ -62,7 +65,8 @@
       category: 'Trendlər',
       categorySlug: 'trendler',
       date: '2025-12-10',
-      dateFormatted: '10 Dekabr 2025',
+      dateFormatted: '10.12.2025',
+      viewsApprox: '2700',
       image: '../assets/images/services/services-img-1.jpg',
       excerpt: '2026-cı ilin vizual trendləri və rəqəmsal mədəniyyətə təsir edən faktorlar.',
       content: [
@@ -76,7 +80,8 @@
       category: 'Sosial media',
       categorySlug: 'sosial-media',
       date: '2025-12-05',
-      dateFormatted: '5 Dekabr 2025',
+      dateFormatted: '05.12.2025',
+      viewsApprox: '1500',
       image: '../assets/images/services/services-img-2.jpg',
       excerpt: 'Reklam büdcəsi olmadan auditoriya qurmaq üçün sübut olunmuş üsullar.',
       content: [
@@ -90,7 +95,8 @@
       category: 'UX/UI',
       categorySlug: 'ux-ui',
       date: '2025-11-28',
-      dateFormatted: '28 Noyabr 2025',
+      dateFormatted: '28.11.2025',
+      viewsApprox: '4200',
       image: '../assets/images/services/services-img-3.jpg',
       excerpt: 'Məhsulunuzun konversiyasını artıran UX yanaşmaları və praktik nümunələr.',
       content: [
@@ -103,7 +109,8 @@
       category: 'Video',
       categorySlug: 'video',
       date: '2025-11-20',
-      dateFormatted: '20 Noyabr 2025',
+      dateFormatted: '20.11.2025',
+      viewsApprox: '1900',
       image: '../assets/images/services/services-img-4.jpg',
       excerpt: 'Reels və TikTok üçün effektiv kontent yaratmaq üsulları.',
       content: [
@@ -116,7 +123,8 @@
       category: 'E-ticarət',
       categorySlug: 'e-ticaret',
       date: '2025-11-12',
-      dateFormatted: '12 Noyabr 2025',
+      dateFormatted: '12.11.2025',
+      viewsApprox: '2200',
       image: '../assets/images/portfolio/portfolio-img-1.jpg',
       excerpt: 'Checkout prosesindən SEO-ya qədər e-ticarət optimallaşdırma bələdçisi.',
       content: [
@@ -129,7 +137,8 @@
       category: 'Kontent',
       categorySlug: 'kontent',
       date: '2025-11-05',
-      dateFormatted: '5 Noyabr 2025',
+      dateFormatted: '05.11.2025',
+      viewsApprox: '3600',
       image: '../assets/images/portfolio/portfolio-img-2.jpg',
       excerpt: 'Aylıq redaksiya təqvimi və məzmun strategiyası üçün addım-addım plan.',
       content: [
@@ -142,7 +151,8 @@
       category: 'SEO',
       categorySlug: 'seo',
       date: '2025-10-28',
-      dateFormatted: '28 Oktyabr 2025',
+      dateFormatted: '28.10.2025',
+      viewsApprox: '5100',
       image: '../assets/images/portfolio/portfolio-img-3.jpg',
       excerpt: 'Axtarış motorlarında yüksəlmək üçün texniki və kontent SEO tövsiyələri.',
       content: [
@@ -155,7 +165,8 @@
       category: 'Brendinq',
       categorySlug: 'brendinq',
       date: '2025-10-20',
-      dateFormatted: '20 Oktyabr 2025',
+      dateFormatted: '20.10.2025',
+      viewsApprox: '2900',
       image: '../assets/images/portfolio/portfolio-img-4.jpg',
       excerpt: 'Müştərilərinizlə eyni dildə danışmaq üçün ton və üslub bələdçisi.',
       content: [
@@ -168,7 +179,8 @@
       category: 'Strategiya',
       categorySlug: 'strategiya',
       date: '2025-10-12',
-      dateFormatted: '12 Oktyabr 2025',
+      dateFormatted: '12.10.2025',
+      viewsApprox: '1700',
       image: '../assets/images/portfolio/portfolio-img-5.jpg',
       excerpt: 'Məhdud resurslarla rəqəmsal dünyada rəqabət aparmaq yolları.',
       content: [

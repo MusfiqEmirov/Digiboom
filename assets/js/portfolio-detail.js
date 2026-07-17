@@ -1,6 +1,39 @@
 (function () {
   'use strict';
 
+  /* — Layihə adı + xidmətlər (URL-dən; detail-də hamısı göstərilir) — */
+  if (window.DigiBoomProjects) {
+    var slug = DigiBoomProjects.getProjectSlugFromUrl();
+    var project = DigiBoomProjects.getProject(slug);
+    var nameEl = document.getElementById('projectDetailName');
+    if (nameEl) nameEl.textContent = project.name;
+    document.title = 'DigiBoom — ' + project.name;
+
+    var tagsList = document.querySelector('.project-detail-tags');
+    if (tagsList && project.services && project.services.length) {
+      tagsList.innerHTML = '';
+      project.services.forEach(function (serviceName) {
+        var href = window.DigiBoomServices
+          ? DigiBoomServices.serviceDetailUrl(serviceName)
+          : 'services-detail.html';
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.className = 'project-detail-tags__item';
+        a.href = href;
+        a.setAttribute('aria-label', serviceName + ' xidmətinin ətraflı səhifəsi');
+        var icon = document.createElement('iconify-icon');
+        icon.setAttribute('icon', DigiBoomProjects.getServiceIcon(serviceName));
+        icon.setAttribute('aria-hidden', 'true');
+        var span = document.createElement('span');
+        span.textContent = serviceName;
+        a.appendChild(icon);
+        a.appendChild(span);
+        li.appendChild(a);
+        tagsList.appendChild(li);
+      });
+    }
+  }
+
   /* — Video oynatma — */
   var player = document.getElementById('projectVideoPlayer');
   var video = document.getElementById('projectDetailVideo');
@@ -35,15 +68,14 @@
     });
   }
 
-  /* — Sinxron qalereya karuselləri — */
-  function initSyncedProjectGalleries() {
+  /* — Tək sətir qalereya karuseli — */
+  function initProjectGallery() {
     var galleryRoot = document.getElementById('projectGallery');
-    var topTrack = document.querySelector('.project-gallery-marquee--top .project-gallery-marquee__track');
-    var bottomTrack = document.querySelector('.project-gallery-marquee--bottom .project-gallery-marquee__track');
-    var topViewport = document.querySelector('.project-gallery-marquee--top');
-    var bottomViewport = document.querySelector('.project-gallery-marquee--bottom');
+    var track = galleryRoot ? galleryRoot.querySelector('.project-gallery-marquee__track') : null;
+    var viewport = galleryRoot ? galleryRoot.querySelector('.project-gallery-marquee') : null;
+    var row = galleryRoot ? galleryRoot.querySelector('.project-gallery-carousel__row') : null;
 
-    if (!galleryRoot || !topTrack || !bottomTrack) return;
+    if (!galleryRoot || !track || !viewport) return;
 
     var speed = 1.05;
     var visible = true;
@@ -51,27 +83,19 @@
     var dragStartX = 0;
     var dragStartOffset = 0;
     var dragMoved = false;
-    var animatingLane = null;
+    var animating = false;
     var animRaf = null;
     var resizeT = null;
 
-    var topRow = document.querySelector('.project-gallery-carousel__row--top');
-    var bottomRow = document.querySelector('.project-gallery-carousel__row--bottom');
+    var lane = { track: track, viewport: viewport, flow: 'left', offset: 0, loopWidth: 0, paused: false };
 
-    var lanes = [
-      { track: topTrack, viewport: topViewport, flow: 'left', offset: 0, loopWidth: 0, paused: false },
-      { track: bottomTrack, viewport: bottomViewport, flow: 'right', offset: 0, loopWidth: 0, paused: false }
-    ];
-
-    lanes.forEach(function (lane) {
-      var origChildren = Array.from(lane.track.children);
-      origChildren.forEach(function (child) {
-        var clone = child.cloneNode(true);
-        clone.setAttribute('data-clone', 'true');
-        lane.track.appendChild(clone);
-      });
-      lane.track.style.animation = 'none';
+    var origChildren = Array.from(lane.track.children);
+    origChildren.forEach(function (child) {
+      var clone = child.cloneNode(true);
+      clone.setAttribute('data-clone', 'true');
+      lane.track.appendChild(clone);
     });
+    lane.track.style.animation = 'none';
 
     function easeOutQuart(t) {
       return 1 - Math.pow(1 - t, 4);
@@ -82,23 +106,18 @@
       return ((v % loopWidth) + loopWidth) % loopWidth;
     }
 
-    function setLaneTransform(lane) {
+    function setLaneTransform() {
       var x = lane.loopWidth > 0 ? normalize(lane.offset, lane.loopWidth) : lane.offset;
       lane.track.style.transform = 'translate3d(' + (-x) + 'px,0,0)';
     }
 
-    function measureAll() {
-      lanes.forEach(function (lane) {
-        lane.loopWidth = lane.track.scrollWidth / 2;
-        if (lane.flow === 'right' && lane.offset === 0) {
-          lane.offset = lane.loopWidth * 0.5;
-        }
-        lane.offset = normalize(lane.offset, lane.loopWidth);
-        setLaneTransform(lane);
-      });
+    function measure() {
+      lane.loopWidth = lane.track.scrollWidth / 2;
+      lane.offset = normalize(lane.offset, lane.loopWidth);
+      setLaneTransform();
     }
 
-    function getStep(lane) {
+    function getStep() {
       var first = lane.track.firstElementChild;
       if (!first) return 300;
       var style = getComputedStyle(lane.track);
@@ -106,10 +125,10 @@
       return first.offsetWidth + gap;
     }
 
-    function animateNudge(lane, delta) {
-      if (animatingLane || lane.loopWidth <= 0) return;
+    function animateNudge(delta) {
+      if (animating || lane.loopWidth <= 0) return;
       if (animRaf) cancelAnimationFrame(animRaf);
-      animatingLane = lane;
+      animating = true;
 
       var start = normalize(lane.offset, lane.loopWidth);
       var end = start + delta;
@@ -125,146 +144,126 @@
         var p = Math.min((now - t0) / duration, 1);
         var cur = start + (end - start) * easeOutQuart(p);
         lane.offset = cur;
-        setLaneTransform(lane);
+        setLaneTransform();
         if (p < 1) {
           animRaf = requestAnimationFrame(frame);
         } else {
           lane.offset = normalize(end, lane.loopWidth);
-          setLaneTransform(lane);
-          animatingLane = null;
+          setLaneTransform();
+          animating = false;
         }
       }
       animRaf = requestAnimationFrame(frame);
     }
 
     function tick() {
-      if (visible && !draggingLane && !animatingLane) {
-        lanes.forEach(function (lane) {
-          if (lane.paused || lane.loopWidth <= 0) return;
-          lane.offset += lane.flow === 'right' ? -speed : speed;
+      if (visible && !draggingLane && !animating) {
+        if (!lane.paused && lane.loopWidth > 0) {
+          lane.offset += speed;
           lane.offset = normalize(lane.offset, lane.loopWidth);
-          setLaneTransform(lane);
-        });
+          setLaneTransform();
+        }
       }
       requestAnimationFrame(tick);
     }
 
-    measureAll();
+    measure();
     tick();
 
     window.addEventListener('resize', function () {
       clearTimeout(resizeT);
-      resizeT = setTimeout(measureAll, 200);
+      resizeT = setTimeout(measure, 200);
     });
 
-    function bindNav(selector, lane, direction) {
-      document.querySelectorAll(selector).forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var delta = direction * getStep(lane);
-          if (lane.flow === 'right') delta = -delta;
-          animateNudge(lane, delta);
-        });
+    galleryRoot.querySelectorAll('.project-gallery-carousel__nav--prev').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        animateNudge(-getStep());
       });
-    }
+    });
 
-    bindNav('.project-gallery-carousel__nav--top-prev', lanes[0], -1);
-    bindNav('.project-gallery-carousel__nav--top-next', lanes[0], 1);
-    bindNav('.project-gallery-carousel__nav--bottom-prev', lanes[1], -1);
-    bindNav('.project-gallery-carousel__nav--bottom-next', lanes[1], 1);
-
-    if (topRow) {
-      topRow.addEventListener('mouseenter', function () { lanes[0].paused = true; });
-      topRow.addEventListener('mouseleave', function () {
-        lanes[0].paused = false;
-        if (draggingLane === lanes[0]) {
-          draggingLane = null;
-          if (lanes[0].viewport) lanes[0].viewport.classList.remove('is-dragging');
-        }
+    galleryRoot.querySelectorAll('.project-gallery-carousel__nav--next').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        animateNudge(getStep());
       });
-    }
-    if (bottomRow) {
-      bottomRow.addEventListener('mouseenter', function () { lanes[1].paused = true; });
-      bottomRow.addEventListener('mouseleave', function () {
-        lanes[1].paused = false;
-        if (draggingLane === lanes[1]) {
+    });
+
+    if (row) {
+      row.addEventListener('mouseenter', function () { lane.paused = true; });
+      row.addEventListener('mouseleave', function () {
+        lane.paused = false;
+        if (draggingLane) {
           draggingLane = null;
-          if (lanes[1].viewport) lanes[1].viewport.classList.remove('is-dragging');
+          viewport.classList.remove('is-dragging');
         }
       });
     }
 
-    lanes.forEach(function (lane) {
-      if (!lane.viewport) return;
+    viewport.addEventListener('mousedown', function (e) {
+      if (e.button !== 0) return;
+      e.preventDefault();
+      draggingLane = lane;
+      dragMoved = false;
+      dragStartX = e.clientX;
+      dragStartOffset = normalize(lane.offset, lane.loopWidth);
+      viewport.classList.add('is-dragging');
+    });
 
-      lane.viewport.addEventListener('mousedown', function (e) {
-        if (e.button !== 0) return;
+    viewport.addEventListener('touchstart', function (e) {
+      if (!e.touches.length) return;
+      draggingLane = lane;
+      dragMoved = false;
+      dragStartX = e.touches[0].clientX;
+      dragStartOffset = normalize(lane.offset, lane.loopWidth);
+    }, { passive: true });
+
+    viewport.addEventListener('touchmove', function (e) {
+      if (draggingLane !== lane || !e.touches.length) return;
+      var delta = e.touches[0].clientX - dragStartX;
+      if (Math.abs(delta) > 4) dragMoved = true;
+      lane.offset = normalize(dragStartOffset - delta, lane.loopWidth);
+      setLaneTransform();
+    }, { passive: true });
+
+    viewport.addEventListener('touchend', function () {
+      if (draggingLane === lane) {
+        draggingLane = null;
+        viewport.classList.remove('is-dragging');
+      }
+    });
+    viewport.addEventListener('touchcancel', function () {
+      if (draggingLane === lane) {
+        draggingLane = null;
+        viewport.classList.remove('is-dragging');
+      }
+    });
+
+    track.addEventListener('click', function (e) {
+      if (dragMoved) {
         e.preventDefault();
-        draggingLane = lane;
+        e.stopPropagation();
         dragMoved = false;
-        dragStartX = e.clientX;
-        dragStartOffset = normalize(lane.offset, lane.loopWidth);
-        lane.viewport.classList.add('is-dragging');
-      });
-
-      lane.viewport.addEventListener('touchstart', function (e) {
-        if (!e.touches.length) return;
-        draggingLane = lane;
-        dragMoved = false;
-        dragStartX = e.touches[0].clientX;
-        dragStartOffset = normalize(lane.offset, lane.loopWidth);
-      }, { passive: true });
-
-      lane.viewport.addEventListener('touchmove', function (e) {
-        if (draggingLane !== lane || !e.touches.length) return;
-        var delta = e.touches[0].clientX - dragStartX;
-        if (Math.abs(delta) > 4) dragMoved = true;
-        lane.offset = normalize(dragStartOffset - delta, lane.loopWidth);
-        setLaneTransform(lane);
-      }, { passive: true });
-
-      lane.viewport.addEventListener('touchend', function () {
-        if (draggingLane === lane) {
-          draggingLane = null;
-          lane.viewport.classList.remove('is-dragging');
-        }
-      });
-      lane.viewport.addEventListener('touchcancel', function () {
-        if (draggingLane === lane) {
-          draggingLane = null;
-          lane.viewport.classList.remove('is-dragging');
-        }
-      });
-
-      lane.track.addEventListener('click', function (e) {
-        if (dragMoved) {
-          e.preventDefault();
-          e.stopPropagation();
-          dragMoved = false;
-        }
-      }, true);
-    });
+      }
+    }, true);
 
     window.addEventListener('mousemove', function (e) {
       if (!draggingLane) return;
       var delta = e.clientX - dragStartX;
       if (Math.abs(delta) > 4) dragMoved = true;
       draggingLane.offset = normalize(dragStartOffset - delta, draggingLane.loopWidth);
-      setLaneTransform(draggingLane);
+      setLaneTransform();
     });
     window.addEventListener('mouseup', function () {
       if (!draggingLane) return;
-      if (draggingLane.viewport) draggingLane.viewport.classList.remove('is-dragging');
+      viewport.classList.remove('is-dragging');
       draggingLane = null;
     });
 
-    galleryRoot.addEventListener('click', function (e) {
-      if (dragMoved) {
-        dragMoved = false;
-      }
+    galleryRoot.addEventListener('click', function () {
+      if (dragMoved) dragMoved = false;
     }, true);
   }
 
-  initSyncedProjectGalleries();
+  initProjectGallery();
 
   /* — Qalereya lightbox — */
   var gallery = document.getElementById('projectGallery');
@@ -278,7 +277,10 @@
     var images = [];
     var i;
     for (i = 0; i < 8; i++) {
-      var item = gallery.querySelector('.project-gallery-marquee__item[data-gallery-index="' + i + '"]');
+      var item = gallery.querySelector('.project-gallery-marquee__item[data-gallery-index="' + i + '"]:not([data-clone])');
+      if (!item) {
+        item = gallery.querySelector('.project-gallery-marquee__item[data-gallery-index="' + i + '"]');
+      }
       if (!item) continue;
       var img = item.querySelector('img');
       images.push({
@@ -332,8 +334,21 @@
       });
     }
 
+    var closeBtn = modalEl.querySelector('.project-gallery-modal__close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        getModal().hide();
+      });
+    }
+
     modalEl.addEventListener('keydown', function (e) {
       if (!modalEl.classList.contains('show')) return;
+      if (e.key === 'Escape') {
+        getModal().hide();
+        return;
+      }
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
         showImage(currentIndex - 1);

@@ -57,32 +57,48 @@
       <button type="button" class="hero-banner-nav hero-banner-nav--next" aria-label="Növbəti slayd">
         <iconify-icon icon="lucide:chevron-right"></iconify-icon>
       </button>
+      <!-- DigiBoom countdown + explosion (hero center) -->
+      <div class="hero-banner-bomb" id="heroBannerBomb" aria-hidden="true">
+        <div class="hero-banner-bomb__veil"></div>
+        <div class="hero-banner-bomb__stage">
+          <div class="hero-banner-bomb__count-track" aria-live="polite">
+            <span class="hero-banner-bomb__num">3</span>
+          </div>
+          <div class="hero-banner-bomb__bomb-wrap">
+            <span class="hero-banner-bomb__bomb">
+              <span class="hero-banner-bomb__fuse">
+                <span class="hero-banner-bomb__fuse-line"></span>
+                <span class="hero-banner-bomb__fuse-fire"></span>
+                <span class="hero-banner-bomb__fuse-spark"></span>
+              </span>
+              <span class="hero-banner-bomb__cap"></span>
+              <span class="hero-banner-bomb__body">
+                <span class="hero-banner-bomb__shine"></span>
+                <span class="hero-banner-bomb__glint"></span>
+                <span class="hero-banner-bomb__band"></span>
+              </span>
+            </span>
+          </div>
+          <div class="hero-banner-bomb__fx" aria-hidden="true">
+            <span class="hero-banner-bomb__core"></span>
+            <span class="hero-banner-bomb__ring hero-banner-bomb__ring--1"></span>
+            <span class="hero-banner-bomb__ring hero-banner-bomb__ring--2"></span>
+            <span class="hero-banner-bomb__ring hero-banner-bomb__ring--3"></span>
+            <span class="hero-banner-bomb__smoke"></span>
+            <div class="hero-banner-bomb__sparks"></div>
+            <div class="hero-banner-bomb__debris"></div>
+          </div>
+          <div class="hero-banner-bomb__word" aria-hidden="true">BOOM</div>
+        </div>
+      </div>
+
       <div class="container">
         <div class="d-flex flex-column gap-4 pb-8 position-relative z-1">
           <div class="row align-items-center">
-            <div class="col-xl-4">
+            <div class="col-xl-5 col-lg-7">
               <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100"
                 data-aos-duration="1000">
-                <img src="../assets/images/svgs/primary-leaf.svg" alt="" class="img-fluid animate-spin">
-                <p class="mb-0 text-white fs-6 text-opacity-80 hero-banner-tagline">Ana mətn</p>
-                <div class="hero-banner-bomb" id="heroBannerBomb" aria-hidden="true">
-                  <div class="hero-banner-bomb__inner">
-                    <div class="hero-banner-bomb__count-track" aria-live="polite">
-                      <span class="hero-banner-bomb__num">3</span>
-                    </div>
-                    <div class="hero-banner-bomb__bomb-wrap">
-                      <span class="hero-banner-bomb__bomb">
-                        <span class="hero-banner-bomb__fuse">
-                          <span class="hero-banner-bomb__fuse-line"></span>
-                          <span class="hero-banner-bomb__fuse-fire"></span>
-                        </span>
-                        <span class="hero-banner-bomb__body"></span>
-                      </span>
-                      <div class="hero-banner-bomb__burst" aria-hidden="true"></div>
-                      <div class="hero-banner-bomb__sparks" aria-hidden="true"></div>
-                    </div>
-                  </div>
-                </div>
+                <p class="mb-0 fs-6 hero-banner-tagline">Rəqəmsal həllər partneriniz — brendinizi böyüdürür, nəticə gətiririk.</p>
               </div>
             </div>
           </div>
@@ -264,8 +280,7 @@
                 <div class="col-xxl-8">
                   <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100"
                     data-aos-duration="1000">
-                    <h2 class="mb-0">Gorduyumuz isler</h2>
-                    <p class="fs-5 mb-0">gorulen isler haqqinda metn.yazilada biler yazilmayada secim sizlikdir</p>
+                    <h2 class="mb-0">Gördüyümüz işlər</h2>
                   </div>
                 </div>
               </div>
@@ -286,7 +301,7 @@
               <article class="portfolio portfolio-showcase-card">
                 <div class="portfolio-showcase-card__frame">
                   <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                    <img src="../assets/images/portfolio/portfolio-img-1.jpg" alt="Layihə 1" class="img-fluid">
+                    <img src="../assets/images/portfolio/portfolio-img-1.jpg" alt="TemizXalı" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
                     <div class="d-flex align-items-center justify-content-end w-100">
                       <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
@@ -301,14 +316,16 @@
                 </div>
                 <div class="portfolio-showcase-card__meta">
                   <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                    <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                    <h3 class="mb-0">Layihə 1</h3>
+                    <h3 class="mb-0">TemizXalı</h3>
                     <div class="portfolio-showcase-card__tags hstack gap-2">
                       <span class="badge text-dark border">UX Strategy</span>
                       <span class="badge text-dark border">UI Design</span>
                     </div>
                   </div>
-                  <a href="projects-detail.html" class="portfolio-showcase-card__cta service-card__btn">Ətraflı</a>
+                  <a href="projects-detail.html?project=temizxali" class="btn portfolio-showcase-card__cta">
+                    <span class="btn-text">Ətraflı</span>
+                    <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
+                  </a>
 
                 </div>
                 </div>
@@ -318,7 +335,7 @@
               <article class="portfolio portfolio-showcase-card">
                 <div class="portfolio-showcase-card__frame">
                   <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                    <img src="../assets/images/portfolio/portfolio-img-2.jpg" alt="Layihə 2" class="img-fluid">
+                    <img src="../assets/images/portfolio/portfolio-img-2.jpg" alt="BusinessCup" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
                     <div class="d-flex align-items-center justify-content-end w-100">
                       <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
@@ -333,14 +350,16 @@
                 </div>
                 <div class="portfolio-showcase-card__meta">
                   <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                    <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                    <h3 class="mb-0">Layihə 2</h3>
+                    <h3 class="mb-0">BusinessCup</h3>
                     <div class="portfolio-showcase-card__tags hstack gap-2">
                       <span class="badge text-dark border">Web development</span>
                       <span class="badge text-dark border">Digital design</span>
                     </div>
                   </div>
-                  <a href="projects-detail.html" class="portfolio-showcase-card__cta service-card__btn">Ətraflı</a>
+                  <a href="projects-detail.html?project=bunisesscup" class="btn portfolio-showcase-card__cta">
+                    <span class="btn-text">Ətraflı</span>
+                    <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
+                  </a>
 
                 </div>
                 </div>
@@ -350,7 +369,7 @@
               <article class="portfolio portfolio-showcase-card">
                 <div class="portfolio-showcase-card__frame">
                   <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                    <img src="../assets/images/portfolio/portfolio-img-3.jpg" alt="Layihə 3" class="img-fluid">
+                    <img src="../assets/images/portfolio/portfolio-img-3.jpg" alt="NewAway" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
                     <div class="d-flex align-items-center justify-content-end w-100">
                       <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
@@ -365,14 +384,16 @@
                 </div>
                 <div class="portfolio-showcase-card__meta">
                   <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                    <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                    <h3 class="mb-0">Layihə 3</h3>
+                    <h3 class="mb-0">NewAway</h3>
                     <div class="portfolio-showcase-card__tags hstack gap-2">
                       <span class="badge text-dark border">UI/UX design</span>
                       <span class="badge text-dark border">Web development</span>
                     </div>
                   </div>
-                  <a href="projects-detail.html" class="portfolio-showcase-card__cta service-card__btn">Ətraflı</a>
+                  <a href="projects-detail.html?project=newawey" class="btn portfolio-showcase-card__cta">
+                    <span class="btn-text">Ətraflı</span>
+                    <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
+                  </a>
 
                 </div>
                 </div>
@@ -382,7 +403,7 @@
               <article class="portfolio portfolio-showcase-card">
                 <div class="portfolio-showcase-card__frame">
                   <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                    <img src="../assets/images/portfolio/portfolio-img-4.jpg" alt="Layihə 4" class="img-fluid">
+                    <img src="../assets/images/portfolio/portfolio-img-4.jpg" alt="Snacks" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
                     <div class="d-flex align-items-center justify-content-end w-100">
                       <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
@@ -397,14 +418,16 @@
                 </div>
                 <div class="portfolio-showcase-card__meta">
                   <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                    <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                    <h3 class="mb-0">Layihə 4</h3>
+                    <h3 class="mb-0">Snacks</h3>
                     <div class="portfolio-showcase-card__tags hstack gap-2">
                       <span class="badge text-dark border">Brand identity</span>
                       <span class="badge text-dark border">Digital design</span>
                     </div>
                   </div>
-                  <a href="projects-detail.html" class="portfolio-showcase-card__cta service-card__btn">Ətraflı</a>
+                  <a href="projects-detail.html?project=snakcs" class="btn portfolio-showcase-card__cta">
+                    <span class="btn-text">Ətraflı</span>
+                    <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
+                  </a>
 
                 </div>
                 </div>
@@ -414,7 +437,7 @@
               <article class="portfolio portfolio-showcase-card">
                 <div class="portfolio-showcase-card__frame">
                   <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                    <img src="../assets/images/portfolio/portfolio-img-5.jpg" alt="Layihə 5" class="img-fluid">
+                    <img src="../assets/images/portfolio/portfolio-img-5.jpg" alt="Kahi" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
                     <div class="d-flex align-items-center justify-content-end w-100">
                       <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
@@ -429,14 +452,16 @@
                 </div>
                 <div class="portfolio-showcase-card__meta">
                   <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                    <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                    <h3 class="mb-0">Layihə 5</h3>
+                    <h3 class="mb-0">Kahi</h3>
                     <div class="portfolio-showcase-card__tags hstack gap-2">
                       <span class="badge text-dark border">Photography</span>
                       <span class="badge text-dark border">Studio</span>
                     </div>
                   </div>
-                  <a href="projects-detail.html" class="portfolio-showcase-card__cta service-card__btn">Ətraflı</a>
+                  <a href="projects-detail.html?project=kahi" class="btn portfolio-showcase-card__cta">
+                    <span class="btn-text">Ətraflı</span>
+                    <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
+                  </a>
 
                 </div>
                 </div>
@@ -446,7 +471,7 @@
               <article class="portfolio portfolio-showcase-card">
                 <div class="portfolio-showcase-card__frame">
                   <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                    <img src="../assets/images/portfolio/portfolio-img-6.jpg" alt="Layihə 6" class="img-fluid">
+                    <img src="../assets/images/portfolio/portfolio-img-6.jpg" alt="AvertaTravel" class="img-fluid">
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
                     <div class="d-flex align-items-center justify-content-end w-100">
                       <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
@@ -461,14 +486,16 @@
                 </div>
                 <div class="portfolio-showcase-card__meta">
                   <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                    <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                    <h3 class="mb-0">Layihə 6</h3>
+                    <h3 class="mb-0">AvertaTravel</h3>
                     <div class="portfolio-showcase-card__tags hstack gap-2">
                       <span class="badge text-dark border">Digital design</span>
                       <span class="badge text-dark border">Web development</span>
                     </div>
                   </div>
-                  <a href="projects-detail.html" class="portfolio-showcase-card__cta service-card__btn">Ətraflı</a>
+                  <a href="projects-detail.html?project=avertatravel" class="btn portfolio-showcase-card__cta">
+                    <span class="btn-text">Ətraflı</span>
+                    <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
+                  </a>
 
                 </div>
                 </div>
@@ -511,7 +538,6 @@
             <div class="col services-header__center position-absolute start-0 end-0 d-flex justify-content-center align-items-center">
               <div class="services-title-block text-center" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
                 <h2 class="mb-0 text-white">Xidmətlər</h2>
-                <p class="fs-5 mb-0 text-white text-opacity-70">Her hansisa bir metn</p>
               </div>
             </div>
           </div>
@@ -528,96 +554,102 @@
               <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
-                  <span class="service-card__index" aria-hidden="true">01</span>
-                  <span class="service-card__icon-wrap" aria-hidden="true">
-                    <iconify-icon icon="lucide:megaphone"></iconify-icon>
-                  </span>
+
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-1.jpg');"></span>
                   <span class="service-card__overlay"></span>
+                  <span class="service-card__category" data-cat="marketinq">Marketinq</span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
                     <h3 class="service-card__title text-white mb-0">Ənənəvi marketinq</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Adet-ənənə üzərindən güclü brend qurmaq.</p>
-                    <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
+                    <a href="services-detail.html" class="btn service-card__btn">
+                      <span class="btn-text">Ətraflı</span>
+                      <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
+                    </a>
                   </div>
                 </article>
               </div>
               <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
-                  <span class="service-card__index" aria-hidden="true">02</span>
-                  <span class="service-card__icon-wrap" aria-hidden="true">
-                    <iconify-icon icon="lucide:messages-square"></iconify-icon>
-                  </span>
+
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-2.jpg');"></span>
                   <span class="service-card__overlay"></span>
+                  <span class="service-card__category" data-cat="konsultasiya">Konsultasiya</span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
                     <h3 class="service-card__title text-white mb-0">Konsultasiya</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Müvafiq sahə üzrə mütəxəssis məsləhəti.</p>
-                    <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
+                    <a href="services-detail.html" class="btn service-card__btn">
+                      <span class="btn-text">Ətraflı</span>
+                      <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
+                    </a>
                   </div>
                 </article>
               </div>
               <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
-                  <span class="service-card__index" aria-hidden="true">03</span>
-                  <span class="service-card__icon-wrap" aria-hidden="true">
-                    <iconify-icon icon="lucide:trending-up"></iconify-icon>
-                  </span>
+
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-3.jpg');"></span>
                   <span class="service-card__overlay"></span>
+                  <span class="service-card__category" data-cat="marketinq">Marketinq</span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
                     <h3 class="service-card__title text-white mb-0">Rəqəmsal marketinq</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">SEO, SMM, reklam kampaniyaları.</p>
-                    <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
+                    <a href="services-detail.html" class="btn service-card__btn">
+                      <span class="btn-text">Ətraflı</span>
+                      <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
+                    </a>
                   </div>
                 </article>
               </div>
               <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
-                  <span class="service-card__index" aria-hidden="true">04</span>
-                  <span class="service-card__icon-wrap" aria-hidden="true">
-                    <iconify-icon icon="lucide:settings-2"></iconify-icon>
-                  </span>
+
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-4.jpg');"></span>
                   <span class="service-card__overlay"></span>
+                  <span class="service-card__category" data-cat="texnologiya">Texnologiya</span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
                     <h3 class="service-card__title text-white mb-0">Biznes avtomatlaşdırması</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Proseslərin optimallaşdırılması və CRM.</p>
-                    <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
+                    <a href="services-detail.html" class="btn service-card__btn">
+                      <span class="btn-text">Ətraflı</span>
+                      <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
+                    </a>
                   </div>
                 </article>
               </div>
               <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
-                  <span class="service-card__index" aria-hidden="true">05</span>
-                  <span class="service-card__icon-wrap" aria-hidden="true">
-                    <iconify-icon icon="lucide:palette"></iconify-icon>
-                  </span>
+
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-1.jpg');"></span>
                   <span class="service-card__overlay"></span>
+                  <span class="service-card__category" data-cat="brendinq">Brendinq</span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
                     <h3 class="service-card__title text-white mb-0">Brending və dizayn</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Loqo, vizual identitet, brendinq kitabı.</p>
-                    <a href="services-detail.html" class="service-card__btn">Ətraflı</a>
+                    <a href="services-detail.html" class="btn service-card__btn">
+                      <span class="btn-text">Ətraflı</span>
+                      <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
+                    </a>
                   </div>
                 </article>
               </div>
               <div class="services-marquee__item" id="training">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
-                  <span class="service-card__index" aria-hidden="true">06</span>
-                  <span class="service-card__icon-wrap" aria-hidden="true">
-                    <iconify-icon icon="lucide:graduation-cap"></iconify-icon>
-                  </span>
+
                   <span class="service-card__bg" style="background-image: url('../assets/images/services/services-img-2.jpg');"></span>
                   <span class="service-card__overlay"></span>
+                  <span class="service-card__category" data-cat="telim">Təlim</span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
                     <h3 class="service-card__title text-white mb-0">Təlim</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Korporativ və individual təlim proqramları.</p>
-                    <a href="training.html" class="service-card__btn">Ətraflı</a>
+                    <a href="training.html" class="btn service-card__btn">
+                      <span class="btn-text">Ətraflı</span>
+                      <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
+                    </a>
                   </div>
                 </article>
               </div>
@@ -636,7 +668,7 @@
     </div>
 
     <!--  Testimonial Section -->
-    <section class="testimonial py-5 py-lg-8 py-xl-9 bg-light-gray">
+    <section id="rey" class="testimonial py-5 py-lg-8 py-xl-9 bg-light-gray">
       <div class="container">
         <div class="d-flex flex-column gap-5 gap-xl-11">
           <div class="row gap-7 gap-xl-0">
@@ -644,7 +676,7 @@
               <div class="home-section-badge" data-aos="fade-right" data-aos-delay="100"
                 data-aos-duration="1000">
                 <span
-                  class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">05</span>
+                  class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">04</span>
                 <hr class="border-line flex-grow-1 mb-0">
               </div>
             </div>
@@ -653,12 +685,12 @@
                 <div class="col-xxl-8">
                   <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100"
                     data-aos-duration="1000">
-                    <h2 class="mb-0">Rəylər bölməsi</h2>
+                    <h2 class="mb-0">Sizdən gələn rəylər</h2>
                   </div>
                 </div>
-                <div class="col-xxl-4 mt-4 mt-xxl-0 d-flex justify-content-xxl-end">
+                <div class="col-xxl-4 mt-4 mt-xxl-0 d-none d-lg-flex justify-content-xxl-end">
                   <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#reviewModal" data-aos="fade-left" data-aos-delay="150" data-aos-duration="1000">
-                    <span class="btn-text">Rəy bildir</span>
+                    <span class="btn-text">Rəy bildirin</span>
                     <iconify-icon icon="lucide:arrow-up-right"
                       class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
                   </button>
@@ -670,7 +702,7 @@
             <div class="testimonial-slider owl-carousel">
               <!-- 1 -->
               <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card testimonial-card--light w-100 h-100">
+                <div class="testimonial-card testimonial-card--light w-100 h-100" data-rating="5">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
                     <p class="testimonial-quote mb-0">Peşəkar yanaşma, əla nəticə!</p>
                     <div class="testimonial-author hstack gap-3">
@@ -686,7 +718,7 @@
               </div>
               <!-- 2 -->
               <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card testimonial-card--dark w-100 h-100">
+                <div class="testimonial-card testimonial-card--dark w-100 h-100" data-rating="5">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
                     <p class="testimonial-quote mb-0">Sosial media hesablarımızı idarə etdilər. Müştəri sayımız və onlayn görünürlüyümüz bir neçə ay ərzində gözəl artdı, komanda hər addımda dəstək oldu.</p>
                     <div class="testimonial-author hstack gap-3">
@@ -702,7 +734,7 @@
               </div>
               <!-- 3 -->
               <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card w-100 h-100">
+                <div class="testimonial-card w-100 h-100" data-rating="4">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
                     <p class="testimonial-quote mb-0">Veb saytımızı sıfırdan dizayn edib hazırladılar — sürətli, mobil uyğun və istifadəsi asandır. Texniki dəstək və layihə idarəetməsi bütün proses boyunca çox peşəkar idi.</p>
                     <div class="testimonial-author hstack gap-3">
@@ -718,9 +750,9 @@
               </div>
               <!-- 4 -->
               <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card testimonial-card--light w-100 h-100">
+                <div class="testimonial-card testimonial-card--light w-100 h-100" data-rating="5">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Brening layihəmizdə loqo, korporativ stil və marketinq materiallarını tam paket şəklində təqdim etdilər. Nəticədən çox razıyıq — vizual kimliyimiz daha güclü və yaddaqalan oldu, təslim müddətlərinə də riayət etdilər.</p>
+                    <p class="testimonial-quote mb-0">Brending layihəmizdə loqo, korporativ stil və marketinq materiallarını tam paket şəklində təqdim etdilər. Nəticədən çox razıyıq — vizual kimliyimiz daha güclü və yaddaqalan oldu, təslim müddətlərinə də riayət etdilər.</p>
                     <div class="testimonial-author hstack gap-3">
                       <img src="../assets/images/testimonial/testimonial-1.jpg" alt=""
                         class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
@@ -734,7 +766,7 @@
               </div>
               <!-- 5 -->
               <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card testimonial-card--dark w-100 h-100">
+                <div class="testimonial-card testimonial-card--dark w-100 h-100" data-rating="4">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
                     <p class="testimonial-quote mb-0">Tövsiyə edirəm!</p>
                     <div class="testimonial-author hstack gap-3">
@@ -750,7 +782,7 @@
               </div>
               <!-- 6 -->
               <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card w-100 h-100">
+                <div class="testimonial-card w-100 h-100" data-rating="5">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
                     <p class="testimonial-quote mb-0">Konsultasiya xidməti biznes modelimizi yenidən qurmağımıza kömək etdi. Rəqəmsal transformasiya planı hazırladılar, KPI-lar müəyyənləşdirildi və hər addımda dəstək gördük. İndi satış və marketinq proseslərimiz daha şəffaf və effektivdir.</p>
                     <div class="testimonial-author hstack gap-3">
@@ -766,7 +798,7 @@
               </div>
               <!-- 7 -->
               <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card testimonial-card--light w-100 h-100">
+                <div class="testimonial-card testimonial-card--light w-100 h-100" data-rating="4">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
                     <p class="testimonial-quote mb-0">Ənənəvi marketinq kampaniyalarımızı rəqəmsalla inteqrasiya etdilər — çap materialları, billbord və online reklamlar vahid strategiya altında birləşdi.</p>
                     <div class="testimonial-author hstack gap-3">
@@ -782,7 +814,7 @@
               </div>
               <!-- 8 -->
               <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card testimonial-card--dark w-100 h-100">
+                <div class="testimonial-card testimonial-card--dark w-100 h-100" data-rating="5">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
                     <p class="testimonial-quote mb-0">Avtomatlaşdırma sistemi vaxtımızı azaltdı.</p>
                     <div class="testimonial-author hstack gap-3">
@@ -798,7 +830,7 @@
               </div>
               <!-- 9 -->
               <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card w-100 h-100">
+                <div class="testimonial-card w-100 h-100" data-rating="5">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
                     <p class="testimonial-quote mb-0">Təlim proqramlarında komandamız praktiki biliklər əldə etdi: SEO, məzmun marketinqi və analitika üzrə mühazirələr real layihələr üzərində keçirildi. Təlimdən sonra öz hesablarımızı daha peşəkar idarə edə bilirik. Digiboom-un yanaşması nəzəriyyə ilə praktikanı mükəmməl birləşdirir və biz artıq uzunmüddətli tərəfdaş kimi görürük.</p>
                     <div class="testimonial-author hstack gap-3">
@@ -820,6 +852,13 @@
               <iconify-icon icon="lucide:chevron-right" class="fs-4"></iconify-icon>
             </button>
           </div>
+          <div class="testimonial-review-cta d-lg-none">
+            <button type="button" class="btn testimonial-review-cta__btn" data-bs-toggle="modal" data-bs-target="#reviewModal">
+              <span class="btn-text">Rəy bildirin</span>
+              <iconify-icon icon="lucide:arrow-up-right"
+                class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -827,107 +866,6 @@
     <div class="home-section-divider" aria-hidden="true">
       <div class="container">
         <div class="home-section-divider__line"></div>
-      </div>
-    </div>
-
-    <!--  Rəy bildir modal -->
-    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered review-modal-dialog">
-        <div class="modal-content review-modal-content border-0 shadow-lg">
-          <div class="review-modal-accent" aria-hidden="true"></div>
-          <div class="modal-header review-modal-header border-0">
-            <div class="review-modal-header-text">
-              <span class="review-modal-eyebrow">Rəyiniz bizim üçün önəmlidir</span>
-              <h3 class="modal-title mb-0" id="reviewModalLabel">Rəy bildir</h3>
-            </div>
-            <button type="button" class="btn-close review-modal-close" data-bs-dismiss="modal" aria-label="Bağla"></button>
-          </div>
-          <div class="modal-body review-modal-body">
-            <form id="reviewForm" class="review-modal-form">
-              <div class="review-field">
-                <label for="reviewCompany" class="review-modal-label">Şirkət adı <span class="text-danger">*</span></label>
-                <div class="review-input-wrap">
-                  <iconify-icon icon="lucide:building-2" class="review-input-icon" aria-hidden="true"></iconify-icon>
-                  <input type="text" class="form-control review-input" id="reviewCompany" name="company" placeholder="Şirkətinizin adı" required>
-                </div>
-              </div>
-              <div class="review-field">
-                <span class="review-modal-label d-block" id="reviewServiceLabel">Xidmət <span class="text-danger">*</span></span>
-                <div class="review-service-grid" role="radiogroup" aria-labelledby="reviewServiceLabel">
-                  <label class="review-service-chip">
-                    <input type="radio" name="service" value="reqemsal-marketing" required>
-                    <span class="review-service-chip__inner">
-                      <iconify-icon icon="lucide:bar-chart-3" aria-hidden="true"></iconify-icon>
-                      <span>Rəqəmsal marketinq</span>
-                    </span>
-                  </label>
-                  <label class="review-service-chip">
-                    <input type="radio" name="service" value="veb-development">
-                    <span class="review-service-chip__inner">
-                      <iconify-icon icon="lucide:code-2" aria-hidden="true"></iconify-icon>
-                      <span>Veb development</span>
-                    </span>
-                  </label>
-                  <label class="review-service-chip">
-                    <input type="radio" name="service" value="brending-dizayn">
-                    <span class="review-service-chip__inner">
-                      <iconify-icon icon="lucide:palette" aria-hidden="true"></iconify-icon>
-                      <span>Brending və dizayn</span>
-                    </span>
-                  </label>
-                  <label class="review-service-chip">
-                    <input type="radio" name="service" value="konsultasiya">
-                    <span class="review-service-chip__inner">
-                      <iconify-icon icon="lucide:message-circle" aria-hidden="true"></iconify-icon>
-                      <span>Konsultasiya</span>
-                    </span>
-                  </label>
-                  <label class="review-service-chip">
-                    <input type="radio" name="service" value="enenevi-marketing">
-                    <span class="review-service-chip__inner">
-                      <iconify-icon icon="lucide:megaphone" aria-hidden="true"></iconify-icon>
-                      <span>Ənənəvi marketinq</span>
-                    </span>
-                  </label>
-                  <label class="review-service-chip">
-                    <input type="radio" name="service" value="biznes-avtomatlasdirilmasi">
-                    <span class="review-service-chip__inner">
-                      <iconify-icon icon="lucide:settings" aria-hidden="true"></iconify-icon>
-                      <span>Biznes avtomatlaşdırılması</span>
-                    </span>
-                  </label>
-                  <label class="review-service-chip">
-                    <input type="radio" name="service" value="telim">
-                    <span class="review-service-chip__inner">
-                      <iconify-icon icon="lucide:graduation-cap" aria-hidden="true"></iconify-icon>
-                      <span>Təlim</span>
-                    </span>
-                  </label>
-                </div>
-              </div>
-              <div class="review-field">
-                <label for="reviewText" class="review-modal-label">Rəy <span class="text-danger">*</span></label>
-                <textarea class="form-control review-textarea" id="reviewText" name="review" placeholder="Təcrübənizi qısaca paylaşın..." rows="4" required></textarea>
-              </div>
-              <div class="review-field">
-                <span class="review-modal-label d-block" id="reviewImageLabel">Şəkil <span class="text-danger">*</span></span>
-                <label class="review-file-upload" for="reviewImage">
-                  <span class="review-file-upload__icon" aria-hidden="true">
-                    <iconify-icon icon="lucide:image-plus"></iconify-icon>
-                  </span>
-                  <span class="review-file-upload__text">Şəkil yükləyin</span>
-                  <span class="review-file-upload__hint">Loqo və ya təsdiq üçün · PNG, JPG</span>
-                  <input type="file" class="visually-hidden" id="reviewImage" name="image" accept="image/*" required aria-labelledby="reviewImageLabel">
-                </label>
-                <span class="review-file-name" aria-live="polite"></span>
-              </div>
-              <div class="review-modal-actions">
-                <button type="button" class="btn btn-outline-dark review-modal-btn-cancel" data-bs-dismiss="modal">Ləğv et</button>
-                <button type="submit" class="btn btn-dark review-modal-btn-submit">Göndər</button>
-              </div>
-            </form>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -941,7 +879,7 @@
                 <div class="home-section-badge" data-aos="fade-right" data-aos-delay="100"
                   data-aos-duration="1000">
                   <span
-                    class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">07</span>
+                    class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">05</span>
                   <hr class="border-line flex-grow-1 mb-0">
 
                 </div>
@@ -951,152 +889,144 @@
                   <div class="col-xxl-8">
                     <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100"
                       data-aos-duration="1000">
-                      <h2 class="mb-0">Xususi paketler</h2>
-                      <p class="fs-5 mb-0 text-opacity-70">Burda her hansisa cumle olada biler olmayada biler secimi edin.</p>
+                      <h2 class="mb-0">Xüsusi paketlər</h2>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="row pricing-cards-row">
-              <div class="col-lg-6 col-xl-4 mb-7 mb-xl-0 d-flex align-items-stretch">
+              <div class="col-lg-6 col-xl-4 mb-7 mb-xl-0">
                 <div class="card pricing-card w-100" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                  <div class="card-body p-7 p-xxl-5 d-flex flex-column gap-8">
-                    <div class="d-flex flex-column gap-6">
-                      <h5 class="mb-0 fw-medium">Paketin adi</h5>
-                      <div class="hstack gap-2">
-                        <h3 class="mb-0">565 azn</h3>
-                        <p class="mb-0">/ayliq</p>
+                  <div class="card-body pricing-card__body">
+                    <div class="pricing-card__head">
+                      <h5 class="pricing-card__name mb-0">Başlanğıc</h5>
+                      <div class="pricing-card__pricing">
+                        <span class="pricing-card__old">750 azn</span>
+                        <div class="pricing-card__price">
+                          <span class="pricing-card__amount">565 azn</span>
+                          <span class="pricing-card__period">/aylıq</span>
+                        </div>
                       </div>
-                      <p class="mb-0">metn</p>
+                      <p class="pricing-card__desc mb-0">Kiçik biznes və fərdi layihələr üçün əsas rəqəmsal paket.</p>
                     </div>
-                    <div class="pt-8 border-top d-flex flex-column gap-6">
-                      <h6 class="mb-0 fw-normal">neler daxildir</h6>
-                      <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
-                        <li class="hstack gap-3">
-                          <span
-                            class="round-32 rounded-circle bg-primary flex-shrink-0 hstack justify-content-center"><iconify-icon
-                              icon="lucide:check" class="fs-6 text-dark"></iconify-icon></span>
-                          <h6 class="mb-0 fw-normal">Everything in the Scale Plan</h6>
+                    <div class="pricing-card__features">
+                      <p class="pricing-card__features-label mb-0">Nələr daxildir</p>
+                      <ul class="pricing-card__list list-unstyled mb-0">
+                        <li class="pricing-card__item">
+                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
+                          <span class="pricing-card__item-text">5 səhifəlik veb sayt</span>
                         </li>
-                        <li class="hstack gap-3">
-                          <span
-                            class="round-32 rounded-circle bg-primary flex-shrink-0 hstack justify-content-center"><iconify-icon
-                              icon="lucide:check" class="fs-6 text-dark"></iconify-icon></span>
-                          <h6 class="mb-0 fw-normal">E-commerce functionality (if needed)</h6>
+                        <li class="pricing-card__item">
+                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
+                          <span class="pricing-card__item-text">Mobil uyğun dizayn</span>
                         </li>
-                        <li class="hstack gap-3">
-                          <span
-                            class="round-32 rounded-circle bg-primary flex-shrink-0 hstack justify-content-center"><iconify-icon
-                              icon="lucide:check" class="fs-6 text-dark"></iconify-icon></span>
-                          <h6 class="mb-0 fw-normal">Branded email template design</h6>
-                        </li>
-                        <li class="hstack gap-3">
-                          <span
-                            class="round-32 rounded-circle bg-primary flex-shrink-0 hstack justify-content-center"><iconify-icon
-                              icon="lucide:check" class="fs-6 text-dark"></iconify-icon></span>
-                          <h6 class="mb-0 fw-normal">Priority support for six months after launch</h6>
+                        <li class="pricing-card__item">
+                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
+                          <span class="pricing-card__item-text">1 ay texniki dəstək</span>
                         </li>
                       </ul>
                     </div>
-                    <a href="" class="btn w-100 justify-content-center">
-                      <span class="btn-text">Sifariş et</span>
+                    <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal>
+                      <span class="btn-text">Sifariş edin</span>
                       <iconify-icon icon="lucide:arrow-up-right"
                         class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
                     </a>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 col-xl-4 mb-7 mb-xl-0 d-flex align-items-stretch">
+              <div class="col-lg-6 col-xl-4 mb-7 mb-xl-0">
                 <div class="card pricing-card w-100" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                  <div class="card-body p-7 p-xxl-5 d-flex flex-column gap-8">
-                    <div class="d-flex flex-column gap-6">
-                      <h5 class="mb-0 fw-medium">Paketin adi</h5>
-                      <div class="hstack gap-2">
-                        <h3 class="mb-0">565 azn</h3>
-                        <p class="mb-0">/ayliq</p>
+                  <div class="card-body pricing-card__body">
+                    <div class="pricing-card__head">
+                      <h5 class="pricing-card__name mb-0">Peşəkar</h5>
+                      <div class="pricing-card__pricing">
+                        <span class="pricing-card__old">850 azn</span>
+                        <div class="pricing-card__price">
+                          <span class="pricing-card__amount">565 azn</span>
+                          <span class="pricing-card__period">/aylıq</span>
+                        </div>
                       </div>
-                      <p class="mb-0">metn</p>
+                      <p class="pricing-card__desc mb-0">Böyüyən brendlər üçün genişləndirilmiş xidmət və marketinq dəstəyi.</p>
                     </div>
-                    <div class="pt-8 border-top d-flex flex-column gap-6">
-                      <h6 class="mb-0 fw-normal">neler daxildir</h6>
-                      <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
-                        <li class="hstack gap-3">
-                          <span
-                            class="round-32 rounded-circle bg-primary flex-shrink-0 hstack justify-content-center"><iconify-icon
-                              icon="lucide:check" class="fs-6 text-dark"></iconify-icon></span>
-                          <h6 class="mb-0 fw-normal">Everything in the Scale Plan</h6>
+                    <div class="pricing-card__features">
+                      <p class="pricing-card__features-label mb-0">Nələr daxildir</p>
+                      <ul class="pricing-card__list list-unstyled mb-0">
+                        <li class="pricing-card__item">
+                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
+                          <span class="pricing-card__item-text">15 səhifəlik veb sayt</span>
                         </li>
-                        <li class="hstack gap-3">
-                          <span
-                            class="round-32 rounded-circle bg-primary flex-shrink-0 hstack justify-content-center"><iconify-icon
-                              icon="lucide:check" class="fs-6 text-dark"></iconify-icon></span>
-                          <h6 class="mb-0 fw-normal">E-commerce functionality (if needed)</h6>
+                        <li class="pricing-card__item">
+                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
+                          <span class="pricing-card__item-text">SEO optimallaşdırması</span>
                         </li>
-                        <li class="hstack gap-3">
-                          <span
-                            class="round-32 rounded-circle bg-primary flex-shrink-0 hstack justify-content-center"><iconify-icon
-                              icon="lucide:check" class="fs-6 text-dark"></iconify-icon></span>
-                          <h6 class="mb-0 fw-normal">Branded email template design</h6>
+                        <li class="pricing-card__item">
+                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
+                          <span class="pricing-card__item-text">Sosial media idarəetməsi</span>
                         </li>
-                        <li class="hstack gap-3">
-                          <span
-                            class="round-32 rounded-circle bg-primary flex-shrink-0 hstack justify-content-center"><iconify-icon
-                              icon="lucide:check" class="fs-6 text-dark"></iconify-icon></span>
-                          <h6 class="mb-0 fw-normal">Priority support for six months after launch</h6>
+                        <li class="pricing-card__item">
+                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
+                          <span class="pricing-card__item-text">Aylıq analitika hesabatı</span>
+                        </li>
+                        <li class="pricing-card__item">
+                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
+                          <span class="pricing-card__item-text">3 ay prioritet dəstək</span>
                         </li>
                       </ul>
                     </div>
-                    <a href="" class="btn w-100 justify-content-center">
-                      <span class="btn-text">Sifariş et</span>
+                    <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal>
+                      <span class="btn-text">Sifariş edin</span>
                       <iconify-icon icon="lucide:arrow-up-right"
                         class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
                     </a>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 col-xl-4 mb-7 mb-xl-0 d-flex align-items-stretch">
+              <div class="col-lg-6 col-xl-4 mb-7 mb-xl-0">
                 <div class="card pricing-card w-100" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                  <div class="card-body p-7 p-xxl-5 d-flex flex-column gap-8">
-                    <div class="d-flex flex-column gap-6">
-                      <h5 class="mb-0 fw-medium">Paketin adi</h5>
-                      <div class="hstack gap-2">
-                        <h3 class="mb-0">565 azn</h3>
-                        <p class="mb-0">/ayliq</p>
+                  <div class="card-body pricing-card__body">
+                    <div class="pricing-card__head">
+                      <h5 class="pricing-card__name mb-0">Korporativ</h5>
+                      <div class="pricing-card__pricing">
+                        <span class="pricing-card__old">980 azn</span>
+                        <div class="pricing-card__price">
+                          <span class="pricing-card__amount">565 azn</span>
+                          <span class="pricing-card__period">/aylıq</span>
+                        </div>
                       </div>
-                      <p class="mb-0">metn</p>
+                      <p class="pricing-card__desc mb-0">Tam həcmli rəqəmsal həllər və fərdi strategiya ilə korporativ paket.</p>
                     </div>
-                    <div class="pt-8 border-top d-flex flex-column gap-6">
-                      <h6 class="mb-0 fw-normal">neler daxildir</h6>
-                      <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
-                        <li class="hstack gap-3">
-                          <span
-                            class="round-32 rounded-circle bg-primary flex-shrink-0 hstack justify-content-center"><iconify-icon
-                              icon="lucide:check" class="fs-6 text-dark"></iconify-icon></span>
-                          <h6 class="mb-0 fw-normal">Everything in the Scale Plan</h6>
+                    <div class="pricing-card__features">
+                      <p class="pricing-card__features-label mb-0">Nələr daxildir</p>
+                      <ul class="pricing-card__list list-unstyled mb-0">
+                        <li class="pricing-card__item">
+                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
+                          <span class="pricing-card__item-text">Limitsiz səhifə sayı</span>
                         </li>
-                        <li class="hstack gap-3">
-                          <span
-                            class="round-32 rounded-circle bg-primary flex-shrink-0 hstack justify-content-center"><iconify-icon
-                              icon="lucide:check" class="fs-6 text-dark"></iconify-icon></span>
-                          <h6 class="mb-0 fw-normal">E-commerce functionality (if needed)</h6>
+                        <li class="pricing-card__item">
+                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
+                          <span class="pricing-card__item-text">E-ticarət funksionallığı</span>
                         </li>
-                        <li class="hstack gap-3">
-                          <span
-                            class="round-32 rounded-circle bg-primary flex-shrink-0 hstack justify-content-center"><iconify-icon
-                              icon="lucide:check" class="fs-6 text-dark"></iconify-icon></span>
-                          <h6 class="mb-0 fw-normal">Branded email template design</h6>
+                        <li class="pricing-card__item">
+                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
+                          <span class="pricing-card__item-text">Brend e-poçt şablonu dizaynı</span>
                         </li>
-                        <li class="hstack gap-3">
-                          <span
-                            class="round-32 rounded-circle bg-primary flex-shrink-0 hstack justify-content-center"><iconify-icon
-                              icon="lucide:check" class="fs-6 text-dark"></iconify-icon></span>
-                          <h6 class="mb-0 fw-normal">Priority support for six months after launch</h6>
+                        <li class="pricing-card__item">
+                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
+                          <span class="pricing-card__item-text">Reklam kampaniyalarının idarə edilməsi</span>
+                        </li>
+                        <li class="pricing-card__item">
+                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
+                          <span class="pricing-card__item-text">Fərdi layihə meneceri</span>
+                        </li>
+                        <li class="pricing-card__item">
+                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
+                          <span class="pricing-card__item-text">6 ay prioritet dəstək</span>
                         </li>
                       </ul>
                     </div>
-                    <a href="" class="btn w-100 justify-content-center">
-                      <span class="btn-text">Sifariş et</span>
+                    <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal>
+                      <span class="btn-text">Sifariş edin</span>
                       <iconify-icon icon="lucide:arrow-up-right"
                         class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
                     </a>
@@ -1125,7 +1055,7 @@
               <div class="home-section-badge" data-aos="fade-right" data-aos-delay="100"
                 data-aos-duration="1000">
                 <span
-                  class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">08</span>
+                  class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">06</span>
                 <hr class="border-line flex-grow-1 mb-0">
               </div>
             </div>
@@ -1134,8 +1064,7 @@
                 <div class="col-xxl-9">
                   <div class="d-flex flex-column gap-3" data-aos="fade-up" data-aos-delay="100"
                     data-aos-duration="1000">
-                    <h2 class="mb-0">Tez tez verilen suallar</h2>
-                    <p class="fs-5 mb-0 text-opacity-70">her hasnisa metn qalada biler silede bilerem</p>
+                    <h2 class="mb-0">Tez-tez verilən suallar</h2>
                   </div>
                 </div>
               </div>
@@ -1143,7 +1072,7 @@
           </div>
           <div class="row justify-content-center"><div class="col-12 col-xxl-10"><div class="accordion accordion-flush faq-modern" id="accordionFlushExample" data-aos="fade-up" data-aos-delay="200"
                 data-aos-duration="1000">
-                <div class="accordion-item faq-modern__item">
+                <div class="accordion-item faq-modern__item" data-faq-type="nested">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -1152,16 +1081,45 @@
                   </h2>
                   <div id="flush-collapseOne" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Rəqəmsal marketinq</h3><p class="faq-modern__text">Sosial media idarəetməsi, reklam kampaniyaları, SEO və məzmun stratejiyası – brendinizi onlayn gücləndiririk.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Veb development</h3><p class="faq-modern__text">Müasir, sürətli və mobil uyğun saytlar, e-ticarət həlləri və xüsusi proqram təminatı hazırlayırıq.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Brending və dizayn</h3><p class="faq-modern__text">Loqo, vizual identitet, ünvanlıq və materiallar – brendinizi vahid və tanınan edirik.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Konsultasiya</h3><p class="faq-modern__text">Strategiya, rəqəmsal transformasiya və layihə idarəetməsi üzrə mütəxəssis məsləhətləri təqdim edirik.</p></article>
+                    <div class="accordion-body faq-modern__panel">
+                      <div class="accordion faq-modern__subaccordion" id="faq-sub-one">
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-one-1" aria-expanded="false" aria-controls="faq-sub-one-1">Rəqəmsal marketinq</button>
+                          </h3>
+                          <div id="faq-sub-one-1" class="accordion-collapse collapse" data-bs-parent="#faq-sub-one">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Sosial media idarəetməsi, reklam kampaniyaları, SEO və məzmun stratejiyası – brendinizi onlayn gücləndiririk.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-one-2" aria-expanded="false" aria-controls="faq-sub-one-2">Veb development</button>
+                          </h3>
+                          <div id="faq-sub-one-2" class="accordion-collapse collapse" data-bs-parent="#faq-sub-one">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Müasir, sürətli və mobil uyğun saytlar, e-ticarət həlləri və xüsusi proqram təminatı hazırlayırıq.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-one-3" aria-expanded="false" aria-controls="faq-sub-one-3">Brending və dizayn</button>
+                          </h3>
+                          <div id="faq-sub-one-3" class="accordion-collapse collapse" data-bs-parent="#faq-sub-one">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Loqo, vizual identitet, ünvanlıq və materiallar – brendinizi vahid və tanınan edirik.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-one-4" aria-expanded="false" aria-controls="faq-sub-one-4">Konsultasiya</button>
+                          </h3>
+                          <div id="faq-sub-one-4" class="accordion-collapse collapse" data-bs-parent="#faq-sub-one">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Strategiya, rəqəmsal transformasiya və layihə idarəetməsi üzrə mütəxəssis məsləhətləri təqdim edirik.</p></div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item faq-modern__item">
+                <div class="accordion-item faq-modern__item" data-faq-type="simple">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
@@ -1170,16 +1128,14 @@
                   </h2>
                   <div id="flush-collapseTwo" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Kiçik sayt (vizitka)</h3><p class="faq-modern__text">Təxminən 2–4 həftə: dizayn, məzmun və texniki quraşdırma daxildir.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Korporativ sayt</h3><p class="faq-modern__text">1–3 ay: səhifələr çoxluğu, inteqrasiyalar və test mərhələsi nəzərə alınır.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">E-ticarət platforması</h3><p class="faq-modern__text">2–4 ay: ödəniş, inventar, çatdırılma və təhlükəsizlik konfiqurasiyası ilə.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Brending layihəsi</h3><p class="faq-modern__text">3–8 həftə: araşdırma, konseptlər, son loqo və vizual tətbiqetmə.</p></article>
+                    <div class="accordion-body faq-modern__panel">
+                      <div class="faq-modern__direct">
+                        <p class="faq-modern__text mb-0">Müddət layihənin növündən asılıdır: vizitka sayt təxminən 2–4 həftə, korporativ sayt 1–3 ay, e-ticarət 2–4 ay, brending isə adətən 3–8 həftə çəkir. Dəqiq planı məzmun və inteqrasiyalara görə birlikdə müəyyənləşdiririk.</p>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item faq-modern__item">
+                <div class="accordion-item faq-modern__item" data-faq-type="nested">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
@@ -1188,16 +1144,45 @@
                   </h2>
                   <div id="flush-collapseThree" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Tam xüsusi dizayn</h3><p class="faq-modern__text">Sıfırdan, yalnız sizin brendiniz üçün unikal UI/UX və vizual stil hazırlanır.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Şablon əsaslı uyğunlaşdırma</h3><p class="faq-modern__text">Seçilmiş şablon rənglər, məzmun və bəzək elementləri ilə tam sizinə uyğunlaşdırılır.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Hibrid yanaşma</h3><p class="faq-modern__text">Bəzi səhifələr xüsusi, bəziləri şablondan – büdcə və sürətə görə seçim edirik.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Rəng və tipografiya seçimi</h3><p class="faq-modern__text">Brend qaydalarınıza uyğun palitra və fontlar bütün materiallarda tətbiq olunur.</p></article>
+                    <div class="accordion-body faq-modern__panel">
+                      <div class="accordion faq-modern__subaccordion" id="faq-sub-three">
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-three-1" aria-expanded="false" aria-controls="faq-sub-three-1">Tam xüsusi dizayn</button>
+                          </h3>
+                          <div id="faq-sub-three-1" class="accordion-collapse collapse" data-bs-parent="#faq-sub-three">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Sıfırdan, yalnız sizin brendiniz üçün unikal UI/UX və vizual stil hazırlanır.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-three-2" aria-expanded="false" aria-controls="faq-sub-three-2">Şablon əsaslı uyğunlaşdırma</button>
+                          </h3>
+                          <div id="faq-sub-three-2" class="accordion-collapse collapse" data-bs-parent="#faq-sub-three">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Seçilmiş şablon rənglər, məzmun və bəzək elementləri ilə tam sizinə uyğunlaşdırılır.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-three-3" aria-expanded="false" aria-controls="faq-sub-three-3">Hibrid yanaşma</button>
+                          </h3>
+                          <div id="faq-sub-three-3" class="accordion-collapse collapse" data-bs-parent="#faq-sub-three">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Bəzi səhifələr xüsusi, bəziləri şablondan – büdcə və sürətə görə seçim edirik.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-three-4" aria-expanded="false" aria-controls="faq-sub-three-4">Rəng və tipografiya seçimi</button>
+                          </h3>
+                          <div id="faq-sub-three-4" class="accordion-collapse collapse" data-bs-parent="#faq-sub-three">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Brend qaydalarınıza uyğun palitra və fontlar bütün materiallarda tətbiq olunur.</p></div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item faq-modern__item">
+                <div class="accordion-item faq-modern__item" data-faq-type="simple">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
@@ -1206,16 +1191,14 @@
                   </h2>
                   <div id="flush-collapseFour" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Başlanğıc paketlər</h3><p class="faq-modern__text">Vizitka sayt və sadə brending üçün sabit qiymətlər; qiymət təklifi ilə başlayırıq.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Orta və böyük layihələr</h3><p class="faq-modern__text">E-ticarət və korporativ saytlar üçün səhifə sayı, funksionallıq və inteqrasiyaya əsasən qiymət.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Aylıq dəstək paketləri</h3><p class="faq-modern__text">Yeniləmə, hostinq, texniki dəstək və kiçik dəyişikliklər üçün aylıq abunə variantları.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Rəqəmsal marketinq büdcəsi</h3><p class="faq-modern__text">Kampaniya məqsədlərinə görə reklam büdcəsi və xidmət haqları ayrıca müzakirə olunur.</p></article>
+                    <div class="accordion-body faq-modern__panel">
+                      <div class="faq-modern__direct">
+                        <p class="faq-modern__text mb-0">Qiymət layihənin həcmindən asılıdır. Başlanğıc paketlər üçün sabit təkliflərimiz var; orta və böyük layihələrdə səhifə sayı, funksionallıq və inteqrasiyalara əsasən fərdi qiymət hazırlanır. Ətraflı təklif üçün bizimlə əlaqə saxlayın.</p>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item border-bottom">
+                <div class="accordion-item faq-modern__item" data-faq-type="nested">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
@@ -1224,11 +1207,40 @@
                   </h2>
                   <div id="flush-collapseFive" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body faq-modern__panel"><div class="faq-modern__answers">
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Texniki dəstək</h3><p class="faq-modern__text">Sayt və sistemlərdə xəta, yeniləmə və kiçik dəyişikliklər üçün reaksiya müddəti ilə dəstək.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Məzmun yeniləmələri</h3><p class="faq-modern__text">Mətn, şəkil və səhifə əlavəsi; CMS üzərindən və ya bizim tərəfimizdən edilə bilər.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Hostinq və SSL</h3><p class="faq-modern__text">Hostinq, domain və SSL sertifikatının saxlanması üçün aylıq/illik paket təklifləri.</p></article>
-                        <article class="faq-modern__answer"><h3 class="faq-modern__subq">Prioritet dəstək</h3><p class="faq-modern__text">Kritik məsələlər üçün qısa reaksiya müddəti və müntəzəm yoxlamalar daxil ola bilər.</p></article>
+                    <div class="accordion-body faq-modern__panel">
+                      <div class="accordion faq-modern__subaccordion" id="faq-sub-five">
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-five-1" aria-expanded="false" aria-controls="faq-sub-five-1">Texniki dəstək</button>
+                          </h3>
+                          <div id="faq-sub-five-1" class="accordion-collapse collapse" data-bs-parent="#faq-sub-five">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Sayt və sistemlərdə xəta, yeniləmə və kiçik dəyişikliklər üçün reaksiya müddəti ilə dəstək.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-five-2" aria-expanded="false" aria-controls="faq-sub-five-2">Məzmun yeniləmələri</button>
+                          </h3>
+                          <div id="faq-sub-five-2" class="accordion-collapse collapse" data-bs-parent="#faq-sub-five">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Mətn, şəkil və səhifə əlavəsi; CMS üzərindən və ya bizim tərəfimizdən edilə bilər.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-five-3" aria-expanded="false" aria-controls="faq-sub-five-3">Hostinq və SSL</button>
+                          </h3>
+                          <div id="faq-sub-five-3" class="accordion-collapse collapse" data-bs-parent="#faq-sub-five">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Hostinq, domain və SSL sertifikatının saxlanması üçün aylıq/illik paket təklifləri.</p></div>
+                          </div>
+                        </div>
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-five-4" aria-expanded="false" aria-controls="faq-sub-five-4">Prioritet dəstək</button>
+                          </h3>
+                          <div id="faq-sub-five-4" class="accordion-collapse collapse" data-bs-parent="#faq-sub-five">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Kritik məsələlər üçün qısa reaksiya müddəti və müntəzəm yoxlamalar daxil ola bilər.</p></div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1250,19 +1262,16 @@
     <section id="get-in-touch" class="get-in-touch get-in-touch--home py-5 py-lg-8 py-xl-9">
       <div class="container">
         <div class="d-flex flex-column gap-5 gap-xl-7">
-          <div class="row gap-7 gap-xl-0">
-            <div class="col-xl-4 col-xxl-4">
-              <div class="home-section-badge" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
-                <span class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">09</span>
-                <hr class="border-line flex-grow-1 mb-0">
+          <div class="d-flex flex-column gap-3 gap-xl-4">
+            <div class="home-contact__header" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+              <div class="home-contact__header-left">
+                <span class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">07</span>
+                <hr class="border-line mb-0">
               </div>
+              <h2 class="home-contact__title mb-0">Müraciət et</h2>
+              <div class="home-contact__header-right" aria-hidden="true"></div>
             </div>
-            <div class="col-xl-8 col-xxl-7">
-              <div class="d-flex flex-column gap-3" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                <h2 class="home-contact__title mb-0">Müraciət et</h2>
-                <p class="home-contact__lead mb-0">Layihə, sual və ya əməkdaşlıq təklifiniz var? Qısa formu doldurun — komandamız tezliklə sizə qayıdacaq.</p>
-              </div>
-            </div>
+            <p class="home-contact__lead mb-0" data-aos="fade-up" data-aos-delay="120" data-aos-duration="1000">Layihə, sual və ya əməkdaşlıq təklifiniz var? Qısa formu doldurun — komandamız tezliklə sizə qayıdacaq.</p>
           </div>
 
           <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="120" data-aos-duration="1000">
@@ -1295,13 +1304,13 @@
 
 <!-- Floating Widgets -->
   <aside class="floating-widgets" aria-label="Sürətli əlaqə">
-    <a href="tel:+994501234567" class="floating-widget-btn floating-widget-btn--call" aria-label="Zəng et">
+    <a href="tel:+994501234567" class="floating-widget-btn floating-widget-btn--call" aria-label="Zəng edin">
       <iconify-icon icon="lucide:phone"></iconify-icon>
     </a>
     <a href="https://wa.me/994501234567" target="_blank" rel="noopener" class="floating-widget-btn floating-widget-btn--whatsapp" aria-label="WhatsApp">
       <iconify-icon icon="mdi:whatsapp"></iconify-icon>
     </a>
-    <button type="button" class="floating-widget-btn floating-widget-btn--top" id="scrollToTopBtn" aria-label="Başa qayıt">
+    <button type="button" class="floating-widget-btn floating-widget-btn--top" id="scrollToTopBtn" aria-label="Başa qayıdın">
       <iconify-icon icon="lucide:arrow-up"></iconify-icon>
     </button>
   </aside>
@@ -1316,6 +1325,8 @@
   <script src="../assets/js/includes.js" defer></script>
   <script src="../assets/js/i18n.js"></script>
   <script src="../assets/js/digiboom.js"></script>
+  <script src="../assets/js/projects-data.js"></script>
+  <script src="../assets/js/portfolio-cards.js"></script>
   <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>

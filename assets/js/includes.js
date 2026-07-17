@@ -17,15 +17,25 @@
     var formClass = el.getAttribute('data-form-class') || '';
     var btnClass = el.getAttribute('data-btn-class') || '';
     var smtpAction = el.getAttribute('data-smtp-action') || '/api/contact';
+    var showService = el.getAttribute('data-show-service') === 'true';
     var aos = el.getAttribute('data-aos');
     var aosDelay = el.getAttribute('data-aos-delay');
     var aosDuration = el.getAttribute('data-aos-duration');
     var aosAttrs = '';
+    var serviceField = '';
 
     if (aos) {
       aosAttrs = 'data-aos="' + aos + '"';
       if (aosDelay) aosAttrs += ' data-aos-delay="' + aosDelay + '"';
       if (aosDuration) aosAttrs += ' data-aos-duration="' + aosDuration + '"';
+    }
+
+    if (showService) {
+      serviceField =
+        '<div class="contact-form-modern__field contact-form-modern__field--full">' +
+          '<label for="' + prefix + '-service" class="contact-form-modern__label">Xidmət</label>' +
+          '<input type="text" class="contact-form-modern__input contact-form-modern__input--service" id="' + prefix + '-service" name="service" readonly required tabindex="-1">' +
+        '</div>';
     }
 
     return html
@@ -34,7 +44,8 @@
       .replace(/\{\{formClass\}\}/g, formClass)
       .replace(/\{\{btnClass\}\}/g, btnClass)
       .replace(/\{\{smtpAction\}\}/g, smtpAction)
-      .replace(/\{\{aosAttrs\}\}/g, aosAttrs);
+      .replace(/\{\{aosAttrs\}\}/g, aosAttrs)
+      .replace(/\{\{serviceField\}\}/g, serviceField);
   }
 
   function setActiveNav(page) {

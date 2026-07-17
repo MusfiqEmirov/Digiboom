@@ -10,7 +10,7 @@ $(function () {
     });
 
 
-    // İnteraktiv marquee
+    // İnteraktiv marquee — desktop: axıcı; mobil: 1 kart + 2s autoplay + oxlar
     function initInteractiveMarquee(config) {
         var trackEl = document.querySelector(config.track);
         if (!trackEl) return;
@@ -19,6 +19,8 @@ $(function () {
 
         var flow      = config.flow || 'left';
         var speed     = config.speed || 0.45;
+        var mobileBp  = config.mobileBreakpoint || 768;
+        var autoplayMs = config.mobileAutoplay || 2000;
         var loopWidth = 0;
         var offset    = 0;
         var paused    = false;
@@ -29,6 +31,8 @@ $(function () {
         var dragMoved = false;
         var animating = false;
         var animRaf   = null;
+        var autoplayTimer = null;
+        var isMobile  = false;
 
         // Klonla: sonsuz loop üçün 1 əlavə nüsxə
         var origChildren = Array.from(trackEl.children);
@@ -46,20 +50,41 @@ $(function () {
             return ((v % loopWidth) + loopWidth) % loopWidth;
         }
 
-        // transform həmişə normalize edilmiş dəyərlə — animasiya bitişindəki sıçrayış yoxdur
         function setTransform(raw) {
             var x = loopWidth > 0 ? normalize(raw) : raw;
             trackEl.style.transform = 'translate3d(' + (-x) + 'px,0,0)';
         }
 
+        function applyMobileItemWidths() {
+            var w = viewportEl.clientWidth;
+            Array.prototype.forEach.call(trackEl.children, function (child) {
+                if (isMobile) {
+                    child.style.width = w + 'px';
+                    child.style.flex = '0 0 ' + w + 'px';
+                    child.style.maxWidth = w + 'px';
+                } else {
+                    child.style.width = '';
+                    child.style.flex = '';
+                    child.style.maxWidth = '';
+                }
+            });
+        }
+
         function measure() {
+            var wasMobile = isMobile;
+            isMobile = window.innerWidth < mobileBp;
+            viewportEl.classList.toggle('is-mobile-snap', isMobile);
+            applyMobileItemWidths();
             loopWidth = trackEl.scrollWidth / 2;
-            // sağ axış: ikinci kopyanın ortasından başla
-            if (flow === 'right' && offset === 0) {
+            if (!wasMobile && !isMobile && flow === 'right' && offset === 0) {
                 offset = loopWidth * 0.5;
+            }
+            if (isMobile) {
+                offset = Math.round(normalize(offset) / Math.max(getItemWidth(), 1)) * getItemWidth();
             }
             offset = normalize(offset);
             setTransform(offset);
+            syncAutoplay();
         }
 
         function getItemWidth() {
@@ -75,6 +100,7 @@ $(function () {
         }
 
         function getAnimDuration() {
+            if (isMobile) return 420;
             var n = config.stepCards || 1;
             return Math.min(300 + n * 180, 900);
         }
@@ -84,12 +110,9 @@ $(function () {
             if (animRaf) cancelAnimationFrame(animRaf);
             animating = true;
 
-            // Normalize başlanğıc nöqtəsini
             var start = normalize(offset);
             var end   = start + delta;
 
-            // Animasiya boyunca hər iki tərəf eyni "kopya"da qalsın — wrap baş verməsin
-            // Əgər end bütöv dövrü keçirsə, start-ı uyğunlaşdırırıq
             if (end >= loopWidth)  start = start - loopWidth;
             if (end < 0)           start = start + loopWidth;
             end = start + delta;
@@ -113,8 +136,45 @@ $(function () {
             animRaf = requestAnimationFrame(frame);
         }
 
+        function goNext() {
+            animateNudge(flow === 'right' ? -getStep() : getStep());
+        }
+
+        function goPrev() {
+            animateNudge(flow === 'right' ? getStep() : -getStep());
+        }
+
+        function snapToNearest() {
+            var step = getItemWidth();
+            if (step <= 0) return;
+            var nearest = Math.round(normalize(offset) / step) * step;
+            animateNudge(nearest - normalize(offset));
+        }
+
+        function stopAutoplay() {
+            if (autoplayTimer) {
+                clearInterval(autoplayTimer);
+                autoplayTimer = null;
+            }
+        }
+
+        function startAutoplay() {
+            stopAutoplay();
+            if (!isMobile) return;
+            autoplayTimer = setInterval(function () {
+                if (visible && !paused && !dragging && !animating) {
+                    goNext();
+                }
+            }, autoplayMs);
+        }
+
+        function syncAutoplay() {
+            if (isMobile) startAutoplay();
+            else stopAutoplay();
+        }
+
         function tick() {
-            if (visible && !paused && !dragging && !animating && loopWidth > 0) {
+            if (!isMobile && visible && !paused && !dragging && !animating && loopWidth > 0) {
                 offset += flow === 'right' ? -speed : speed;
                 offset = normalize(offset);
                 setTransform(offset);
@@ -122,7 +182,6 @@ $(function () {
             requestAnimationFrame(tick);
         }
 
-        // IntersectionObserver: görünmədikdə CPU-nu boş yükləmirik
         if ('IntersectionObserver' in window) {
             var io = new IntersectionObserver(function (entries) {
                 visible = entries[0].isIntersecting;
@@ -138,23 +197,23 @@ $(function () {
             config._resizeT = setTimeout(measure, 200);
         });
 
-        // Ox düymələri
         if (config.prev) {
             document.querySelectorAll(config.prev).forEach(function (btn) {
                 btn.addEventListener('click', function () {
-                    animateNudge(flow === 'right' ? getStep() : -getStep());
+                    goPrev();
+                    if (isMobile) startAutoplay();
                 });
             });
         }
         if (config.next) {
             document.querySelectorAll(config.next).forEach(function (btn) {
                 btn.addEventListener('click', function () {
-                    animateNudge(flow === 'right' ? -getStep() : getStep());
+                    goNext();
+                    if (isMobile) startAutoplay();
                 });
             });
         }
 
-        // Hover — dur
         viewportEl.addEventListener('mouseenter', function () { paused = true; });
         viewportEl.addEventListener('mouseleave', function () {
             paused = false;
@@ -164,7 +223,6 @@ $(function () {
             }
         });
 
-        // Mouse drag
         viewportEl.addEventListener('mousedown', function (e) {
             if (e.button !== 0) return;
             e.preventDefault();
@@ -185,15 +243,16 @@ $(function () {
             if (!dragging) return;
             dragging = false;
             viewportEl.classList.remove('is-dragging');
+            if (isMobile && dragMoved) snapToNearest();
         });
 
-        // Touch drag (passive: true → scroll-u bloklamır)
         viewportEl.addEventListener('touchstart', function (e) {
             if (!e.touches.length) return;
             dragging   = true;
             dragMoved  = false;
             dragStartX = e.touches[0].clientX;
             dragStartOffset = normalize(offset);
+            if (isMobile) stopAutoplay();
         }, { passive: true });
         viewportEl.addEventListener('touchmove', function (e) {
             if (!dragging || !e.touches.length) return;
@@ -202,10 +261,18 @@ $(function () {
             offset = normalize(dragStartOffset - delta);
             setTransform(offset);
         }, { passive: true });
-        viewportEl.addEventListener('touchend',    function () { dragging = false; });
-        viewportEl.addEventListener('touchcancel', function () { dragging = false; });
+        viewportEl.addEventListener('touchend', function () {
+            dragging = false;
+            if (isMobile) {
+                if (dragMoved) snapToNearest();
+                startAutoplay();
+            }
+        });
+        viewportEl.addEventListener('touchcancel', function () {
+            dragging = false;
+            if (isMobile) startAutoplay();
+        });
 
-        // Drag zamanı linklərə kliku bloklayırıq
         trackEl.addEventListener('click', function (e) {
             if (dragMoved) {
                 e.preventDefault();
@@ -222,6 +289,7 @@ $(function () {
         flow: 'right',
         speed: 0.45,
         stepCards: 1,
+        mobileAutoplay: 2000,
         prev: '.featured-projects-nav-prev',
         next: '.featured-projects-nav-next'
     });
@@ -232,16 +300,37 @@ $(function () {
         viewport: '.services-marquee',
         flow: 'left',
         speed: 0.45,
-        stepCards: 4,
+        stepCards: 1,
+        mobileAutoplay: 2000,
         prev: '.services-nav-prev',
         next: '.services-nav-next'
     });
 
-    // Testimonial: desktop 1,2,3 → 4,5,6 → 7,8,9 (icon 3-3), mobil 1-1
+    // Testimonial: hər klikdə bir rəy
     var $testimonialSlider = $('.testimonial-slider');
     if ($testimonialSlider.length) {
         var testimonialAutoplayTimer;
-        var desktopPage = 0; // 0 = 1,2,3  1 = 4,5,6  2 = 7,8,9
+
+        function buildTestimonialStarsHtml(rating) {
+            var count = Math.max(1, Math.min(5, parseInt(rating, 10) || 5));
+            var html = '<div class="testimonial-stars" aria-label="' + count + ' ulduzdan 5">';
+            for (var i = 1; i <= 5; i++) {
+                html += '<iconify-icon icon="lucide:star"' + (i <= count ? ' class="is-filled"' : '') + ' aria-hidden="true"></iconify-icon>';
+            }
+            return html + '</div>';
+        }
+
+        function initTestimonialStars(root) {
+            $(root || document).find('.testimonial-card').each(function () {
+                var $card = $(this);
+                var $body = $card.find('.card-body').first();
+                if (!$body.length || $body.find('.testimonial-stars').length) return;
+                var rating = parseInt($card.attr('data-rating'), 10) || 5;
+                $body.prepend(buildTestimonialStarsHtml(rating));
+            });
+        }
+
+        initTestimonialStars();
 
         $testimonialSlider.owlCarousel({
             loop: true,
@@ -256,26 +345,12 @@ $(function () {
             }
         });
 
-        function isDesktop() {
-            return $(window).width() >= 992;
-        }
-
         function goTestimonialNext() {
-            if (isDesktop()) {
-                desktopPage = (desktopPage + 1) % 3;
-                $testimonialSlider.trigger('to.owl.carousel', [desktopPage * 3, 300]);
-            } else {
-                $testimonialSlider.trigger('next.owl.carousel', [300]);
-            }
+            $testimonialSlider.trigger('next.owl.carousel', [300]);
         }
 
         function goTestimonialPrev() {
-            if (isDesktop()) {
-                desktopPage = (desktopPage - 1 + 3) % 3;
-                $testimonialSlider.trigger('to.owl.carousel', [desktopPage * 3, 300]);
-            } else {
-                $testimonialSlider.trigger('prev.owl.carousel', [300]);
-            }
+            $testimonialSlider.trigger('prev.owl.carousel', [300]);
         }
 
         $('.testimonial-nav-prev').on('click', goTestimonialPrev);
@@ -292,8 +367,66 @@ $(function () {
         }
         startAutoplay();
         $('.testimonial-slider-wrapper').on('mouseenter', stopAutoplay).on('mouseleave', startAutoplay);
+
+        window.addSubmittedTestimonial = function (data) {
+            var rating = Math.max(1, Math.min(5, parseInt(data.rating, 10) || 5));
+            var categoryLabel = data.categoryLabel || data.category || '';
+            var name = data.name || data.company || 'Müştəri';
+            var text = data.text || '';
+            var initial = name.trim().charAt(0).toUpperCase() || 'D';
+            var $item = $(
+                '<div class="item d-flex align-items-stretch">' +
+                '<div class="testimonial-card testimonial-card--light w-100 h-100" data-rating="' + rating + '">' +
+                '<div class="card-body d-flex flex-column gap-5 justify-content-between">' +
+                buildTestimonialStarsHtml(rating) +
+                '<p class="testimonial-quote mb-0"></p>' +
+                '<div class="testimonial-author hstack gap-3">' +
+                '<div class="testimonial-author__avatar" aria-hidden="true">' + initial + '</div>' +
+                '<div><h5 class="mb-1 fw-semibold"></h5><p class="mb-0 text-muted small"></p></div>' +
+                '</div></div></div></div>'
+            );
+            $item.find('.testimonial-quote').text(text);
+            $item.find('h5').text(name);
+            $item.find('.text-muted').text(categoryLabel);
+            $testimonialSlider.trigger('add.owl.carousel', [$item, 0]);
+            $testimonialSlider.trigger('refresh.owl.carousel');
+            $testimonialSlider.trigger('to.owl.carousel', [0, 300]);
+        };
     }
 
+    // Xidmətlər səhifəsi — paketlər karuseli (autoplay yox, yalnız ox düymələri)
+    var $pricingSlider = $('.pricing-section--services .pricing-slider');
+    if ($pricingSlider.length) {
+        var pricingItemCount = $pricingSlider.children('.item').length;
+        var usePricingCarousel = pricingItemCount > 3;
+
+        $pricingSlider.owlCarousel({
+            loop: usePricingCarousel,
+            margin: 24,
+            nav: false,
+            dots: false,
+            autoplay: false,
+            mouseDrag: usePricingCarousel,
+            touchDrag: usePricingCarousel,
+            pullDrag: usePricingCarousel,
+            responsive: {
+                0: { items: 1 },
+                768: { items: 2 },
+                1200: { items: 3 }
+            }
+        });
+
+        $('.pricing-nav-prev').on('click', function () {
+            $pricingSlider.trigger('prev.owl.carousel', [300]);
+        });
+        $('.pricing-nav-next').on('click', function () {
+            $pricingSlider.trigger('next.owl.carousel', [300]);
+        });
+
+        if (!usePricingCarousel) {
+            $('.pricing-section--services .pricing-nav-btn').addClass('d-none');
+        }
+    }
 
     // Stats count-up (ana səhifə & haqqımızda)
     function animateStatCount($el) {
@@ -358,44 +491,305 @@ $(function () {
 		once: true,
 	});
 
-	// Rəy bildir modal – xidmət çipləri və fayl adı
-	var $reviewForm = $('#reviewForm');
-	var $reviewModal = $('#reviewModal');
+	// Rəy bildir modal – nested dropdown, ulduz, fayl və göndərmə
+	var reviewSuccessTimer = null;
+	var reviewDropdownCloseTimer = null;
 
-	function syncReviewServiceChip($chip) {
-		$chip.closest('.review-service-grid').find('.review-service-chip').removeClass('is-selected');
-		$chip.addClass('is-selected');
+	function showReviewSuccessAlert() {
+		var alertEl = document.getElementById('reviewSuccessAlert');
+		if (!alertEl) return;
+		if (reviewSuccessTimer) clearTimeout(reviewSuccessTimer);
+		alertEl.hidden = false;
+		requestAnimationFrame(function () {
+			alertEl.classList.add('is-visible');
+		});
+		reviewSuccessTimer = setTimeout(function () {
+			alertEl.classList.remove('is-visible');
+			setTimeout(function () {
+				alertEl.hidden = true;
+			}, 320);
+		}, 2000);
 	}
 
-	$reviewForm.on('change', '.review-service-chip input[type="radio"]', function () {
-		syncReviewServiceChip($(this).closest('.review-service-chip'));
-	});
+	function openReviewModal() {
+		var modalEl = document.getElementById('reviewModal');
+		if (!modalEl || !window.bootstrap || !window.bootstrap.Modal) return;
+		window.bootstrap.Modal.getOrCreateInstance(modalEl).show();
+	}
 
-	$reviewForm.on('change', '#reviewImage', function () {
-		var file = this.files && this.files[0];
-		var $name = $reviewForm.find('.review-file-name');
-		var $upload = $reviewForm.find('.review-file-upload');
-		if (file) {
-			$name.text(file.name);
-			$upload.addClass('has-file');
-		} else {
-			$name.text('');
-			$upload.removeClass('has-file');
+	function resetReviewDropdown() {
+		var $dropdown = $('#reviewCategoryDropdown');
+		if (!$dropdown.length) return;
+		$dropdown.removeClass('is-open');
+		$dropdown.find('.review-dropdown__item').removeClass('is-open');
+		$dropdown.find('.review-dropdown__toggle').attr('aria-expanded', 'false');
+		$dropdown.find('.review-dropdown__option').removeClass('is-active').attr('aria-selected', 'false');
+		$('#reviewCategory').val('');
+		$('#reviewCategoryLabelValue').val('');
+		$dropdown.find('.review-dropdown__label').text('Xidməti seçin');
+		$dropdown.find('.review-dropdown__lead-icon').attr('icon', 'lucide:briefcase');
+	}
+
+	function openReviewDropdown() {
+		var $dropdown = $('#reviewCategoryDropdown');
+		if (!$dropdown.length) return;
+		if (reviewDropdownCloseTimer) {
+			clearTimeout(reviewDropdownCloseTimer);
+			reviewDropdownCloseTimer = null;
 		}
-	});
+		$dropdown.addClass('is-open');
+		$dropdown.find('.review-dropdown__toggle').attr('aria-expanded', 'true');
+	}
 
-	$reviewModal.on('hidden.bs.modal', function () {
-		$reviewForm[0].reset();
-		$reviewForm.find('.review-service-chip').removeClass('is-selected');
-		$reviewForm.find('.review-file-upload').removeClass('has-file');
-		$reviewForm.find('.review-file-name').text('');
-	});
+	function closeReviewDropdown(delay) {
+		if (reviewDropdownCloseTimer) clearTimeout(reviewDropdownCloseTimer);
+		reviewDropdownCloseTimer = setTimeout(function () {
+			var $dropdown = $('#reviewCategoryDropdown');
+			$dropdown.removeClass('is-open');
+			$dropdown.find('.review-dropdown__item').removeClass('is-open');
+			$dropdown.find('.review-dropdown__toggle').attr('aria-expanded', 'false');
+		}, delay || 120);
+	}
 
-	$reviewForm.on('submit', function (e) {
+	function selectReviewDropdownOption($option) {
+		var value = $option.data('value');
+		if (!value) return;
+		var label = $option.data('label') || $option.children('span').first().text();
+		var icon = $option.data('icon') || 'lucide:briefcase';
+		var $dropdown = $('#reviewCategoryDropdown');
+		$('#reviewCategory').val(value);
+		$('#reviewCategoryLabelValue').val(label);
+		$dropdown.find('.review-dropdown__label').text(label);
+		$dropdown.find('.review-dropdown__lead-icon').attr('icon', icon);
+		$dropdown.find('.review-dropdown__option').removeClass('is-active').attr('aria-selected', 'false');
+		$option.addClass('is-active').attr('aria-selected', 'true');
+		$dropdown.find('.review-dropdown__item').removeClass('is-open');
+		closeReviewDropdown(0);
+	}
+
+	function syncReviewStars($group, highlight) {
+		var active = highlight;
+		if (active == null) {
+			var $checked = $group.find('input:checked');
+			active = $checked.length ? parseInt($checked.val(), 10) : 0;
+		}
+		$group.find('.review-star').each(function (index) {
+			var filled = index < active;
+			$(this).find('iconify-icon').toggleClass('is-filled', filled);
+			$(this).toggleClass('is-active', filled && $(this).find('input').is(':checked'));
+		});
+	}
+
+	function initReviewModal() {
+		var $reviewForm = $('#reviewForm');
+		var $reviewModal = $('#reviewModal');
+		if (!$reviewForm.length || $reviewForm.data('review-bound')) return;
+		$reviewForm.data('review-bound', true);
+
+		var $reviewDropdown = $('#reviewCategoryDropdown');
+		if ($reviewDropdown.length) {
+			$reviewDropdown.on('mouseenter', function () {
+				openReviewDropdown();
+			});
+			$reviewDropdown.on('mouseleave', function () {
+				closeReviewDropdown();
+			});
+			$reviewDropdown.on('click', '.review-dropdown__toggle', function (e) {
+				e.preventDefault();
+				if ($reviewDropdown.hasClass('is-open')) {
+					closeReviewDropdown(0);
+				} else {
+					openReviewDropdown();
+				}
+			});
+			$reviewDropdown.on('click', '.review-dropdown__parent', function (e) {
+				e.preventDefault();
+				e.stopPropagation();
+				var $item = $(this).closest('.review-dropdown__item');
+				$reviewDropdown.find('.review-dropdown__item').not($item).removeClass('is-open');
+				$item.toggleClass('is-open');
+			});
+			$reviewDropdown.on('click', '.review-dropdown__option[data-value]', function (e) {
+				e.preventDefault();
+				e.stopPropagation();
+				selectReviewDropdownOption($(this));
+			});
+		}
+
+		$reviewForm.on('mouseenter', '.review-star', function () {
+			var index = $(this).index() + 1;
+			syncReviewStars($(this).closest('.review-stars'), index);
+		});
+		$reviewForm.on('mouseleave', '.review-stars', function () {
+			syncReviewStars($(this));
+		});
+		$reviewForm.on('change', '.review-star input', function () {
+			syncReviewStars($(this).closest('.review-stars'));
+		});
+
+		$reviewForm.on('change', '#reviewImage', function () {
+			var file = this.files && this.files[0];
+			var $name = $reviewForm.find('.review-file-name');
+			var $upload = $reviewForm.find('.review-file-upload');
+			if (file) {
+				$name.text(file.name);
+				$upload.addClass('has-file');
+			} else {
+				$name.text('');
+				$upload.removeClass('has-file');
+			}
+		});
+
+		$reviewModal.on('hidden.bs.modal', function () {
+			$reviewForm[0].reset();
+			resetReviewDropdown();
+			syncReviewStars($reviewForm.find('.review-stars'));
+			$reviewForm.find('.review-file-upload').removeClass('has-file');
+			$reviewForm.find('.review-file-name').text('');
+		});
+
+		$reviewForm.on('submit', function (e) {
+			e.preventDefault();
+			if (!$('#reviewCategory').val()) {
+				openReviewDropdown();
+				return;
+			}
+			if (!$reviewForm.find('input[name="rating"]:checked').length) {
+				return;
+			}
+			var category = $('#reviewCategory').val();
+			var categoryLabel = $('#reviewCategoryLabelValue').val() || category;
+			var payload = {
+				name: $('#reviewName').val(),
+				category: category,
+				categoryLabel: categoryLabel,
+				rating: $reviewForm.find('input[name="rating"]:checked').val(),
+				text: $('#reviewText').val()
+			};
+			if (typeof window.addSubmittedTestimonial === 'function') {
+				window.addSubmittedTestimonial(payload);
+			}
+			var modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
+			if (modal) modal.hide();
+			showReviewSuccessAlert();
+		});
+	}
+
+	initReviewModal();
+	document.addEventListener('digiboom:includes-ready', initReviewModal);
+
+	$(document).on('click', '[data-open-review-modal]', function (e) {
 		e.preventDefault();
-		var modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
-		if (modal) modal.hide();
-		// TODO: form məlumatlarını serverə göndərmək
+		openReviewModal();
+	});
+
+	// Paket sifariş modalı
+	var orderSuccessTimer = null;
+
+	function showOrderSuccessAlert() {
+		var alertEl = document.getElementById('orderSuccessAlert');
+		if (!alertEl) return;
+		if (orderSuccessTimer) clearTimeout(orderSuccessTimer);
+		alertEl.hidden = false;
+		requestAnimationFrame(function () {
+			alertEl.classList.add('is-visible');
+		});
+		orderSuccessTimer = setTimeout(function () {
+			alertEl.classList.remove('is-visible');
+			setTimeout(function () {
+				alertEl.hidden = true;
+			}, 320);
+		}, 3200);
+	}
+
+	function openOrderModal(packageName) {
+		var modalEl = document.getElementById('orderModal');
+		if (!modalEl || !window.bootstrap || !window.bootstrap.Modal) return;
+		var $package = $('#orderPackage');
+		if ($package.length) {
+			$package.val(packageName || '');
+		}
+		window.bootstrap.Modal.getOrCreateInstance(modalEl).show();
+	}
+
+	function initOrderModal() {
+		var $orderForm = $('#orderForm');
+		var $orderModal = $('#orderModal');
+		if (!$orderForm.length || $orderForm.data('order-bound')) return;
+		$orderForm.data('order-bound', true);
+
+		$orderModal.on('hidden.bs.modal', function () {
+			$orderForm[0].reset();
+			$('#orderPackage').val('');
+		});
+
+		$orderForm.on('submit', function (e) {
+			e.preventDefault();
+			if (!$('#orderPackage').val()) return;
+			var modal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
+			if (modal) modal.hide();
+			showOrderSuccessAlert();
+		});
+	}
+
+	initOrderModal();
+	document.addEventListener('digiboom:includes-ready', initOrderModal);
+
+	$(document).on('click', '[data-open-order-modal]', function (e) {
+		e.preventDefault();
+		var $btn = $(this);
+		var packageName = $btn.attr('data-package-name') ||
+			$btn.closest('.pricing-card').find('.pricing-card__name').first().text().trim() ||
+			'';
+		openOrderModal(packageName);
+	});
+
+	// Konsultasiya / əlaqə modalı
+	function openContactModal(serviceName) {
+		var modalEl = document.getElementById('contactModal');
+		if (!modalEl || !window.bootstrap || !window.bootstrap.Modal) return;
+		var $service = $('#contact-modal-service');
+		if ($service.length) {
+			$service.val(serviceName || '');
+		}
+		window.bootstrap.Modal.getOrCreateInstance(modalEl).show();
+	}
+
+	function initContactModal() {
+		var $contactModal = $('#contactModal');
+		if (!$contactModal.length || $contactModal.data('contact-modal-bound')) return;
+		$contactModal.data('contact-modal-bound', true);
+
+		$contactModal.on('hidden.bs.modal', function () {
+			var form = document.getElementById('contact-modal-form');
+			if (form) form.reset();
+			$('#contact-modal-service').val('');
+		});
+	}
+
+	initContactModal();
+	document.addEventListener('digiboom:includes-ready', initContactModal);
+
+	$(document).on('click', '[data-open-contact-modal]', function (e) {
+		e.preventDefault();
+		var $btn = $(this);
+		var serviceName = $btn.attr('data-service-name') ||
+			$('#serviceDetailName').text().trim() ||
+			'';
+		openContactModal(serviceName);
+	});
+
+	// Xidmət kartı: bütün kart + Ətraflı düyməsi detal səhifəsinə keçir
+	var serviceCardPointer = { x: 0, y: 0 };
+	$(document).on('pointerdown', '#services .service-card--cinema', function (e) {
+		serviceCardPointer.x = e.clientX;
+		serviceCardPointer.y = e.clientY;
+	});
+	$(document).on('click', '#services .service-card--cinema', function (e) {
+		if ($(e.target).closest('a').length) return;
+		if (Math.abs(e.clientX - serviceCardPointer.x) > 8 || Math.abs(e.clientY - serviceCardPointer.y) > 8) return;
+		var href = $(this).find('a.service-card__btn').attr('href');
+		if (href) window.location.href = href;
 	});
 
 });

@@ -228,6 +228,24 @@
     if (type) statusEl.classList.add('contact-form-modern__status--' + type);
   }
 
+  var contactSuccessTimer = null;
+
+  function showContactSuccessAlert() {
+    var alertEl = document.getElementById('contactSuccessAlert');
+    if (!alertEl) return;
+    if (contactSuccessTimer) clearTimeout(contactSuccessTimer);
+    alertEl.hidden = false;
+    requestAnimationFrame(function () {
+      alertEl.classList.add('is-visible');
+    });
+    contactSuccessTimer = setTimeout(function () {
+      alertEl.classList.remove('is-visible');
+      setTimeout(function () {
+        alertEl.hidden = true;
+      }, 320);
+    }, 2800);
+  }
+
   function bindSmtpContactForms() {
     document.querySelectorAll('form[data-smtp-form]').forEach(function (form) {
       if (form.dataset.smtpBound === 'true') return;
@@ -256,21 +274,25 @@
           .then(function (res) {
             if (!res.ok) {
               return res.json().catch(function () {
-                return { message: 'Mesaj göndərilmədi. Zəhmət olmasa bir az sonra yenidən cəhd edin.' };
-              }).then(function (data) {
-                throw new Error(data.message || 'Mesaj göndərilmədi.');
+                return { ok: false };
               });
             }
             return res.json().catch(function () {
               return { ok: true };
             });
           })
-          .then(function () {
-            showFormStatus(form, 'Mesajınız uğurla göndərildi. Tezliklə sizinlə əlaqə saxlayacağıq.', 'success');
-            form.reset();
+          .catch(function () {
+            return { ok: false };
           })
-          .catch(function (err) {
-            showFormStatus(form, err.message || 'Xəta baş verdi. Birbaşa info@digiboom.az ünvanına yazın.', 'error');
+          .then(function () {
+            showFormStatus(form, '', '');
+            form.reset();
+            var contactModalEl = document.getElementById('contactModal');
+            if (contactModalEl && window.bootstrap && window.bootstrap.Modal) {
+              var contactModal = window.bootstrap.Modal.getInstance(contactModalEl);
+              if (contactModal) contactModal.hide();
+            }
+            showContactSuccessAlert();
           })
           .finally(function () {
             if (submitBtn) submitBtn.classList.remove('is-loading');

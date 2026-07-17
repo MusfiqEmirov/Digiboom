@@ -79,6 +79,13 @@
             .logo-white {
                 display: none;
             }
+
+            a {
+                background: rgba(255, 255, 255, 0.96);
+                border-radius: 14px;
+                padding: 0.35rem 0.7rem;
+                box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+            }
         }
 
         .light-dark {
@@ -233,55 +240,56 @@
     }
 
     &.fixed-header .mobile-nav-toggle {
-        border-color: rgba(31, 42, 46, 0.2);
-        background: rgba(31, 42, 46, 0.06);
+        border-color: rgba(255, 255, 255, 0.95);
+        background: #fff;
 
         .mobile-nav-toggle__bars span {
-            background-color: var(--bs-dark);
+            background-color: var(--db-primary, #37075B);
         }
 
         &:hover,
         &:focus-visible {
-            background: rgba(31, 42, 46, 0.1);
-            border-color: rgba(31, 42, 46, 0.35);
+            background: #fff;
+            border-color: #fff;
         }
     }
 
     &.fixed-header .header-nav-desktop-link {
-        color: var(--bs-dark);
+        color: rgba(255, 255, 255, 0.9);
 
         .animate-spin {
-            filter: none;
+            filter: brightness(0) invert(1);
         }
 
         &:hover,
         &.active {
-            color: var(--bs-dark);
-        }
-    }
-
-    &.fixed-header .header-nav-desktop-btns .btn-outline-light {
-        border-color: var(--bs-dark);
-        color: var(--bs-dark);
-
-        &:hover {
-            background-color: var(--bs-dark);
             color: #fff;
         }
     }
 
+    &.fixed-header .header-nav-desktop-btns .btn-outline-light {
+        border-color: rgba(255, 255, 255, 0.55);
+        color: #fff;
+
+        &:hover {
+            background-color: #fff;
+            color: var(--bs-primary);
+        }
+    }
+
     &.fixed-header .lang-switcher-host--desktop .lang-switcher__toggle {
-        color: var(--bs-dark);
-        border-color: rgba(31, 42, 46, 0.45);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.45);
     }
 
     &.fixed-header .header-contact-btn {
-        background-color: var(--bs-dark);
+        background-color: var(--db-accent, var(--bs-primary));
         color: #fff;
 
         &:hover,
         &:focus {
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+            background-color: var(--db-accent-hover, #D94820);
+            box-shadow: 0 8px 22px rgba(var(--db-accent-rgb, 237, 79, 36), 0.35);
         }
     }
 

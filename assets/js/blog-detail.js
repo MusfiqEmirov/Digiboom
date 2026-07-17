@@ -11,44 +11,15 @@
     return articles[id] ? id : DEFAULT_ID;
   }
 
-  function formatViewCount(n) {
-    if (typeof n !== 'number' || isNaN(n)) return '—';
-    if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-    if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-    return String(n);
-  }
-
-  function getApiBase() {
-    var path = window.location.pathname;
-    var htmlIdx = path.lastIndexOf('/html/');
-    if (htmlIdx !== -1) {
-      return path.substring(0, htmlIdx) + '/api/blog-views.php';
-    }
-    return '../api/blog-views.php';
-  }
-
-  function registerView(articleId, onDone) {
-    var apiUrl = getApiBase() + '?id=' + encodeURIComponent(articleId);
-
-    fetch(apiUrl, { method: 'POST', credentials: 'same-origin' })
-      .then(function (res) { return res.json(); })
-      .then(function (data) {
-        onDone(data.count);
-      })
-      .catch(function () {
-        fetch(apiUrl, { method: 'GET', credentials: 'same-origin' })
-          .then(function (res) { return res.json(); })
-          .then(function (data) { onDone(data.count); })
-          .catch(function () { onDone(null); });
-      });
-  }
-
-  function updateViewDisplay(count) {
+  function updateViewDisplay(approxLabel) {
     var el = document.getElementById('blogViewCount');
     if (!el) return;
-    el.textContent = formatViewCount(count);
+    el.textContent = approxLabel ? '~' + approxLabel : '—';
     var viewsWrap = el.closest('.blog-detail-views');
-    if (viewsWrap) viewsWrap.classList.toggle('is-loaded', count !== null);
+    if (viewsWrap) {
+      viewsWrap.classList.toggle('is-loaded', !!approxLabel);
+      viewsWrap.setAttribute('title', 'Təxmini baxış sayı');
+    }
   }
 
   function renderArticle(article) {
@@ -76,6 +47,8 @@
     if (captionEl) captionEl.textContent = article.title;
     if (contentEl) contentEl.innerHTML = article.content;
     if (articleEl) articleEl.setAttribute('data-article-id', article.id);
+
+    updateViewDisplay(article.viewsApprox || null);
   }
 
   function renderRelated(currentId) {
@@ -89,6 +62,9 @@
       .slice(0, RELATED_LIMIT);
 
     listEl.innerHTML = others.map(function (item) {
+      var viewsHtml = item.viewsApprox
+        ? '<span class="blog-related-link__views" title="Təxmini baxış sayı">~' + item.viewsApprox + ' baxış</span>'
+        : '';
       return (
         '<li class="blog-related-item">' +
           '<a href="blog-detail.html?id=' + encodeURIComponent(item.id) + '" class="blog-related-link">' +
@@ -98,7 +74,10 @@
             '<span class="blog-related-link__body">' +
               '<span class="blog-related-link__cat">' + item.category + '</span>' +
               '<span class="blog-related-link__title">' + item.title + '</span>' +
-              '<time class="blog-related-link__date" datetime="' + item.date + '">' + item.dateFormatted + '</time>' +
+              '<span class="blog-related-link__meta">' +
+                '<time class="blog-related-link__date" datetime="' + item.date + '">' + item.dateFormatted + '</time>' +
+                viewsHtml +
+              '</span>' +
             '</span>' +
             '<iconify-icon class="blog-related-link__arrow" icon="lucide:chevron-right" aria-hidden="true"></iconify-icon>' +
           '</a>' +
@@ -114,7 +93,6 @@
 
     renderArticle(article);
     renderRelated(articleId);
-    registerView(articleId, updateViewDisplay);
   }
 
   if (document.readyState === 'loading') {
