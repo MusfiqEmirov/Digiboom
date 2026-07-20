@@ -1,0 +1,34 @@
+FROM python:3.11-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+WORKDIR /app
+
+ENV PYTHONPATH=/app/digiboom:$PYTHONPATH
+
+RUN apt-get update && apt-get install -y \
+    postgresql-client \
+    build-essential \
+    libpq-dev \
+    netcat-openbsd \
+    gettext \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install uv
+
+COPY pyproject.toml uv.lock ./
+
+RUN uv pip sync uv.lock --system || uv pip install --system -e .
+
+COPY . .
+
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 8000
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "1", "--timeout", "120", "--chdir", "digiboom", "digiboom.wsgi:application"]
