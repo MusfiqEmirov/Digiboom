@@ -1,0 +1,85 @@
+/* Ana səhifə banner — şəkil/video düymələri (stacked) */
+.home-media-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    margin: 10px 0 16px;
+    padding: 12px 14px;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.home-media-actions .button {
+    cursor: pointer;
+}
+
+.home-media-add-image {
+    background: #417690 !important;
+    color: #fff !important;
+    border-color: #205067 !important;
+}
+
+.home-media-add-video {
+    background: #5b4b8a !important;
+    color: #fff !important;
+    border-color: #3d3260 !important;
+}
+
+.home-media-btn--disabled,
+.home-media-add-video:disabled {
+    opacity: 0.45;
+    cursor: not-allowed !important;
+}
+
+.home-media-hint {
+    flex: 1 1 100%;
+    margin: 0;
+    color: #666;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+#home_media-group .add-row {
+    display: none !important;
+}
+
+#home_media-group .field-media_type {
+    display: none !important;
+}
+
+/* Şəkil sətirində video gizlənir — Sıra öz yerində qalır */
+#home_media-group .home-media-item--image .field-video {
+    display: none !important;
+}
+
+/* Video sətirində şəkil gizlənir — Sıra «Sıra» yazısının altında */
+#home_media-group .home-media-item--video .field-image {
+    display: none !important;
+}
+
+#home_media-group .inline-related {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    background: #fff;
+}
+
+#home_media-group .inline-related h3 {
+    background: #f0f4f7;
+    border-radius: 6px 6px 0 0;
+}
+
+#home_media-group .field-sort_order {
+    clear: both;
+}
+
+#home_media-group .field-sort_order label {
+    font-weight: 600;
+}
+
+#home_media-group .field-sort_order input {
+    width: 5em;
+}

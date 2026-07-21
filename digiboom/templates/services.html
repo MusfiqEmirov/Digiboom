@@ -1,6 +1,6 @@
-{% load static %}
+{% load static i18n %}
 <!doctype html>
-<html lang="az">
+<html lang="{{ LANGUAGE_CODE|default:'az' }}">
 
 <head>
   <meta charset="utf-8">
@@ -55,7 +55,7 @@
           <div class="row services-header align-items-center justify-content-center">
             <div class="col-auto">
               <div class="services-title-block text-center" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                <h2 class="mb-0 text-white">Xidmətlər</h2>
+                <h2 class="mb-0 text-white">{% trans "Xidmətlər" %}</h2>
               </div>
             </div>
           </div>
@@ -74,7 +74,7 @@
                     <button type="button" class="blog-category-tab is-active" role="tab" aria-selected="true" data-filter="all">
                       <span class="blog-category-tab__chip">
                         <span class="blog-category-tab__dot" aria-hidden="true"></span>
-                        <span class="blog-category-tab__label">Hamısı</span>
+                        <span class="blog-category-tab__label">{% trans "Hamısı" %}</span>
                       </span>
                     </button>
                     <button type="button" class="blog-category-tab" role="tab" aria-selected="false" data-filter="marketinq">
@@ -86,7 +86,7 @@
                     <button type="button" class="blog-category-tab" role="tab" aria-selected="false" data-filter="konsultasiya">
                       <span class="blog-category-tab__chip">
                         <span class="blog-category-tab__dot" aria-hidden="true"></span>
-                        <span class="blog-category-tab__label">Konsultasiya</span>
+                        <span class="blog-category-tab__label">{% trans "Konsultasiya" %}</span>
                       </span>
                     </button>
                     <button type="button" class="blog-category-tab" role="tab" aria-selected="false" data-filter="brendinq">
@@ -133,7 +133,7 @@
                     <h3 class="service-card__title text-white mb-0">Ənənəvi marketinq</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Adət-ənənə üzərindən güclü brend qurmaq.</p>
                     <a href="{% url 'services_detail' %}" class="btn service-card__btn">
-                      <span class="btn-text">Ətraflı</span>
+                      <span class="btn-text">{% trans "Ətraflı" %}</span>
                       <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
                     </a>
                   </div>
@@ -144,12 +144,12 @@
                   <span class="service-card__glow" aria-hidden="true"></span>
                   <span class="service-card__bg" style="background-image: url({% static 'images/services/services-img-2.jpg' %});"></span>
                   <span class="service-card__overlay"></span>
-                  <span class="service-card__category" data-cat="konsultasiya">Konsultasiya</span>
+                  <span class="service-card__category" data-cat="konsultasiya">{% trans "Konsultasiya" %}</span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
-                    <h3 class="service-card__title text-white mb-0">Konsultasiya</h3>
+                    <h3 class="service-card__title text-white mb-0">{% trans "Konsultasiya" %}</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Müvafiq sahə üzrə mütəxəssis məsləhəti.</p>
                     <a href="{% url 'services_detail' %}" class="btn service-card__btn">
-                      <span class="btn-text">Ətraflı</span>
+                      <span class="btn-text">{% trans "Ətraflı" %}</span>
                       <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
                     </a>
                   </div>
@@ -165,7 +165,7 @@
                     <h3 class="service-card__title text-white mb-0">Rəqəmsal marketinq</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">SEO, SMM, reklam kampaniyaları.</p>
                     <a href="{% url 'services_detail' %}" class="btn service-card__btn">
-                      <span class="btn-text">Ətraflı</span>
+                      <span class="btn-text">{% trans "Ətraflı" %}</span>
                       <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
                     </a>
                   </div>
@@ -181,7 +181,7 @@
                     <h3 class="service-card__title text-white mb-0">Biznes avtomatlaşdırması</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Proseslərin optimallaşdırılması və CRM.</p>
                     <a href="{% url 'services_detail' %}" class="btn service-card__btn">
-                      <span class="btn-text">Ətraflı</span>
+                      <span class="btn-text">{% trans "Ətraflı" %}</span>
                       <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
                     </a>
                   </div>
@@ -197,7 +197,7 @@
                     <h3 class="service-card__title text-white mb-0">Brending və dizayn</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Loqo, vizual identitet, brendinq kitabı.</p>
                     <a href="{% url 'services_detail' %}" class="btn service-card__btn">
-                      <span class="btn-text">Ətraflı</span>
+                      <span class="btn-text">{% trans "Ətraflı" %}</span>
                       <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
                     </a>
                   </div>
@@ -213,7 +213,7 @@
                     <h3 class="service-card__title text-white mb-0">Təlim</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Korporativ və fərdi təlim proqramları.</p>
                     <a href="{% url 'training' %}" class="btn service-card__btn">
-                      <span class="btn-text">Ətraflı</span>
+                      <span class="btn-text">{% trans "Ətraflı" %}</span>
                       <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
                     </a>
                   </div>
@@ -225,14 +225,14 @@
       </div>
     </section>
 
-    <!--  Xüsusi paketlər Section -->
+    <!--  {% trans "Xüsusi paketlər" %} Section -->
     <section id="paketler" class="pricing-section pricing-section--services py-5 py-lg-11 py-xl-12 bg-light-gray">
       <div class="container">
         <div class="d-flex flex-column gap-5 gap-xl-10">
           <div class="row justify-content-center">
             <div class="col-auto">
               <div class="text-center" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                <h2 class="mb-0">Xüsusi paketlər</h2>
+                <h2 class="mb-0">{% trans "Xüsusi paketlər" %}</h2>
               </div>
             </div>
           </div>
@@ -251,12 +251,12 @@
                       <h5 class="pricing-card__name mb-0">Başlanğıc</h5>
                       <div class="pricing-card__price">
                         <span class="pricing-card__amount">350 azn</span>
-                        <span class="pricing-card__period">/aylıq</span>
+                        <span class="pricing-card__period">/ {% trans "aylıq" %}</span>
                       </div>
                       <p class="pricing-card__desc mb-0">Kiçik biznes və fərdi layihələr üçün əsas rəqəmsal paket.</p>
                     </div>
                     <div class="pricing-card__features">
-                      <p class="pricing-card__features-label mb-0">Nələr daxildir</p>
+                      <p class="pricing-card__features-label mb-0">{% trans "Nələr daxildir" %}</p>
                       <ul class="pricing-card__list list-unstyled mb-0">
                         <li class="pricing-card__item">
                           <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
@@ -273,7 +273,7 @@
                       </ul>
                     </div>
                     <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal>
-                      <span class="btn-text">Sifariş edin</span>
+                      <span class="btn-text">{% trans "Sifariş edin" %}</span>
                       <iconify-icon icon="lucide:arrow-up-right"
                         class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
                     </a>
@@ -287,12 +287,12 @@
                       <h5 class="pricing-card__name mb-0">Peşəkar</h5>
                       <div class="pricing-card__price">
                         <span class="pricing-card__amount">650 azn</span>
-                        <span class="pricing-card__period">/aylıq</span>
+                        <span class="pricing-card__period">/ {% trans "aylıq" %}</span>
                       </div>
                       <p class="pricing-card__desc mb-0">Böyüyən brendlər üçün genişləndirilmiş xidmət və marketinq dəstəyi.</p>
                     </div>
                     <div class="pricing-card__features">
-                      <p class="pricing-card__features-label mb-0">Nələr daxildir</p>
+                      <p class="pricing-card__features-label mb-0">{% trans "Nələr daxildir" %}</p>
                       <ul class="pricing-card__list list-unstyled mb-0">
                         <li class="pricing-card__item">
                           <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
@@ -317,7 +317,7 @@
                       </ul>
                     </div>
                     <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal>
-                      <span class="btn-text">Sifariş edin</span>
+                      <span class="btn-text">{% trans "Sifariş edin" %}</span>
                       <iconify-icon icon="lucide:arrow-up-right"
                         class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
                     </a>
@@ -331,12 +331,12 @@
                       <h5 class="pricing-card__name mb-0">Korporativ</h5>
                       <div class="pricing-card__price">
                         <span class="pricing-card__amount">980 azn</span>
-                        <span class="pricing-card__period">/aylıq</span>
+                        <span class="pricing-card__period">/ {% trans "aylıq" %}</span>
                       </div>
                       <p class="pricing-card__desc mb-0">Tam həcmli rəqəmsal həllər və fərdi strategiya ilə korporativ paket.</p>
                     </div>
                     <div class="pricing-card__features">
-                      <p class="pricing-card__features-label mb-0">Nələr daxildir</p>
+                      <p class="pricing-card__features-label mb-0">{% trans "Nələr daxildir" %}</p>
                       <ul class="pricing-card__list list-unstyled mb-0">
                         <li class="pricing-card__item">
                           <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
@@ -365,7 +365,7 @@
                       </ul>
                     </div>
                     <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal>
-                      <span class="btn-text">Sifariş edin</span>
+                      <span class="btn-text">{% trans "Sifariş edin" %}</span>
                       <iconify-icon icon="lucide:arrow-up-right"
                         class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
                     </a>
@@ -379,12 +379,12 @@
                       <h5 class="pricing-card__name mb-0">Premium</h5>
                       <div class="pricing-card__price">
                         <span class="pricing-card__amount">1450 azn</span>
-                        <span class="pricing-card__period">/aylıq</span>
+                        <span class="pricing-card__period">/ {% trans "aylıq" %}</span>
                       </div>
                       <p class="pricing-card__desc mb-0">Tam spektrli marketinq, brending və texniki dəstək bir yerdə.</p>
                     </div>
                     <div class="pricing-card__features">
-                      <p class="pricing-card__features-label mb-0">Nələr daxildir</p>
+                      <p class="pricing-card__features-label mb-0">{% trans "Nələr daxildir" %}</p>
                       <ul class="pricing-card__list list-unstyled mb-0">
                         <li class="pricing-card__item">
                           <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
@@ -409,7 +409,7 @@
                       </ul>
                     </div>
                     <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal>
-                      <span class="btn-text">Sifariş edin</span>
+                      <span class="btn-text">{% trans "Sifariş edin" %}</span>
                       <iconify-icon icon="lucide:arrow-up-right"
                         class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
                     </a>
@@ -423,12 +423,12 @@
                       <h5 class="pricing-card__name mb-0">Enterprise</h5>
                       <div class="pricing-card__price">
                         <span class="pricing-card__amount">2200 azn</span>
-                        <span class="pricing-card__period">/aylıq</span>
+                        <span class="pricing-card__period">/ {% trans "aylıq" %}</span>
                       </div>
                       <p class="pricing-card__desc mb-0">Böyük şirkətlər üçün fərdi komanda və tam rəqəmsal transformasiya.</p>
                     </div>
                     <div class="pricing-card__features">
-                      <p class="pricing-card__features-label mb-0">Nələr daxildir</p>
+                      <p class="pricing-card__features-label mb-0">{% trans "Nələr daxildir" %}</p>
                       <ul class="pricing-card__list list-unstyled mb-0">
                         <li class="pricing-card__item">
                           <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
@@ -453,7 +453,7 @@
                       </ul>
                     </div>
                     <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal>
-                      <span class="btn-text">Sifariş edin</span>
+                      <span class="btn-text">{% trans "Sifariş edin" %}</span>
                       <iconify-icon icon="lucide:arrow-up-right"
                         class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
                     </a>

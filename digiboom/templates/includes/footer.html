@@ -1,11 +1,11 @@
-{% load static %}
+{% load static i18n %}
 {% include 'includes/review-modal.html' %}
 {% include 'includes/order-modal.html' %}
 {% include 'includes/contact-modal.html' %}
 <div id="contactSuccessAlert" class="review-success-alert review-success-alert--contact" hidden aria-live="polite" role="status">
   <div class="review-success-alert__inner">
     <iconify-icon icon="lucide:circle-check" class="review-success-alert__icon" aria-hidden="true"></iconify-icon>
-    <span class="review-success-alert__text">Mesajınız qəbul olundu, tezliklə geri dönüş olacaq.</span>
+    <span class="review-success-alert__text">{% trans "Mesajınız qəbul olundu, tezliklə geri dönüş olacaq." %}</span>
   </div>
 </div>
 <footer class="footer-modern">
@@ -16,39 +16,39 @@
           <a href="{% url 'home' %}" class="d-inline-block">
             <img src="{% static 'images/logos/digi-boom-logo.png' %}" alt="DigiBoom" style="max-width:130px;">
           </a>
-          <p class="footer-modern__tagline">Rəqəmsal həllər partneriniz — brendinizi böyüdürük.</p>
+          <p class="footer-modern__tagline">{% trans "Rəqəmsal həllər partneriniz — brendinizi böyüdürük." %}</p>
           <div class="footer-modern__social">
-            <a href="#!" aria-label="Facebook"><iconify-icon icon="mdi:facebook"></iconify-icon></a>
-            <a href="#!" aria-label="Instagram"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
-            <a href="#!" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok"></iconify-icon></a>
-            <a href="#!" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+            <a href="#!" aria-label="{% trans 'Facebook' %}"><iconify-icon icon="mdi:facebook"></iconify-icon></a>
+            <a href="#!" aria-label="{% trans 'Instagram' %}"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
+            <a href="#!" aria-label="{% trans 'TikTok' %}"><iconify-icon icon="fa-brands:tiktok"></iconify-icon></a>
+            <a href="#!" aria-label="{% trans 'LinkedIn' %}"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
           </div>
         </div>
       </div>
       <div class="col-6 col-lg-2 offset-lg-1">
-        <p class="footer-modern__heading">Sürətli keçid</p>
+        <p class="footer-modern__heading">{% trans "Sürətli keçid" %}</p>
         <ul class="footer-menu list-unstyled mb-0 d-flex flex-column gap-2">
-          <li><a href="{% url 'home' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Ana səhifə</a></li>
-          <li><a href="{% url 'about' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Haqqımızda</a></li>
-          <li><a href="{% url 'portfolio' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Portfolio</a></li>
-          <li><a href="{% url 'blog' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Blog</a></li>
-          <li><a href="{% url 'training' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Təlim</a></li>
-          <li><a href="#" data-open-review-modal role="button"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Rəy bildirin</a></li>
-          <li><a href="{% url 'services' %}#paketler"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Paketlər</a></li>
-          <li><a href="{% url 'contact' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Əlaqə</a></li>
+          <li><a href="{% url 'home' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Ana səhifə" %}</a></li>
+          <li><a href="{% url 'about' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Haqqımızda" %}</a></li>
+          <li><a href="{% url 'portfolio' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Portfolio" %}</a></li>
+          <li><a href="{% url 'blog' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Blog" %}</a></li>
+          <li><a href="{% url 'training' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Təlim" %}</a></li>
+          <li><a href="#" data-open-review-modal role="button"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Rəy bildirin" %}</a></li>
+          <li><a href="{% url 'services' %}#paketler"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Paketlər" %}</a></li>
+          <li><a href="{% url 'contact' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Əlaqə" %}</a></li>
         </ul>
       </div>
       <div class="col-6 col-lg-2">
-        <p class="footer-modern__heading">Xidmətlər</p>
+        <p class="footer-modern__heading">{% trans "Xidmətlər" %}</p>
         <ul class="footer-menu list-unstyled mb-0 d-flex flex-column gap-2">
-          <li><a href="{% url 'services' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Rəqəmsal marketinq</a></li>
-          <li><a href="{% url 'services' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Brending</a></li>
-          <li><a href="{% url 'services' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Veb development</a></li>
-          <li><a href="{% url 'services' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Konsultasiya</a></li>
+          <li><a href="{% url 'services' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Rəqəmsal marketinq" %}</a></li>
+          <li><a href="{% url 'services' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Brending" %}</a></li>
+          <li><a href="{% url 'services' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Veb development" %}</a></li>
+          <li><a href="{% url 'services' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Konsultasiya" %}</a></li>
         </ul>
       </div>
       <div class="col-lg-3">
-        <p class="footer-modern__heading">Əlaqə</p>
+        <p class="footer-modern__heading">{% trans "Əlaqə" %}</p>
         <div class="d-flex flex-column gap-3">
           <a href="mailto:info@digiboom.az" class="footer-modern__contact-link">
             <iconify-icon icon="lucide:mail"></iconify-icon>
@@ -64,16 +64,16 @@
           </a>
           <a href="#!" class="footer-modern__contact-link">
             <iconify-icon icon="lucide:map-pin"></iconify-icon>
-            Əhməd Rəcəbli 49B, Bakı
+            {% trans "Əhməd Rəcəbli 49B, Bakı" %}
           </a>
         </div>
       </div>
     </div>
     <div class="footer-modern__bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
-      <p class="mb-0">© 2025 DigiBoom. Bütün hüquqlar qorunur.</p>
+      <p class="mb-0">{% trans "© 2025 DigiBoom. Bütün hüquqlar qorunur." %}</p>
       <div class="d-flex footer-modern__bottom-links">
-        <a href="{% url 'terms' %}">Şərtlər</a>
-        <a href="{% url 'privacy' %}">Məxfilik</a>
+        <a href="{% url 'terms' %}">{% trans "Şərtlər" %}</a>
+        <a href="{% url 'privacy' %}">{% trans "Məxfilik" %}</a>
       </div>
     </div>
   </div>

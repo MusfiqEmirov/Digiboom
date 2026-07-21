@@ -1,6 +1,6 @@
-﻿{% load static %}
+﻿{% load static i18n %}
 <!doctype html>
-<html lang="az">
+<html lang="{{ LANGUAGE_CODE|default:'az' }}">
 
 <head>
   <meta charset="utf-8">
@@ -50,7 +50,7 @@
         <div class="project-detail-inner">
 
           <a href="{% url 'portfolio' %}" class="btn btn-back py-2 ps-3 pe-4 align-self-start" data-aos="fade-up" data-aos-delay="80" data-aos-duration="900">
-            <span class="btn-text pe-1">Geri</span>
+            <span class="btn-text pe-1">{% trans "Geri" %}</span>
             <iconify-icon icon="lucide:arrow-up-right"
               class="btn-icon bg-white text-dark round-36 rounded-circle hstack justify-content-center fs-5 shadow-sm"></iconify-icon>
           </a>
@@ -134,7 +134,7 @@
                 imkanı yaradıldı. Kampaniya dövründə sosial media, reklam və e-mail üçün uyğunlaşan vizual
                 materiallar hazırlandı.
               </p>
-              <h3>Layihədə nələr etdik</h3>
+              <h3>{% trans "Layihədə nələr etdik" %}</h3>
               <ul class="project-detail-checklist">
                 <li>Marka strategiyası və vizual kimlik sisteminin hazırlanması</li>
                 <li>UX araşdırması, wireframe və interfeys dizaynı</li>
@@ -153,7 +153,7 @@
       <div class="project-detail-gallery-fullbleed project-detail-block" data-aos="fade-up" data-aos-delay="220" data-aos-duration="900">
         <div class="container">
           <div class="project-detail-gallery-block__head">
-            <h2 class="project-detail-gallery-block__title">Qalereya</h2>
+            <h2 class="project-detail-gallery-block__title">{% trans "Qalereya" %}</h2>
           </div>
         </div>
         <div class="project-gallery-carousel" id="projectGallery">

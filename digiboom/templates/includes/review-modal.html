@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 <!--  Rəy bildirin modal -->
 <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered review-modal-dialog">
@@ -6,35 +6,35 @@
       <div class="review-modal-accent" aria-hidden="true"></div>
       <div class="modal-header review-modal-header border-0">
         <div class="review-modal-header-text">
-          <span class="review-modal-eyebrow">Rəyiniz bizim üçün önəmlidir</span>
-          <h3 class="modal-title mb-0" id="reviewModalLabel">Rəy bildirin</h3>
+          <span class="review-modal-eyebrow">{% trans "Rəyiniz bizim üçün önəmlidir" %}</span>
+          <h3 class="modal-title mb-0" id="reviewModalLabel">{% trans "Rəy bildirin" %}</h3>
         </div>
-        <button type="button" class="btn-close review-modal-close" data-bs-dismiss="modal" aria-label="Bağlayın"></button>
+        <button type="button" class="btn-close review-modal-close" data-bs-dismiss="modal" aria-label="{% trans 'Bağlayın' %}"></button>
       </div>
       <div class="modal-body review-modal-body">
         <form id="reviewForm" class="review-modal-form">
           <div class="review-field">
-            <label for="reviewName" class="review-modal-label">Ad, Soyad <span class="text-danger">*</span></label>
+            <label for="reviewName" class="review-modal-label">{% trans "Ad, Soyad" %} <span class="text-danger">*</span></label>
             <div class="review-input-wrap">
               <iconify-icon icon="lucide:user" class="review-input-icon" aria-hidden="true"></iconify-icon>
-              <input type="text" class="form-control review-input" id="reviewName" name="name" placeholder="Adınız və soyadınız" required>
+              <input type="text" class="form-control review-input" id="reviewName" name="name" placeholder="{% trans 'Adınız və soyadınız' %}" required>
             </div>
           </div>
           <div class="review-field">
-            <span class="review-modal-label" id="reviewCategoryLabel">Xidmət <span class="text-danger">*</span></span>
+            <span class="review-modal-label" id="reviewCategoryLabel">{% trans "Xidmət" %} <span class="text-danger">*</span></span>
             <div class="review-dropdown" id="reviewCategoryDropdown">
               <input type="hidden" id="reviewCategory" name="category" value="" required>
               <input type="hidden" id="reviewCategoryLabelValue" name="categoryLabel" value="">
               <button type="button" class="review-dropdown__toggle" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="reviewCategoryLabel">
                 <iconify-icon icon="lucide:briefcase" class="review-dropdown__lead-icon" aria-hidden="true"></iconify-icon>
-                <span class="review-dropdown__label">Xidməti seçin</span>
+                <span class="review-dropdown__label">{% trans "Xidməti seçin" %}</span>
                 <iconify-icon icon="lucide:chevron-down" class="review-dropdown__chevron" aria-hidden="true"></iconify-icon>
               </button>
               <ul class="review-dropdown__menu" role="listbox" aria-labelledby="reviewCategoryLabel">
                 <li class="review-dropdown__item has-submenu">
                   <button type="button" class="review-dropdown__option review-dropdown__parent" data-group="xidmet" data-icon="lucide:sparkles">
                     <iconify-icon icon="lucide:sparkles" aria-hidden="true"></iconify-icon>
-                    <span>Xidmət</span>
+                    <span>{% trans "Xidmət" %}</span>
                     <iconify-icon icon="lucide:chevron-right" class="review-dropdown__arrow" aria-hidden="true"></iconify-icon>
                   </button>
                   <ul class="review-dropdown__submenu" role="listbox">
@@ -47,7 +47,7 @@
                 <li class="review-dropdown__item has-submenu">
                   <button type="button" class="review-dropdown__option review-dropdown__parent" data-group="telim" data-icon="lucide:graduation-cap">
                     <iconify-icon icon="lucide:graduation-cap" aria-hidden="true"></iconify-icon>
-                    <span>Təlim</span>
+                    <span>{% trans "Təlim" %}</span>
                     <iconify-icon icon="lucide:chevron-right" class="review-dropdown__arrow" aria-hidden="true"></iconify-icon>
                   </button>
                   <ul class="review-dropdown__submenu" role="listbox">
@@ -64,47 +64,47 @@
                 <li class="review-dropdown__item">
                   <button type="button" class="review-dropdown__option" role="option" data-value="konsultasiya" data-label="Konsultasiya" data-icon="lucide:messages-square">
                     <iconify-icon icon="lucide:messages-square" aria-hidden="true"></iconify-icon>
-                    <span>Konsultasiya</span>
+                    <span>{% trans "Konsultasiya" %}</span>
                   </button>
                 </li>
                 <li class="review-dropdown__item">
                   <button type="button" class="review-dropdown__option" role="option" data-value="diger" data-label="Digər" data-icon="lucide:more-horizontal">
                     <iconify-icon icon="lucide:more-horizontal" aria-hidden="true"></iconify-icon>
-                    <span>Digər</span>
+                    <span>{% trans "Digər" %}</span>
                   </button>
                 </li>
               </ul>
             </div>
           </div>
           <div class="review-field">
-            <span class="review-modal-label d-block" id="reviewRatingLabel">Reytinq <span class="text-danger">*</span></span>
+            <span class="review-modal-label d-block" id="reviewRatingLabel">{% trans "Reytinq" %} <span class="text-danger">*</span></span>
             <div class="review-stars" role="radiogroup" aria-labelledby="reviewRatingLabel">
-              <label class="review-star"><input type="radio" name="rating" value="1" required><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">1 ulduz</span></label>
-              <label class="review-star"><input type="radio" name="rating" value="2"><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">2 ulduz</span></label>
-              <label class="review-star"><input type="radio" name="rating" value="3"><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">3 ulduz</span></label>
-              <label class="review-star"><input type="radio" name="rating" value="4"><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">4 ulduz</span></label>
-              <label class="review-star"><input type="radio" name="rating" value="5"><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">5 ulduz</span></label>
+              <label class="review-star"><input type="radio" name="rating" value="1" required><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">{% trans "1 ulduz" %}</span></label>
+              <label class="review-star"><input type="radio" name="rating" value="2"><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">{% trans "2 ulduz" %}</span></label>
+              <label class="review-star"><input type="radio" name="rating" value="3"><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">{% trans "3 ulduz" %}</span></label>
+              <label class="review-star"><input type="radio" name="rating" value="4"><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">{% trans "4 ulduz" %}</span></label>
+              <label class="review-star"><input type="radio" name="rating" value="5"><iconify-icon icon="lucide:star" aria-hidden="true"></iconify-icon><span class="visually-hidden">{% trans "5 ulduz" %}</span></label>
             </div>
           </div>
           <div class="review-field">
-            <label for="reviewText" class="review-modal-label">Rəy <span class="text-danger">*</span></label>
-            <textarea class="form-control review-textarea" id="reviewText" name="review" placeholder="Təcrübənizi qısaca paylaşın..." rows="3" required></textarea>
+            <label for="reviewText" class="review-modal-label">{% trans "Rəy" %} <span class="text-danger">*</span></label>
+            <textarea class="form-control review-textarea" id="reviewText" name="review" placeholder="{% trans 'Təcrübənizi qısaca paylaşın...' %}" rows="3" required></textarea>
           </div>
           <div class="review-field">
-            <span class="review-modal-label d-block" id="reviewImageLabel">Şəkil</span>
+            <span class="review-modal-label d-block" id="reviewImageLabel">{% trans "Şəkil" %}</span>
             <label class="review-file-upload" for="reviewImage">
               <span class="review-file-upload__icon" aria-hidden="true">
                 <iconify-icon icon="lucide:image-plus"></iconify-icon>
               </span>
-              <span class="review-file-upload__text">Şəkil yükləyin</span>
-              <span class="review-file-upload__hint">İstəyə bağlı · PNG, JPG</span>
+              <span class="review-file-upload__text">{% trans "Şəkil yükləyin" %}</span>
+              <span class="review-file-upload__hint">{% trans "İstəyə bağlı · PNG, JPG" %}</span>
               <input type="file" class="visually-hidden" id="reviewImage" name="image" accept="image/*" aria-labelledby="reviewImageLabel">
             </label>
             <span class="review-file-name" aria-live="polite"></span>
           </div>
           <div class="review-modal-actions">
-            <button type="button" class="btn btn-outline-dark review-modal-btn-cancel" data-bs-dismiss="modal">Ləğv edin</button>
-            <button type="submit" class="btn btn-dark review-modal-btn-submit">Göndərin</button>
+            <button type="button" class="btn btn-outline-dark review-modal-btn-cancel" data-bs-dismiss="modal">{% trans "Ləğv edin" %}</button>
+            <button type="submit" class="btn btn-dark review-modal-btn-submit">{% trans "Göndərin" %}</button>
           </div>
         </form>
       </div>
@@ -115,6 +115,6 @@
 <div id="reviewSuccessAlert" class="review-success-alert" hidden aria-live="polite" role="status">
   <div class="review-success-alert__inner">
     <iconify-icon icon="lucide:circle-check" class="review-success-alert__icon" aria-hidden="true"></iconify-icon>
-    <span class="review-success-alert__text">Rəyiniz göndərildi, təşəkkür edirik!</span>
+    <span class="review-success-alert__text">{% trans "Rəyiniz göndərildi, təşəkkür edirik!" %}</span>
   </div>
 </div>

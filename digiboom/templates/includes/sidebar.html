@@ -1,11 +1,11 @@
-{% load static %}
+{% load static i18n %}
 <button
   class="mobile-nav-toggle d-lg-none"
   type="button"
   data-bs-toggle="offcanvas"
   data-bs-target="#mobileNav"
   aria-controls="mobileNav"
-  aria-label="Menyunu açın">
+  aria-label="{% trans 'Menyunu açın' %}">
   <span class="mobile-nav-toggle__bars" aria-hidden="true">
     <span></span>
     <span></span>
@@ -17,7 +17,7 @@
   class="offcanvas offcanvas-end mobile-nav-offcanvas"
   tabindex="-1"
   id="mobileNav"
-  aria-label="Mobil menyu">
+  aria-label="{% trans 'Mobil menyu' %}">
   <div class="mobile-nav-offcanvas__header">
     <a href="{% url 'home' %}" class="mobile-nav-offcanvas__logo" data-bs-dismiss="offcanvas">
       <img src="{% static 'images/logos/digi-boom-logo.png' %}" alt="DigiBoom" width="128" height="44">
@@ -26,7 +26,7 @@
       type="button"
       class="mobile-nav-offcanvas__close"
       data-bs-dismiss="offcanvas"
-      aria-label="Menyunu bağlayın">
+      aria-label="{% trans 'Menyunu bağlayın' %}">
       <span class="mobile-nav-toggle__bars" aria-hidden="true">
         <span></span>
         <span></span>
@@ -37,14 +37,14 @@
 
   <div class="offcanvas-body mobile-nav-offcanvas__body">
 
-    <nav class="mobile-nav" aria-label="Əsas naviqasiya">
+    <nav class="mobile-nav" aria-label="{% trans 'Əsas naviqasiya' %}">
       <ul class="mobile-nav__list list-unstyled mb-0">
         <li class="mobile-nav__item">
           <a href="{% url 'home' %}" data-nav-link="index" class="mobile-nav__link">
             <span class="mobile-nav__link-icon">
               <img src="{% static 'images/svgs/secondary-leaf.svg' %}" alt="" width="20" height="20" class="animate-spin">
             </span>
-            <span class="mobile-nav__link-text">Ana səhifə</span>
+            <span class="mobile-nav__link-text">{% trans "Ana səhifə" %}</span>
             <iconify-icon icon="solar:arrow-right-linear" class="mobile-nav__link-arrow"></iconify-icon>
           </a>
         </li>
@@ -53,7 +53,7 @@
             <span class="mobile-nav__link-icon">
               <img src="{% static 'images/svgs/secondary-leaf.svg' %}" alt="" width="20" height="20" class="animate-spin">
             </span>
-            <span class="mobile-nav__link-text">Haqqımızda</span>
+            <span class="mobile-nav__link-text">{% trans "Haqqımızda" %}</span>
             <iconify-icon icon="solar:arrow-right-linear" class="mobile-nav__link-arrow"></iconify-icon>
           </a>
         </li>
@@ -62,7 +62,7 @@
             <span class="mobile-nav__link-icon">
               <img src="{% static 'images/svgs/secondary-leaf.svg' %}" alt="" width="20" height="20" class="animate-spin">
             </span>
-            <span class="mobile-nav__link-text">Portfolio</span>
+            <span class="mobile-nav__link-text">{% trans "Portfolio" %}</span>
             <iconify-icon icon="solar:arrow-right-linear" class="mobile-nav__link-arrow"></iconify-icon>
           </a>
         </li>
@@ -71,7 +71,7 @@
             <span class="mobile-nav__link-icon">
               <img src="{% static 'images/svgs/secondary-leaf.svg' %}" alt="" width="20" height="20" class="animate-spin">
             </span>
-            <span class="mobile-nav__link-text">Xidmətlər</span>
+            <span class="mobile-nav__link-text">{% trans "Xidmətlər" %}</span>
             <iconify-icon icon="solar:arrow-right-linear" class="mobile-nav__link-arrow"></iconify-icon>
           </a>
         </li>
@@ -80,7 +80,7 @@
             <span class="mobile-nav__link-icon">
               <img src="{% static 'images/svgs/secondary-leaf.svg' %}" alt="" width="20" height="20" class="animate-spin">
             </span>
-            <span class="mobile-nav__link-text">Təlim</span>
+            <span class="mobile-nav__link-text">{% trans "Təlim" %}</span>
             <iconify-icon icon="solar:arrow-right-linear" class="mobile-nav__link-arrow"></iconify-icon>
           </a>
         </li>
@@ -89,7 +89,7 @@
             <span class="mobile-nav__link-icon">
               <img src="{% static 'images/svgs/secondary-leaf.svg' %}" alt="" width="20" height="20" class="animate-spin">
             </span>
-            <span class="mobile-nav__link-text">Blog</span>
+            <span class="mobile-nav__link-text">{% trans "Blog" %}</span>
             <iconify-icon icon="solar:arrow-right-linear" class="mobile-nav__link-arrow"></iconify-icon>
           </a>
         </li>
@@ -97,28 +97,32 @@
     </nav>
 
     <div class="lang-switcher-host lang-switcher-host--mobile mobile-nav__lang">
-      <div class="lang-switcher mobile-nav__lang-switcher">
-        <div class="mobile-nav__lang-pills" role="group" aria-label="Dil seçimi">
-          <button type="button" class="mobile-nav__lang-pill lang-switcher__option is-active" data-lang="az">
-            <img src="{% static 'images/flags/flag-az.webp' %}" alt="" width="22" height="16">
-            <span>AZ</span>
-          </button>
-          <button type="button" class="mobile-nav__lang-pill lang-switcher__option" data-lang="en">
-            <img src="{% static 'images/flags/flag-en.webp' %}" alt="" width="22" height="16">
-            <span>EN</span>
-          </button>
-          <button type="button" class="mobile-nav__lang-pill lang-switcher__option" data-lang="ru">
-            <img src="{% static 'images/flags/flag-ru.webp' %}" alt="" width="22" height="16">
-            <span>RU</span>
-          </button>
+      <form action="{% url 'set_language' %}" method="post" class="lang-switcher-form lang-switcher-form--mobile">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <div class="lang-switcher mobile-nav__lang-switcher" data-current-lang="{{ LANGUAGE_CODE|default:'az' }}">
+          <div class="mobile-nav__lang-pills" role="group" aria-label="{% trans 'Dil seçimi' %}">
+            <button type="submit" name="language" value="az" class="mobile-nav__lang-pill lang-switcher__option{% if LANGUAGE_CODE == 'az' or not LANGUAGE_CODE %} is-active{% endif %}"{% if LANGUAGE_CODE == 'az' or not LANGUAGE_CODE %} aria-current="true"{% endif %}>
+              <img src="{% static 'images/flags/flag-az.webp' %}" alt="" width="22" height="16">
+              <span>AZ</span>
+            </button>
+            <button type="submit" name="language" value="en" class="mobile-nav__lang-pill lang-switcher__option{% if LANGUAGE_CODE == 'en' %} is-active{% endif %}"{% if LANGUAGE_CODE == 'en' %} aria-current="true"{% endif %}>
+              <img src="{% static 'images/flags/flag-en.webp' %}" alt="" width="22" height="16">
+              <span>EN</span>
+            </button>
+            <button type="submit" name="language" value="ru" class="mobile-nav__lang-pill lang-switcher__option{% if LANGUAGE_CODE == 'ru' %} is-active{% endif %}"{% if LANGUAGE_CODE == 'ru' %} aria-current="true"{% endif %}>
+              <img src="{% static 'images/flags/flag-ru.webp' %}" alt="" width="22" height="16">
+              <span>RU</span>
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
 
     <div class="mobile-nav__cta">
       <a href="{% url 'contact' %}" data-nav-link="contact" class="mobile-nav__contact-btn">
         <iconify-icon icon="solar:chat-round-dots-linear" width="22" height="22"></iconify-icon>
-        <span>Əlaqə və müraciətlər</span>
+        <span>{% trans "Əlaqə və müraciətlər" %}</span>
       </a>
     </div>
 

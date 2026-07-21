@@ -1,6 +1,6 @@
-﻿{% load static %}
+﻿{% load static i18n %}
 <!doctype html>
-<html lang="az">
+<html lang="{{ LANGUAGE_CODE|default:'az' }}">
 
 <head>
   <meta charset="utf-8">
@@ -49,7 +49,7 @@
         <div class="blog-detail-inner">
 
           <a href="{% url 'blog' %}" class="btn btn-back py-2 ps-3 pe-4 align-self-start" data-aos="fade-up" data-aos-delay="80" data-aos-duration="900">
-            <span class="btn-text pe-1">Geri</span>
+            <span class="btn-text pe-1">{% trans "Geri" %}</span>
             <iconify-icon icon="lucide:arrow-up-right"
               class="btn-icon bg-white text-dark round-36 rounded-circle hstack justify-content-center fs-5 shadow-sm"></iconify-icon>
           </a>
@@ -67,10 +67,10 @@
                       <span>24.12.2025</span>
                     </time>
                     <span class="blog-detail-meta-divider" aria-hidden="true"></span>
-                    <span class="blog-detail-views" id="blogDetailViews" title="Təxmini baxış sayı" aria-live="polite">
+                    <span class="blog-detail-views" id="blogDetailViews" title="{% trans 'Təxmini baxış sayı' %}" aria-live="polite">
                       <iconify-icon icon="lucide:eye" aria-hidden="true"></iconify-icon>
                       <span class="blog-detail-views__count" id="blogViewCount">~2400</span>
-                      <span class="blog-detail-views__label">baxış</span>
+                      <span class="blog-detail-views__label">{% trans "baxış" %}</span>
                     </span>
                   </div>
                 </header>
@@ -91,14 +91,14 @@
               <div class="blog-detail-sidebar">
                 <div class="blog-detail-related">
                   <div class="blog-detail-related__head">
-                    <span class="blog-detail-related__eyebrow">Oxumağa davam edin</span>
-                    <h2 class="blog-detail-related__title">Digər məqalələr</h2>
+                    <span class="blog-detail-related__eyebrow">{% trans "Oxumağa davam edin" %}</span>
+                    <h2 class="blog-detail-related__title">{% trans "Digər məqalələr" %}</h2>
                   </div>
-                  <ul class="blog-related-list" id="blogRelatedList" aria-label="Digər məqalələr">
+                  <ul class="blog-related-list" id="blogRelatedList" aria-label="{% trans 'Digər məqalələr' %}">
                     <!-- JS ilə doldurulur -->
                   </ul>
                   <a href="{% url 'blog' %}" class="blog-detail-related__all">
-                    Bütün məqalələr
+                    {% trans "Bütün məqalələr" %}
                     <iconify-icon icon="lucide:arrow-right" aria-hidden="true"></iconify-icon>
                   </a>
                 </div>

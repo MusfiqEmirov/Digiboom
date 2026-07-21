@@ -1,6 +1,6 @@
-﻿{% load static %}
+﻿{% load static i18n %}
 <!doctype html>
-<html lang="az">
+<html lang="{{ LANGUAGE_CODE|default:'az' }}">
 
 <head>
   <meta charset="utf-8">
@@ -50,7 +50,7 @@
         <div class="training-detail-inner">
 
           <a href="{% url 'training' %}" class="btn btn-back py-2 ps-3 pe-4 align-self-start" data-aos="fade-up" data-aos-delay="80" data-aos-duration="900">
-            <span class="btn-text pe-1">Geri</span>
+            <span class="btn-text pe-1">{% trans "Geri" %}</span>
             <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-36 rounded-circle hstack justify-content-center fs-5 shadow-sm"></iconify-icon>
           </a>
 
@@ -62,9 +62,9 @@
                 Hər modul qısa video izahı, praktik tapşırıqlar və real nümunələrlə dəstəklənir.
               </p>
               <div class="training-detail__meta">
-                <span class="training-detail__meta-item"><iconify-icon icon="lucide:clock"></iconify-icon> 12 saat</span>
-                <span class="training-detail__meta-item"><iconify-icon icon="lucide:play-circle"></iconify-icon> 24 dərs</span>
-                <span class="training-detail__meta-item"><iconify-icon icon="lucide:bar-chart-2"></iconify-icon> Orta səviyyə</span>
+                <span class="training-detail__meta-item"><iconify-icon icon="lucide:clock"></iconify-icon> 12 {% trans "saat" %}</span>
+                <span class="training-detail__meta-item"><iconify-icon icon="lucide:play-circle"></iconify-icon> 24 {% trans "dərs" %}</span>
+                <span class="training-detail__meta-item"><iconify-icon icon="lucide:bar-chart-2"></iconify-icon> {% trans "Orta səviyyə" %}</span>
                 <span class="training-detail__meta-item"><iconify-icon icon="lucide:tag"></iconify-icon> 149 AZN</span>
               </div>
             </div>
@@ -79,7 +79,7 @@
                     playsinline
                     preload="metadata"
                   ></video>
-                  <button type="button" class="about-promo-video__play" aria-label="Tanıtım videosunu oynat">
+                  <button type="button" class="about-promo-video__play" aria-label="{% trans 'Tanıtım videosunu oynat' %}">
                     <span class="about-promo-video__play-pulse" aria-hidden="true"></span>
                     <span class="about-promo-video__play-pulse about-promo-video__play-pulse--delay" aria-hidden="true"></span>
                     <span class="about-promo-video__play-btn" aria-hidden="true">
@@ -93,7 +93,7 @@
 
           <!-- Udemy tipli icmal videoları -->
           <div class="training-curriculum" data-aos="fade-up" data-aos-delay="180" data-aos-duration="900">
-            <h2 class="training-curriculum__title">Kurs məzmunu — icmal videoları</h2>
+            <h2 class="training-curriculum__title">{% trans "Kurs məzmunu — icmal videoları" %}</h2>
             <div class="training-curriculum__list">
 
               <article class="training-curriculum__item">
@@ -161,7 +161,7 @@
 
           <!-- Şəkillər -->
           <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="900">
-            <h2 class="training-curriculum__title">Təlimdən kadrlar</h2>
+            <h2 class="training-curriculum__title">{% trans "Təlimdən kadrlar" %}</h2>
             <div class="training-detail__gallery" id="trainingGallery">
               <button type="button" class="training-detail__gallery-item" data-gallery-index="0" aria-label="Təlim məzmunu 1 — böyüt">
                 <img src="{% static 'images/services/services-img-1.jpg' %}" alt="Təlim məzmunu 1" loading="lazy">
@@ -177,10 +177,10 @@
 
           <!-- Sifariş -->
           <div class="training-detail__cta" data-aos="fade-up" data-aos-delay="220" data-aos-duration="900">
-            <h3>Bu təlimə qoşulmaq istəyirsiniz?</h3>
-            <p>Qeydiyyat və əlavə məlumat üçün formu doldurun — sonra ödənişə keçə bilərsiniz.</p>
+            <h3>{% trans "Bu təlimə qoşulmaq istəyirsiniz?" %}</h3>
+            <p>{% trans "Qeydiyyat və əlavə məlumat üçün formu doldurun — sonra ödənişə keçə bilərsiniz." %}</p>
             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#trainingOrderModal">
-              <span class="btn-text">Sifariş edin</span>
+              <span class="btn-text">{% trans "Sifariş edin" %}</span>
               <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
             </button>
           </div>
@@ -191,7 +191,7 @@
 
   </div>
 
-  <!-- Təlimdən kadrlar lightbox -->
+  <!-- {% trans "Təlimdən kadrlar" %} lightbox -->
   <div class="modal fade service-gallery-modal" id="trainingImageModal" tabindex="-1" aria-labelledby="trainingImageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content border-0 bg-transparent">
@@ -234,32 +234,32 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header border-0 pb-0">
-          <h2 class="modal-title fs-5 fw-bold" id="trainingOrderModalLabel">Təlim sifarişi</h2>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Bağlayın"></button>
+          <h2 class="modal-title fs-5 fw-bold" id="trainingOrderModalLabel">{% trans "Təlim sifarişi" %}</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans 'Bağlayın' %}"></button>
         </div>
         <div class="modal-body pt-3">
           <form id="trainingOrderForm" class="training-order-form" novalidate>
             <div class="training-order-form__field">
-              <label for="trainingOrderCourse" class="training-order-form__label">Təlim</label>
+              <label for="trainingOrderCourse" class="training-order-form__label">{% trans "Təlim" %}</label>
               <input type="text" class="training-order-form__input" id="trainingOrderCourse" name="training" readonly>
             </div>
             <div class="training-order-form__field">
-              <label for="trainingOrderName" class="training-order-form__label">Ad soyad <span class="text-danger">*</span></label>
-              <input type="text" class="training-order-form__input" id="trainingOrderName" name="name" placeholder="Adınız və soyadınız" required autocomplete="name">
+              <label for="trainingOrderName" class="training-order-form__label">{% trans "Ad soyad" %} <span class="text-danger">*</span></label>
+              <input type="text" class="training-order-form__input" id="trainingOrderName" name="name" placeholder="{% trans 'Adınız və soyadınız' %}" required autocomplete="name">
             </div>
             <div class="training-order-form__field">
-              <label for="trainingOrderPhone" class="training-order-form__label">Nömrə <span class="text-danger">*</span></label>
+              <label for="trainingOrderPhone" class="training-order-form__label">{% trans "Nömrə" %} <span class="text-danger">*</span></label>
               <input type="tel" class="training-order-form__input" id="trainingOrderPhone" name="phone" placeholder="+994 XX XXX XX XX" required autocomplete="tel">
             </div>
             <div class="training-order-form__field">
-              <label for="trainingOrderGmail" class="training-order-form__label">Gmail <span class="text-danger">*</span></label>
+              <label for="trainingOrderGmail" class="training-order-form__label">{% trans "Gmail" %} <span class="text-danger">*</span></label>
               <input type="email" class="training-order-form__input" id="trainingOrderGmail" name="gmail" placeholder="ad@gmail.com" required autocomplete="email" inputmode="email">
-              <p class="training-order-form__hint">Yalnız @gmail.com ünvanı qəbul olunur.</p>
-              <p class="training-order-form__error" id="trainingOrderGmailError" hidden role="alert">Zəhmət olmasa düzgün Gmail ünvanı daxil edin.</p>
+              <p class="training-order-form__hint">{% trans "Yalnız @gmail.com ünvanı qəbul olunur." %}</p>
+              <p class="training-order-form__error" id="trainingOrderGmailError" hidden role="alert">{% trans "Zəhmət olmasa düzgün Gmail ünvanı daxil edin." %}</p>
             </div>
             <p class="training-order-form__status" id="trainingOrderStatus" hidden role="status" aria-live="polite"></p>
             <button type="submit" class="btn training-order-form__submit w-100 justify-content-center">
-              <span class="btn-text">Ödənişə keçin</span>
+              <span class="btn-text">{% trans "Ödənişə keçin" %}</span>
               <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm" aria-hidden="true"></iconify-icon>
             </button>
           </form>

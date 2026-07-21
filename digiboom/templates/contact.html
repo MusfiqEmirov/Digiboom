@@ -1,6 +1,6 @@
-﻿{% load static %}
+﻿{% load static i18n %}
 <!doctype html>
-<html lang="az">
+<html lang="{{ LANGUAGE_CODE|default:'az' }}">
 
 <head>
   <meta charset="utf-8">
@@ -56,8 +56,8 @@
         <div class="cp-layout">
           <div class="cp-stack" data-aos="fade-right" data-aos-delay="120" data-aos-duration="900">
             <div class="cp-card cp-card--social">
-              <h3 class="cp-card__title">Sosial şəbəkələr</h3>
-              <p class="cp-card__subtitle">Bizi izləyin və birbaşa mesaj göndərin.</p>
+              <h3 class="cp-card__title">{% trans "Sosial şəbəkələr" %}</h3>
+              <p class="cp-card__subtitle">{% trans "Bizi izləyin və birbaşa mesaj göndərin." %}</p>
               <ul class="cp-social">
                 <li>
                   <a href="https://www.google.com/maps/search/?api=1&amp;query=%C6%9Fhm%C9%99d+R%C9%99c%C9%99bli+49B%2C+Bak%C4%B1"
@@ -67,7 +67,7 @@
                       <iconify-icon icon="lucide:map-pin"></iconify-icon>
                     </span>
                     <span class="cp-social__text">
-                      <span class="cp-social__name">Ünvan</span>
+                      <span class="cp-social__name">{% trans "Ünvan" %}</span>
                       <span class="cp-social__handle">Əhməd Rəcəbli 49B, Bakı</span>
                     </span>
                     <span class="cp-social__arrow" aria-hidden="true">
@@ -82,7 +82,7 @@
                       <iconify-icon icon="mdi:whatsapp"></iconify-icon>
                     </span>
                     <span class="cp-social__text">
-                      <span class="cp-social__name">WhatsApp</span>
+                      <span class="cp-social__name">{% trans "WhatsApp" %}</span>
                       <span class="cp-social__handle">+994 50 123 45 67</span>
                     </span>
                     <span class="cp-social__arrow" aria-hidden="true">
@@ -97,7 +97,7 @@
                       <iconify-icon icon="lucide:mail"></iconify-icon>
                     </span>
                     <span class="cp-social__text">
-                      <span class="cp-social__name">E-poçt</span>
+                      <span class="cp-social__name">{% trans "E-poçt" %}</span>
                       <span class="cp-social__handle">info@digiboom.az</span>
                     </span>
                     <span class="cp-social__arrow" aria-hidden="true">
@@ -112,7 +112,7 @@
                       <iconify-icon icon="mdi:facebook"></iconify-icon>
                     </span>
                     <span class="cp-social__text">
-                      <span class="cp-social__name">Facebook</span>
+                      <span class="cp-social__name">{% trans "Facebook" %}</span>
                       <span class="cp-social__handle">/digiboom</span>
                     </span>
                     <span class="cp-social__arrow" aria-hidden="true">
@@ -127,7 +127,7 @@
                       <iconify-icon icon="mdi:instagram"></iconify-icon>
                     </span>
                     <span class="cp-social__text">
-                      <span class="cp-social__name">Instagram</span>
+                      <span class="cp-social__name">{% trans "Instagram" %}</span>
                       <span class="cp-social__handle">@digiboom</span>
                     </span>
                     <span class="cp-social__arrow" aria-hidden="true">
@@ -142,7 +142,7 @@
                       <iconify-icon icon="fa-brands:tiktok"></iconify-icon>
                     </span>
                     <span class="cp-social__text">
-                      <span class="cp-social__name">TikTok</span>
+                      <span class="cp-social__name">{% trans "TikTok" %}</span>
                       <span class="cp-social__handle">@digiboom</span>
                     </span>
                     <span class="cp-social__arrow" aria-hidden="true">
@@ -157,7 +157,7 @@
                       <iconify-icon icon="mdi:linkedin"></iconify-icon>
                     </span>
                     <span class="cp-social__text">
-                      <span class="cp-social__name">LinkedIn</span>
+                      <span class="cp-social__name">{% trans "LinkedIn" %}</span>
                       <span class="cp-social__handle">Digiboom</span>
                     </span>
                     <span class="cp-social__arrow" aria-hidden="true">
@@ -184,11 +184,11 @@
             </div>
 
             <div class="cp-card cp-card--map">
-              <h3 class="cp-card__title">Ofisimiz</h3>
+              <h3 class="cp-card__title">{% trans "Ofisimiz" %}</h3>
               <div class="cp-map">
                 <iframe
                   src="https://www.google.com/maps?q=%C6%9Fhm%C9%99d+R%C9%99c%C9%99bli+49B%2C+Bak%C4%B1&amp;output=embed"
-                  title="Əhməd Rəcəbli 49B, Bakı xəritəsi" loading="lazy"
+                  title="{% trans 'Əhməd Rəcəbli 49B, Bakı xəritəsi' %}" loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
               </div>
             </div>
@@ -196,11 +196,11 @@
 
           <div class="cp-card cp-card--form" data-aos="fade-left" data-aos-delay="140" data-aos-duration="900">
             <header class="cp-form-head">
-              <h2 class="cp-form-head__title">Müraciət formu</h2>
-              <p class="cp-form-head__text">Layihəniz, təklifiniz və ya sualınız haqqında qısaca yazın. Bütün sahələr mütləqdir, şirkət adı isə istəyə görədir.</p>
+              <h2 class="cp-form-head__title">{% trans "Müraciət formu" %}</h2>
+              <p class="cp-form-head__text">{% trans "Layihəniz, təklifiniz və ya sualınız haqqında qısaca yazın. Bütün sahələr mütləqdir, şirkət adı isə istəyə görədir." %}</p>
               <ul class="cp-form-head__perks">
-                <li><iconify-icon icon="lucide:clock-3"></iconify-icon> 24 saat ərzində cavab</li>
-                <li><iconify-icon icon="lucide:sparkles"></iconify-icon> Pulsuz ilkin məsləhət</li>
+                <li><iconify-icon icon="lucide:clock-3"></iconify-icon> {% trans "24 saat ərzində cavab" %}</li>
+                <li><iconify-icon icon="lucide:sparkles"></iconify-icon> {% trans "Pulsuz ilkin məsləhət" %}</li>
               </ul>
             </header>
             <div class="cp-form-body">

@@ -1,6 +1,6 @@
-﻿{% load static %}
+﻿{% load static i18n %}
 <!doctype html>
-<html lang="az">
+<html lang="{{ LANGUAGE_CODE|default:'az' }}">
 
 <head>
   <meta charset="utf-8">
@@ -50,7 +50,7 @@
         <div class="service-detail-inner">
 
           <a href="{% url 'services' %}" class="btn btn-back py-2 ps-3 pe-4 align-self-start" data-aos="fade-up" data-aos-delay="60" data-aos-duration="900">
-            <span class="btn-text pe-1">Geri</span>
+            <span class="btn-text pe-1">{% trans "Geri" %}</span>
             <iconify-icon icon="lucide:arrow-up-right"
               class="btn-icon bg-white text-dark round-36 rounded-circle hstack justify-content-center fs-5 shadow-sm"></iconify-icon>
           </a>
@@ -59,9 +59,6 @@
           <header class="service-detail-hero" data-aos="fade-up" data-aos-delay="100" data-aos-duration="900">
             <div class="service-detail-hero__copy">
               <h1 class="service-detail-hero__title" id="serviceDetailName">Rəqəmsal marketinq xidməti</h1>
-              <p class="service-detail-hero__lead">
-                Brendinizin rəqəmsal ekosistemdə görünürlüyünü artırmaq, hədəf auditoriyaya çatmaq və ölçülə bilən nəticələr əldə etmək üçün tam dövriyyə marketinq həlli.
-              </p>
             </div>
 
             <div class="service-detail-hero__media">
@@ -86,7 +83,7 @@
                 </div>
                 <span class="service-detail-video__badge" aria-hidden="true">
                   <iconify-icon icon="lucide:film"></iconify-icon>
-                  Tanıtım videosu
+                  {% trans "Tanıtım videosu" %}
                 </span>
               </div>
             </div>
@@ -112,7 +109,7 @@
                   lead, satış və brend tanınması artımı təmin etməkdir.
                 </p>
 
-                <h3>Xidmətə daxildir</h3>
+                <h3>{% trans "Xidmətə daxildir" %}</h3>
                 <ul class="service-detail-checklist">
                   <li>SEO audit və açar söz strategiyası</li>
                   <li>Sosial media məzmun planı və idarəçilik</li>
@@ -126,7 +123,7 @@
 
             <aside class="service-detail-aside" aria-label="Xidmət üstünlükləri">
               <div class="service-detail-aside__card">
-                <span class="service-detail-aside__label">Niyə bu xidmət?</span>
+                <span class="service-detail-aside__label">{% trans "Niyə bu xidmət?" %}</span>
                 <ul class="service-detail-aside__list list-unstyled mb-0">
                   <li>
                     <span class="service-detail-aside__icon"><iconify-icon icon="lucide:trending-up"></iconify-icon></span>
@@ -146,7 +143,7 @@
                   </li>
                 </ul>
                 <button type="button" class="service-detail-aside__cta" data-open-contact-modal>
-                  Konsultasiya
+                  {% trans "Konsultasiya" %}
                   <iconify-icon icon="lucide:arrow-right" aria-hidden="true"></iconify-icon>
                 </button>
               </div>
@@ -160,8 +157,8 @@
       <div class="service-detail-gallery" data-aos="fade-up" data-aos-delay="200" data-aos-duration="900">
         <div class="container">
           <div class="service-detail-gallery__head">
-            <h2 class="service-detail-gallery__title">İş prosesindən kadrlar</h2>
-            <p class="service-detail-gallery__desc">Kampaniya, məzmun və nəticələrdən seçilmiş anlar — şəkillərə klikləyərək böyüdə bilərsiniz.</p>
+            <h2 class="service-detail-gallery__title">{% trans "İş prosesindən kadrlar" %}</h2>
+            <p class="service-detail-gallery__desc">{% trans "Kampaniya, məzmun və nəticələrdən seçilmiş anlar — şəkillərə klikləyərək böyüdə bilərsiniz." %}</p>
           </div>
         </div>
 
@@ -199,11 +196,11 @@
         <div class="service-detail-cta" data-aos="fade-up" data-aos-delay="220" data-aos-duration="900">
           <div class="service-detail-cta__inner">
             <div class="service-detail-cta__copy">
-              <h3>Bu xidmətə marağınız var?</h3>
-              <p>Bizimlə əlaqə saxlayın — pulsuz məsləhət və fərdi təklif alın.</p>
+              <h3>{% trans "Bu xidmətə marağınız var?" %}</h3>
+              <p>{% trans "Bizimlə əlaqə saxlayın — pulsuz məsləhət və fərdi təklif alın." %}</p>
             </div>
             <a href="{% url 'contact' %}" class="btn">
-              <span class="btn-text">Əlaqə saxlayın</span>
+              <span class="btn-text">{% trans "Əlaqə saxlayın" %}</span>
               <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
             </a>
           </div>

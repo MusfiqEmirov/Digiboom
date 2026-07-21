@@ -1,6 +1,6 @@
-﻿{% load static %}
+﻿{% load static i18n %}
 <!doctype html>
-<html lang="az">
+<html lang="{{ LANGUAGE_CODE|default:'az' }}">
 
 <head>
   <meta charset="utf-8">
@@ -159,7 +159,7 @@
     <section class="stats-facts about-stats pt-3 pt-lg-4 pt-xl-5 pb-5 pb-lg-6 pb-xl-7 position-relative overflow-hidden">
       <div class="container">
         <div class="text-center mb-4 mb-xl-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-          <h2 class="mb-0">DigiBoom rəqəmlərlə</h2>
+          <h2 class="mb-0">{% trans "DigiBoom rəqəmlərlə" %}</h2>
         </div>
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4 about-stats__cards mt-4 mt-xl-6 justify-content-lg-center">
           <div class="col" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
@@ -218,7 +218,7 @@
     <section class="about-img py-5 py-lg-8 py-xl-9">
       <div class="container pt-5 pt-lg-8">
         <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-          <p class="marquee-title mb-0 text-center text-dark">Tərəfdaş və müştərilər</p>
+          <p class="marquee-title mb-0 text-center text-dark">{% trans "Tərəfdaş və müştərilər" %}</p>
           <div class="marquee w-100 d-flex align-items-center overflow-hidden">
             <div class="marquee-content d-flex align-items-center gap-8 flex-nowrap">
               <div class="marquee-tag hstack justify-content-center flex-shrink-0">

@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 <!-- Əlaqə / konsultasiya modal — contact.html ilə eyni forma -->
 <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered review-modal-dialog contact-modal-dialog">
@@ -6,12 +6,12 @@
       <div class="review-modal-accent" aria-hidden="true"></div>
       <div class="modal-header review-modal-header border-0">
         <div class="review-modal-header-text">
-          <h3 class="modal-title mb-0" id="contactModalLabel">Konsultasiya</h3>
+          <h3 class="modal-title mb-0" id="contactModalLabel">{% trans "Konsultasiya" %}</h3>
         </div>
-        <button type="button" class="btn-close review-modal-close" data-bs-dismiss="modal" aria-label="Bağlayın"></button>
+        <button type="button" class="btn-close review-modal-close" data-bs-dismiss="modal" aria-label="{% trans 'Bağlayın' %}"></button>
       </div>
       <div class="modal-body review-modal-body contact-modal-body">
-        <p class="contact-modal-lead">Layihəniz və ya sualınız haqqında qısaca yazın — 24 saat ərzində cavab veririk.</p>
+        <p class="contact-modal-lead">{% trans "Layihəniz və ya sualınız haqqında qısaca yazın — 24 saat ərzində cavab veririk." %}</p>
         {% include 'includes/contact-form.html' with formId='contact-modal-form' prefix='contact-modal' formClass='contact-modal-form' btnClass='' smtpAction='/api/contact' show_service=True %}
       </div>
     </div>
