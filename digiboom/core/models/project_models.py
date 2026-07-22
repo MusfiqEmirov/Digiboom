@@ -1,3 +1,13 @@
+"""
+Project / portfolio models.
+
+Special rules:
+- No separate «card image» ImageField — selected via ProjectGalleryImage.is_cover.
+- When is_cover=True is saved, other images' is_cover is automatically cleared.
+- cover_image property: falls back to the first gallery image if no cover.
+- First 2 service tags appear on the card (front).
+"""
+
 from django.core.validators import FileExtensionValidator, MaxLengthValidator
 from django.db import models
 
@@ -29,7 +39,7 @@ PROJECT_TAG_ICON_CHOICES = [
 
 
 class Project(models.Model):
-    """Layihə — portfolio kartı + detail məzmunu."""
+    """Project — portfolio card + detail content."""
 
     name_az = models.CharField(max_length=160, verbose_name='Ad (AZ)')
     name_en = models.CharField(
@@ -158,7 +168,7 @@ class Project(models.Model):
 
     @property
     def cover_image(self):
-        """Kart şəkli — qalereyada «Kart şəkli?» seçilmiş şəkil (yoxdursa ilk şəkil)."""
+        """Card image — gallery row marked «Kart şəkli?» (falls back to first image)."""
         cover = self.gallery_images.filter(is_cover=True).first()
         if cover:
             return cover.image
@@ -167,7 +177,7 @@ class Project(models.Model):
 
 
 class ProjectServiceTag(models.Model):
-    """Daxil olan xidmət növləri — Project edit-də inline."""
+    """Included service types — inline on Project edit."""
 
     project = models.ForeignKey(
         Project,
@@ -207,7 +217,7 @@ class ProjectServiceTag(models.Model):
 
 
 class ProjectWhatWeDid(models.Model):
-    """Layihədə nələr etdik — Project edit-də inline."""
+    """What we did on the project — inline on Project edit."""
 
     project = models.ForeignKey(
         Project,
@@ -245,7 +255,7 @@ class ProjectWhatWeDid(models.Model):
 
 
 class ProjectGalleryImage(models.Model):
-    """Qalereya — Project edit-də inline."""
+    """Gallery — inline on Project edit."""
 
     project = models.ForeignKey(
         Project,
@@ -265,8 +275,8 @@ class ProjectGalleryImage(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Qalereya şəkli'
-        verbose_name_plural = 'Qalereya şəkilləri'
+        verbose_name = 'Qaleriya şəkli'
+        verbose_name_plural = 'Qaleriya şəkilləri'
         ordering = ('id',)
 
     def __str__(self):

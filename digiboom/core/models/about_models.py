@@ -1,8 +1,19 @@
+"""
+About page models.
+
+Special rules:
+- About is a singleton (only one record in admin).
+- Section / gallery / partner / statistics are FK-linked to About (inlines).
+- Banner image and mottos live on PageHeader (page=about) — not here.
+- show_on_home=True statistics also appear on the home page.
+"""
+
 from django.core.validators import FileExtensionValidator, MaxLengthValidator
 from django.db import models
 from django.utils.html import strip_tags
 
 
+# Front Iconify/Lucide names — selected value is rendered as an icon on the site.
 ABOUT_SECTION_ICON_CHOICES = [
     ('lucide:briefcase', 'Agentlik / iş'),
     ('lucide:graduation-cap', 'Academy / təlim'),
@@ -35,7 +46,7 @@ STAT_ICON_CHOICES = [
 
 
 class About(models.Model):
-    """Haqqımızda səhifəsi — adətən yalnız 1 qeyd (singleton)."""
+    """About page — typically only one record (singleton)."""
 
     mezmun_az = models.TextField(
         validators=[MaxLengthValidator(8000)],
@@ -95,7 +106,7 @@ class About(models.Model):
 
 
 class AboutSection(models.Model):
-    """Missiya / Agentlik / DigiBoom Academy kimi mətn kartları."""
+    """Text cards such as Mission / Agency / DigiBoom Academy."""
 
     about = models.ForeignKey(
         About,
@@ -161,7 +172,7 @@ class AboutSection(models.Model):
 
 
 class AboutGalleryImage(models.Model):
-    """Haqqımızda qalereya şəkilləri — istənilən sayda."""
+    """About page gallery images — any number allowed."""
 
     about = models.ForeignKey(
         About,
@@ -191,7 +202,7 @@ class AboutGalleryImage(models.Model):
 
 
 class Partner(models.Model):
-    """Tərəfdaş / müştəri loqosu — About edit səhifəsində inline."""
+    """Partner / client logo — inline on the About edit page."""
 
     about = models.ForeignKey(
         About,
@@ -221,7 +232,7 @@ class Partner(models.Model):
 
 
 class StatisticItem(models.Model):
-    """Rəqəm + ad + ikon — About edit səhifəsində inline."""
+    """Number + label + icon — inline on the About edit page."""
 
     about = models.ForeignKey(
         About,

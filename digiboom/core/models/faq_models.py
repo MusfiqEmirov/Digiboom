@@ -1,13 +1,22 @@
+"""
+FAQ — home page accordion.
+
+Special rules:
+- FAQ = level-1 question; FAQSubItem = level-2 (optional) + answer.
+- If SubItem title is empty, the front shows only the answer (direct answer).
+- Admin «Parametrlər» fieldset is repositioned after the inline via JS.
+"""
+
 from django.db import models
 
 
 class FAQ(models.Model):
     """
-    Tez-tez verilən suallar — ana səhifə accordion.
+    Frequently asked questions — home page accordion.
 
-    1-ci dərəcəli sual + aşağıda cədvəl (FAQSubItem):
-    - 2-ci dərəcə varsa: title + cavab (məs. SEO / dizayn / IT)
-    - yoxdursa: title boş, yalnız cavab (birbaşa cavab)
+    Level-1 question + table below (FAQSubItem):
+    - With level-2: title + answer (e.g. SEO / design / IT)
+    - Without level-2: empty title, answer only (direct answer)
     """
 
     question_az = models.CharField(
@@ -48,7 +57,7 @@ class FAQ(models.Model):
 
 
 class FAQSubItem(models.Model):
-    """2-ci dərəcəli sual (opsional) + cavab."""
+    """Level-2 question (optional) + answer."""
 
     faq = models.ForeignKey(
         FAQ,

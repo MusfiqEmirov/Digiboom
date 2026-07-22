@@ -1,3 +1,13 @@
+"""
+Service models.
+
+Special rules:
+- If slug is blank, save() generates it from name_az via unique_slug_for.
+- card_text appears only on list/carousel cards; description only on detail.
+- Category is hidden from admin menu — added via «+» on Service edit.
+- Why / Include / Gallery are not separate menus — Service inlines only.
+"""
+
 from django.core.validators import FileExtensionValidator, MaxLengthValidator
 from django.db import models
 
@@ -25,7 +35,7 @@ SERVICE_WHY_ICON_CHOICES = [
 
 
 class ServiceCategory(models.Model):
-    """Xidmət kateqoriyası — filter və qruplaşdırma üçün."""
+    """Service category — for filtering and grouping."""
 
     name_az = models.CharField(max_length=120, verbose_name='Ad (AZ)')
     name_en = models.CharField(
@@ -63,7 +73,7 @@ class ServiceCategory(models.Model):
 
 
 class Service(models.Model):
-    """Xidmət — kart + detail məzmunu."""
+    """Service — card + detail content."""
 
     category = models.ForeignKey(
         ServiceCategory,
@@ -175,7 +185,7 @@ class Service(models.Model):
 
 
 class ServiceWhyItem(models.Model):
-    """«Niyə bu xidmət?» — Service edit-də inline."""
+    """Why this service? — inline on Service edit."""
 
     service = models.ForeignKey(
         Service,
@@ -221,7 +231,7 @@ class ServiceWhyItem(models.Model):
 
 
 class ServiceIncludeItem(models.Model):
-    """«Xidmətə daxildir» — Service edit-də inline."""
+    """What's included — inline on Service edit."""
 
     service = models.ForeignKey(
         Service,
@@ -253,7 +263,7 @@ class ServiceIncludeItem(models.Model):
 
 
 class ServiceGalleryImage(models.Model):
-    """«İş prosesindən kadrlar» — Service edit-də inline."""
+    """Work-in-progress gallery frames — inline on Service edit."""
 
     service = models.ForeignKey(
         Service,

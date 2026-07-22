@@ -83,3 +83,32 @@
 #home_media-group .field-sort_order input {
     width: 5em;
 }
+
+/* Təlim blokları — JS yuxarıya daşıyır və göstərir/gizlədir */
+#training_why_items-group,
+#training_stats-group {
+    margin-top: 8px;
+}
+
+.training-admin-hint {
+    margin: 8px 12px 12px;
+    padding: 10px 12px;
+    background: #f0f7fb;
+    border: 1px solid #c5dce8;
+    border-radius: 6px;
+    color: #335;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.fieldset-training-why {
+    border: 1px solid #c5dce8 !important;
+    border-radius: 6px;
+    background: #fafcfd;
+}
+
+#training_stats-group .add-row a::after {
+    content: ' (maks. 3)';
+    color: #888;
+    font-weight: normal;
+}

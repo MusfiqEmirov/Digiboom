@@ -1,13 +1,22 @@
+"""
+Contact information.
+
+Special rules:
+- Singleton (only one record) — limited via admin has_add_permission.
+- No separate SocialLink model; social URLs live on this model.
+- map_url is the same source for map embed and address click link.
+"""
+
 from django.db import models
 
 
 class Contact(models.Model):
     """
-    Əlaqə məlumatları — adətən yalnız 1 qeyd (singleton).
-    Eyni mənbə: əlaqə səhifəsi + footer + sağ tərəf sosial ikonlar (front sonra).
+    Contact information — typically only one record (singleton).
+    Same source for: contact page + footer + side social icons (front TBD).
     """
 
-    # --- Ünvan / xəritə ---
+    # --- Address / map ---
     address_az = models.CharField(
         max_length=255,
         verbose_name='Ünvan (AZ)',
@@ -35,7 +44,7 @@ class Contact(models.Model):
         ),
     )
 
-    # --- WhatsApp / email / telefon ---
+    # --- WhatsApp / email / phone ---
     whatsapp_number = models.CharField(
         max_length=40,
         verbose_name='WhatsApp nömrəsi',
@@ -52,7 +61,7 @@ class Contact(models.Model):
         verbose_name='Telefon',
     )
 
-    # --- Sosial şəbəkələr (yalnız link) ---
+    # --- Social networks (links only) ---
     facebook_url = models.URLField(
         max_length=255,
         null=True,

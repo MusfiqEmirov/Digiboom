@@ -1,3 +1,10 @@
+"""
+core.models — DigiBoom data models.
+
+Each domain has its own file (about_models, service_models, …).
+Admin registration: core.admin.admin_v1.*_admin
+"""
+
 from .about_models import (
     About,
     AboutGalleryImage,
@@ -6,9 +13,13 @@ from .about_models import (
     StatisticItem,
 )
 from .contact_models import Contact
+from .appeal_models import AppealContact
+from .consultation_appeal_models import ConsultationAppeal
 from .page_header_models import (
     HomeHeroMedia,
     PageHeader,
+    TrainingStatItem,
+    TrainingWhyItem,
 )
 from .service_models import (
     Service,
@@ -40,14 +51,12 @@ from .training_models import (
     TrainingCurriculumItem,
     TrainingGalleryImage,
 )
-from .training_order_models import (
-    TrainingOrder,
-    TrainingOrderDriveLink,
-)
+from .training_order_models import TrainingOrder
 from .faq_models import (
     FAQ,
     FAQSubItem,
 )
+from .legal_models import LegalContent
 
 __all__ = [
     'About',
@@ -56,8 +65,12 @@ __all__ = [
     'Partner',
     'StatisticItem',
     'Contact',
+    'AppealContact',
+    'ConsultationAppeal',
     'PageHeader',
     'HomeHeroMedia',
+    'TrainingWhyItem',
+    'TrainingStatItem',
     'ServiceCategory',
     'Service',
     'ServiceWhyItem',
@@ -79,7 +92,7 @@ __all__ = [
     'TrainingCurriculumItem',
     'TrainingGalleryImage',
     'TrainingOrder',
-    'TrainingOrderDriveLink',
     'FAQ',
     'FAQSubItem',
+    'LegalContent',
 ]

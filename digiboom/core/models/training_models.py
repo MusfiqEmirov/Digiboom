@@ -1,3 +1,14 @@
+"""
+Training / course models.
+
+Special rules:
+- Card image: TrainingGalleryImage.is_cover (only one per training — save clears others).
+- Promo video: TrainingCurriculumItem.is_promo (only one per training).
+- cover_image / promo_video properties are convenient accessors for the front end.
+- TrainingAccessLink — URLs sent to the customer after payment (Zoom, etc.).
+- Category is hidden from the admin menu.
+"""
+
 from django.core.validators import FileExtensionValidator, MaxLengthValidator
 from django.db import models
 
@@ -5,7 +16,7 @@ from core.utils import unique_slug_for
 
 
 class TrainingCategory(models.Model):
-    """Təlim kateqoriyası — filter və qruplaşdırma üçün."""
+    """Training category — for filtering and grouping."""
 
     name_az = models.CharField(max_length=120, verbose_name='Ad (AZ)')
     name_en = models.CharField(
@@ -43,7 +54,7 @@ class TrainingCategory(models.Model):
 
 
 class Training(models.Model):
-    """Təlim / kurs — kart + detail məzmunu."""
+    """Training / course — card + detail content."""
 
     class Level(models.TextChoices):
         BEGINNER = 'beginner', 'Başlanğıc'
@@ -141,7 +152,7 @@ class Training(models.Model):
 
     @property
     def cover_image(self):
-        """Kart şəkli — qalereyada «Kart şəkli?» seçilmiş şəkil (yoxdursa ilk)."""
+        """Card image — gallery row marked «Kart şəkli?» (falls back to first)."""
         cover = self.gallery_images.filter(is_cover=True).first()
         if cover:
             return cover.image
@@ -150,13 +161,13 @@ class Training(models.Model):
 
     @property
     def promo_video(self):
-        """Tanıtım videosu — icmalda «Tanıtım videosu?» seçilmiş element."""
+        """Promo video — curriculum item marked «Tanıtım videosu?»."""
         item = self.curriculum_items.filter(is_promo=True).first()
         return item.video if item else None
 
 
 class TrainingAccessLink(models.Model):
-    """Ödənişdən sonra müştəriyə göndərilən linklər (Training edit-də inline)."""
+    """Links sent to the customer after payment (inline on Training edit)."""
 
     training = models.ForeignKey(
         Training,
@@ -193,7 +204,7 @@ class TrainingAccessLink(models.Model):
 
 
 class TrainingCurriculumItem(models.Model):
-    """Kurs məzmunu — icmal videoları (Training edit-də inline)."""
+    """Course content — overview videos (inline on Training edit)."""
 
     training = models.ForeignKey(
         Training,
@@ -272,7 +283,7 @@ class TrainingCurriculumItem(models.Model):
 
 
 class TrainingGalleryImage(models.Model):
-    """Təlimdən kadrlar — Training edit-də inline."""
+    """Training gallery frames — inline on Training edit."""
 
     training = models.ForeignKey(
         Training,

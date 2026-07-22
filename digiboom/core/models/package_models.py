@@ -1,3 +1,14 @@
+"""
+Package models.
+
+Special rules:
+- price_from=True → get_price_display() adds «-dan/-dən» / from / от by language.
+- AZ ablative suffix chosen by last digit (_AZ_ABLATIVE_BY_DIGIT).
+- show_on_home selects home packages; services page shows all active packages
+  automatically (no extra flag).
+- PackageFeature is a Package inline only.
+"""
+
 from django.db import models
 from django.utils.translation import get_language, gettext as _
 
@@ -10,23 +21,23 @@ CURRENCY_CHOICES = [
     ('EUR', 'EUR'),
 ]
 
-# Son rəqəmin AZ oxunuşuna görə ablativ: dan (arka) / dən (ön).
+# AZ ablative by last digit pronunciation: dan (back vowel) / dən (front vowel).
 _AZ_ABLATIVE_BY_DIGIT = {
-    '0': 'dan',  # sıfır / on…
-    '1': 'dən',  # bir
-    '2': 'dən',  # iki
-    '3': 'dən',  # üç
-    '4': 'dən',  # dörd
-    '5': 'dən',  # beş
-    '6': 'dan',  # altı
-    '7': 'dən',  # yeddi
-    '8': 'dən',  # səkkiz
-    '9': 'dan',  # doqquz
+    '0': 'dan',  # zero / on…
+    '1': 'dən',  # one
+    '2': 'dən',  # two
+    '3': 'dən',  # three
+    '4': 'dən',  # four
+    '5': 'dən',  # five
+    '6': 'dan',  # six
+    '7': 'dən',  # seven
+    '8': 'dən',  # eight
+    '9': 'dan',  # nine
 }
 
 
 class Package(models.Model):
-    """Paket — ana səhifə / xidmətlər / footer kartları."""
+    """Package — home / services cards."""
 
     name_az = models.CharField(max_length=160, verbose_name='Ad (AZ)')
     name_en = models.CharField(
@@ -94,11 +105,6 @@ class Package(models.Model):
         verbose_name='Ana səhifədə?',
         help_text='Ana səhifə «Xüsusi paketlər» blokunda göstərilsin.',
     )
-    show_in_footer = models.BooleanField(
-        default=False,
-        verbose_name='Footer-də?',
-        help_text='Footer Xidmətlər/Paketlər siyahısında.',
-    )
 
     class Meta:
         verbose_name = 'Paket'
@@ -114,13 +120,13 @@ class Package(models.Model):
         super().save(*args, **kwargs)
 
     def _az_price_from_suffix(self):
-        """Qiymətin tam hissəsinin son rəqəminə görə dan/dən."""
+        """dan/dən based on the last digit of the integer part of the price."""
         digit = str(int(self.price))[-1]
         return _AZ_ABLATIVE_BY_DIGIT.get(digit, 'dən')
 
     def get_price_display(self):
         """
-        Lokalizə olunmuş qiymət mətni.
+        Localized price string.
         AZ: 565-dən azn | EN: from 565 azn | RU: от 565 azn
         """
         if self.price == self.price.to_integral_value():
@@ -140,7 +146,7 @@ class Package(models.Model):
 
 
 class PackageFeature(models.Model):
-    """«Nələr daxildir» — Package edit-də inline."""
+    """What's included — inline on Package edit."""
 
     package = models.ForeignKey(
         Package,

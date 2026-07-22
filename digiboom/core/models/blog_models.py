@@ -1,3 +1,12 @@
+"""
+Blog models.
+
+Special rules:
+- slug is generated automatically from name_az.
+- view_count is admin readonly — incremented on the front detail page; do not edit manually.
+- BlogCategory is hidden from menu — added via «+» on Blog edit.
+"""
+
 from django.core.validators import MaxLengthValidator
 from django.db import models
 
@@ -5,7 +14,7 @@ from core.utils import unique_slug_for
 
 
 class BlogCategory(models.Model):
-    """Bloq kateqoriyası — filter və qruplaşdırma üçün."""
+    """Blog category — for filtering and grouping."""
 
     name_az = models.CharField(max_length=120, verbose_name='Ad (AZ)')
     name_en = models.CharField(
@@ -43,7 +52,7 @@ class BlogCategory(models.Model):
 
 
 class Blog(models.Model):
-    """Bloq yazısı — siyahı kartı + detail məzmunu."""
+    """Blog post — list card + detail content."""
 
     category = models.ForeignKey(
         BlogCategory,

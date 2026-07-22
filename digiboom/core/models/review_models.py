@@ -1,3 +1,13 @@
+"""
+Review models.
+
+Special rules:
+- Created only from the site form (admin cannot add).
+- is_active defaults to False — not shown on the site until admin approves.
+- service or training FK is filled based on category_type; OTHER/CONSULTATION use label.
+- save() auto-fills category_label from type/FK when blank.
+"""
+
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -5,8 +15,8 @@ from django.db import models
 
 class Review(models.Model):
     """
-    Sayt «Rəy bildirin» formasından gələn rəylər.
-    Admin yalnız təsdiq / redaktə / silmə üçündür — yeni rəy əlavə edilmir.
+    Reviews from the site «Submit review» form.
+    Admin is for approve / edit / delete only — new reviews cannot be added.
     """
 
     class CategoryType(models.TextChoices):
@@ -62,11 +72,12 @@ class Review(models.Model):
     )
     is_active = models.BooleanField(
         default=False,
-        verbose_name='Saytda göstərilsin?',
+        verbose_name='Təsdiq et',
+        help_text='İşarələsəniz rəy saytda görünər.',
     )
     is_read = models.BooleanField(
         default=False,
-        verbose_name='Oxunub?',
+        verbose_name='Oxunmuş et',
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -87,7 +98,7 @@ class Review(models.Model):
 
     @property
     def subject_name(self):
-        """Göstərilən ad: Digər / Konsultasiya / xidmət adı / təlim adı."""
+        """Display name: Other / Consultation / service name / training name."""
         if self.category_type == self.CategoryType.OTHER:
             return 'Digər'
         if self.category_type == self.CategoryType.CONSULTATION:

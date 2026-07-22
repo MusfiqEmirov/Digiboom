@@ -1,10 +1,19 @@
+"""
+Package orders.
+
+Special rules:
+- Created only from the site form (admin has_add_permission=False).
+- package_name is a snapshot — name remains if Package is deleted.
+- package FK SET_NULL — order is not deleted when the package is removed.
+"""
+
 from django.db import models
 
 
 class PackageOrder(models.Model):
     """
-    Sayt «Paket sifarişi» formasından gələn sifarişlər.
-    Admin yalnız baxış / status — yeni sifariş əlavə edilmir.
+    Orders from the site «Package order» form.
+    Admin is view / status only — new orders cannot be added.
     """
 
     full_name = models.CharField(
@@ -31,7 +40,6 @@ class PackageOrder(models.Model):
         blank=True,
         default='',
         verbose_name='Paket adı',
-        help_text='Formadan gələn paket adı (snapshot) — paket silinsə belə qalır.',
     )
     message = models.TextField(
         blank=True,
