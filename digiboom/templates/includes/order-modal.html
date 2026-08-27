@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 <!--  Paket sifariş modal -->
 <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered review-modal-dialog order-modal-dialog">
@@ -6,48 +6,50 @@
       <div class="review-modal-accent" aria-hidden="true"></div>
       <div class="modal-header review-modal-header border-0">
         <div class="review-modal-header-text">
-          <span class="review-modal-eyebrow">Paket sifarişi</span>
-          <h3 class="modal-title mb-0" id="orderModalLabel">Sifariş edin</h3>
+          <span class="review-modal-eyebrow">{% trans "Paket sifarişi" %}</span>
+          <h3 class="modal-title mb-0" id="orderModalLabel">{% trans "Sifariş edin" %}</h3>
         </div>
-        <button type="button" class="btn-close review-modal-close" data-bs-dismiss="modal" aria-label="Bağlayın"></button>
+        <button type="button" class="btn-close review-modal-close" data-bs-dismiss="modal" aria-label="{% trans 'Bağlayın' %}"></button>
       </div>
       <div class="modal-body review-modal-body">
-        <form id="orderForm" class="review-modal-form">
+        <form id="orderForm" class="review-modal-form" method="post" action="{% url 'api_package_order' %}" novalidate>
+          {% csrf_token %}
+          <input type="hidden" id="orderPackageId" name="package_id" value="">
           <div class="review-field">
-            <label for="orderName" class="review-modal-label">Ad və soyadınız <span class="text-danger">*</span></label>
+            <label for="orderName" class="review-modal-label">{% trans "Ad və soyadınız" %} <span class="text-danger">*</span></label>
             <div class="review-input-wrap">
               <iconify-icon icon="lucide:user" class="review-input-icon" aria-hidden="true"></iconify-icon>
-              <input type="text" class="form-control review-input" id="orderName" name="name" placeholder="Adınız və soyadınız" required autocomplete="name">
+              <input type="text" class="form-control review-input" id="orderName" name="name" placeholder="{% trans 'Adınız və soyadınız' %}" required autocomplete="name">
             </div>
           </div>
           <div class="review-field">
-            <label for="orderPhone" class="review-modal-label">Nömrə <span class="text-danger">*</span></label>
+            <label for="orderPhone" class="review-modal-label">{% trans "Nömrə" %} <span class="text-danger">*</span></label>
             <div class="review-input-wrap">
               <iconify-icon icon="lucide:phone" class="review-input-icon" aria-hidden="true"></iconify-icon>
               <input type="tel" class="form-control review-input" id="orderPhone" name="phone" placeholder="+994 XX XXX XX XX" required autocomplete="tel">
             </div>
           </div>
           <div class="review-field">
-            <label for="orderEmail" class="review-modal-label">Email <span class="text-danger">*</span></label>
+            <label for="orderEmail" class="review-modal-label">{% trans "Email" %} <span class="text-danger">*</span></label>
             <div class="review-input-wrap">
               <iconify-icon icon="lucide:mail" class="review-input-icon" aria-hidden="true"></iconify-icon>
               <input type="email" class="form-control review-input" id="orderEmail" name="email" placeholder="email@example.com" required autocomplete="email">
             </div>
           </div>
           <div class="review-field">
-            <label for="orderPackage" class="review-modal-label">Paket <span class="text-danger">*</span></label>
+            <label for="orderPackage" class="review-modal-label">{% trans "Paket" %} <span class="text-danger">*</span></label>
             <div class="review-input-wrap">
               <iconify-icon icon="lucide:package" class="review-input-icon" aria-hidden="true"></iconify-icon>
               <input type="text" class="form-control review-input" id="orderPackage" name="package" readonly required tabindex="-1">
             </div>
           </div>
           <div class="review-field">
-            <label for="orderMessage" class="review-modal-label">Mesajınızı qeyd edin</label>
-            <textarea class="form-control review-textarea" id="orderMessage" name="message" placeholder="Mesajınızı qeyd edin..." rows="3"></textarea>
+            <label for="orderMessage" class="review-modal-label">{% trans "Mesajınızı qeyd edin" %}</label>
+            <textarea class="form-control review-textarea" id="orderMessage" name="message" placeholder="{% trans 'Mesajınızı qeyd edin...' %}" rows="3"></textarea>
           </div>
           <div class="review-modal-actions">
-            <button type="button" class="btn btn-outline-dark review-modal-btn-cancel" data-bs-dismiss="modal">Ləğv edin</button>
-            <button type="submit" class="btn btn-dark review-modal-btn-submit">Göndərin</button>
+            <button type="button" class="btn btn-outline-dark review-modal-btn-cancel" data-bs-dismiss="modal">{% trans "Ləğv edin" %}</button>
+            <button type="submit" class="btn btn-dark review-modal-btn-submit">{% trans "Göndərin" %}</button>
           </div>
         </form>
       </div>
@@ -58,6 +60,6 @@
 <div id="orderSuccessAlert" class="review-success-alert" hidden aria-live="polite" role="status">
   <div class="review-success-alert__inner">
     <iconify-icon icon="lucide:circle-check" class="review-success-alert__icon" aria-hidden="true"></iconify-icon>
-    <span class="review-success-alert__text">Çox sağ olun! Ən qısa zamanda sizə dönüş olacaq.</span>
+    <span class="review-success-alert__text">{% trans "Çox sağ olun! Ən qısa zamanda sizə dönüş olacaq." %}</span>
   </div>
 </div>

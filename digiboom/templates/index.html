@@ -1,6 +1,6 @@
-{% load static %}
+{% load static i18n digiboom_tags %}
 <!doctype html>
-<html lang="az">
+<html lang="{{ LANGUAGE_CODE|default:'az' }}">
 
 <head>
   <meta charset="utf-8">
@@ -31,33 +31,34 @@
 <!--  Page Wrapper -->
   <div class="page-wrapper overflow-hidden">
 
-    <!--  Banner Section -->
+    <!--  Banner Section — PageHeader (page=home) -->
+    {% if home_media or home_motto %}
     <section class="banner-section position-relative d-flex align-items-end min-vh-100">
-      <!-- Hero media slides -->
+      {% if home_media %}
+      <!-- Hero media slides (admin) -->
       <div class="hero-banner-media">
-        <div class="hero-banner-slide is-active">
-          <video autoplay muted loop playsinline>
-            <source src="{% static 'images/backgrounds/banner-video.mp4' %}" type="video/mp4" />
+        {% for item in home_media %}
+        <div class="hero-banner-slide{% if forloop.first %} is-active{% endif %}">
+          {% if item.media_type == 'video' %}
+          <video muted playsinline preload="auto"{% if forloop.first %} autoplay{% endif %}>
+            <source src="{{ item.video.url }}" type="video/mp4" />
           </video>
+          {% else %}
+          <img src="{{ item.image.url }}" alt="DigiBoom">
+          {% endif %}
         </div>
-        <div class="hero-banner-slide">
-          <img src="{% static 'images/portfolio/portfolio-img-1.jpg' %}" alt="DigiBoom — Layihə 1">
-        </div>
-        <div class="hero-banner-slide">
-          <img src="{% static 'images/portfolio/portfolio-img-3.jpg' %}" alt="DigiBoom — Layihə 3">
-        </div>
-        <div class="hero-banner-slide">
-          <img src="{% static 'images/portfolio/portfolio-img-5.jpg' %}" alt="DigiBoom — Layihə 5">
-        </div>
+        {% endfor %}
       </div>
-      <!-- Banner nav -->
-      <button type="button" class="hero-banner-nav hero-banner-nav--prev hero-banner-nav--hidden hero-banner-nav--disabled"
-        aria-label="Əvvəlki slayd" aria-disabled="true" aria-hidden="true" tabindex="-1">
-        <iconify-icon icon="lucide:chevron-left"></iconify-icon>
+      {% if home_media|length > 1 %}
+      <!-- Banner nav — həmişə hər iki ox -->
+      <button type="button" class="hero-banner-nav hero-banner-nav--prev" aria-label="Əvvəlki slayd">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
       </button>
       <button type="button" class="hero-banner-nav hero-banner-nav--next" aria-label="Növbəti slayd">
-        <iconify-icon icon="lucide:chevron-right"></iconify-icon>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
       </button>
+      {% endif %}
+      {% endif %}
       <!-- DigiBoom countdown + explosion (hero center) -->
       <div class="hero-banner-bomb" id="heroBannerBomb" aria-hidden="true">
         <div class="hero-banner-bomb__veil"></div>
@@ -93,19 +94,22 @@
         </div>
       </div>
 
+      {% if home_motto %}
       <div class="container">
         <div class="d-flex flex-column gap-4 pb-8 position-relative z-1">
           <div class="row align-items-center">
             <div class="col-xl-5 col-lg-7">
               <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100"
                 data-aos-duration="1000">
-                <p class="mb-0 fs-6 hero-banner-tagline">Rəqəmsal həllər partneriniz — brendinizi böyüdürür, nəticə gətiririk.</p>
+                <div class="mb-0 fs-6 hero-banner-tagline about-cms-motto">{{ home_motto|safe }}</div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {% endif %}
     </section>
+    {% endif %}
 
     <div class="home-section-divider home-section-divider--after-hero" aria-hidden="true">
       <div class="container">
@@ -113,7 +117,8 @@
       </div>
     </div>
 
-    <!--  About Section -->
+    <!--  About Section — CMS: About admin (ana_sehife_metn, gallery, stats, partners) -->
+    {% if home_about_text or about_gallery_images or home_statistics or about_partners %}
     <section class="stats-facts about-stats py-5 py-lg-8 py-xl-9 position-relative overflow-hidden">
       <div class="container">
         <div class="d-flex flex-column gap-9">
@@ -124,137 +129,92 @@
             <hr class="border-line flex-grow-1 mb-0">
           </div>
 
+          {% if home_about_text or about_gallery_images %}
           <div class="row align-items-start g-5 g-xl-6 about-intro">
+            {% if about_gallery_images %}
             <div class="col-md-6 col-lg-5 col-xl-5">
               <div class="about-image-carousel-wrap" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
                 <div class="about-image-carousel-viewport">
                   <div class="about-image-carousel-track">
-                    <div class="about-image-carousel-slide is-active">
-                      <img src="{% static 'images/portfolio/portfolio-img-2.jpg' %}" alt="DigiBoom ofis 1" class="about-carousel-img">
+                    {% for img in about_gallery_images %}
+                    <div class="about-image-carousel-slide{% if forloop.first %} is-active{% endif %}">
+                      <img src="{{ img.image.url }}" alt="DigiBoom" class="about-carousel-img">
                     </div>
-                    <div class="about-image-carousel-slide">
-                      <img src="{% static 'images/portfolio/portfolio-img-4.jpg' %}" alt="DigiBoom ofis 2" class="about-carousel-img">
-                    </div>
-                    <div class="about-image-carousel-slide">
-                      <img src="{% static 'images/portfolio/portfolio-img-6.jpg' %}" alt="DigiBoom ofis 3" class="about-carousel-img">
-                    </div>
+                    {% endfor %}
                   </div>
                 </div>
+                {% if about_gallery_images|length > 1 %}
                 <button type="button" class="about-carousel-nav about-carousel-nav--prev" aria-label="Əvvəlki şəkil">
                   <iconify-icon icon="lucide:chevron-left"></iconify-icon>
                 </button>
                 <button type="button" class="about-carousel-nav about-carousel-nav--next" aria-label="Növbəti şəkil">
                   <iconify-icon icon="lucide:chevron-right"></iconify-icon>
                 </button>
+                {% endif %}
               </div>
             </div>
-            <div class="col-md-6 col-lg-7 col-xl-7">
+            {% endif %}
+            {% if home_about_text %}
+            <div class="{% if about_gallery_images %}col-md-6 col-lg-7 col-xl-7{% else %}col-12{% endif %}">
               <div class="d-flex flex-column about-intro__content" data-aos="fade-left" data-aos-delay="150" data-aos-duration="1000">
-                <h2 class="mb-0 about-intro__title">Rəqəmsal dünyada səsinizi eşidilir edirik</h2>
-                <p class="fs-5 mb-0 about-intro__desc">DigiBoom — brendlərin rəqəmsal ekosistemdə güclü mövqe qazanması üçün strategiya, dizayn və texnologiyanı birləşdirən yaradıcı komandadır.</p>
-                <p class="fs-5 mb-0 about-intro__desc">Veb, mobil, dizayn və rəqəmsal marketinq sahələrində təcrübə ilə tərəfdaşlarımızın biznesinə real dəyər qatırıq.</p>
+                <div class="about-intro__cms home-about-cms">{{ home_about_text|safe }}</div>
                 <a href="{% url 'about' %}" class="btn about-intro__btn" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
-                  <span class="btn-text">Ətraflı</span>
+                  <span class="btn-text">{% trans "Ətraflı" %}</span>
                   <iconify-icon icon="lucide:arrow-up-right"
                     class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
                 </a>
               </div>
             </div>
+            {% endif %}
           </div>
+          {% endif %}
 
+          {% if home_statistics %}
           <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4 about-stats__cards justify-content-lg-center">
-                <div class="col" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column align-items-center gap-2">
-                    <span class="stats-card__icon">
-                      <iconify-icon icon="lucide:users" class="fs-6"></iconify-icon>
-                    </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="40">0</span></h2>
-                    <p class="mb-0 stats-card__text">Formlar</p>
-                  </div>
-                </div>
-                <div class="col" data-aos="fade-up" data-aos-delay="220" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column align-items-center gap-2">
-                    <span class="stats-card__icon">
-                      <iconify-icon icon="lucide:mic" class="fs-6"></iconify-icon>
-                    </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="35">0</span></h2>
-                    <p class="mb-0 stats-card__text">Seminarlar</p>
-                  </div>
-                </div>
-                <div class="col" data-aos="fade-up" data-aos-delay="240" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column align-items-center gap-2">
-                    <span class="stats-card__icon">
-                      <iconify-icon icon="lucide:presentation" class="fs-6"></iconify-icon>
-                    </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="28">0</span></h2>
-                    <p class="mb-0 stats-card__text">Konfranslar</p>
-                  </div>
-                </div>
-                <div class="col" data-aos="fade-up" data-aos-delay="260" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column align-items-center gap-2">
-                    <span class="stats-card__icon">
-                      <iconify-icon icon="lucide:smile-plus" class="fs-6"></iconify-icon>
-                    </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="120">0</span></h2>
-                    <p class="mb-0 stats-card__text">Müştərilər</p>
-                  </div>
-                </div>
-                <div class="col" data-aos="fade-up" data-aos-delay="280" data-aos-duration="1000">
-                  <div class="stats-card d-flex flex-column align-items-center gap-2">
-                    <span class="stats-card__icon">
-                      <iconify-icon icon="lucide:award" class="fs-6"></iconify-icon>
-                    </span>
-                    <h2 class="mb-0 stats-card__number"><span class="count" data-target="85">0</span></h2>
-                    <p class="mb-0 stats-card__text">Layihələr</p>
-                  </div>
-                </div>
+            {% for item in home_statistics %}
+            <div class="col" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:2 }}00" data-aos-duration="1000">
+              <div class="stats-card d-flex flex-column align-items-center gap-2">
+                {% if item.icon %}
+                <span class="stats-card__icon">
+                  <iconify-icon icon="{{ item.icon }}" class="fs-6"></iconify-icon>
+                </span>
+                {% endif %}
+                <h2 class="mb-0 stats-card__number"><span class="count" data-target="{{ item.value|stat_number }}">0</span></h2>
+                <p class="mb-0 stats-card__text">{{ item|localized:'label' }}</p>
+              </div>
+            </div>
+            {% endfor %}
           </div>
+          {% endif %}
         </div>
       </div>
       <div class="position-absolute bottom-0 start-0" data-aos="zoom-in" data-aos-delay="100" data-aos-duration="1000">
         <img src="{% static 'images/backgrounds/stats-facts-bg.svg' %}" alt="" class="img-fluid">
       </div>
-      <!-- Tərəfdaş və müştərilər – Haqqımızda bölməsinin altında -->
+      {% if about_partners %}
+      <!-- {% trans "Tərəfdaş və müştərilər" %} – Haqqımızda bölməsinin altında -->
       <div class="container pt-6 pt-lg-8 pt-xl-9">
         <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-          <p class="marquee-title mb-0 text-center text-dark">Tərəfdaş və müştərilər</p>
+          <p class="marquee-title mb-0 text-center text-dark">{% trans "Tərəfdaş və müştərilər" %}</p>
           <div class="marquee w-100 d-flex align-items-center overflow-hidden">
             <div class="marquee-content d-flex align-items-center gap-8 flex-nowrap">
+              {% for partner in about_partners %}
               <div class="marquee-tag hstack justify-content-center flex-shrink-0">
-                <img src="{% static 'images/pricing/partners-1.svg' %}" alt="partners" class="img-fluid">
+                <img src="{{ partner.logo.url }}" alt="partners" class="img-fluid">
               </div>
+              {% endfor %}
+              {% for partner in about_partners %}
               <div class="marquee-tag hstack justify-content-center flex-shrink-0">
-                <img src="{% static 'images/pricing/partners-2.svg' %}" alt="partners" class="img-fluid">
+                <img src="{{ partner.logo.url }}" alt="partners" class="img-fluid">
               </div>
-              <div class="marquee-tag hstack justify-content-center flex-shrink-0">
-                <img src="{% static 'images/pricing/partners-3.svg' %}" alt="partners" class="img-fluid">
-              </div>
-              <div class="marquee-tag hstack justify-content-center flex-shrink-0">
-                <img src="{% static 'images/pricing/partners-4.svg' %}" alt="partners" class="img-fluid">
-              </div>
-              <div class="marquee-tag hstack justify-content-center flex-shrink-0">
-                <img src="{% static 'images/pricing/partners-5.svg' %}" alt="partners" class="img-fluid">
-              </div>
-              <div class="marquee-tag hstack justify-content-center flex-shrink-0">
-                <img src="{% static 'images/pricing/partners-1.svg' %}" alt="partners" class="img-fluid">
-              </div>
-              <div class="marquee-tag hstack justify-content-center flex-shrink-0">
-                <img src="{% static 'images/pricing/partners-2.svg' %}" alt="partners" class="img-fluid">
-              </div>
-              <div class="marquee-tag hstack justify-content-center flex-shrink-0">
-                <img src="{% static 'images/pricing/partners-3.svg' %}" alt="partners" class="img-fluid">
-              </div>
-              <div class="marquee-tag hstack justify-content-center flex-shrink-0">
-                <img src="{% static 'images/pricing/partners-4.svg' %}" alt="partners" class="img-fluid">
-              </div>
-              <div class="marquee-tag hstack justify-content-center flex-shrink-0">
-                <img src="{% static 'images/pricing/partners-5.svg' %}" alt="partners" class="img-fluid">
-              </div>
+              {% endfor %}
             </div>
           </div>
         </div>
       </div>
+      {% endif %}
     </section>
+    {% endif %}
 
     <div class="home-section-divider" aria-hidden="true">
       <div class="container">
@@ -262,7 +222,8 @@
       </div>
     </div>
 
-    <!--   Projects Section - Gördüyümüz işlər -->
+    <!--   Projects Section - {% trans "Gördüyümüz işlər" %} -->
+    {% if home_projects %}
     <section class="featured-projects featured-projects--showcase py-5 py-lg-8 py-xl-9">
       <div class="featured-projects__atmosphere" aria-hidden="true"></div>
       <div class="d-flex flex-column gap-5 gap-xl-11 position-relative">
@@ -281,7 +242,7 @@
                 <div class="col-xxl-8">
                   <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100"
                     data-aos-duration="1000">
-                    <h2 class="mb-0">Gördüyümüz işlər</h2>
+                    <h2 class="mb-0">{% trans "Gördüyümüz işlər" %}</h2>
                   </div>
                 </div>
               </div>
@@ -298,33 +259,54 @@
           <div class="featured-projects-slider">
             <div class="featured-projects-marquee w-100 overflow-hidden">
               <div class="featured-projects-marquee__track d-flex flex-nowrap align-items-stretch">
+            {% for project in home_projects %}
             <div class="featured-projects-marquee__item">
               <article class="portfolio portfolio-showcase-card">
                 <div class="portfolio-showcase-card__frame">
                   <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                    <img src="{% static 'images/portfolio/portfolio-img-1.jpg' %}" alt="TemizXalı" class="img-fluid">
+                    {% if project.cover_image %}
+                    <img src="{{ project.cover_image.url }}" alt="{{ project|localized:'name' }}" class="img-fluid">
+                    {% endif %}
                   <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
                     <div class="d-flex align-items-center justify-content-end w-100">
                       <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
+                        {% if project.url_web %}<li><a href="{{ project.url_web }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>{% endif %}
+                        {% if project.url_facebook %}<li><a href="{{ project.url_facebook }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>{% endif %}
+                        {% if project.url_instagram %}<li><a href="{{ project.url_instagram }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>{% endif %}
+                        {% if project.url_tiktok %}<li><a href="{{ project.url_tiktok }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>{% endif %}
+                        {% if project.url_linkedin %}<li><a href="{{ project.url_linkedin }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>{% endif %}
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="portfolio-showcase-card__meta">
                   <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                    <h3 class="mb-0">TemizXalı</h3>
-                    <div class="portfolio-showcase-card__tags hstack gap-2">
-                      <span class="badge text-dark border">UX Strategy</span>
-                      <span class="badge text-dark border">UI Design</span>
+                    <h3 class="mb-0">{{ project|localized:'name' }}</h3>
+                    {% with tags=project.service_tags.all|slice:":2" %}
+                    {% if tags %}
+                    <div class="portfolio-showcase-card__tags">
+                      {% for tag in tags %}
+                      {% if tag.service_id %}
+                      <span class="badge portfolio-showcase-card__tag">
+                        {% with cslug=tag.service.category.slug %}
+                        {% if cslug == 'dizayn-brend' %}
+                        <iconify-icon icon="lucide:palette" aria-hidden="true"></iconify-icon>
+                        {% elif cslug == 'marketinq' %}
+                        <iconify-icon icon="lucide:megaphone" aria-hidden="true"></iconify-icon>
+                        {% else %}
+                        <iconify-icon icon="lucide:code-2" aria-hidden="true"></iconify-icon>
+                        {% endif %}
+                        {% endwith %}
+                        <span class="portfolio-showcase-card__tag-label">{{ tag.service|localized:'name' }}</span>
+                      </span>
+                      {% endif %}
+                      {% endfor %}
                     </div>
+                    {% endif %}
+                    {% endwith %}
                   </div>
-                  <a href="{% url 'projects_detail' %}?project=temizxali" class="btn portfolio-showcase-card__cta">
-                    <span class="btn-text">Ətraflı</span>
+                  <a href="{% url 'projects_detail' project.slug %}" class="btn portfolio-showcase-card__cta">
+                    <span class="btn-text">{% trans "Ətraflı" %}</span>
                     <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
                   </a>
 
@@ -332,189 +314,21 @@
                 </div>
               </article>
             </div>
-            <div class="featured-projects-marquee__item">
-              <article class="portfolio portfolio-showcase-card">
-                <div class="portfolio-showcase-card__frame">
-                  <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                    <img src="{% static 'images/portfolio/portfolio-img-2.jpg' %}" alt="BusinessCup" class="img-fluid">
-                  <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                    <div class="d-flex align-items-center justify-content-end w-100">
-                      <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="portfolio-showcase-card__meta">
-                  <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                    <h3 class="mb-0">BusinessCup</h3>
-                    <div class="portfolio-showcase-card__tags hstack gap-2">
-                      <span class="badge text-dark border">Web development</span>
-                      <span class="badge text-dark border">Digital design</span>
-                    </div>
-                  </div>
-                  <a href="{% url 'projects_detail' %}?project=bunisesscup" class="btn portfolio-showcase-card__cta">
-                    <span class="btn-text">Ətraflı</span>
-                    <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                  </a>
-
-                </div>
-                </div>
-              </article>
-            </div>
-            <div class="featured-projects-marquee__item">
-              <article class="portfolio portfolio-showcase-card">
-                <div class="portfolio-showcase-card__frame">
-                  <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                    <img src="{% static 'images/portfolio/portfolio-img-3.jpg' %}" alt="NewAway" class="img-fluid">
-                  <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                    <div class="d-flex align-items-center justify-content-end w-100">
-                      <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="portfolio-showcase-card__meta">
-                  <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                    <h3 class="mb-0">NewAway</h3>
-                    <div class="portfolio-showcase-card__tags hstack gap-2">
-                      <span class="badge text-dark border">UI/UX design</span>
-                      <span class="badge text-dark border">Web development</span>
-                    </div>
-                  </div>
-                  <a href="{% url 'projects_detail' %}?project=newawey" class="btn portfolio-showcase-card__cta">
-                    <span class="btn-text">Ətraflı</span>
-                    <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                  </a>
-
-                </div>
-                </div>
-              </article>
-            </div>
-            <div class="featured-projects-marquee__item">
-              <article class="portfolio portfolio-showcase-card">
-                <div class="portfolio-showcase-card__frame">
-                  <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                    <img src="{% static 'images/portfolio/portfolio-img-4.jpg' %}" alt="Snacks" class="img-fluid">
-                  <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                    <div class="d-flex align-items-center justify-content-end w-100">
-                      <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="portfolio-showcase-card__meta">
-                  <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                    <h3 class="mb-0">Snacks</h3>
-                    <div class="portfolio-showcase-card__tags hstack gap-2">
-                      <span class="badge text-dark border">Brand identity</span>
-                      <span class="badge text-dark border">Digital design</span>
-                    </div>
-                  </div>
-                  <a href="{% url 'projects_detail' %}?project=snakcs" class="btn portfolio-showcase-card__cta">
-                    <span class="btn-text">Ətraflı</span>
-                    <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                  </a>
-
-                </div>
-                </div>
-              </article>
-            </div>
-            <div class="featured-projects-marquee__item">
-              <article class="portfolio portfolio-showcase-card">
-                <div class="portfolio-showcase-card__frame">
-                  <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                    <img src="{% static 'images/portfolio/portfolio-img-5.jpg' %}" alt="Kahi" class="img-fluid">
-                  <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                    <div class="d-flex align-items-center justify-content-end w-100">
-                      <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="portfolio-showcase-card__meta">
-                  <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                    <h3 class="mb-0">Kahi</h3>
-                    <div class="portfolio-showcase-card__tags hstack gap-2">
-                      <span class="badge text-dark border">Photography</span>
-                      <span class="badge text-dark border">Studio</span>
-                    </div>
-                  </div>
-                  <a href="{% url 'projects_detail' %}?project=kahi" class="btn portfolio-showcase-card__cta">
-                    <span class="btn-text">Ətraflı</span>
-                    <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                  </a>
-
-                </div>
-                </div>
-              </article>
-            </div>
-            <div class="featured-projects-marquee__item">
-              <article class="portfolio portfolio-showcase-card">
-                <div class="portfolio-showcase-card__frame">
-                  <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                    <img src="{% static 'images/portfolio/portfolio-img-6.jpg' %}" alt="AvertaTravel" class="img-fluid">
-                  <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                    <div class="d-flex align-items-center justify-content-end w-100">
-                      <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                        <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="portfolio-showcase-card__meta">
-                  <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                    <h3 class="mb-0">AvertaTravel</h3>
-                    <div class="portfolio-showcase-card__tags hstack gap-2">
-                      <span class="badge text-dark border">Digital design</span>
-                      <span class="badge text-dark border">Web development</span>
-                    </div>
-                  </div>
-                  <a href="{% url 'projects_detail' %}?project=avertatravel" class="btn portfolio-showcase-card__cta">
-                    <span class="btn-text">Ətraflı</span>
-                    <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                  </a>
-
-                </div>
-                </div>
-              </article>
-            </div>
+            {% endfor %}
               </div>
             </div>
           </div>
         </div>
         <div class="d-flex justify-content-center pt-3 pt-lg-4 pb-3 pb-lg-4">
           <a href="{% url 'portfolio' %}" class="btn" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
-            <span class="btn-text">Ətraflı</span>
+            <span class="btn-text">{% trans "Ətraflı" %}</span>
             <iconify-icon icon="lucide:arrow-up-right"
               class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
           </a>
         </div>
       </div>
     </section>
+    {% endif %}
 
     <div class="home-section-divider" aria-hidden="true">
       <div class="container">
@@ -538,7 +352,7 @@
             </div>
             <div class="col services-header__center position-absolute start-0 end-0 d-flex justify-content-center align-items-center">
               <div class="services-title-block text-center" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                <h2 class="mb-0 text-white">Xidmətlər</h2>
+                <h2 class="mb-0 text-white">{% trans "Xidmətlər" %}</h2>
               </div>
             </div>
           </div>
@@ -552,91 +366,25 @@
             <div class="service-grid position-relative">
               <div class="services-marquee w-100 overflow-hidden">
                 <div class="services-marquee__track d-flex flex-nowrap align-items-stretch">
+              {% for service in home_services %}
               <div class="services-marquee__item">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
 
-                  <span class="service-card__bg" style="background-image: url({% static 'images/services/services-img-1.jpg' %});"></span>
+                  <span class="service-card__bg" style="background-image: url({{ service.image.url }});"></span>
                   <span class="service-card__overlay"></span>
-                  <span class="service-card__category" data-cat="marketinq">Marketinq</span>
+                  <span class="service-card__category" data-cat="{{ service.category.slug }}">{{ service.category|localized:'name' }}</span>
                   <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
-                    <h3 class="service-card__title text-white mb-0">Ənənəvi marketinq</h3>
-                    <p class="service-card__text text-white mb-0 opacity-90">Adet-ənənə üzərindən güclü brend qurmaq.</p>
-                    <a href="{% url 'services_detail' %}" class="btn service-card__btn">
-                      <span class="btn-text">Ətraflı</span>
+                    <h3 class="service-card__title text-white mb-0">{{ service|localized:'name' }}</h3>
+                    <p class="service-card__text text-white mb-0 opacity-90">{{ service|localized:'card_text' }}</p>
+                    <a href="{% url 'services_detail' service.slug %}" class="btn service-card__btn">
+                      <span class="btn-text">{% trans "Ətraflı" %}</span>
                       <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
                     </a>
                   </div>
                 </article>
               </div>
-              <div class="services-marquee__item">
-                <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
-                  <span class="service-card__glow" aria-hidden="true"></span>
-
-                  <span class="service-card__bg" style="background-image: url({% static 'images/services/services-img-2.jpg' %});"></span>
-                  <span class="service-card__overlay"></span>
-                  <span class="service-card__category" data-cat="konsultasiya">Konsultasiya</span>
-                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
-                    <h3 class="service-card__title text-white mb-0">Konsultasiya</h3>
-                    <p class="service-card__text text-white mb-0 opacity-90">Müvafiq sahə üzrə mütəxəssis məsləhəti.</p>
-                    <a href="{% url 'services_detail' %}" class="btn service-card__btn">
-                      <span class="btn-text">Ətraflı</span>
-                      <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                    </a>
-                  </div>
-                </article>
-              </div>
-              <div class="services-marquee__item">
-                <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
-                  <span class="service-card__glow" aria-hidden="true"></span>
-
-                  <span class="service-card__bg" style="background-image: url({% static 'images/services/services-img-3.jpg' %});"></span>
-                  <span class="service-card__overlay"></span>
-                  <span class="service-card__category" data-cat="marketinq">Marketinq</span>
-                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
-                    <h3 class="service-card__title text-white mb-0">Rəqəmsal marketinq</h3>
-                    <p class="service-card__text text-white mb-0 opacity-90">SEO, SMM, reklam kampaniyaları.</p>
-                    <a href="{% url 'services_detail' %}" class="btn service-card__btn">
-                      <span class="btn-text">Ətraflı</span>
-                      <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                    </a>
-                  </div>
-                </article>
-              </div>
-              <div class="services-marquee__item">
-                <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
-                  <span class="service-card__glow" aria-hidden="true"></span>
-
-                  <span class="service-card__bg" style="background-image: url({% static 'images/services/services-img-4.jpg' %});"></span>
-                  <span class="service-card__overlay"></span>
-                  <span class="service-card__category" data-cat="texnologiya">Texnologiya</span>
-                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
-                    <h3 class="service-card__title text-white mb-0">Biznes avtomatlaşdırması</h3>
-                    <p class="service-card__text text-white mb-0 opacity-90">Proseslərin optimallaşdırılması və CRM.</p>
-                    <a href="{% url 'services_detail' %}" class="btn service-card__btn">
-                      <span class="btn-text">Ətraflı</span>
-                      <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                    </a>
-                  </div>
-                </article>
-              </div>
-              <div class="services-marquee__item">
-                <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
-                  <span class="service-card__glow" aria-hidden="true"></span>
-
-                  <span class="service-card__bg" style="background-image: url({% static 'images/services/services-img-1.jpg' %});"></span>
-                  <span class="service-card__overlay"></span>
-                  <span class="service-card__category" data-cat="brendinq">Brendinq</span>
-                  <div class="service-card__content position-relative p-5 d-flex flex-column justify-content-end gap-3">
-                    <h3 class="service-card__title text-white mb-0">Brending və dizayn</h3>
-                    <p class="service-card__text text-white mb-0 opacity-90">Loqo, vizual identitet, brendinq kitabı.</p>
-                    <a href="{% url 'services_detail' %}" class="btn service-card__btn">
-                      <span class="btn-text">Ətraflı</span>
-                      <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                    </a>
-                  </div>
-                </article>
-              </div>
+              {% endfor %}
               <div class="services-marquee__item" id="training">
                 <article class="service-card service-card--cinema position-relative overflow-hidden rounded-3">
                   <span class="service-card__glow" aria-hidden="true"></span>
@@ -648,7 +396,7 @@
                     <h3 class="service-card__title text-white mb-0">Təlim</h3>
                     <p class="service-card__text text-white mb-0 opacity-90">Korporativ və individual təlim proqramları.</p>
                     <a href="{% url 'training' %}" class="btn service-card__btn">
-                      <span class="btn-text">Ətraflı</span>
+                      <span class="btn-text">{% trans "Ətraflı" %}</span>
                       <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
                     </a>
                   </div>
@@ -669,6 +417,7 @@
     </div>
 
     <!--  Testimonial Section -->
+    {% if home_reviews %}
     <section id="rey" class="testimonial py-5 py-lg-8 py-xl-9 bg-light-gray">
       <div class="container">
         <div class="d-flex flex-column gap-5 gap-xl-11">
@@ -686,12 +435,12 @@
                 <div class="col-xxl-8">
                   <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100"
                     data-aos-duration="1000">
-                    <h2 class="mb-0">Sizdən gələn rəylər</h2>
+                    <h2 class="mb-0">{% trans "Sizdən gələn rəylər" %}</h2>
                   </div>
                 </div>
                 <div class="col-xxl-4 mt-4 mt-xxl-0 d-none d-lg-flex justify-content-xxl-end">
                   <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#reviewModal" data-aos="fade-left" data-aos-delay="150" data-aos-duration="1000">
-                    <span class="btn-text">Rəy bildirin</span>
+                    <span class="btn-text">{% trans "Rəy bildirin" %}</span>
                     <iconify-icon icon="lucide:arrow-up-right"
                       class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
                   </button>
@@ -701,150 +450,27 @@
           </div>
           <div class="testimonial-slider-wrapper position-relative" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
             <div class="testimonial-slider owl-carousel">
-              <!-- 1 -->
+              {% for review in home_reviews %}
               <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card testimonial-card--light w-100 h-100" data-rating="5">
+                <div class="testimonial-card {% cycle 'testimonial-card--light' 'testimonial-card--dark' '' %} w-100 h-100" data-rating="{{ review.rating }}">
                   <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Peşəkar yanaşma, əla nəticə!</p>
+                    <p class="testimonial-quote mb-0">{{ review.message }}</p>
                     <div class="testimonial-author hstack gap-3">
-                      <img src="{% static 'images/testimonial/testimonial-1.jpg' %}" alt=""
+                      {% if review.image %}
+                      <img src="{{ review.image.url }}" alt=""
                         class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
+                      {% else %}
+                      <div class="testimonial-author__avatar" aria-hidden="true">{{ review.name|slice:':1'|upper }}</div>
+                      {% endif %}
                       <div>
-                        <h5 class="mb-1 fw-semibold">Şirkətin adı 1</h5>
-                        <p class="mb-0 text-muted small">Rəqəmsal marketinq</p>
+                        <h5 class="mb-1 fw-semibold">{{ review.name }}</h5>
+                        <p class="mb-0 text-muted small">{{ review.category_label }}</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- 2 -->
-              <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card testimonial-card--dark w-100 h-100" data-rating="5">
-                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Sosial media hesablarımızı idarə etdilər. Müştəri sayımız və onlayn görünürlüyümüz bir neçə ay ərzində gözəl artdı, komanda hər addımda dəstək oldu.</p>
-                    <div class="testimonial-author hstack gap-3">
-                      <img src="{% static 'images/testimonial/testimonial-2.jpg' %}" alt=""
-                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
-                      <div>
-                        <h5 class="mb-1 fw-semibold">Şirkətin adı 2</h5>
-                        <p class="mb-0 small">Veb development</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- 3 -->
-              <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card w-100 h-100" data-rating="4">
-                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Veb saytımızı sıfırdan dizayn edib hazırladılar — sürətli, mobil uyğun və istifadəsi asandır. Texniki dəstək və layihə idarəetməsi bütün proses boyunca çox peşəkar idi.</p>
-                    <div class="testimonial-author hstack gap-3">
-                      <img src="{% static 'images/testimonial/testimonial-3.jpg' %}" alt=""
-                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
-                      <div>
-                        <h5 class="mb-1 fw-semibold">Şirkətin adı 3</h5>
-                        <p class="mb-0 text-muted small">Brending və dizayn</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- 4 -->
-              <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card testimonial-card--light w-100 h-100" data-rating="5">
-                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Brending layihəmizdə loqo, korporativ stil və marketinq materiallarını tam paket şəklində təqdim etdilər. Nəticədən çox razıyıq — vizual kimliyimiz daha güclü və yaddaqalan oldu, təslim müddətlərinə də riayət etdilər.</p>
-                    <div class="testimonial-author hstack gap-3">
-                      <img src="{% static 'images/testimonial/testimonial-1.jpg' %}" alt=""
-                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
-                      <div>
-                        <h5 class="mb-1 fw-semibold">Şirkətin adı 4</h5>
-                        <p class="mb-0 text-muted small">Konsultasiya</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- 5 -->
-              <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card testimonial-card--dark w-100 h-100" data-rating="4">
-                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Tövsiyə edirəm!</p>
-                    <div class="testimonial-author hstack gap-3">
-                      <img src="{% static 'images/testimonial/testimonial-2.jpg' %}" alt=""
-                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
-                      <div>
-                        <h5 class="mb-1 fw-semibold">Şirkətin adı 5</h5>
-                        <p class="mb-0 small">Ənənəvi marketinq</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- 6 -->
-              <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card w-100 h-100" data-rating="5">
-                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Konsultasiya xidməti biznes modelimizi yenidən qurmağımıza kömək etdi. Rəqəmsal transformasiya planı hazırladılar, KPI-lar müəyyənləşdirildi və hər addımda dəstək gördük. İndi satış və marketinq proseslərimiz daha şəffaf və effektivdir.</p>
-                    <div class="testimonial-author hstack gap-3">
-                      <img src="{% static 'images/testimonial/testimonial-3.jpg' %}" alt=""
-                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
-                      <div>
-                        <h5 class="mb-1 fw-semibold">Şirkətin adı 6</h5>
-                        <p class="mb-0 text-muted small">Biznes avtomatlaşdırılması</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- 7 -->
-              <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card testimonial-card--light w-100 h-100" data-rating="4">
-                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Ənənəvi marketinq kampaniyalarımızı rəqəmsalla inteqrasiya etdilər — çap materialları, billbord və online reklamlar vahid strategiya altında birləşdi.</p>
-                    <div class="testimonial-author hstack gap-3">
-                      <img src="{% static 'images/testimonial/testimonial-1.jpg' %}" alt=""
-                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
-                      <div>
-                        <h5 class="mb-1 fw-semibold">Şirkətin adı 7</h5>
-                        <p class="mb-0 text-muted small">Təlim</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- 8 -->
-              <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card testimonial-card--dark w-100 h-100" data-rating="5">
-                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Avtomatlaşdırma sistemi vaxtımızı azaltdı.</p>
-                    <div class="testimonial-author hstack gap-3">
-                      <img src="{% static 'images/testimonial/testimonial-2.jpg' %}" alt=""
-                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
-                      <div>
-                        <h5 class="mb-1 fw-semibold">Şirkətin adı 8</h5>
-                        <p class="mb-0 small">Rəqəmsal marketinq</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- 9 -->
-              <div class="item d-flex align-items-stretch">
-                <div class="testimonial-card w-100 h-100" data-rating="5">
-                  <div class="card-body d-flex flex-column gap-5 justify-content-between">
-                    <p class="testimonial-quote mb-0">Təlim proqramlarında komandamız praktiki biliklər əldə etdi: SEO, məzmun marketinqi və analitika üzrə mühazirələr real layihələr üzərində keçirildi. Təlimdən sonra öz hesablarımızı daha peşəkar idarə edə bilirik. Digiboom-un yanaşması nəzəriyyə ilə praktikanı mükəmməl birləşdirir və biz artıq uzunmüddətli tərəfdaş kimi görürük.</p>
-                    <div class="testimonial-author hstack gap-3">
-                      <img src="{% static 'images/testimonial/testimonial-3.jpg' %}" alt=""
-                        class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
-                      <div>
-                        <h5 class="mb-1 fw-semibold">Şirkətin adı 9</h5>
-                        <p class="mb-0 text-muted small">Veb development</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {% endfor %}
             </div>
             <button type="button" class="testimonial-nav-btn testimonial-nav-prev" aria-label="Əvvəlki">
               <iconify-icon icon="lucide:chevron-left" class="fs-4"></iconify-icon>
@@ -855,7 +481,7 @@
           </div>
           <div class="testimonial-review-cta d-lg-none">
             <button type="button" class="btn testimonial-review-cta__btn" data-bs-toggle="modal" data-bs-target="#reviewModal">
-              <span class="btn-text">Rəy bildirin</span>
+              <span class="btn-text">{% trans "Rəy bildirin" %}</span>
               <iconify-icon icon="lucide:arrow-up-right"
                 class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
             </button>
@@ -863,6 +489,7 @@
         </div>
       </div>
     </section>
+    {% endif %}
 
     <div class="home-section-divider" aria-hidden="true">
       <div class="container">
@@ -871,6 +498,7 @@
     </div>
 
     <!--  Pricing Section -->
+    {% if home_packages %}
     <section class="pricing-section py-5 py-lg-8 py-xl-9 bg-light-gray">
       <div class="container">
         <div class="d-flex flex-column gap-5 gap-xl-10">
@@ -890,147 +518,53 @@
                   <div class="col-xxl-8">
                     <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100"
                       data-aos-duration="1000">
-                      <h2 class="mb-0">Xüsusi paketlər</h2>
+                      <h2 class="mb-0">{% trans "Xüsusi paketlər" %}</h2>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="row pricing-cards-row">
+              {% for package in home_packages %}
               <div class="col-lg-6 col-xl-4 mb-7 mb-xl-0">
                 <div class="card pricing-card w-100" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
                   <div class="card-body pricing-card__body">
                     <div class="pricing-card__head">
-                      <h5 class="pricing-card__name mb-0">Başlanğıc</h5>
+                      <h5 class="pricing-card__name mb-0">{{ package|localized:'name' }}</h5>
                       <div class="pricing-card__price">
-                        <span class="pricing-card__amount">565 azn</span>
-                        <span class="pricing-card__period">/aylıq</span>
+                        <span class="pricing-card__amount">{{ package.get_price_display }}</span>
                       </div>
-                      <p class="pricing-card__desc mb-0">Kiçik biznes və fərdi layihələr üçün əsas rəqəmsal paket.</p>
+                      <p class="pricing-card__desc mb-0">{{ package|localized:'description' }}</p>
                     </div>
+                    {% if package.features.all %}
                     <div class="pricing-card__features">
-                      <p class="pricing-card__features-label mb-0">Nələr daxildir</p>
+                      <p class="pricing-card__features-label mb-0">{% trans "Nələr daxildir" %}</p>
                       <ul class="pricing-card__list list-unstyled mb-0">
+                        {% for feature in package.features.all %}
                         <li class="pricing-card__item">
                           <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
-                          <span class="pricing-card__item-text">5 səhifəlik veb sayt</span>
+                          <span class="pricing-card__item-text">{{ feature|localized:'text' }}</span>
                         </li>
-                        <li class="pricing-card__item">
-                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
-                          <span class="pricing-card__item-text">Mobil uyğun dizayn</span>
-                        </li>
-                        <li class="pricing-card__item">
-                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
-                          <span class="pricing-card__item-text">1 ay texniki dəstək</span>
-                        </li>
+                        {% endfor %}
                       </ul>
                     </div>
-                    <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal>
-                      <span class="btn-text">Sifariş edin</span>
+                    {% endif %}
+                    <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal data-package-id="{{ package.id }}" data-package-name="{{ package|localized:'name' }}">
+                      <span class="btn-text">{% trans "Sifariş edin" %}</span>
                       <iconify-icon icon="lucide:arrow-up-right"
                         class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
                     </a>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 col-xl-4 mb-7 mb-xl-0">
-                <div class="card pricing-card w-100" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                  <div class="card-body pricing-card__body">
-                    <div class="pricing-card__head">
-                      <h5 class="pricing-card__name mb-0">Peşəkar</h5>
-                      <div class="pricing-card__price">
-                        <span class="pricing-card__amount">565 azn</span>
-                        <span class="pricing-card__period">/aylıq</span>
-                      </div>
-                      <p class="pricing-card__desc mb-0">Böyüyən brendlər üçün genişləndirilmiş xidmət və marketinq dəstəyi.</p>
-                    </div>
-                    <div class="pricing-card__features">
-                      <p class="pricing-card__features-label mb-0">Nələr daxildir</p>
-                      <ul class="pricing-card__list list-unstyled mb-0">
-                        <li class="pricing-card__item">
-                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
-                          <span class="pricing-card__item-text">15 səhifəlik veb sayt</span>
-                        </li>
-                        <li class="pricing-card__item">
-                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
-                          <span class="pricing-card__item-text">SEO optimallaşdırması</span>
-                        </li>
-                        <li class="pricing-card__item">
-                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
-                          <span class="pricing-card__item-text">Sosial media idarəetməsi</span>
-                        </li>
-                        <li class="pricing-card__item">
-                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
-                          <span class="pricing-card__item-text">Aylıq analitika hesabatı</span>
-                        </li>
-                        <li class="pricing-card__item">
-                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
-                          <span class="pricing-card__item-text">3 ay prioritet dəstək</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal>
-                      <span class="btn-text">Sifariş edin</span>
-                      <iconify-icon icon="lucide:arrow-up-right"
-                        class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 col-xl-4 mb-7 mb-xl-0">
-                <div class="card pricing-card w-100" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                  <div class="card-body pricing-card__body">
-                    <div class="pricing-card__head">
-                      <h5 class="pricing-card__name mb-0">Korporativ</h5>
-                      <div class="pricing-card__price">
-                        <span class="pricing-card__amount">565 azn</span>
-                        <span class="pricing-card__period">/aylıq</span>
-                      </div>
-                      <p class="pricing-card__desc mb-0">Tam həcmli rəqəmsal həllər və fərdi strategiya ilə korporativ paket.</p>
-                    </div>
-                    <div class="pricing-card__features">
-                      <p class="pricing-card__features-label mb-0">Nələr daxildir</p>
-                      <ul class="pricing-card__list list-unstyled mb-0">
-                        <li class="pricing-card__item">
-                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
-                          <span class="pricing-card__item-text">Limitsiz səhifə sayı</span>
-                        </li>
-                        <li class="pricing-card__item">
-                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
-                          <span class="pricing-card__item-text">E-ticarət funksionallığı</span>
-                        </li>
-                        <li class="pricing-card__item">
-                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
-                          <span class="pricing-card__item-text">Brend e-poçt şablonu dizaynı</span>
-                        </li>
-                        <li class="pricing-card__item">
-                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
-                          <span class="pricing-card__item-text">Reklam kampaniyalarının idarə edilməsi</span>
-                        </li>
-                        <li class="pricing-card__item">
-                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
-                          <span class="pricing-card__item-text">Fərdi layihə meneceri</span>
-                        </li>
-                        <li class="pricing-card__item">
-                          <span class="pricing-card__check"><iconify-icon icon="lucide:check" aria-hidden="true"></iconify-icon></span>
-                          <span class="pricing-card__item-text">6 ay prioritet dəstək</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <a href="#" class="btn pricing-card__cta w-100 justify-content-center" data-open-order-modal>
-                      <span class="btn-text">Sifariş edin</span>
-                      <iconify-icon icon="lucide:arrow-up-right"
-                        class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
-                    </a>
-                  </div>
-                </div>
-              </div>
+              {% endfor %}
 
             </div>
           </div>
         </div>
       </div>
     </section>
+    {% endif %}
 
     <div class="home-section-divider" aria-hidden="true">
       <div class="container">
@@ -1039,6 +573,7 @@
     </div>
 
     <!--  FAQ Section -->
+    {% if home_faqs %}
     <section class="faq faq-section-modern py-5 py-lg-8 py-xl-9">
       <div class="container">
         <div class="d-flex flex-column gap-4 gap-lg-6">
@@ -1056,7 +591,7 @@
                 <div class="col-xxl-9">
                   <div class="d-flex flex-column gap-3" data-aos="fade-up" data-aos-delay="100"
                     data-aos-duration="1000">
-                    <h2 class="mb-0">Tez-tez verilən suallar</h2>
+                    <h2 class="mb-0">{% trans "Tez-tez verilən suallar" %}</h2>
                   </div>
                 </div>
               </div>
@@ -1064,185 +599,58 @@
           </div>
           <div class="row justify-content-center"><div class="col-12 col-xxl-10"><div class="accordion accordion-flush faq-modern" id="accordionFlushExample" data-aos="fade-up" data-aos-delay="200"
                 data-aos-duration="1000">
-                <div class="accordion-item faq-modern__item" data-faq-type="nested">
+                {% for faq in home_faqs %}
+                {% with subs=faq.sub_items.all %}
+                {% if subs %}
+                <div class="accordion-item faq-modern__item" data-faq-type="{% if subs|length == 1 and not subs.0.title_az and not subs.0.title_en and not subs.0.title_ru %}simple{% else %}nested{% endif %}">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                      Hansı xidmətləri təklif edirsiniz?
+                      data-bs-target="#flush-collapse-{{ faq.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ faq.id }}">
+                      {{ faq|localized:'question' }}
                     </button>
                   </h2>
-                  <div id="flush-collapseOne" class="accordion-collapse collapse"
+                  <div id="flush-collapse-{{ faq.id }}" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body faq-modern__panel">
-                      <div class="accordion faq-modern__subaccordion" id="faq-sub-one">
-                        <div class="accordion-item faq-modern__subitem">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-one-1" aria-expanded="false" aria-controls="faq-sub-one-1">Rəqəmsal marketinq</button>
-                          </h3>
-                          <div id="faq-sub-one-1" class="accordion-collapse collapse" data-bs-parent="#faq-sub-one">
-                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Sosial media idarəetməsi, reklam kampaniyaları, SEO və məzmun stratejiyası – brendinizi onlayn gücləndiririk.</p></div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-modern__subitem">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-one-2" aria-expanded="false" aria-controls="faq-sub-one-2">Veb development</button>
-                          </h3>
-                          <div id="faq-sub-one-2" class="accordion-collapse collapse" data-bs-parent="#faq-sub-one">
-                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Müasir, sürətli və mobil uyğun saytlar, e-ticarət həlləri və xüsusi proqram təminatı hazırlayırıq.</p></div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-modern__subitem">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-one-3" aria-expanded="false" aria-controls="faq-sub-one-3">Brending və dizayn</button>
-                          </h3>
-                          <div id="faq-sub-one-3" class="accordion-collapse collapse" data-bs-parent="#faq-sub-one">
-                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Loqo, vizual identitet, ünvanlıq və materiallar – brendinizi vahid və tanınan edirik.</p></div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-modern__subitem">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-one-4" aria-expanded="false" aria-controls="faq-sub-one-4">Konsultasiya</button>
-                          </h3>
-                          <div id="faq-sub-one-4" class="accordion-collapse collapse" data-bs-parent="#faq-sub-one">
-                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Strategiya, rəqəmsal transformasiya və layihə idarəetməsi üzrə mütəxəssis məsləhətləri təqdim edirik.</p></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item faq-modern__item" data-faq-type="simple">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                      Layihə adətən nə qədər vaxt aparır?
-                    </button>
-                  </h2>
-                  <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                    data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body faq-modern__panel">
+                      {% if subs|length == 1 and not subs.0.title_az and not subs.0.title_en and not subs.0.title_ru %}
                       <div class="faq-modern__direct">
-                        <p class="faq-modern__text mb-0">Müddət layihənin növündən asılıdır: vizitka sayt təxminən 2–4 həftə, korporativ sayt 1–3 ay, e-ticarət 2–4 ay, brending isə adətən 3–8 həftə çəkir. Dəqiq planı məzmun və inteqrasiyalara görə birlikdə müəyyənləşdiririk.</p>
+                        <p class="faq-modern__text mb-0">{{ subs.0|localized:'answer'|safe }}</p>
                       </div>
+                      {% else %}
+                      <div class="accordion faq-modern__subaccordion" id="faq-sub-{{ faq.id }}">
+                        {% for sub in subs %}
+                        {% with stitle=sub|localized:'title' %}
+                        {% if stitle %}
+                        <div class="accordion-item faq-modern__subitem">
+                          <h3 class="accordion-header">
+                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-{{ faq.id }}-{{ sub.id }}" aria-expanded="false" aria-controls="faq-sub-{{ faq.id }}-{{ sub.id }}">{{ stitle }}</button>
+                          </h3>
+                          <div id="faq-sub-{{ faq.id }}-{{ sub.id }}" class="accordion-collapse collapse" data-bs-parent="#faq-sub-{{ faq.id }}">
+                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">{{ sub|localized:'answer'|safe }}</p></div>
+                          </div>
+                        </div>
+                        {% else %}
+                        <div class="faq-modern__direct mb-3">
+                          <p class="faq-modern__text mb-0">{{ sub|localized:'answer'|safe }}</p>
+                        </div>
+                        {% endif %}
+                        {% endwith %}
+                        {% endfor %}
+                      </div>
+                      {% endif %}
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item faq-modern__item" data-faq-type="nested">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                      Xüsusi dizayn təklif edirsiniz, yoxsa şablon?
-                    </button>
-                  </h2>
-                  <div id="flush-collapseThree" class="accordion-collapse collapse"
-                    data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body faq-modern__panel">
-                      <div class="accordion faq-modern__subaccordion" id="faq-sub-three">
-                        <div class="accordion-item faq-modern__subitem">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-three-1" aria-expanded="false" aria-controls="faq-sub-three-1">Tam xüsusi dizayn</button>
-                          </h3>
-                          <div id="faq-sub-three-1" class="accordion-collapse collapse" data-bs-parent="#faq-sub-three">
-                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Sıfırdan, yalnız sizin brendiniz üçün unikal UI/UX və vizual stil hazırlanır.</p></div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-modern__subitem">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-three-2" aria-expanded="false" aria-controls="faq-sub-three-2">Şablon əsaslı uyğunlaşdırma</button>
-                          </h3>
-                          <div id="faq-sub-three-2" class="accordion-collapse collapse" data-bs-parent="#faq-sub-three">
-                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Seçilmiş şablon rənglər, məzmun və bəzək elementləri ilə tam sizinə uyğunlaşdırılır.</p></div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-modern__subitem">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-three-3" aria-expanded="false" aria-controls="faq-sub-three-3">Hibrid yanaşma</button>
-                          </h3>
-                          <div id="faq-sub-three-3" class="accordion-collapse collapse" data-bs-parent="#faq-sub-three">
-                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Bəzi səhifələr xüsusi, bəziləri şablondan – büdcə və sürətə görə seçim edirik.</p></div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-modern__subitem">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-three-4" aria-expanded="false" aria-controls="faq-sub-three-4">Rəng və tipografiya seçimi</button>
-                          </h3>
-                          <div id="faq-sub-three-4" class="accordion-collapse collapse" data-bs-parent="#faq-sub-three">
-                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Brend qaydalarınıza uyğun palitra və fontlar bütün materiallarda tətbiq olunur.</p></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item faq-modern__item" data-faq-type="simple">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                      Layihənin qiyməti nə qədərdir?
-                    </button>
-                  </h2>
-                  <div id="flush-collapseFour" class="accordion-collapse collapse"
-                    data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body faq-modern__panel">
-                      <div class="faq-modern__direct">
-                        <p class="faq-modern__text mb-0">Qiymət layihənin həcmindən asılıdır. Başlanğıc paketlər üçün sabit təkliflərimiz var; orta və böyük layihələrdə səhifə sayı, funksionallıq və inteqrasiyalara əsasən fərdi qiymət hazırlanır. Ətraflı təklif üçün bizimlə əlaqə saxlayın.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item faq-modern__item" data-faq-type="nested">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed faq-modern__trigger" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-                      Layihə bitdikdən sonra dəstək göstərilir?
-                    </button>
-                  </h2>
-                  <div id="flush-collapseFive" class="accordion-collapse collapse"
-                    data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body faq-modern__panel">
-                      <div class="accordion faq-modern__subaccordion" id="faq-sub-five">
-                        <div class="accordion-item faq-modern__subitem">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-five-1" aria-expanded="false" aria-controls="faq-sub-five-1">Texniki dəstək</button>
-                          </h3>
-                          <div id="faq-sub-five-1" class="accordion-collapse collapse" data-bs-parent="#faq-sub-five">
-                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Sayt və sistemlərdə xəta, yeniləmə və kiçik dəyişikliklər üçün reaksiya müddəti ilə dəstək.</p></div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-modern__subitem">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-five-2" aria-expanded="false" aria-controls="faq-sub-five-2">Məzmun yeniləmələri</button>
-                          </h3>
-                          <div id="faq-sub-five-2" class="accordion-collapse collapse" data-bs-parent="#faq-sub-five">
-                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Mətn, şəkil və səhifə əlavəsi; CMS üzərindən və ya bizim tərəfimizdən edilə bilər.</p></div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-modern__subitem">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-five-3" aria-expanded="false" aria-controls="faq-sub-five-3">Hostinq və SSL</button>
-                          </h3>
-                          <div id="faq-sub-five-3" class="accordion-collapse collapse" data-bs-parent="#faq-sub-five">
-                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Hostinq, domain və SSL sertifikatının saxlanması üçün aylıq/illik paket təklifləri.</p></div>
-                          </div>
-                        </div>
-                        <div class="accordion-item faq-modern__subitem">
-                          <h3 class="accordion-header">
-                            <button class="accordion-button collapsed faq-modern__subtrigger" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sub-five-4" aria-expanded="false" aria-controls="faq-sub-five-4">Prioritet dəstək</button>
-                          </h3>
-                          <div id="faq-sub-five-4" class="accordion-collapse collapse" data-bs-parent="#faq-sub-five">
-                            <div class="accordion-body faq-modern__subbody"><p class="faq-modern__text mb-0">Kritik məsələlər üçün qısa reaksiya müddəti və müntəzəm yoxlamalar daxil ola bilər.</p></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {% endif %}
+                {% endwith %}
+                {% endfor %}
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+    {% endif %}
 
     <div class="home-section-divider" aria-hidden="true">
       <div class="container">
@@ -1260,19 +668,19 @@
                 <span class="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">07</span>
                 <hr class="border-line mb-0">
               </div>
-              <h2 class="home-contact__title mb-0">Müraciət et</h2>
+              <h2 class="home-contact__title mb-0">{% trans "Müraciət et" %}</h2>
               <div class="home-contact__header-right" aria-hidden="true"></div>
             </div>
-            <p class="home-contact__lead mb-0" data-aos="fade-up" data-aos-delay="120" data-aos-duration="1000">Layihə, sual və ya əməkdaşlıq təklifiniz var? Qısa formu doldurun — komandamız tezliklə sizə qayıdacaq.</p>
+            <p class="home-contact__lead mb-0" data-aos="fade-up" data-aos-delay="120" data-aos-duration="1000">{% trans "Layihə, sual və ya əməkdaşlıq təklifiniz var? Qısa formu doldurun — komandamız tezliklə sizə qayıdacaq." %}</p>
           </div>
 
           <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="120" data-aos-duration="1000">
             <div class="col-12 col-xl-10 col-xxl-8">
               <div class="home-contact-form-card">
-                {% include 'includes/contact-form.html' with formId='home-contact-form' prefix='home-contact' smtpAction='/api/contact' formClass='' btnClass='' show_service=False %}
+                {% include 'includes/contact-form.html' with formId='home-contact-form' prefix='home-contact' smtpAction='/api/appeal/' formClass='' btnClass='' show_service=False %}
                 <p class="home-contact-form-card__note mb-0">
-                  Telefon, WhatsApp və digər əlaqə vasitələri üçün
-                  <a href="{% url 'contact' %}">Əlaqə səhifəsinə</a> keçin.
+                  {% trans "Telefon, WhatsApp və digər əlaqə vasitələri üçün" %}
+                  <a href="{% url 'contact' %}">{% trans "Əlaqə səhifəsinə" %}</a> {% trans "keçin." %}
                 </p>
               </div>
             </div>
@@ -1291,18 +699,7 @@
 
   {% include 'includes/footer.html' %}
 
-<!-- Floating Widgets -->
-  <aside class="floating-widgets" aria-label="Sürətli əlaqə">
-    <a href="tel:+994501234567" class="floating-widget-btn floating-widget-btn--call" aria-label="Zəng edin">
-      <iconify-icon icon="lucide:phone"></iconify-icon>
-    </a>
-    <a href="https://wa.me/994501234567" target="_blank" rel="noopener" class="floating-widget-btn floating-widget-btn--whatsapp" aria-label="WhatsApp">
-      <iconify-icon icon="mdi:whatsapp"></iconify-icon>
-    </a>
-    <button type="button" class="floating-widget-btn floating-widget-btn--top" id="scrollToTopBtn" aria-label="Başa qayıdın">
-      <iconify-icon icon="lucide:arrow-up"></iconify-icon>
-    </button>
-  </aside>
+  {% include 'includes/floating-widgets.html' %}
 
 
   <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
@@ -1321,3 +718,8 @@
 </body>
 
 </html>
+</html>
+
+
+
+

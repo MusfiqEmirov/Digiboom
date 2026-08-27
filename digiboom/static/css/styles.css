@@ -17048,9 +17048,11 @@ textarea.form-control-lg {
   .projects-page-grid.featured-projects--showcase .portfolio-showcase-card__details h3 {
     font-size: 0.9rem;
   }
-  .projects-page-grid.featured-projects--showcase .portfolio-showcase-card__tags .badge {
-    font-size: 0.62rem;
-    padding: 0.28rem 0.55rem;
+  .projects-page-grid.featured-projects--showcase .portfolio-showcase-card__tags .badge,
+  .projects-page-grid.featured-projects--showcase .portfolio-showcase-card__tag {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.5rem 0.3rem 0.4rem;
+    white-space: normal;
   }
 }
 

@@ -155,6 +155,7 @@ body[data-active-page="contact"] .page-wrapper {
   color: #3d5a28;
 }
 .cp-social__link--address .cp-social__icon { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+.cp-social__link--phone .cp-social__icon { background: linear-gradient(135deg, #0ea5e9, #0284c7); }
 .cp-social__link--whatsapp .cp-social__icon { background: linear-gradient(135deg, #25d366, #128c7e); }
 .cp-social__link--email .cp-social__icon { background: linear-gradient(135deg, #1f2a2e, #3d4f56); }
 .cp-social__link--facebook .cp-social__icon { background: #1877f2; }

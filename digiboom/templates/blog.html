@@ -1,6 +1,6 @@
-﻿{% load static %}
+﻿{% load static i18n digiboom_tags %}
 <!doctype html>
-<html lang="az">
+<html lang="{{ LANGUAGE_CODE|default:'az' }}">
 
 <head>
   <meta charset="utf-8">
@@ -31,25 +31,31 @@
 <!--  Page Wrapper -->
   <div class="page-wrapper overflow-hidden">
 
+    {% if page_header.image or blog_motto %}
     <!--  Banner Section -->
     <section class="banner-section banner-inner-section position-relative overflow-hidden d-flex align-items-end"
-      style="background-image: url({% static 'images/backgrounds/blog-banner.jpg' %});">
+      {% if page_header.image %}style="background-image: url({{ page_header.image.url }});"{% endif %}>
       <div class="container">
         <div class="d-flex flex-column gap-4 pb-5 pb-xl-10 position-relative z-1">
           <div class="row align-items-center">
             <div class="col-xl-4">
+              {% if blog_motto %}
               <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100"
                 data-aos-duration="1000">
-                <p class="mb-0 fs-5 page-banner-tagline">Marketinq, dizayn və rəqəmsal trendlər haqqında faydalı məqalələr.</p>
+                <div class="mb-0 fs-5 page-banner-tagline">{{ blog_motto|safe }}</div>
               </div>
+              {% endif %}
             </div>
           </div>
         </div>
       </div>
     </section>
+    {% endif %}
 
+    {% if blogs or blog_categories %}
     <!--  Blog Section -->
     <section class="blog-section py-5 py-lg-11 py-xl-12">
+      {% if blog_categories %}
       <div class="blog-category-filter-sticky">
         <div class="container">
           <div class="blog-category-filter-wrap">
@@ -62,42 +68,20 @@
                 </button>
 
                 <div class="blog-category-filter" role="tablist" aria-label="Blog kateqoriyaları">
-                  <button type="button" class="blog-category-tab" role="tab" aria-selected="false" data-filter="trendler">
-                    <span class="blog-category-tab__chip">
-                      <span class="blog-category-tab__dot" aria-hidden="true"></span>
-                      <span class="blog-category-tab__label">Trendlər</span>
-                    </span>
-                  </button>
-                  <button type="button" class="blog-category-tab" role="tab" aria-selected="false" data-filter="brendinq">
-                    <span class="blog-category-tab__chip">
-                      <span class="blog-category-tab__dot" aria-hidden="true"></span>
-                      <span class="blog-category-tab__label">Brendinq</span>
-                    </span>
-                  </button>
                   <button type="button" class="blog-category-tab is-active" role="tab" aria-selected="true" data-filter="all">
                     <span class="blog-category-tab__chip">
                       <span class="blog-category-tab__dot" aria-hidden="true"></span>
-                      <span class="blog-category-tab__label">Hamısı</span>
+                      <span class="blog-category-tab__label">{% trans "Hamısı" %}</span>
                     </span>
                   </button>
-                  <button type="button" class="blog-category-tab" role="tab" aria-selected="false" data-filter="marketinq">
+                  {% for category in blog_categories %}
+                  <button type="button" class="blog-category-tab" role="tab" aria-selected="false" data-filter="{{ category.slug }}">
                     <span class="blog-category-tab__chip">
                       <span class="blog-category-tab__dot" aria-hidden="true"></span>
-                      <span class="blog-category-tab__label">Marketinq</span>
+                      <span class="blog-category-tab__label">{{ category|localized:'name' }}</span>
                     </span>
                   </button>
-                  <button type="button" class="blog-category-tab" role="tab" aria-selected="false" data-filter="dizayn">
-                    <span class="blog-category-tab__chip">
-                      <span class="blog-category-tab__dot" aria-hidden="true"></span>
-                      <span class="blog-category-tab__label">Dizayn</span>
-                    </span>
-                  </button>
-                  <button type="button" class="blog-category-tab" role="tab" aria-selected="false" data-filter="sosial-media">
-                    <span class="blog-category-tab__chip">
-                      <span class="blog-category-tab__dot" aria-hidden="true"></span>
-                      <span class="blog-category-tab__label">Sosial media</span>
-                    </span>
-                  </button>
+                  {% endfor %}
                 </div>
 
                 <button type="button" class="blog-cat-nav blog-cat-nav--next" aria-label="Növbəti kateqoriyalar" hidden>
@@ -111,288 +95,43 @@
         </div>
       </div>
       <div class="blog-category-filter-placeholder" aria-hidden="true"></div>
+      {% endif %}
 
       <div class="container">
         <p class="blog-filter-empty d-none" role="status">Bu kateqoriyada məqalə tapılmadı.</p>
 
+        {% if blogs %}
         <div class="blog-page-grid mx-auto">
-
+          {% for blog in blogs %}
           <article class="blog-card blog-card-modern">
-            <a href="{% url 'blog_detail' %}?id=campaign-that-connects" class="blog-card__stretch" aria-label="A campaign that connects"></a>
+            <a href="{% url 'blog_detail' blog.slug %}" class="blog-card__stretch" aria-label="{{ blog|localized:'name' }}"></a>
             <div class="blog-card__media">
-              <img src="{% static 'images/resources/resources-1.jpg' %}" alt="A campaign that connects" class="img-fluid">
+              {% if blog.image %}
+              <img src="{{ blog.image.url }}" alt="{{ blog|localized:'name' }}" class="img-fluid">
+              {% endif %}
               <span class="blog-card__overlay" aria-hidden="true"></span>
-              <span class="blog-card__category" data-cat="marketinq">Marketinq</span>
+              <span class="blog-card__category" data-cat="{{ blog.category.slug }}">{{ blog.category|localized:'name' }}</span>
             </div>
             <div class="blog-card__body">
               <div class="blog-card__meta">
-                <time class="blog-card__date" datetime="2025-12-24">24.12.2025</time>
-                <span class="blog-card__views" title="Təxmini baxış sayı">~2400 baxış</span>
+                <time class="blog-card__date" datetime="{{ blog.date|date:'Y-m-d' }}">{{ blog.date|date:'d.m.Y' }}</time>
+                {% if blog.view_count %}
+                <span class="blog-card__views" title="{% trans 'Baxış sayı' %}">{{ blog.view_count }} {% trans "baxış" %}</span>
+                {% endif %}
               </div>
-              <h3 class="blog-card__title">A campaign that connects</h3>
-              <p class="blog-card__excerpt">Auditoriyanızla emosional əlaqə qurmaq üçün strategiyalar və real nəticələr.</p>
+              <h3 class="blog-card__title">{{ blog|localized:'name' }}</h3>
+              {% with excerpt=blog|localized:'description'|plain_text|truncatewords:18 %}
+              {% if excerpt %}<p class="blog-card__excerpt">{{ excerpt }}</p>{% endif %}
+              {% endwith %}
               <div class="blog-card__footer">
-                <a href="{% url 'blog_detail' %}?id=campaign-that-connects" class="btn blog-card__btn">
-                  <span class="btn-text">Ətraflı</span>
+                <a href="{% url 'blog_detail' blog.slug %}" class="btn blog-card__btn">
+                  <span class="btn-text">{% trans "Ətraflı" %}</span>
                   <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
                 </a>
               </div>
             </div>
           </article>
-
-          <article class="blog-card blog-card-modern">
-            <a href="{% url 'blog_detail' %}?id=brand-redesign" class="blog-card__stretch" aria-label="Breaking boundaries: our latest brand redesign"></a>
-            <div class="blog-card__media">
-              <img src="{% static 'images/resources/resources-2.jpg' %}" alt="Breaking boundaries brand redesign" class="img-fluid">
-              <span class="blog-card__overlay" aria-hidden="true"></span>
-              <span class="blog-card__category" data-cat="brendinq">Brendinq</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <time class="blog-card__date" datetime="2025-12-20">20.12.2025</time>
-                <span class="blog-card__views" title="Təxmini baxış sayı">~1800 baxış</span>
-              </div>
-              <h3 class="blog-card__title">Breaking boundaries: our latest brand redesign</h3>
-              <p class="blog-card__excerpt">Köhnə vizual identiklikdən müasir, güclü brend təcrübəsinə keçid hekayəsi.</p>
-              <div class="blog-card__footer">
-                <a href="{% url 'blog_detail' %}?id=brand-redesign" class="btn blog-card__btn">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="blog-card blog-card-modern">
-            <a href="{% url 'blog_detail' %}?id=recognized-for-design" class="blog-card__stretch" aria-label="Recognized for design"></a>
-            <div class="blog-card__media">
-              <img src="{% static 'images/resources/resources-3.jpg' %}" alt="Recognized for design" class="img-fluid">
-              <span class="blog-card__overlay" aria-hidden="true"></span>
-              <span class="blog-card__category" data-cat="dizayn">Dizayn</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <time class="blog-card__date" datetime="2025-12-15">15.12.2025</time>
-                <span class="blog-card__views" title="Təxmini baxış sayı">~3100 baxış</span>
-              </div>
-              <h3 class="blog-card__title">Recognized for design</h3>
-              <p class="blog-card__excerpt">Mükafat qazanan layihələrimiz və dizayn prosesinin arxasındakı düşüncə.</p>
-              <div class="blog-card__footer">
-                <a href="{% url 'blog_detail' %}?id=recognized-for-design" class="btn blog-card__btn">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="blog-card blog-card-modern">
-            <a href="{% url 'blog_detail' %}?id=modern-lens" class="blog-card__stretch" aria-label="The Modern Lens: Perspectives on Culture & Trends"></a>
-            <div class="blog-card__media">
-              <img src="{% static 'images/services/services-img-1.jpg' %}" alt="The Modern Lens" class="img-fluid">
-              <span class="blog-card__overlay" aria-hidden="true"></span>
-              <span class="blog-card__category" data-cat="trendler">Trendlər</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <time class="blog-card__date" datetime="2025-12-10">10.12.2025</time>
-                <span class="blog-card__views" title="Təxmini baxış sayı">~2700 baxış</span>
-              </div>
-              <h3 class="blog-card__title">The Modern Lens: Perspectives on Culture &amp; Trends</h3>
-              <p class="blog-card__excerpt">2026-cı ilin vizual trendləri və rəqəmsal mədəniyyətə təsir edən faktorlar.</p>
-              <div class="blog-card__footer">
-                <a href="{% url 'blog_detail' %}?id=modern-lens" class="btn blog-card__btn">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="blog-card blog-card-modern">
-            <a href="{% url 'blog_detail' %}?id=social-media-growth" class="blog-card__stretch" aria-label="Sosial mediada organik böyümə strategiyası"></a>
-            <div class="blog-card__media">
-              <img src="{% static 'images/services/services-img-2.jpg' %}" alt="Sosial media strategiyası" class="img-fluid">
-              <span class="blog-card__overlay" aria-hidden="true"></span>
-              <span class="blog-card__category" data-cat="sosial-media">Sosial media</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <time class="blog-card__date" datetime="2025-12-05">05.12.2025</time>
-                <span class="blog-card__views" title="Təxmini baxış sayı">~1500 baxış</span>
-              </div>
-              <h3 class="blog-card__title">Sosial mediada organik böyümə strategiyası</h3>
-              <p class="blog-card__excerpt">Reklam büdcəsi olmadan auditoriya qurmaq üçün sübut olunmuş üsullar.</p>
-              <div class="blog-card__footer">
-                <a href="{% url 'blog_detail' %}?id=social-media-growth" class="btn blog-card__btn">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="blog-card blog-card-modern">
-            <a href="{% url 'blog_detail' %}?id=ux-principles" class="blog-card__stretch" aria-label="İstifadəçi mərkəzli dizayn: 5 əsas prinsip"></a>
-            <div class="blog-card__media">
-              <img src="{% static 'images/services/services-img-3.jpg' %}" alt="UX təcrübəsi" class="img-fluid">
-              <span class="blog-card__overlay" aria-hidden="true"></span>
-              <span class="blog-card__category" data-cat="dizayn">Dizayn</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <time class="blog-card__date" datetime="2025-11-28">28.11.2025</time>
-                <span class="blog-card__views" title="Təxmini baxış sayı">~4200 baxış</span>
-              </div>
-              <h3 class="blog-card__title">İstifadəçi mərkəzli dizayn: 5 əsas prinsip</h3>
-              <p class="blog-card__excerpt">Məhsulunuzun konversiyasını artıran UX yanaşmaları və praktik nümunələr.</p>
-              <div class="blog-card__footer">
-                <a href="{% url 'blog_detail' %}?id=ux-principles" class="btn blog-card__btn">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="blog-card blog-card-modern">
-            <a href="{% url 'blog_detail' %}?id=short-video-brand" class="blog-card__stretch" aria-label="Qısa video formatında brend hekayəsi"></a>
-            <div class="blog-card__media">
-              <img src="{% static 'images/services/services-img-4.jpg' %}" alt="Video marketinq" class="img-fluid">
-              <span class="blog-card__overlay" aria-hidden="true"></span>
-              <span class="blog-card__category" data-cat="sosial-media">Sosial media</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <time class="blog-card__date" datetime="2025-11-20">20.11.2025</time>
-                <span class="blog-card__views" title="Təxmini baxış sayı">~1900 baxış</span>
-              </div>
-              <h3 class="blog-card__title">Qısa video formatında brend hekayəsi</h3>
-              <p class="blog-card__excerpt">Reels və TikTok üçün effektiv kontent yaratmaq üsulları.</p>
-              <div class="blog-card__footer">
-                <a href="{% url 'blog_detail' %}?id=short-video-brand" class="btn blog-card__btn">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="blog-card blog-card-modern">
-            <a href="{% url 'blog_detail' %}?id=ecommerce-sales" class="blog-card__stretch" aria-label="Onlayn mağazanızın satışlarını artırmaq"></a>
-            <div class="blog-card__media">
-              <img src="{% static 'images/portfolio/portfolio-img-1.jpg' %}" alt="E-ticarət optimallaşdırması" class="img-fluid">
-              <span class="blog-card__overlay" aria-hidden="true"></span>
-              <span class="blog-card__category" data-cat="marketinq">Marketinq</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <time class="blog-card__date" datetime="2025-11-12">12.11.2025</time>
-                <span class="blog-card__views" title="Təxmini baxış sayı">~2200 baxış</span>
-              </div>
-              <h3 class="blog-card__title">Onlayn mağazanızın satışlarını artırmaq</h3>
-              <p class="blog-card__excerpt">Checkout prosesindən SEO-ya qədər e-ticarət optimallaşdırma bələdçisi.</p>
-              <div class="blog-card__footer">
-                <a href="{% url 'blog_detail' %}?id=ecommerce-sales" class="btn blog-card__btn">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="blog-card blog-card-modern">
-            <a href="{% url 'blog_detail' %}?id=content-plan" class="blog-card__stretch" aria-label="Kontent planı necə qurulur?"></a>
-            <div class="blog-card__media">
-              <img src="{% static 'images/portfolio/portfolio-img-2.jpg' %}" alt="Kontent marketinqi" class="img-fluid">
-              <span class="blog-card__overlay" aria-hidden="true"></span>
-              <span class="blog-card__category" data-cat="marketinq">Marketinq</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <time class="blog-card__date" datetime="2025-11-05">05.11.2025</time>
-                <span class="blog-card__views" title="Təxmini baxış sayı">~3600 baxış</span>
-              </div>
-              <h3 class="blog-card__title">Kontent planı necə qurulur?</h3>
-              <p class="blog-card__excerpt">Aylıq redaksiya təqvimi və məzmun strategiyası üçün addım-addım plan.</p>
-              <div class="blog-card__footer">
-                <a href="{% url 'blog_detail' %}?id=content-plan" class="btn blog-card__btn">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="blog-card blog-card-modern">
-            <a href="{% url 'blog_detail' %}?id=seo-basics" class="blog-card__stretch" aria-label="SEO-nun əsasları: 2025 bələdçisi"></a>
-            <div class="blog-card__media">
-              <img src="{% static 'images/portfolio/portfolio-img-3.jpg' %}" alt="SEO əsasları" class="img-fluid">
-              <span class="blog-card__overlay" aria-hidden="true"></span>
-              <span class="blog-card__category" data-cat="marketinq">Marketinq</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <time class="blog-card__date" datetime="2025-10-28">28.10.2025</time>
-                <span class="blog-card__views" title="Təxmini baxış sayı">~5100 baxış</span>
-              </div>
-              <h3 class="blog-card__title">SEO-nun əsasları: 2025 bələdçisi</h3>
-              <p class="blog-card__excerpt">Axtarış motorlarında yüksəlmək üçün texniki və kontent SEO tövsiyələri.</p>
-              <div class="blog-card__footer">
-                <a href="{% url 'blog_detail' %}?id=seo-basics" class="btn blog-card__btn">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="blog-card blog-card-modern">
-            <a href="{% url 'blog_detail' %}?id=brand-voice" class="blog-card__stretch" aria-label="Brend səsinizi necə formalaşdırmaq olar"></a>
-            <div class="blog-card__media">
-              <img src="{% static 'images/portfolio/portfolio-img-4.jpg' %}" alt="Brend səsi" class="img-fluid">
-              <span class="blog-card__overlay" aria-hidden="true"></span>
-              <span class="blog-card__category" data-cat="brendinq">Brendinq</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <time class="blog-card__date" datetime="2025-10-20">20.10.2025</time>
-                <span class="blog-card__views" title="Təxmini baxış sayı">~2900 baxış</span>
-              </div>
-              <h3 class="blog-card__title">Brend səsinizi necə formalaşdırmaq olar</h3>
-              <p class="blog-card__excerpt">Müştərilərinizlə eyni dildə danışmaq üçün ton və üslub bələdçisi.</p>
-              <div class="blog-card__footer">
-                <a href="{% url 'blog_detail' %}?id=brand-voice" class="btn blog-card__btn">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="blog-card blog-card-modern">
-            <a href="{% url 'blog_detail' %}?id=digital-transformation" class="blog-card__stretch" aria-label="Kiçik biznes üçün rəqəmsal transformasiya"></a>
-            <div class="blog-card__media">
-              <img src="{% static 'images/portfolio/portfolio-img-5.jpg' %}" alt="Rəqəmsal transformasiya" class="img-fluid">
-              <span class="blog-card__overlay" aria-hidden="true"></span>
-              <span class="blog-card__category" data-cat="brendinq">Brendinq</span>
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-card__meta">
-                <time class="blog-card__date" datetime="2025-10-12">12.10.2025</time>
-                <span class="blog-card__views" title="Təxmini baxış sayı">~1700 baxış</span>
-              </div>
-              <h3 class="blog-card__title">Kiçik biznes üçün rəqəmsal transformasiya</h3>
-              <p class="blog-card__excerpt">Məhdud resurslarla rəqəmsal dünyada rəqabət aparmaq yolları.</p>
-              <div class="blog-card__footer">
-                <a href="{% url 'blog_detail' %}?id=digital-transformation" class="btn blog-card__btn">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-
+          {% endfor %}
         </div>
 
         <nav class="projects-pagination-ui blog-pagination-ui mt-5 d-flex justify-content-center" aria-label="Blog pagination">
@@ -410,19 +149,16 @@
             </button>
           </div>
         </nav>
+        {% endif %}
       </div>
     </section>
+    {% endif %}
 
   </div>
 
   {% include 'includes/footer.html' %}
 
-<aside class="floating-widgets" aria-label="Sürətli əlaqə">
-    <a href="tel:+994501234567" class="floating-widget-btn floating-widget-btn--call" aria-label="Zəng edin"><iconify-icon icon="lucide:phone"></iconify-icon></a>
-    <a href="https://wa.me/994501234567" target="_blank" rel="noopener" class="floating-widget-btn floating-widget-btn--whatsapp" aria-label="WhatsApp"><iconify-icon icon="mdi:whatsapp"></iconify-icon></a>
-    <button type="button" class="floating-widget-btn floating-widget-btn--top" id="scrollToTopBtn" aria-label="Başa qayıdın"><iconify-icon icon="lucide:arrow-up"></iconify-icon></button>
-  </aside>
-
+  {% include 'includes/floating-widgets.html' %}
 
   <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
   <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
@@ -435,7 +171,8 @@
   <script>
     $(function () {
       var $grid = $('.blog-page-grid');
-      var $originals = $grid.children('.blog-card');
+      if (!$grid.length) return;
+      var $items = $grid.find('.blog-card');
       var $empty = $('.blog-filter-empty');
       var $ui = $('.blog-pagination-ui');
       var $links = $ui.find('.projects-pagination-links');
@@ -443,29 +180,13 @@
       var $next = $ui.find('.projects-pagination-next');
       var $tabs = $('.blog-category-tab');
       var perPage = 6;
-      var targetTotal = perPage * 12;
       var currentFilter = 'all';
       var currentPage = 1;
       var totalPages = 1;
-      var $items;
-      var $visibleItems;
-
-      while ($grid.children('.blog-card').length < targetTotal) {
-        $grid.append($originals.eq($grid.children('.blog-card').length % $originals.length).clone(false));
-      }
-
-      $items = $grid.find('.blog-card');
-      $visibleItems = $items;
+      var $visibleItems = $items;
 
       $grid.on('click', '.blog-card', function (e) {
         if ($(e.target).closest('a.blog-card__btn, a.blog-card__stretch').length) return;
-        var href = $(this).find('a.blog-card__btn').attr('href') || $(this).find('a.blog-card__stretch').attr('href');
-        if (href) window.location.href = href;
-      });
-      $grid.on('keydown', '.blog-card', function (e) {
-        if (e.key !== 'Enter' && e.key !== ' ') return;
-        if ($(e.target).closest('a').length) return;
-        e.preventDefault();
         var href = $(this).find('a.blog-card__btn').attr('href') || $(this).find('a.blog-card__stretch').attr('href');
         if (href) window.location.href = href;
       });
@@ -480,8 +201,7 @@
 
       function refreshTotals() {
         $visibleItems = getFilteredItems();
-        var total = $visibleItems.length;
-        totalPages = Math.max(1, Math.ceil(total / perPage));
+        totalPages = Math.max(1, Math.ceil($visibleItems.length / perPage));
         if (currentPage > totalPages) currentPage = 1;
       }
 
@@ -496,17 +216,9 @@
       function getPageWindow(page) {
         var windowSize = 3;
         var start = page;
-
-        if (page > totalPages - windowSize) {
-          start = Math.max(1, page - windowSize + 1);
-        }
-
+        if (page > totalPages - windowSize) start = Math.max(1, page - windowSize + 1);
         var end = Math.min(start + windowSize - 1, totalPages);
-
-        if (end - start + 1 < windowSize) {
-          start = Math.max(1, end - windowSize + 1);
-        }
-
+        if (end - start + 1 < windowSize) start = Math.max(1, end - windowSize + 1);
         return { start: start, end: end, size: windowSize };
       }
 
@@ -514,34 +226,19 @@
         $links.empty();
         setNavDisabled($prev, currentPage <= 1);
         setNavDisabled($next, currentPage >= totalPages);
-
         if (totalPages <= 1) return;
-
         var win = getPageWindow(currentPage);
-        var start = win.start;
-        var end = win.end;
         var p;
-
-        if (start > 1 && currentPage > win.size) {
-          var firstCls = 'projects-pg-num';
-          if (currentPage === 1) firstCls += ' projects-pg-num--current';
-          $links.append('<a href="#" class="' + firstCls + '" data-page="1">1</a>');
-          if (start > 2) {
-            $links.append('<span class="dots" aria-hidden="true">...</span>');
-          }
+        if (win.start > 1 && currentPage > win.size) {
+          $links.append('<a href="#" class="projects-pg-num' + (currentPage === 1 ? ' projects-pg-num--current' : '') + '" data-page="1">1</a>');
+          if (win.start > 2) $links.append('<span class="dots" aria-hidden="true">...</span>');
         }
-
-        for (p = start; p <= end; p++) {
-          var cls = 'projects-pg-num';
-          if (p === currentPage) cls += ' projects-pg-num--current';
-          $links.append('<a href="#" class="' + cls + '" data-page="' + p + '">' + p + '</a>');
+        for (p = win.start; p <= win.end; p++) {
+          $links.append('<a href="#" class="projects-pg-num' + (p === currentPage ? ' projects-pg-num--current' : '') + '" data-page="' + p + '">' + p + '</a>');
         }
-
-        if (end < totalPages) {
+        if (win.end < totalPages) {
           $links.append('<span class="dots" aria-hidden="true">...</span>');
-          var lastCls = 'projects-pg-num';
-          if (currentPage === totalPages) lastCls += ' projects-pg-num--current';
-          $links.append('<a href="#" class="' + lastCls + '" data-page="' + totalPages + '">' + totalPages + '</a>');
+          $links.append('<a href="#" class="projects-pg-num' + (currentPage === totalPages ? ' projects-pg-num--current' : '') + '" data-page="' + totalPages + '">' + totalPages + '</a>');
         }
       }
 
@@ -554,32 +251,17 @@
         if (page < 1) page = 1;
         if (page > totalPages) page = totalPages;
         currentPage = page;
-
         $items.hide();
         if ($visibleItems.length === 0) {
           $empty.removeClass('d-none');
           $ui.addClass('d-none');
           return;
         }
-
         $empty.addClass('d-none');
-        var start = (page - 1) * perPage;
-        $visibleItems.slice(start, start + perPage).show();
-
-        if (totalPages <= 1) {
-          $ui.addClass('d-none');
-        } else {
-          $ui.removeClass('d-none');
-        }
-
+        $visibleItems.slice((page - 1) * perPage, page * perPage).show();
+        if (totalPages <= 1) $ui.addClass('d-none');
+        else $ui.removeClass('d-none');
         renderPagination();
-      }
-
-      function applyFilter(filter, doScroll) {
-        currentFilter = filter;
-        currentPage = 1;
-        showPage(1);
-        if (doScroll) scrollToGrid();
       }
 
       showPage(1);
@@ -590,145 +272,54 @@
         if (filter === currentFilter) return;
         $tabs.removeClass('is-active').attr('aria-selected', 'false');
         $tab.addClass('is-active').attr('aria-selected', 'true');
-        applyFilter(filter, false);
-        if ($tab[0] && typeof $tab[0].scrollIntoView === 'function') {
-          $tab[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        }
+        currentFilter = filter;
+        currentPage = 1;
+        showPage(1);
       });
 
       var $filterRail = $('.blog-category-filter');
       var $filterShell = $('.blog-category-filter-shell');
       var $filterPrev = $('.blog-cat-nav--prev');
       var $filterNext = $('.blog-cat-nav--next');
-      var filterScrollStep = 180;
-
-      function scrollFilterRail(direction) {
-        if (!$filterRail.length) return;
-        $filterRail[0].scrollBy({ left: direction * filterScrollStep, behavior: 'smooth' });
-      }
-
       function updateFilterScrollState() {
         if (!$filterRail.length || !$filterShell.length) return;
         var rail = $filterRail[0];
         var maxScroll = rail.scrollWidth - rail.clientWidth;
         var canScroll = maxScroll > 4;
-
         $filterShell.toggleClass('is-scrollable', canScroll);
-
         if (!canScroll) {
-          $filterShell.removeClass('can-scroll-left can-scroll-right');
           $filterPrev.prop('hidden', true);
           $filterNext.prop('hidden', true);
           return;
         }
-
         var atStart = rail.scrollLeft <= 4;
         var atEnd = rail.scrollLeft >= maxScroll - 4;
-        $filterShell.toggleClass('can-scroll-left', !atStart);
-        $filterShell.toggleClass('can-scroll-right', !atEnd);
         $filterPrev.prop('hidden', atStart);
         $filterNext.prop('hidden', atEnd);
       }
-
       if ($filterRail.length) {
         $filterRail.on('scroll.blogFilter', updateFilterScrollState);
         $(window).on('resize.blogFilter', updateFilterScrollState);
-        $filterPrev.on('click', function () { scrollFilterRail(-1); });
-        $filterNext.on('click', function () { scrollFilterRail(1); });
+        $filterPrev.on('click', function () { $filterRail[0].scrollBy({ left: -180, behavior: 'smooth' }); });
+        $filterNext.on('click', function () { $filterRail[0].scrollBy({ left: 180, behavior: 'smooth' }); });
         updateFilterScrollState();
       }
 
       $links.on('click', 'a.projects-pg-num', function (e) {
         e.preventDefault();
-        if ($(this).hasClass('projects-pg-num--disabled')) return;
         var p = parseInt($(this).data('page'), 10);
-        if (!isNaN(p) && p >= 1 && p <= totalPages) {
-          showPage(p);
-          scrollToGrid();
-        }
+        if (!isNaN(p)) { showPage(p); scrollToGrid(); }
       });
-
       $prev.on('click', function () {
         if ($prev.hasClass('projects-pagination-nav--disabled')) return;
-        var cur = parseInt($links.find('a.projects-pg-num--current').data('page'), 10) || currentPage;
-        if (cur > 1) {
-          showPage(cur - 1);
-          scrollToGrid();
-        }
+        showPage(currentPage - 1); scrollToGrid();
       });
-
       $next.on('click', function () {
         if ($next.hasClass('projects-pagination-nav--disabled')) return;
-        var cur = parseInt($links.find('a.projects-pg-num--current').data('page'), 10) || currentPage;
-        if (cur < totalPages) {
-          showPage(cur + 1);
-          scrollToGrid();
-        }
+        showPage(currentPage + 1); scrollToGrid();
       });
-
-      var $stickyBar = $('.blog-category-filter-sticky');
-      var $stickyPlaceholder = $('.blog-category-filter-placeholder');
-      var stickyAnchorTop = 0;
-      var stickyTicking = false;
-
-      function getBlogHeaderOffset() {
-        return window.matchMedia('(max-width: 991.98px)').matches ? 76 : 88;
-      }
-
-      function measureStickyAnchor() {
-        if (!$stickyBar.length || $stickyBar.hasClass('is-fixed')) return;
-        stickyAnchorTop = $stickyBar.offset().top;
-      }
-
-      function setStickyPlaceholderHeight(height) {
-        if (!$stickyPlaceholder.length) return;
-        $stickyPlaceholder.height($stickyBar.hasClass('is-fixed') ? height : 0);
-      }
-
-      function updateStickyBar() {
-        if (!$stickyBar.length) return;
-
-        var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-        var headerOffset = getBlogHeaderOffset();
-        var shouldFix = scrollY + headerOffset >= stickyAnchorTop;
-
-        if (shouldFix) {
-          if (!$stickyBar.hasClass('is-fixed')) {
-            setStickyPlaceholderHeight($stickyBar.outerHeight(true));
-            $stickyBar.addClass('is-fixed');
-          } else {
-            setStickyPlaceholderHeight($stickyBar.outerHeight(true));
-          }
-        } else if ($stickyBar.hasClass('is-fixed')) {
-          $stickyBar.removeClass('is-fixed');
-          setStickyPlaceholderHeight(0);
-          measureStickyAnchor();
-        }
-
-        updateFilterScrollState();
-        stickyTicking = false;
-      }
-
-      function onStickyScroll() {
-        if (stickyTicking) return;
-        stickyTicking = true;
-        window.requestAnimationFrame(updateStickyBar);
-      }
-
-      if ($stickyBar.length) {
-        measureStickyAnchor();
-        updateStickyBar();
-        $(window).on('scroll.blogSticky resize.blogSticky', function () {
-          if (!$stickyBar.hasClass('is-fixed')) {
-            measureStickyAnchor();
-          }
-          onStickyScroll();
-          updateFilterScrollState();
-        });
-      }
     });
   </script>
-  <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
 

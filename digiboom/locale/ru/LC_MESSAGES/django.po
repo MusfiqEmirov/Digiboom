@@ -1,0 +1,423 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Digiboom\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "1 ulduz"
+msgstr "1 звезда"
+
+msgid "2 ulduz"
+msgstr "2 звезды"
+
+msgid "24 saat ərzində cavab"
+msgstr "Ответ в течение 24 часов"
+
+msgid "3 ulduz"
+msgstr "3 звезды"
+
+msgid "4 ulduz"
+msgstr "4 звезды"
+
+msgid "5 ulduz"
+msgstr "5 звёзд"
+
+msgid "Ad soyad"
+msgstr "Имя и фамилия"
+
+msgid "Ad və soyad"
+msgstr "Имя и фамилия"
+
+msgid "Ad və soyadınız"
+msgstr "Ваше имя и фамилия"
+
+msgid "Ad, Soyad"
+msgstr "Имя, фамилия"
+
+msgid "Adınız və soyadınız"
+msgstr "Ваше имя и фамилия"
+
+msgid "Ana səhifə"
+msgstr "Главная"
+
+msgid "Bağlayın"
+msgstr "Закрыть"
+
+msgid "Başlanğıc"
+msgstr "Начальный"
+
+msgid "Bizi izləyin və birbaşa mesaj göndərin."
+msgstr "Подписывайтесь и пишите нам напрямую."
+
+msgid "Bizimlə əlaqə saxlayın — pulsuz məsləhət və fərdi təklif alın."
+msgstr ""
+"Свяжитесь с нами — бесплатная консультация и индивидуальное предложение."
+
+msgid "Blog"
+msgstr "Блог"
+
+msgid "Brending"
+msgstr "Брендинг"
+
+msgid "Bu təlimə qoşulmaq istəyirsiniz?"
+msgstr "Хотите присоединиться к обучению?"
+
+msgid "Bu xidmətə marağınız var?"
+msgstr "Интересует эта услуга?"
+
+msgid "Bütün məqalələr"
+msgstr "Все статьи"
+
+msgid "Bütün təlim proqramları"
+msgstr "Все программы обучения"
+
+msgid "DigiBoom rəqəmlərlə"
+msgstr "DigiBoom в цифрах"
+
+msgid "Digər"
+msgstr "Другое"
+
+msgid "Digər məqalələr"
+msgstr "Другие статьи"
+
+msgid "Dil seçimi"
+msgstr "Выбор языка"
+
+msgid "E-poçt"
+msgstr "Эл. почта"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Facebook"
+msgstr "Facebook"
+
+msgid "Geri"
+msgstr "Назад"
+
+msgid "Gmail"
+msgstr "Gmail"
+
+msgid "Göndərin"
+msgstr "Отправить"
+
+msgid "Gördüyümüz işlər"
+msgstr "Наши работы"
+
+msgid "Hamısı"
+msgstr "Все"
+
+msgid "Haqqımızda"
+msgstr "О нас"
+
+msgid "Instagram"
+msgstr "Instagram"
+
+msgid ""
+"Kampaniya, məzmun və nəticələrdən seçilmiş anlar — şəkillərə klikləyərək "
+"böyüdə bilərsiniz."
+msgstr ""
+"Избранные моменты кампаний, контента и результатов — нажмите, чтобы "
+"увеличить."
+
+msgid "Kateqoriya"
+msgstr "Категория"
+
+msgid "Komandanız üçün xüsusi təlim planı lazımdır?"
+msgstr "Нужен индивидуальный план обучения для команды?"
+
+msgid "Konsultasiya"
+msgstr "Консультация"
+
+msgid "Kurs məzmunu — icmal videoları"
+msgstr "Содержание курса — обзорные видео"
+
+msgid "Kursa baxın"
+msgstr "Смотреть курс"
+
+msgid "Kurslara baxın"
+msgstr "Смотреть курсы"
+
+msgid ""
+"Layihə, sual və ya əməkdaşlıq təklifiniz var? Qısa formu doldurun — "
+"komandamız tezliklə sizə qayıdacaq."
+msgstr ""
+"Есть проект, вопрос или предложение о сотрудничестве? Заполните короткую "
+"форму — мы скоро ответим."
+
+msgid "Layihədə nələr etdik"
+msgstr "Что мы сделали в проекте"
+
+msgid ""
+"Layihəniz və ya sualınız haqqında qısaca yazın — 24 saat ərzində cavab "
+"veririk."
+msgstr "Кратко опишите проект или вопрос — отвечаем в течение 24 часов."
+
+msgid "Layihəniz və ya sualınız haqqında qısaca yazın..."
+msgstr "Кратко опишите проект или вопрос..."
+
+msgid ""
+"Layihəniz, təklifiniz və ya sualınız haqqında qısaca yazın. Bütün sahələr "
+"mütləqdir, şirkət adı isə istəyə görədir."
+msgstr ""
+"Кратко опишите проект, предложение или вопрос. Все поля обязательны, кроме "
+"названия компании."
+
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+msgid "Ləğv edin"
+msgstr "Отмена"
+
+msgid "Menyunu açın"
+msgstr "Открыть меню"
+
+msgid "Menyunu bağlayın"
+msgstr "Закрыть меню"
+
+msgid "Mesaj"
+msgstr "Сообщение"
+
+msgid "Mesajınız qəbul olundu, tezliklə geri dönüş olacaq."
+msgstr "Ваше сообщение получено; мы скоро свяжемся с вами."
+
+msgid "Mesajınızı qeyd edin"
+msgstr "Ваше сообщение"
+
+msgid "Mesajınızı qeyd edin..."
+msgstr "Введите сообщение..."
+
+msgid "Mobil menyu"
+msgstr "Мобильное меню"
+
+msgid "Müraciət et"
+msgstr "Оставить заявку"
+
+msgid "Müraciət formu"
+msgstr "Форма заявки"
+
+msgid "Məxfilik"
+msgstr "Конфиденциальность"
+
+msgid "Niyə biz?"
+msgstr "Почему мы?"
+
+msgid "Niyə bu xidmət?"
+msgstr "Почему эта услуга?"
+
+msgid "Nömrə"
+msgstr "Номер"
+
+msgid "Nələr daxildir"
+msgstr "Что входит"
+
+msgid "Ofisimiz"
+msgstr "Наш офис"
+
+msgid "Orta səviyyə"
+msgstr "Средний уровень"
+
+msgid "Oxumağa davam edin"
+msgstr "Читать дальше"
+
+msgid "Paket"
+msgstr "Пакет"
+
+msgid "Paket sifarişi"
+msgstr "Заказ пакета"
+
+msgid "Paketlər"
+msgstr "Пакеты"
+
+msgid "Peşəkar komandadan öyrənin — nəzəriyyə deyil, tətbiq olunan bilik."
+msgstr "Учитесь у профессионалов — прикладные знания, а не только теория."
+
+msgid "Portfolio"
+msgstr "Портфолио"
+
+msgid "Pulsuz ilkin məsləhət"
+msgstr "Бесплатная первичная консультация"
+
+msgid "Qalereya"
+msgstr "Галерея"
+
+msgid ""
+"Qeydiyyat və əlavə məlumat üçün formu doldurun — sonra ödənişə keçə "
+"bilərsiniz."
+msgstr ""
+"Заполните форму для регистрации и деталей — затем можно перейти к оплате."
+
+msgid "Reytinq"
+msgstr "Рейтинг"
+
+msgid "Rəqəmsal həllər partneriniz — brendinizi böyüdürük."
+msgstr "Ваш партнёр по цифровым решениям — мы развиваем ваш бренд."
+
+msgid "Rəqəmsal marketinq"
+msgstr "Цифровой маркетинг"
+
+msgid "Rəy"
+msgstr "Отзыв"
+
+msgid "Rəy bildirin"
+msgstr "Оставить отзыв"
+
+msgid "Rəyiniz bizim üçün önəmlidir"
+msgstr "Ваш отзыв важен для нас"
+
+msgid "Rəyiniz göndərildi, təşəkkür edirik!"
+msgstr "Отзыв отправлен — спасибо!"
+
+msgid "Sifariş edin"
+msgstr "Заказать"
+
+msgid "Sizdən gələn rəylər"
+msgstr "Отзывы клиентов"
+
+msgid "Sosial şəbəkələr"
+msgstr "Социальные сети"
+
+msgid "Sürətli keçid"
+msgstr "Быстрые ссылки"
+
+msgid "Tanıtım videosu"
+msgstr "Промо-видео"
+
+msgid "Tanıtım videosunu oynat"
+msgstr "Воспроизвести промо-видео"
+
+msgid "Telefon"
+msgstr "Телефон"
+
+msgid "Telefon, WhatsApp və digər əlaqə vasitələri üçün"
+msgstr "Для телефона, WhatsApp и других способов связи"
+
+msgid "Tez-tez verilən suallar"
+msgstr "Часто задаваемые вопросы"
+
+msgid "TikTok"
+msgstr "TikTok"
+
+msgid "Təcrübənizi qısaca paylaşın..."
+msgstr "Кратко поделитесь опытом..."
+
+msgid "Təlim"
+msgstr "Обучение"
+
+msgid "Təlim sifarişi"
+msgstr "Заказ обучения"
+
+msgid "Təlimdən kadrlar"
+msgstr "Кадры с обучения"
+
+msgid "Tərəfdaş və müştərilər"
+msgstr "Партнёры и клиенты"
+
+msgid "Təxmini baxış sayı"
+msgstr "Примерное число просмотров"
+
+msgid "Veb development"
+msgstr "Веб-разработка"
+
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+msgid "Xidmət"
+msgstr "Услуга"
+
+msgid "Xidməti seçin"
+msgstr "Выберите услугу"
+
+msgid "Xidmətlər"
+msgstr "Услуги"
+
+msgid "Xidmətə daxildir"
+msgstr "Что входит в услугу"
+
+msgid "Xüsusi paketlər"
+msgstr "Специальные пакеты"
+
+msgid "Yalnız @gmail.com ünvanı qəbul olunur."
+msgstr "Принимаются только адреса @gmail.com."
+
+msgid "Zəhmət olmasa düzgün Gmail ünvanı daxil edin."
+msgstr "Пожалуйста, введите корректный Gmail."
+
+msgid "aylıq"
+msgstr "мес."
+
+msgid "baxış"
+msgstr "просмотров"
+
+msgid "dərs"
+msgstr "уроков"
+
+msgid "keçin."
+msgstr "."
+
+msgid "saat"
+msgstr "часов"
+
+msgid "© 2025 DigiBoom. Bütün hüquqlar qorunur."
+msgstr "© 2025 DigiBoom. Все права защищены."
+
+msgid "Çox sağ olun! Ən qısa zamanda sizə dönüş olacaq."
+msgstr "Спасибо! Мы свяжемся с вами в ближайшее время."
+
+msgid "Ödənişə keçin"
+msgstr "Перейти к оплате"
+
+msgid "Ünvan"
+msgstr "Адрес"
+
+msgid "İstəyə bağlı · PNG, JPG"
+msgstr "Необязательно · PNG, JPG"
+
+msgid "İş prosesindən kadrlar"
+msgstr "Кадры из процесса"
+
+msgid ""
+"Şirkətinizin ehtiyaclarına uyğun modul, tarix və format seçin — biz sizə "
+"uyğun proqram hazırlayaq."
+msgstr ""
+"Выберите модули, даты и формат под задачи компании — мы подготовим "
+"подходящую программу."
+
+msgid "Şəkil"
+msgstr "Изображение"
+
+msgid "Şəkil yükləyin"
+msgstr "Загрузить изображение"
+
+msgid "Şərtlər"
+msgstr "Условия"
+
+msgid "Əhməd Rəcəbli 49B, Bakı"
+msgstr "Ахмед Раджабли 49B, Баку"
+
+msgid "Əhməd Rəcəbli 49B, Bakı xəritəsi"
+msgstr "Карта: Ахмед Раджабли 49B, Баку"
+
+msgid "Əlaqə"
+msgstr "Контакты"
+
+msgid "Əlaqə saxlayın"
+msgstr "Связаться"
+
+msgid "Əlaqə səhifəsinə"
+msgstr "перейдите на страницу Контакты"
+
+msgid "Əlaqə və müraciətlər"
+msgstr "Контакты и заявки"
+
+msgid "Ən populyar"
+msgstr "Самый популярный"
+
+msgid "Əsas naviqasiya"
+msgstr "Основная навигация"
+
+msgid "Ətraflı"
+msgstr "Подробнее"

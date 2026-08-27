@@ -4,18 +4,11 @@
   /* Siyahı: səhifə başına 6 kurs — layihələr səhifəsi kimi 12 səhifə pəncərəsi */
   var grid = document.querySelector('[data-training-grid]');
   if (grid) {
-    var originals = Array.prototype.slice.call(grid.querySelectorAll('[data-training-card]'));
     var perPage = 6;
-    var targetTotal = perPage * 12;
     var currentPage = 1;
     var activeFilter = 'all';
     var pagination = document.querySelector('[data-training-pagination]');
     var filterButtons = document.querySelectorAll('[data-training-filter]');
-
-    while (grid.querySelectorAll('[data-training-card]').length < targetTotal && originals.length) {
-      var nextIndex = grid.querySelectorAll('[data-training-card]').length % originals.length;
-      grid.appendChild(originals[nextIndex].cloneNode(true));
-    }
 
     var allCards = Array.prototype.slice.call(grid.querySelectorAll('[data-training-card]'));
 
@@ -143,13 +136,91 @@
     renderPage(1);
   }
 
-  /* Detal: icmal video müddəti + önizləmə */
+  /* Detal: icmal video müddəti + avtomatik qapaq kadrı (videodan) */
   function formatVideoDuration(seconds) {
     if (!isFinite(seconds) || seconds < 0) return '';
     var total = Math.round(seconds);
     var mins = Math.floor(total / 60);
     var secs = total % 60;
     return mins + ':' + (secs < 10 ? '0' : '') + secs;
+  }
+
+  function paintVideoPoster(video) {
+    if (!video || video.dataset.posterReady === '1') return;
+
+    function captureFrame() {
+      try {
+        if (!video.videoWidth || !video.videoHeight) return false;
+        var canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        var ctx = canvas.getContext('2d');
+        if (!ctx) return false;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        var url = canvas.toDataURL('image/jpeg', 0.82);
+        video.setAttribute('poster', url);
+        video.dataset.posterReady = '1';
+        // Keep the visible frame; pause so it stays as cover
+        video.pause();
+        return true;
+      } catch (err) {
+        return false;
+      }
+    }
+
+    function seekToCover() {
+      try {
+        if (!isFinite(video.duration) || video.duration <= 0) {
+          // Still try capture at 0
+          captureFrame();
+          return;
+        }
+        var t = Math.min(0.35, Math.max(0.08, video.duration * 0.03));
+        var onSeeked = function () {
+          video.removeEventListener('seeked', onSeeked);
+          if (!captureFrame()) {
+            video.dataset.posterReady = '1';
+          }
+        };
+        video.addEventListener('seeked', onSeeked);
+        if (Math.abs(video.currentTime - t) < 0.02) {
+          onSeeked();
+        } else {
+          video.currentTime = t;
+        }
+      } catch (err) { /* ignore */ }
+    }
+
+    video.muted = true;
+    video.playsInline = true;
+
+    function start() {
+      // Some browsers need a play→pause kick to decode a frame
+      var p = video.play();
+      if (p && typeof p.then === 'function') {
+        p.then(function () {
+          video.pause();
+          seekToCover();
+        }).catch(function () {
+          seekToCover();
+        });
+      } else {
+        seekToCover();
+      }
+    }
+
+    if (video.readyState >= 2) {
+      start();
+    } else {
+      video.addEventListener('loadeddata', start, { once: true });
+      video.addEventListener('error', function () {
+        video.dataset.posterReady = '1';
+      }, { once: true });
+    }
+  }
+
+  function initAutoPosters() {
+    document.querySelectorAll('video[data-training-auto-poster]').forEach(paintVideoPoster);
   }
 
   function fillCurriculumDurations() {
@@ -159,6 +230,8 @@
     thumbs.forEach(function (btn) {
       var src = btn.getAttribute('data-video-src');
       var durationEl = btn.querySelector('.training-curriculum__duration');
+      var thumbVideo = btn.querySelector('.training-curriculum__thumb-video');
+      if (thumbVideo) paintVideoPoster(thumbVideo);
       if (!src || !durationEl) return;
 
       durationEl.textContent = '';
@@ -186,6 +259,7 @@
     });
   }
 
+  initAutoPosters();
   fillCurriculumDurations();
 
   /* Detal: Təlimdən kadrlar lightbox */
@@ -375,12 +449,61 @@
         return;
       }
 
-      /* Ödəniş inteqrasiyası sonra əlavə olunacaq */
+      var endpoint = orderForm.getAttribute('action') || '/api/training-order/';
+      var formData = new FormData(orderForm);
+      var csrf = (window.digiboomGetCsrfToken && window.digiboomGetCsrfToken()) ||
+        ((orderForm.querySelector('[name="csrfmiddlewaretoken"]') || {}).value || '');
+      var submitBtn = orderForm.querySelector('[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
       if (orderStatus) {
-        orderStatus.hidden = false;
-        orderStatus.classList.add('training-order-form__status--ok');
-        orderStatus.textContent = 'Məlumatlar qəbul olundu. Ödəniş inteqrasiyası tezliklə aktivləşəcək.';
+        orderStatus.hidden = true;
+        orderStatus.textContent = '';
+        orderStatus.classList.remove('training-order-form__status--ok');
       }
+
+      fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+        credentials: 'same-origin',
+        headers: {
+          Accept: 'application/json',
+          'X-CSRFToken': csrf
+        }
+      })
+        .then(function (res) {
+          return res.json().catch(function () {
+            return { ok: false, message: 'Xəta baş verdi.' };
+          });
+        })
+        .catch(function () {
+          return { ok: false, message: 'Şəbəkə xətası.' };
+        })
+        .then(function (data) {
+          if (!data || !data.ok) {
+            if (orderStatus) {
+              orderStatus.hidden = false;
+              orderStatus.classList.remove('training-order-form__status--ok');
+              orderStatus.textContent = (data && data.message) || 'Göndərilmədi.';
+            }
+            return;
+          }
+          orderForm.reset();
+          fillTrainingName();
+          if (orderStatus) {
+            orderStatus.hidden = false;
+            orderStatus.classList.add('training-order-form__status--ok');
+            orderStatus.textContent = data.message || 'Sifarişiniz qəbul olundu. Ödəniş tezliklə aktivləşəcək.';
+          }
+          if (window.bootstrap && window.bootstrap.Modal) {
+            var modal = bootstrap.Modal.getInstance(orderModal);
+            if (modal) {
+              setTimeout(function () { modal.hide(); }, 1600);
+            }
+          }
+        })
+        .finally(function () {
+          if (submitBtn) submitBtn.disabled = false;
+        });
     });
   }
 })();

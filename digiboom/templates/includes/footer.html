@@ -1,11 +1,11 @@
-{% load static %}
+{% load static i18n digiboom_tags %}
 {% include 'includes/review-modal.html' %}
 {% include 'includes/order-modal.html' %}
 {% include 'includes/contact-modal.html' %}
 <div id="contactSuccessAlert" class="review-success-alert review-success-alert--contact" hidden aria-live="polite" role="status">
   <div class="review-success-alert__inner">
     <iconify-icon icon="lucide:circle-check" class="review-success-alert__icon" aria-hidden="true"></iconify-icon>
-    <span class="review-success-alert__text">Mesajınız qəbul olundu, tezliklə geri dönüş olacaq.</span>
+    <span class="review-success-alert__text">{% trans "Mesajınız qəbul olundu, tezliklə geri dönüş olacaq." %}</span>
   </div>
 </div>
 <footer class="footer-modern">
@@ -16,65 +16,101 @@
           <a href="{% url 'home' %}" class="d-inline-block">
             <img src="{% static 'images/logos/digi-boom-logo.png' %}" alt="DigiBoom" style="max-width:130px;">
           </a>
-          <p class="footer-modern__tagline">Rəqəmsal həllər partneriniz — brendinizi böyüdürük.</p>
+          <p class="footer-modern__tagline">{% trans "Rəqəmsal həllər partneriniz — brendinizi böyüdürük." %}</p>
+          {% if site_contact %}
+          {% if site_contact.facebook_url or site_contact.instagram_url or site_contact.tiktok_url or site_contact.linkedin_url or site_contact.youtube_url or whatsapp_link %}
           <div class="footer-modern__social">
-            <a href="#!" aria-label="Facebook"><iconify-icon icon="mdi:facebook"></iconify-icon></a>
-            <a href="#!" aria-label="Instagram"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
-            <a href="#!" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok"></iconify-icon></a>
-            <a href="#!" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+            {% if site_contact.facebook_url %}
+            <a href="{{ site_contact.facebook_url }}" target="_blank" rel="noopener" aria-label="{% trans 'Facebook' %}"><iconify-icon icon="mdi:facebook"></iconify-icon></a>
+            {% endif %}
+            {% if site_contact.instagram_url %}
+            <a href="{{ site_contact.instagram_url }}" target="_blank" rel="noopener" aria-label="{% trans 'Instagram' %}"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
+            {% endif %}
+            {% if site_contact.tiktok_url %}
+            <a href="{{ site_contact.tiktok_url }}" target="_blank" rel="noopener" aria-label="{% trans 'TikTok' %}"><iconify-icon icon="fa-brands:tiktok"></iconify-icon></a>
+            {% endif %}
+            {% if site_contact.linkedin_url %}
+            <a href="{{ site_contact.linkedin_url }}" target="_blank" rel="noopener" aria-label="{% trans 'LinkedIn' %}"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+            {% endif %}
+            {% if site_contact.youtube_url %}
+            <a href="{{ site_contact.youtube_url }}" target="_blank" rel="noopener" aria-label="{% trans 'YouTube' %}"><iconify-icon icon="mdi:youtube"></iconify-icon></a>
+            {% endif %}
+            {% if whatsapp_link %}
+            <a href="{{ whatsapp_link }}" target="_blank" rel="noopener" class="footer-modern__social--whatsapp" aria-label="WhatsApp">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            </a>
+            {% endif %}
           </div>
+          {% endif %}
+          {% endif %}
         </div>
       </div>
       <div class="col-6 col-lg-2 offset-lg-1">
-        <p class="footer-modern__heading">Sürətli keçid</p>
+        <p class="footer-modern__heading">{% trans "Sürətli keçid" %}</p>
         <ul class="footer-menu list-unstyled mb-0 d-flex flex-column gap-2">
-          <li><a href="{% url 'home' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Ana səhifə</a></li>
-          <li><a href="{% url 'about' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Haqqımızda</a></li>
-          <li><a href="{% url 'portfolio' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Portfolio</a></li>
-          <li><a href="{% url 'blog' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Blog</a></li>
-          <li><a href="{% url 'training' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Təlim</a></li>
-          <li><a href="#" data-open-review-modal role="button"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Rəy bildirin</a></li>
-          <li><a href="{% url 'services' %}#paketler"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Paketlər</a></li>
-          <li><a href="{% url 'contact' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Əlaqə</a></li>
+          <li><a href="{% url 'home' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Ana səhifə" %}</a></li>
+          <li><a href="{% url 'about' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Haqqımızda" %}</a></li>
+          <li><a href="{% url 'services' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Xidmətlər" %}</a></li>
+          <li><a href="{% url 'portfolio' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Portfolio" %}</a></li>
+          <li><a href="{% url 'blog' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Blog" %}</a></li>
+          <li><a href="{% url 'training' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Təlim" %}</a></li>
+          <li><a href="#" data-open-review-modal role="button"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Rəy bildirin" %}</a></li>
+          <li><a href="{% url 'services' %}#paketler"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Paketlər" %}</a></li>
+          <li><a href="{% url 'contact' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Əlaqə" %}</a></li>
         </ul>
       </div>
       <div class="col-6 col-lg-2">
-        <p class="footer-modern__heading">Xidmətlər</p>
+        <p class="footer-modern__heading">{% trans "Xidmətlər" %}</p>
         <ul class="footer-menu list-unstyled mb-0 d-flex flex-column gap-2">
-          <li><a href="{% url 'services' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Rəqəmsal marketinq</a></li>
-          <li><a href="{% url 'services' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Brending</a></li>
-          <li><a href="{% url 'services' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Veb development</a></li>
-          <li><a href="{% url 'services' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">Konsultasiya</a></li>
+          {% for svc in footer_services %}
+          <li>
+            <a href="{% url 'services_detail' svc.slug %}">
+              <img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% firstof svc.name_az svc.name_en svc.name_ru "Xidmət" %}
+            </a>
+          </li>
+          {% empty %}
+          <li><a href="{% url 'services' %}"><img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% trans "Xidmətlər" %}</a></li>
+          {% endfor %}
         </ul>
       </div>
       <div class="col-lg-3">
-        <p class="footer-modern__heading">Əlaqə</p>
+        <p class="footer-modern__heading">{% trans "Əlaqə" %}</p>
         <div class="d-flex flex-column gap-3">
-          <a href="mailto:info@digiboom.az" class="footer-modern__contact-link">
+          {% if site_contact.email %}
+          <a href="mailto:{{ site_contact.email }}" class="footer-modern__contact-link">
             <iconify-icon icon="lucide:mail"></iconify-icon>
-            info@digiboom.az
+            {{ site_contact.email }}
           </a>
-          <a href="tel:+994501234567" class="footer-modern__contact-link">
+          {% endif %}
+          {% if site_contact.phone %}
+          <a href="tel:{{ site_contact.phone }}" class="footer-modern__contact-link">
             <iconify-icon icon="lucide:phone"></iconify-icon>
-            +994 50 123 45 67
+            {{ site_contact.phone }}
           </a>
-          <a href="https://wa.me/994501234567" class="footer-modern__contact-link">
+          {% endif %}
+          {% if whatsapp_link %}
+          <a href="{{ whatsapp_link }}" target="_blank" rel="noopener" class="footer-modern__contact-link">
             <iconify-icon icon="mdi:whatsapp"></iconify-icon>
-            +994 50 123 45 67
+            {{ site_contact.whatsapp_number }}
           </a>
-          <a href="#!" class="footer-modern__contact-link">
+          {% endif %}
+          {% if contact_address %}
+          <a href="{% if contact_map_link %}{{ contact_map_link }}{% else %}#!{% endif %}" {% if contact_map_link %}target="_blank" rel="noopener"{% endif %} class="footer-modern__contact-link">
             <iconify-icon icon="lucide:map-pin"></iconify-icon>
-            Əhməd Rəcəbli 49B, Bakı
+            {{ contact_address }}
           </a>
+          {% endif %}
         </div>
       </div>
     </div>
     <div class="footer-modern__bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
-      <p class="mb-0">© 2025 DigiBoom. Bütün hüquqlar qorunur.</p>
+      <p class="mb-0">{% trans "© 2025 DigiBoom. Bütün hüquqlar qorunur." %}</p>
+      {% if has_terms or has_privacy %}
       <div class="d-flex footer-modern__bottom-links">
-        <a href="{% url 'terms' %}">Şərtlər</a>
-        <a href="{% url 'privacy' %}">Məxfilik</a>
+        {% if has_terms %}<a href="{% url 'terms' %}">{% trans "Şərtlər" %}</a>{% endif %}
+        {% if has_privacy %}<a href="{% url 'privacy' %}">{% trans "Məxfilik" %}</a>{% endif %}
       </div>
+      {% endif %}
     </div>
   </div>
 </footer>
