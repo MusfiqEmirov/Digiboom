@@ -175,6 +175,7 @@ TRAINING_HELP = (
     'qalereya və müştəriyə göndərilən access linklər.<br>'
     '<strong>Harada dəyişir?</strong> Menyu → Təlim; təlim detail; '
     '«Ən populyar» spotlight kartı.<br>'
+    '<strong>Sıra:</strong> 1 = ilk. Kiçik rəqəm siyahıda əvvəl gəlir.<br>'
     '<strong>Qeyd:</strong> Ödənişdən sonra göndərilən material linklərini '
     'buradakı access linklərdə doldurun.'
 )
@@ -196,8 +197,9 @@ PACKAGE_HELP = (
 PROJECT_HELP = (
     '<strong>Bu nədir?</strong> Portfolio — gördüyümüz işlər.<br>'
     '<strong>Harada dəyişir?</strong> Menyu → Portfolio; layihə detail səhifəsi.<br>'
-    '<strong>İçindəkilər:</strong> Cover, video, xidmət teqləri, «Nə etdik», '
-    'qalereya və sosial linklər — hamısı bu redaktədə / inlinelərdədir.'
+    '<strong>İçindəkilər:</strong> Cover, video, daxil olan xidmətlər '
+    '(mövcud Xidmətlər siyahısından seçilir — detail-də xidmət səhifəsinə link), '
+    '«Nə etdik», qalereya və sosial linklər — hamısı bu redaktədə / inlinelərdədir.'
 )
 
 BLOG_HELP = (

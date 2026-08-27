@@ -90,12 +90,6 @@
     var lane = { track: track, viewport: viewport, flow: 'left', offset: 0, loopWidth: 0, paused: false };
 
     var origChildren = Array.from(lane.track.children);
-    origChildren.forEach(function (child) {
-      var clone = child.cloneNode(true);
-      clone.setAttribute('data-clone', 'true');
-      lane.track.appendChild(clone);
-    });
-    lane.track.style.animation = 'none';
 
     function easeOutQuart(t) {
       return 1 - Math.pow(1 - t, 4);
@@ -111,19 +105,64 @@
       lane.track.style.transform = 'translate3d(' + (-x) + 'px,0,0)';
     }
 
-    function measure() {
-      lane.loopWidth = lane.track.scrollWidth / 2;
+    /**
+     * Clone the gallery set enough times so the track always fills the
+     * viewport (and beyond) — seamless infinite loop even with 2–3 images.
+     */
+    function rebuildLoop() {
+      Array.from(lane.track.querySelectorAll('[data-clone="true"]')).forEach(function (node) {
+        node.remove();
+      });
+
+      if (!origChildren.length) {
+        lane.loopWidth = 0;
+        setLaneTransform();
+        return;
+      }
+
+      // Measure one original set width before cloning
+      var setWidth = lane.track.scrollWidth;
+      var viewportW = viewport.clientWidth || 1;
+      // Need at least 2 sets, and enough total width to cover 2 viewports
+      var targetWidth = Math.max(viewportW * 2, setWidth * 2, 1);
+      var guard = 0;
+
+      while (lane.track.scrollWidth < targetWidth && guard < 24) {
+        origChildren.forEach(function (child) {
+          var clone = child.cloneNode(true);
+          clone.setAttribute('data-clone', 'true');
+          clone.setAttribute('aria-hidden', 'true');
+          clone.tabIndex = -1;
+          lane.track.appendChild(clone);
+        });
+        guard += 1;
+        // setWidth of 0 would infinite-loop; bail
+        if (setWidth <= 0) break;
+      }
+
+      // Use first clone's offset so flex gap between sets is included
+      var firstClone = lane.track.querySelector('[data-clone="true"]');
+      lane.loopWidth = firstClone
+        ? firstClone.offsetLeft
+        : (setWidth > 0 ? setWidth : 0);
       lane.offset = normalize(lane.offset, lane.loopWidth);
       setLaneTransform();
     }
 
+    function measure() {
+      rebuildLoop();
+    }
+
     function getStep() {
-      var first = lane.track.firstElementChild;
+      var first = lane.track.querySelector('.project-gallery-marquee__item:not([data-clone])')
+        || lane.track.firstElementChild;
       if (!first) return 300;
       var style = getComputedStyle(lane.track);
       var gap = parseFloat(style.columnGap || style.gap || 0) || 0;
       return first.offsetWidth + gap;
     }
+
+    lane.track.style.animation = 'none';
 
     function animateNudge(delta) {
       if (animating || lane.loopWidth <= 0) return;
@@ -167,12 +206,26 @@
       requestAnimationFrame(tick);
     }
 
-    measure();
-    tick();
+    // Wait a frame so images/layout sizes settle before measuring
+    requestAnimationFrame(function () {
+      measure();
+      tick();
+    });
 
     window.addEventListener('resize', function () {
       clearTimeout(resizeT);
       resizeT = setTimeout(measure, 200);
+    });
+
+    // Re-measure when images load (widths can change)
+    origChildren.forEach(function (child) {
+      var img = child.querySelector('img');
+      if (img && !img.complete) {
+        img.addEventListener('load', function () {
+          clearTimeout(resizeT);
+          resizeT = setTimeout(measure, 50);
+        });
+      }
     });
 
     galleryRoot.querySelectorAll('.project-gallery-carousel__nav--prev').forEach(function (btn) {
@@ -275,19 +328,13 @@
 
   if (gallery && modalEl && modalImg) {
     var images = [];
-    var i;
-    for (i = 0; i < 8; i++) {
-      var item = gallery.querySelector('.project-gallery-marquee__item[data-gallery-index="' + i + '"]:not([data-clone])');
-      if (!item) {
-        item = gallery.querySelector('.project-gallery-marquee__item[data-gallery-index="' + i + '"]');
-      }
-      if (!item) continue;
+    gallery.querySelectorAll('.project-gallery-marquee__item:not([data-clone])').forEach(function (item) {
       var img = item.querySelector('img');
       images.push({
         src: img ? img.src : '',
         alt: img ? img.alt : ''
       });
-    }
+    });
 
     var currentIndex = 0;
     var modalInstance = null;

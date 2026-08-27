@@ -3,6 +3,8 @@
 
   /* =====================================================
      HERO BANNER SLIDER
+     - Both arrows always visible (when >1 slide)
+     - Auto: image ~3.5s → next; video → next when ended
      ===================================================== */
   var heroMedia = document.querySelector('.hero-banner-media');
   if (heroMedia) {
@@ -12,12 +14,56 @@
     var current = 0;
     var heroTransitionMs = 850;
     var heroTransitioning = false;
+    var imageDwellMs = 3500;
+    var autoTimer = null;
+    var videoEndedHandler = null;
+
+    function clearAutoAdvance() {
+      if (autoTimer) {
+        clearTimeout(autoTimer);
+        autoTimer = null;
+      }
+      if (videoEndedHandler) {
+        slides.forEach(function (slide) {
+          var vid = slide.querySelector('video');
+          if (vid) vid.removeEventListener('ended', videoEndedHandler);
+        });
+        videoEndedHandler = null;
+      }
+    }
+
+    function scheduleAutoAdvance() {
+      clearAutoAdvance();
+      if (slides.length <= 1) return;
+
+      var slide = slides[current];
+      var vid = slide.querySelector('video');
+
+      if (vid) {
+        videoEndedHandler = function () {
+          goTo(current + 1);
+        };
+        vid.addEventListener('ended', videoEndedHandler);
+        // If metadata already ended / short clip already finished
+        if (vid.ended) {
+          autoTimer = setTimeout(function () {
+            goTo(current + 1);
+          }, 200);
+        }
+      } else {
+        autoTimer = setTimeout(function () {
+          goTo(current + 1);
+        }, imageDwellMs);
+      }
+    }
 
     function goTo(idx) {
       if (heroTransitioning) return;
+      if (slides.length <= 1) return;
       var next = (idx + slides.length) % slides.length;
       if (next === current) return;
 
+      clearAutoAdvance();
       heroTransitioning = true;
       var oldSlide = slides[current];
       var oldVid = oldSlide.querySelector('video');
@@ -28,50 +74,49 @@
 
       var newVid = slides[current].querySelector('video');
       if (newVid) {
+        try {
+          newVid.currentTime = 0;
+        } catch (e) { /* ignore */ }
         newVid.play().catch(function () {});
       }
 
-      updateBtns();
-
       setTimeout(function () {
-        if (oldVid) oldVid.pause();
+        if (oldVid) {
+          oldVid.pause();
+          try {
+            oldVid.currentTime = 0;
+          } catch (e) { /* ignore */ }
+        }
         heroTransitioning = false;
+        scheduleAutoAdvance();
       }, heroTransitionMs);
     }
 
-    function updateBtns() {
-      if (!prevBtn || !nextBtn) return;
-      var isVideo = !!slides[current].querySelector('video');
-
-      if (isVideo) {
-        prevBtn.classList.add('hero-banner-nav--hidden');
-        prevBtn.classList.add('hero-banner-nav--disabled');
-        prevBtn.setAttribute('aria-disabled', 'true');
-        prevBtn.setAttribute('aria-hidden', 'true');
-        prevBtn.setAttribute('tabindex', '-1');
-      } else {
-        prevBtn.classList.remove('hero-banner-nav--hidden');
-        prevBtn.classList.remove('hero-banner-nav--disabled');
-        prevBtn.removeAttribute('aria-disabled');
-        prevBtn.removeAttribute('aria-hidden');
-        prevBtn.removeAttribute('tabindex');
-      }
-    }
-
     if (prevBtn) {
+      prevBtn.classList.remove('hero-banner-nav--hidden', 'hero-banner-nav--disabled');
+      prevBtn.removeAttribute('aria-disabled');
+      prevBtn.removeAttribute('aria-hidden');
+      prevBtn.removeAttribute('tabindex');
       prevBtn.addEventListener('click', function () {
-        if (prevBtn.classList.contains('hero-banner-nav--hidden')) return;
         goTo(current - 1);
       });
     }
     if (nextBtn) {
+      nextBtn.classList.remove('hero-banner-nav--hidden', 'hero-banner-nav--disabled');
+      nextBtn.removeAttribute('aria-disabled');
+      nextBtn.removeAttribute('aria-hidden');
+      nextBtn.removeAttribute('tabindex');
       nextBtn.addEventListener('click', function () {
         goTo(current + 1);
       });
     }
 
-    // Initial state
-    updateBtns();
+    // Start autoplay for the initial slide
+    var firstVid = slides[current] && slides[current].querySelector('video');
+    if (firstVid) {
+      firstVid.play().catch(function () {});
+    }
+    scheduleAutoAdvance();
   }
 
   /* =====================================================
@@ -165,8 +210,12 @@
 
     playBtn.addEventListener('click', function () {
       hideOverlay();
+      video.muted = false;
       video.play().catch(function () {
-        showOverlay();
+        video.muted = true;
+        video.play().then(hideOverlay).catch(function () {
+          showOverlay();
+        });
       });
     });
 
@@ -230,6 +279,15 @@
 
   var contactSuccessTimer = null;
 
+  function getCsrfToken() {
+    var cookie = document.cookie.match(/(?:^|;\s*)csrftoken=([^;]+)/);
+    if (cookie) return decodeURIComponent(cookie[1]);
+    var input = document.querySelector('input[name="csrfmiddlewaretoken"]');
+    return input ? input.value : '';
+  }
+
+  window.digiboomGetCsrfToken = getCsrfToken;
+
   function showContactSuccessAlert() {
     var alertEl = document.getElementById('contactSuccessAlert');
     if (!alertEl) return;
@@ -260,8 +318,9 @@
         }
 
         var submitBtn = form.querySelector('[type="submit"]');
-        var endpoint = form.getAttribute('action') || '/api/contact';
+        var endpoint = form.getAttribute('action') || '/api/appeal/';
         var formData = new FormData(form);
+        var csrf = getCsrfToken();
 
         if (submitBtn) submitBtn.classList.add('is-loading');
         showFormStatus(form, '', '');
@@ -269,22 +328,28 @@
         fetch(endpoint, {
           method: 'POST',
           body: formData,
-          headers: { Accept: 'application/json' }
+          credentials: 'same-origin',
+          headers: {
+            Accept: 'application/json',
+            'X-CSRFToken': csrf
+          }
         })
           .then(function (res) {
-            if (!res.ok) {
-              return res.json().catch(function () {
-                return { ok: false };
-              });
-            }
             return res.json().catch(function () {
-              return { ok: true };
+              return { ok: false, message: 'Xəta baş verdi.' };
+            }).then(function (data) {
+              data._httpOk = res.ok;
+              return data;
             });
           })
           .catch(function () {
-            return { ok: false };
+            return { ok: false, message: 'Şəbəkə xətası.' };
           })
-          .then(function () {
+          .then(function (data) {
+            if (!data || !data.ok) {
+              showFormStatus(form, (data && data.message) || 'Göndərilmədi. Yenidən cəhd edin.', 'error');
+              return;
+            }
             showFormStatus(form, '', '');
             form.reset();
             var contactModalEl = document.getElementById('contactModal');

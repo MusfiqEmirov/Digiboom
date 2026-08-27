@@ -9,7 +9,8 @@ Special rules:
 - Category is hidden from the admin menu.
 """
 
-from django.core.validators import FileExtensionValidator, MaxLengthValidator
+from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator, MaxLengthValidator, MinValueValidator
 from django.db import models
 
 from core.utils import unique_slug_for
@@ -123,7 +124,7 @@ class Training(models.Model):
     is_popular = models.BooleanField(
         default=False,
         verbose_name='Ən populyar?',
-        help_text='Spotlight / «Ən populyar» işarəsi.',
+        help_text='Spotlight / «Ən populyar» işarəsi. Eyni anda yalnız bir təlim seçilə bilər.',
     )
     is_active = models.BooleanField(
         default=True,
@@ -131,10 +132,11 @@ class Training(models.Model):
         help_text='Söndürsəniz saytda görünməz.',
     )
     sort_order = models.PositiveIntegerField(
-        default=0,
+        default=1,
         db_index=True,
+        validators=[MinValueValidator(1)],
         verbose_name='Sıra',
-        help_text='0 = ilk. Kiçik rəqəm əvvəl göstərilir.',
+        help_text='1 = ilk. Kiçik rəqəm siyahıda əvvəl gəlir.',
     )
 
     class Meta:
@@ -145,6 +147,22 @@ class Training(models.Model):
     def __str__(self):
         return self.name_az or f'Təlim #{self.pk}'
 
+    def clean(self):
+        super().clean()
+        if not self.is_popular:
+            return
+        qs = Training.objects.filter(is_popular=True)
+        if self.pk:
+            qs = qs.exclude(pk=self.pk)
+        other = qs.first()
+        if other:
+            raise ValidationError({
+                'is_popular': (
+                    f'Artıq «Ən populyar» seçilib: «{other.name_az}». '
+                    'Yalnız bir təlim ola bilər — əvvəlcə digərini söndürün.'
+                ),
+            })
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = unique_slug_for(self, self.name_az)
@@ -152,17 +170,17 @@ class Training(models.Model):
 
     @property
     def cover_image(self):
-        """Card image — gallery row marked «Kart şəkli?» (falls back to first)."""
+        """Card image — gallery «Kart şəkli?»; else first gallery frame."""
         cover = self.gallery_images.filter(is_cover=True).first()
         if cover:
             return cover.image
-        first = self.gallery_images.first()
+        first = self.gallery_images.order_by('sort_order', 'id').first()
         return first.image if first else None
 
     @property
     def promo_video(self):
-        """Promo video — curriculum item marked «Tanıtım videosu?»."""
-        item = self.curriculum_items.filter(is_promo=True).first()
+        """Detail tanıtım videosu — «Tanıtım videosu?» işarələnən icmal."""
+        item = self.curriculum_items.filter(is_promo=True).exclude(video='').first()
         return item.video if item else None
 
 
@@ -257,10 +275,11 @@ class TrainingCurriculumItem(models.Model):
         help_text='İşarələsəniz bu video detail-də tanıtım kimi görünəcək. Bir təlimdə yalnız biri.',
     )
     sort_order = models.PositiveIntegerField(
-        default=0,
+        default=1,
         db_index=True,
+        validators=[MinValueValidator(1)],
         verbose_name='Sıra',
-        help_text='0 = ilk. Kiçik rəqəm əvvəl göstərilir.',
+        help_text='1 = ilk. Detail icmal siyahısında başlıq yanında görünür (məs: 1. Giriş).',
     )
 
     class Meta:
@@ -301,11 +320,18 @@ class TrainingGalleryImage(models.Model):
         verbose_name='Kart şəkli?',
         help_text='İşarələsəniz bu şəkil təlim kartında görünəcək. Bir təlimdə yalnız biri.',
     )
+    sort_order = models.PositiveIntegerField(
+        default=1,
+        db_index=True,
+        validators=[MinValueValidator(1)],
+        verbose_name='Sıra',
+        help_text='1 = ilk. Kiçik rəqəm qalereyada əvvəl gəlir.',
+    )
 
     class Meta:
         verbose_name = 'Təlimdən kadr'
         verbose_name_plural = 'Təlimdən kadrlar'
-        ordering = ('id',)
+        ordering = ('sort_order', 'id')
 
     def __str__(self):
         return f'Qaleriya #{self.pk}' if self.pk else 'Qaleriya şəkli'

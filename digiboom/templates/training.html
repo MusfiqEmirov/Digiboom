@@ -1,4 +1,4 @@
-﻿{% load static i18n %}
+﻿{% load static i18n digiboom_tags %}
 <!doctype html>
 <html lang="{{ LANGUAGE_CODE|default:'az' }}">
 
@@ -30,6 +30,7 @@
 
   <div class="page-wrapper training-page overflow-hidden">
 
+    {% if training_motto or training_why_items or training_stats or page_header %}
     <section class="training-hero" aria-labelledby="training-hero-title">
       <div class="training-hero__mesh" aria-hidden="true"></div>
       <div class="training-hero__glow training-hero__glow--1" aria-hidden="true"></div>
@@ -41,76 +42,81 @@
               <iconify-icon icon="lucide:graduation-cap" aria-hidden="true"></iconify-icon>
               DigiBoom Academy
             </span>
-            <h1 id="training-hero-title" class="training-hero__title">Online Təlimlər</h1>
-            <p class="training-hero__tagline page-banner-tagline">Praktiki kurslar ilə rəqəmsal bacarıqlarınızı artırın — marketinq, SMM, SEO və brendinq üzrə mentor dəstəyi.</p>
+            <h1 id="training-hero-title" class="training-hero__title">{% trans "Online Təlimlər" %}</h1>
+            {% if training_motto %}
+            <div class="training-hero__tagline page-banner-tagline">{{ training_motto|safe }}</div>
+            {% endif %}
+            {% if trainings %}
             <div class="training-hero__actions">
               <a href="#training-catalog" class="btn btn-sm training-hero__cta">
                 <span class="btn-text">{% trans "Kurslara baxın" %}</span>
                 <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm" aria-hidden="true"></iconify-icon>
               </a>
             </div>
+            {% endif %}
           </div>
+          {% if training_why_items or training_stats %}
           <div class="training-hero__panel" data-aos="fade-left" data-aos-delay="120" data-aos-duration="900">
+            {% if training_why_title or training_why_items %}
             <div class="training-hero__panel-head">
-              <span class="training-hero__panel-label">{% trans "Niyə biz?" %}</span>
-              <p>{% trans "Peşəkar komandadan öyrənin — nəzəriyyə deyil, tətbiq olunan bilik." %}</p>
+              {% if training_why_title %}<span class="training-hero__panel-label">{{ training_why_title }}</span>{% endif %}
             </div>
+            {% endif %}
+            {% if training_why_items %}
             <ul class="training-hero__perks">
+              {% for item in training_why_items %}
               <li>
-                <iconify-icon icon="lucide:video" aria-hidden="true"></iconify-icon>
-                <span>Video dərslər və canlı sessiyalar</span>
+                {% if item.icon %}<iconify-icon icon="{{ item.icon }}" aria-hidden="true"></iconify-icon>{% endif %}
+                <span>{{ item|localized:'text' }}</span>
               </li>
-              <li>
-                <iconify-icon icon="lucide:file-check" aria-hidden="true"></iconify-icon>
-                <span>Bitirmə sertifikatı</span>
-              </li>
-              <li>
-                <iconify-icon icon="lucide:users" aria-hidden="true"></iconify-icon>
-                <span>Kiçik qrup və fərdi mentorluq</span>
-              </li>
-              <li>
-                <iconify-icon icon="lucide:infinity" aria-hidden="true"></iconify-icon>
-                <span>Materiallara limitsiz giriş</span>
-              </li>
+              {% endfor %}
             </ul>
+            {% endif %}
+            {% if training_stats %}
             <div class="training-hero__stats">
+              {% for stat in training_stats %}
               <div class="training-hero__stat">
-                <strong>8+</strong>
-                <span>Aktiv kurs</span>
+                <strong>{{ stat.value }}</strong>
+                <span>{{ stat|localized:'label' }}</span>
               </div>
-              <div class="training-hero__stat">
-                <strong>120+</strong>
-                <span>Saat məzmun</span>
-              </div>
-              <div class="training-hero__stat">
-                <strong>500+</strong>
-                <span>Məzun</span>
-              </div>
+              {% endfor %}
             </div>
+            {% endif %}
           </div>
+          {% endif %}
         </div>
       </div>
     </section>
+    {% endif %}
 
+    {% if featured_training %}
     <section class="training-spotlight" data-aos="fade-up" data-aos-delay="80" data-aos-duration="900">
       <div class="container">
         <article class="training-spotlight__card">
+          {% if featured_training.cover_image %}
           <div class="training-spotlight__media">
-            <img src="{% static 'images/services/services-img-1.jpg' %}" alt="Rəqəmsal marketinq əsasları" loading="lazy">
+            <img src="{{ featured_training.cover_image.url }}" alt="{{ featured_training|localized:'name' }}" loading="lazy">
+            {% if featured_training.is_popular %}
             <span class="training-spotlight__badge">{% trans "Ən populyar" %}</span>
+            {% endif %}
           </div>
+          {% endif %}
           <div class="training-spotlight__body">
-            <span class="training-spotlight__tag">Marketinq</span>
-            <h2 class="training-spotlight__title">Rəqəmsal marketinq əsasları</h2>
-            <p class="training-spotlight__text">Sosial media, reklam və analitika ilə işə başlamaq üçün ən çox seçilən başlanğıc proqramı — sıfırdan praktiki layihələrə qədər.</p>
+            {% if featured_training.category %}
+            <span class="training-spotlight__tag">{{ featured_training.category|localized:'name' }}</span>
+            {% endif %}
+            <h2 class="training-spotlight__title">{{ featured_training|localized:'name' }}</h2>
+            {% with desc=featured_training|localized:'description'|plain_text|truncatewords:28 %}
+            {% if desc %}<p class="training-spotlight__text">{{ desc }}</p>{% endif %}
+            {% endwith %}
             <ul class="training-spotlight__meta">
-              <li><iconify-icon icon="lucide:clock" aria-hidden="true"></iconify-icon> 18 {% trans "saat" %}</li>
-              <li><iconify-icon icon="lucide:layers" aria-hidden="true"></iconify-icon> 24 {% trans "dərs" %}</li>
-              <li><iconify-icon icon="lucide:signal" aria-hidden="true"></iconify-icon> {% trans "Başlanğıc" %}</li>
+              {% if featured_training.duration_hours %}<li><iconify-icon icon="lucide:clock" aria-hidden="true"></iconify-icon> {{ featured_training.duration_hours }} {% trans "saat" %}</li>{% endif %}
+              {% if featured_training.lesson_count %}<li><iconify-icon icon="lucide:layers" aria-hidden="true"></iconify-icon> {{ featured_training.lesson_count }} {% trans "dərs" %}</li>{% endif %}
+              {% if featured_training.level %}<li><iconify-icon icon="lucide:signal" aria-hidden="true"></iconify-icon> {{ featured_training.get_level_display }}</li>{% endif %}
             </ul>
             <div class="training-spotlight__footer">
-              <span class="training-spotlight__price">149 <small>AZN</small></span>
-              <a href="{% url 'training_detail' %}" class="btn btn-sm">
+              {% if featured_training.price %}<span class="training-spotlight__price">{{ featured_training.price }} <small>AZN</small></span>{% endif %}
+              <a href="{% url 'training_detail' featured_training.slug %}" class="btn btn-sm">
                 <span class="btn-text">{% trans "Kursa baxın" %}</span>
                 <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm" aria-hidden="true"></iconify-icon>
               </a>
@@ -119,7 +125,9 @@
         </article>
       </div>
     </section>
+    {% endif %}
 
+    {% if trainings %}
     <section class="training-catalog" id="training-catalog">
       <div class="container">
         <div class="training-catalog__head" data-aos="fade-up" data-aos-delay="60" data-aos-duration="900">
@@ -129,205 +137,48 @@
         </div>
 
         <div class="training-catalog__layout">
+          {% if training_categories %}
           <aside class="training-filters" data-aos="fade-right" data-aos-delay="100" data-aos-duration="900" aria-label="Kurs filtrləri">
             <h3 class="training-filters__title">{% trans "Kateqoriya" %}</h3>
             <ul class="training-filters__list">
               <li><button type="button" class="training-filters__chip is-active" data-training-filter="all">{% trans "Hamısı" %}</button></li>
-              <li><button type="button" class="training-filters__chip" data-training-filter="marketinq">Marketinq</button></li>
-              <li><button type="button" class="training-filters__chip" data-training-filter="smm">SMM</button></li>
-              <li><button type="button" class="training-filters__chip" data-training-filter="seo">SEO</button></li>
-              <li><button type="button" class="training-filters__chip" data-training-filter="brendinq">Brendinq</button></li>
-              <li><button type="button" class="training-filters__chip" data-training-filter="korporativ">Korporativ</button></li>
+              {% for category in training_categories %}
+              <li><button type="button" class="training-filters__chip" data-training-filter="{{ category.slug }}">{{ category|localized:'name' }}</button></li>
+              {% endfor %}
             </ul>
           </aside>
+          {% endif %}
 
           <div class="training-catalog__main">
             <div class="training-course-list" data-training-grid data-aos="fade-up" data-aos-delay="120" data-aos-duration="900">
-
-              <article class="training-course" data-training-card data-training-category="marketinq">
-                <a href="{% url 'training_detail' %}" class="training-course__thumb" tabindex="-1" aria-hidden="true">
-                  <img src="{% static 'images/services/services-img-1.jpg' %}" alt="" loading="lazy">
+              {% for training in trainings %}
+              <article class="training-course" data-training-card data-training-category="{{ training.category.slug }}">
+                <a href="{% url 'training_detail' training.slug %}" class="training-course__thumb" tabindex="-1" aria-hidden="true">
+                  {% if training.cover_image %}
+                  <img src="{{ training.cover_image.url }}" alt="" loading="lazy">
+                  {% endif %}
                   <span class="training-course__play"><iconify-icon icon="lucide:play" aria-hidden="true"></iconify-icon></span>
                 </a>
                 <div class="training-course__content">
                   <div class="training-course__top">
-                    <span class="training-course__cat">Marketinq</span>
-                    <span class="training-course__level">{% trans "Başlanğıc" %}</span>
+                    <span class="training-course__cat">{{ training.category|localized:'name' }}</span>
+                    {% if training.level %}<span class="training-course__level">{{ training.get_level_display }}</span>{% endif %}
                   </div>
-                  <h3 class="training-course__title"><a href="{% url 'training_detail' %}">Rəqəmsal marketinq əsasları</a></h3>
-                  <p class="training-course__excerpt">Sosial media, reklam və analitika ilə işə başlamaq üçün praktiki təməl biliklər.</p>
+                  <h3 class="training-course__title"><a href="{% url 'training_detail' training.slug %}">{{ training|localized:'name' }}</a></h3>
+                  {% with excerpt=training|localized:'description'|plain_text|truncatewords:18 %}
+                  {% if excerpt %}<p class="training-course__excerpt">{{ excerpt }}</p>{% endif %}
+                  {% endwith %}
                   <ul class="training-course__meta">
-                    <li><iconify-icon icon="lucide:clock" aria-hidden="true"></iconify-icon> 18 {% trans "saat" %}</li>
-                    <li><iconify-icon icon="lucide:book-open" aria-hidden="true"></iconify-icon> 24 {% trans "dərs" %}</li>
+                    {% if training.duration_hours %}<li><iconify-icon icon="lucide:clock" aria-hidden="true"></iconify-icon> {{ training.duration_hours }} {% trans "saat" %}</li>{% endif %}
+                    {% if training.lesson_count %}<li><iconify-icon icon="lucide:book-open" aria-hidden="true"></iconify-icon> {{ training.lesson_count }} {% trans "dərs" %}</li>{% endif %}
                   </ul>
                 </div>
                 <div class="training-course__aside">
-                  <span class="training-course__price">149 <small>AZN</small></span>
-                  <a href="{% url 'training_detail' %}" class="training-course__btn">{% trans "Ətraflı" %}</a>
+                  {% if training.price %}<span class="training-course__price">{{ training.price }} <small>AZN</small></span>{% endif %}
+                  <a href="{% url 'training_detail' training.slug %}" class="training-course__btn">{% trans "Ətraflı" %}</a>
                 </div>
               </article>
-
-              <article class="training-course" data-training-card data-training-category="smm">
-                <a href="{% url 'training_detail' %}" class="training-course__thumb" tabindex="-1" aria-hidden="true">
-                  <img src="{% static 'images/services/services-img-2.jpg' %}" alt="" loading="lazy">
-                  <span class="training-course__play"><iconify-icon icon="lucide:play" aria-hidden="true"></iconify-icon></span>
-                </a>
-                <div class="training-course__content">
-                  <div class="training-course__top">
-                    <span class="training-course__cat">SMM</span>
-                    <span class="training-course__level">Orta</span>
-                  </div>
-                  <h3 class="training-course__title"><a href="{% url 'training_detail' %}">SMM praktik kursu</a></h3>
-                  <p class="training-course__excerpt">Instagram, Facebook və TikTok üçün məzmun planı, dizayn və reklam strategiyası.</p>
-                  <ul class="training-course__meta">
-                    <li><iconify-icon icon="lucide:clock" aria-hidden="true"></iconify-icon> 22 {% trans "saat" %}</li>
-                    <li><iconify-icon icon="lucide:book-open" aria-hidden="true"></iconify-icon> 28 {% trans "dərs" %}</li>
-                  </ul>
-                </div>
-                <div class="training-course__aside">
-                  <span class="training-course__price">199 <small>AZN</small></span>
-                  <a href="{% url 'training_detail' %}" class="training-course__btn">{% trans "Ətraflı" %}</a>
-                </div>
-              </article>
-
-              <article class="training-course" data-training-card data-training-category="seo">
-                <a href="{% url 'training_detail' %}" class="training-course__thumb" tabindex="-1" aria-hidden="true">
-                  <img src="{% static 'images/services/services-img-3.jpg' %}" alt="" loading="lazy">
-                  <span class="training-course__play"><iconify-icon icon="lucide:play" aria-hidden="true"></iconify-icon></span>
-                </a>
-                <div class="training-course__content">
-                  <div class="training-course__top">
-                    <span class="training-course__cat">SEO</span>
-                    <span class="training-course__level">Orta</span>
-                  </div>
-                  <h3 class="training-course__title"><a href="{% url 'training_detail' %}">SEO və kontent marketinqi</a></h3>
-                  <p class="training-course__excerpt">Açar sözlər, texniki SEO və bloq yazıları ilə orqanik trafik artırma.</p>
-                  <ul class="training-course__meta">
-                    <li><iconify-icon icon="lucide:clock" aria-hidden="true"></iconify-icon> 16 {% trans "saat" %}</li>
-                    <li><iconify-icon icon="lucide:book-open" aria-hidden="true"></iconify-icon> 20 {% trans "dərs" %}</li>
-                  </ul>
-                </div>
-                <div class="training-course__aside">
-                  <span class="training-course__price">179 <small>AZN</small></span>
-                  <a href="{% url 'training_detail' %}" class="training-course__btn">{% trans "Ətraflı" %}</a>
-                </div>
-              </article>
-
-              <article class="training-course" data-training-card data-training-category="brendinq">
-                <a href="{% url 'training_detail' %}" class="training-course__thumb" tabindex="-1" aria-hidden="true">
-                  <img src="{% static 'images/services/services-img-4.jpg' %}" alt="" loading="lazy">
-                  <span class="training-course__play"><iconify-icon icon="lucide:play" aria-hidden="true"></iconify-icon></span>
-                </a>
-                <div class="training-course__content">
-                  <div class="training-course__top">
-                    <span class="training-course__cat">Brendinq</span>
-                    <span class="training-course__level">{% trans "Başlanğıc" %}</span>
-                  </div>
-                  <h3 class="training-course__title"><a href="{% url 'training_detail' %}">Brendinq və vizual identitet</a></h3>
-                  <p class="training-course__excerpt">Loqo, rəng palitrası və brend kitabçası hazırlamağın əsas prinsipləri.</p>
-                  <ul class="training-course__meta">
-                    <li><iconify-icon icon="lucide:clock" aria-hidden="true"></iconify-icon> 12 {% trans "saat" %}</li>
-                    <li><iconify-icon icon="lucide:book-open" aria-hidden="true"></iconify-icon> 16 {% trans "dərs" %}</li>
-                  </ul>
-                </div>
-                <div class="training-course__aside">
-                  <span class="training-course__price">129 <small>AZN</small></span>
-                  <a href="{% url 'training_detail' %}" class="training-course__btn">{% trans "Ətraflı" %}</a>
-                </div>
-              </article>
-
-              <article class="training-course" data-training-card data-training-category="marketinq">
-                <a href="{% url 'training_detail' %}" class="training-course__thumb" tabindex="-1" aria-hidden="true">
-                  <img src="{% static 'images/services/services-img-1.jpg' %}" alt="" loading="lazy">
-                  <span class="training-course__play"><iconify-icon icon="lucide:play" aria-hidden="true"></iconify-icon></span>
-                </a>
-                <div class="training-course__content">
-                  <div class="training-course__top">
-                    <span class="training-course__cat">Marketinq</span>
-                    <span class="training-course__level">Qabaqcıl</span>
-                  </div>
-                  <h3 class="training-course__title"><a href="{% url 'training_detail' %}">Google Ads kampaniyaları</a></h3>
-                  <p class="training-course__excerpt">Axtarış və display reklamları, büdcə idarəetməsi və konversiya optimallaşdırması.</p>
-                  <ul class="training-course__meta">
-                    <li><iconify-icon icon="lucide:clock" aria-hidden="true"></iconify-icon> 20 {% trans "saat" %}</li>
-                    <li><iconify-icon icon="lucide:book-open" aria-hidden="true"></iconify-icon> 26 {% trans "dərs" %}</li>
-                  </ul>
-                </div>
-                <div class="training-course__aside">
-                  <span class="training-course__price">219 <small>AZN</small></span>
-                  <a href="{% url 'training_detail' %}" class="training-course__btn">{% trans "Ətraflı" %}</a>
-                </div>
-              </article>
-
-              <article class="training-course" data-training-card data-training-category="smm">
-                <a href="{% url 'training_detail' %}" class="training-course__thumb" tabindex="-1" aria-hidden="true">
-                  <img src="{% static 'images/services/services-img-2.jpg' %}" alt="" loading="lazy">
-                  <span class="training-course__play"><iconify-icon icon="lucide:play" aria-hidden="true"></iconify-icon></span>
-                </a>
-                <div class="training-course__content">
-                  <div class="training-course__top">
-                    <span class="training-course__cat">SMM</span>
-                    <span class="training-course__level">Orta</span>
-                  </div>
-                  <h3 class="training-course__title"><a href="{% url 'training_detail' %}">Video məzmun istehsalı</a></h3>
-                  <p class="training-course__excerpt">Reels, qısa tanıtım və reklam videoları üçün çəkiliş və montaj əsasları.</p>
-                  <ul class="training-course__meta">
-                    <li><iconify-icon icon="lucide:clock" aria-hidden="true"></iconify-icon> 14 {% trans "saat" %}</li>
-                    <li><iconify-icon icon="lucide:book-open" aria-hidden="true"></iconify-icon> 18 {% trans "dərs" %}</li>
-                  </ul>
-                </div>
-                <div class="training-course__aside">
-                  <span class="training-course__price">159 <small>AZN</small></span>
-                  <a href="{% url 'training_detail' %}" class="training-course__btn">{% trans "Ətraflı" %}</a>
-                </div>
-              </article>
-
-              <article class="training-course" data-training-card data-training-category="korporativ">
-                <a href="{% url 'training_detail' %}" class="training-course__thumb" tabindex="-1" aria-hidden="true">
-                  <img src="{% static 'images/services/services-img-3.jpg' %}" alt="" loading="lazy">
-                  <span class="training-course__play"><iconify-icon icon="lucide:play" aria-hidden="true"></iconify-icon></span>
-                </a>
-                <div class="training-course__content">
-                  <div class="training-course__top">
-                    <span class="training-course__cat">Korporativ</span>
-                    <span class="training-course__level">Fərdi</span>
-                  </div>
-                  <h3 class="training-course__title"><a href="{% url 'training_detail' %}">Korporativ təlim paketi</a></h3>
-                  <p class="training-course__excerpt">Komanda üçün fərdiləşdirilmiş modullar — ofisdə və ya online formatda.</p>
-                  <ul class="training-course__meta">
-                    <li><iconify-icon icon="lucide:clock" aria-hidden="true"></iconify-icon> 40+ {% trans "saat" %}</li>
-                    <li><iconify-icon icon="lucide:book-open" aria-hidden="true"></iconify-icon> Modullar</li>
-                  </ul>
-                </div>
-                <div class="training-course__aside">
-                  <span class="training-course__price">349 <small>AZN</small></span>
-                  <a href="{% url 'training_detail' %}" class="training-course__btn">{% trans "Ətraflı" %}</a>
-                </div>
-              </article>
-
-              <article class="training-course" data-training-card data-training-category="marketinq">
-                <a href="{% url 'training_detail' %}" class="training-course__thumb" tabindex="-1" aria-hidden="true">
-                  <img src="{% static 'images/services/services-img-4.jpg' %}" alt="" loading="lazy">
-                  <span class="training-course__play"><iconify-icon icon="lucide:play" aria-hidden="true"></iconify-icon></span>
-                </a>
-                <div class="training-course__content">
-                  <div class="training-course__top">
-                    <span class="training-course__cat">Marketinq</span>
-                    <span class="training-course__level">Orta</span>
-                  </div>
-                  <h3 class="training-course__title"><a href="{% url 'training_detail' %}">E-ticarət satış strategiyası</a></h3>
-                  <p class="training-course__excerpt">Onlayn mağaza, məhsul səhifələri və satış hunisinin qurulması.</p>
-                  <ul class="training-course__meta">
-                    <li><iconify-icon icon="lucide:clock" aria-hidden="true"></iconify-icon> 17 {% trans "saat" %}</li>
-                    <li><iconify-icon icon="lucide:book-open" aria-hidden="true"></iconify-icon> 22 {% trans "dərs" %}</li>
-                  </ul>
-                </div>
-                <div class="training-course__aside">
-                  <span class="training-course__price">189 <small>AZN</small></span>
-                  <a href="{% url 'training_detail' %}" class="training-course__btn">{% trans "Ətraflı" %}</a>
-                </div>
-              </article>
-
+              {% endfor %}
             </div>
 
             <nav class="training-pagination" data-training-pagination aria-label="Təlim səhifələməsi"></nav>
@@ -335,6 +186,7 @@
         </div>
       </div>
     </section>
+    {% endif %}
 
     <section class="training-bottom-cta">
       <div class="container">
@@ -355,11 +207,7 @@
 
   {% include 'includes/footer.html' %}
 
-  <aside class="floating-widgets" aria-label="Sürətli əlaqə">
-    <a href="tel:+994501234567" class="floating-widget-btn floating-widget-btn--call" aria-label="Zəng edin"><iconify-icon icon="lucide:phone"></iconify-icon></a>
-    <a href="https://wa.me/994501234567" target="_blank" rel="noopener" class="floating-widget-btn floating-widget-btn--whatsapp" aria-label="WhatsApp"><iconify-icon icon="mdi:whatsapp"></iconify-icon></a>
-    <button type="button" class="floating-widget-btn floating-widget-btn--top" id="scrollToTopBtn" aria-label="Başa qayıdın"><iconify-icon icon="lucide:arrow-up"></iconify-icon></button>
-  </aside>
+  {% include 'includes/floating-widgets.html' %}
 
   <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
   <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>

@@ -28,6 +28,29 @@ from .admin_help import (
 from .mixins import AdminImageCompressMixin
 
 
+class TrainingAdminForm(forms.ModelForm):
+    """Yalnız bir təlim «Ən populyar» ola bilər."""
+
+    class Meta:
+        model = Training
+        fields = '__all__'
+
+    def clean_is_popular(self):
+        is_popular = self.cleaned_data.get('is_popular')
+        if not is_popular:
+            return is_popular
+        qs = Training.objects.filter(is_popular=True)
+        if self.instance.pk:
+            qs = qs.exclude(pk=self.instance.pk)
+        other = qs.first()
+        if other:
+            raise forms.ValidationError(
+                f'Artıq «Ən populyar» var: «{other.name_az}». '
+                'Yalnız bir təlim seçilə bilər — əvvəlcə digərini söndürün.'
+            )
+        return is_popular
+
+
 class TrainingAccessLinkInline(admin.TabularInline):
     """Links sent to the customer after successful payment (Zoom, materials, etc.)."""
 
@@ -78,13 +101,13 @@ class TrainingGalleryImageInline(admin.TabularInline):
     model = TrainingGalleryImage
     extra = 1
     max_num = 40
-    ordering = ('id',)
+    ordering = ('sort_order', 'id')
     classes = ('wide',)
     verbose_name = 'Kadr'
     verbose_name_plural = (
-        'Təlimdən kadrlar — «Kart şəkli?» işarələnən şəkil kartında görünür'
+        'Təlimdən kadrlar — «Kart şəkli?» işarələnən şəkil təlim siyahısında qapaq olur'
     )
-    fields = ('image_preview', 'image', 'is_cover')
+    fields = ('image_preview', 'image', 'is_cover', 'sort_order')
     readonly_fields = ('image_preview',)
 
     def image_preview(self, obj):
@@ -122,6 +145,7 @@ class TrainingAdmin(AdminImageCompressMixin, AdminPageHelpMixin, admin.ModelAdmi
     """Trainings — main left-menu section; Links/Curriculum/Gallery as inlines."""
 
     admin_page_help = TRAINING_HELP
+    form = TrainingAdminForm
     list_display = (
         'name_az',
         'category',
@@ -132,7 +156,7 @@ class TrainingAdmin(AdminImageCompressMixin, AdminPageHelpMixin, admin.ModelAdmi
         'sort_order',
     )
     list_filter = ('category', 'level', 'is_popular', 'is_active')
-    list_editable = ('sort_order', 'is_active', 'is_popular')
+    list_editable = ('sort_order', 'is_active')
     search_fields = ('name_az', 'name_en', 'name_ru')
     ordering = ('sort_order', 'id')
     formfield_overrides = {
@@ -151,6 +175,10 @@ class TrainingAdmin(AdminImageCompressMixin, AdminPageHelpMixin, admin.ModelAdmi
                 'is_popular',
                 'is_active',
                 'sort_order',
+            ),
+            'description': (
+                '«Ən populyar?» — eyni anda yalnız bir təlim. '
+                'Başqa biri artıq seçilibsə, admin xəbərdarlıq göstərəcək.'
             ),
         }),
         ('Azərbaycan', {

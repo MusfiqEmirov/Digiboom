@@ -12,7 +12,9 @@
         <button type="button" class="btn-close review-modal-close" data-bs-dismiss="modal" aria-label="{% trans 'Bağlayın' %}"></button>
       </div>
       <div class="modal-body review-modal-body">
-        <form id="orderForm" class="review-modal-form">
+        <form id="orderForm" class="review-modal-form" method="post" action="{% url 'api_package_order' %}" novalidate>
+          {% csrf_token %}
+          <input type="hidden" id="orderPackageId" name="package_id" value="">
           <div class="review-field">
             <label for="orderName" class="review-modal-label">{% trans "Ad və soyadınız" %} <span class="text-danger">*</span></label>
             <div class="review-input-wrap">

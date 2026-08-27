@@ -657,21 +657,45 @@ $(function () {
 			if (!$reviewForm.find('input[name="rating"]:checked').length) {
 				return;
 			}
-			var category = $('#reviewCategory').val();
-			var categoryLabel = $('#reviewCategoryLabelValue').val() || category;
-			var payload = {
-				name: $('#reviewName').val(),
-				category: category,
-				categoryLabel: categoryLabel,
-				rating: $reviewForm.find('input[name="rating"]:checked').val(),
-				text: $('#reviewText').val()
-			};
-			if (typeof window.addSubmittedTestimonial === 'function') {
-				window.addSubmittedTestimonial(payload);
-			}
-			var modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
-			if (modal) modal.hide();
-			showReviewSuccessAlert();
+			var formEl = $reviewForm[0];
+			var endpoint = $reviewForm.attr('action') || '/api/review/';
+			var formData = new FormData(formEl);
+			var csrf = (window.digiboomGetCsrfToken && window.digiboomGetCsrfToken()) ||
+				($reviewForm.find('[name="csrfmiddlewaretoken"]').val() || '');
+			var $submit = $reviewForm.find('[type="submit"]');
+			$submit.prop('disabled', true);
+
+			fetch(endpoint, {
+				method: 'POST',
+				body: formData,
+				credentials: 'same-origin',
+				headers: {
+					Accept: 'application/json',
+					'X-CSRFToken': csrf
+				}
+			})
+				.then(function (res) {
+					return res.json().catch(function () {
+						return { ok: false };
+					}).then(function (data) {
+						data._httpOk = res.ok;
+						return data;
+					});
+				})
+				.catch(function () {
+					return { ok: false };
+				})
+				.then(function (data) {
+					if (!data || !data.ok) {
+						return;
+					}
+					var modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
+					if (modal) modal.hide();
+					showReviewSuccessAlert();
+				})
+				.finally(function () {
+					$submit.prop('disabled', false);
+				});
 		});
 	}
 
@@ -702,12 +726,16 @@ $(function () {
 		}, 3200);
 	}
 
-	function openOrderModal(packageName) {
+	function openOrderModal(packageName, packageId) {
 		var modalEl = document.getElementById('orderModal');
 		if (!modalEl || !window.bootstrap || !window.bootstrap.Modal) return;
 		var $package = $('#orderPackage');
+		var $packageId = $('#orderPackageId');
 		if ($package.length) {
 			$package.val(packageName || '');
+		}
+		if ($packageId.length) {
+			$packageId.val(packageId || '');
 		}
 		window.bootstrap.Modal.getOrCreateInstance(modalEl).show();
 	}
@@ -721,14 +749,49 @@ $(function () {
 		$orderModal.on('hidden.bs.modal', function () {
 			$orderForm[0].reset();
 			$('#orderPackage').val('');
+			$('#orderPackageId').val('');
 		});
 
 		$orderForm.on('submit', function (e) {
 			e.preventDefault();
 			if (!$('#orderPackage').val()) return;
-			var modal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
-			if (modal) modal.hide();
-			showOrderSuccessAlert();
+			var formEl = $orderForm[0];
+			var endpoint = $orderForm.attr('action') || '/api/package-order/';
+			var formData = new FormData(formEl);
+			var csrf = (window.digiboomGetCsrfToken && window.digiboomGetCsrfToken()) ||
+				($orderForm.find('[name="csrfmiddlewaretoken"]').val() || '');
+			var $submit = $orderForm.find('[type="submit"]');
+			$submit.prop('disabled', true);
+
+			fetch(endpoint, {
+				method: 'POST',
+				body: formData,
+				credentials: 'same-origin',
+				headers: {
+					Accept: 'application/json',
+					'X-CSRFToken': csrf
+				}
+			})
+				.then(function (res) {
+					return res.json().catch(function () {
+						return { ok: false };
+					}).then(function (data) {
+						data._httpOk = res.ok;
+						return data;
+					});
+				})
+				.catch(function () {
+					return { ok: false };
+				})
+				.then(function (data) {
+					if (!data || !data.ok) return;
+					var modal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
+					if (modal) modal.hide();
+					showOrderSuccessAlert();
+				})
+				.finally(function () {
+					$submit.prop('disabled', false);
+				});
 		});
 	}
 
@@ -741,16 +804,21 @@ $(function () {
 		var packageName = $btn.attr('data-package-name') ||
 			$btn.closest('.pricing-card').find('.pricing-card__name').first().text().trim() ||
 			'';
-		openOrderModal(packageName);
+		var packageId = $btn.attr('data-package-id') || '';
+		openOrderModal(packageName, packageId);
 	});
 
 	// Konsultasiya / əlaqə modalı
-	function openContactModal(serviceName) {
+	function openContactModal(serviceName, serviceId) {
 		var modalEl = document.getElementById('contactModal');
 		if (!modalEl || !window.bootstrap || !window.bootstrap.Modal) return;
 		var $service = $('#contact-modal-service');
+		var $serviceId = $('#contact-modal-service-id');
 		if ($service.length) {
 			$service.val(serviceName || '');
+		}
+		if ($serviceId.length) {
+			$serviceId.val(serviceId || '');
 		}
 		window.bootstrap.Modal.getOrCreateInstance(modalEl).show();
 	}
@@ -764,6 +832,7 @@ $(function () {
 			var form = document.getElementById('contact-modal-form');
 			if (form) form.reset();
 			$('#contact-modal-service').val('');
+			$('#contact-modal-service-id').val('');
 		});
 	}
 
@@ -776,7 +845,8 @@ $(function () {
 		var serviceName = $btn.attr('data-service-name') ||
 			$('#serviceDetailName').text().trim() ||
 			'';
-		openContactModal(serviceName);
+		var serviceId = $btn.attr('data-service-id') || '';
+		openContactModal(serviceName, serviceId);
 	});
 
 	// Xidmət kartı: bütün kart + Ətraflı düyməsi detal səhifəsinə keçir

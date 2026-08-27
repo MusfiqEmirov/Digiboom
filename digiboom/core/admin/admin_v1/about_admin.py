@@ -87,16 +87,18 @@ class AboutSectionInline(admin.StackedInline):
 
 
 class AboutGalleryImageInline(admin.TabularInline):
-    """About page gallery images."""
+    """Gallery images — About hero + home about carousel."""
 
     model = AboutGalleryImage
     extra = 1
     max_num = 40
-    ordering = ('id',)
+    ordering = ('sort_order', 'id')
     classes = ('wide',)
     verbose_name = 'Qaleriya şəkli'
-    verbose_name_plural = 'Qaleriya şəkilləri'
-    fields = ('image_preview', 'image')
+    verbose_name_plural = (
+        'Qaleriya — Haqqımızda böyük şəkil (ilk) + ana səhifə karuseli'
+    )
+    fields = ('image_preview', 'image', 'sort_order')
     readonly_fields = ('image_preview',)
 
     def image_preview(self, obj):
@@ -112,15 +114,15 @@ class AboutGalleryImageInline(admin.TabularInline):
 
 
 class PartnerInline(admin.TabularInline):
-    """Partner / client logos."""
+    """Partner logos — About + home marquee."""
 
     model = Partner
     extra = 1
-    ordering = ('id',)
+    ordering = ('sort_order', 'id')
     classes = ('wide',)
     verbose_name = 'Tərəfdaş loqosu'
-    verbose_name_plural = 'Tərəfdaş loqoları'
-    fields = ('logo_preview', 'logo')
+    verbose_name_plural = 'Tərəfdaş loqoları — Haqqımızda və ana səhifə marquee'
+    fields = ('logo_preview', 'logo', 'sort_order')
     readonly_fields = ('logo_preview',)
 
     def logo_preview(self, obj):
@@ -144,7 +146,8 @@ class StatisticItemInline(admin.TabularInline):
     classes = ('wide',)
     verbose_name = 'Statistika'
     verbose_name_plural = (
-        'Statistika elementləri — hansı ikon seçilsə, saytda həmin ikon görünəcək'
+        'Statistika — Haqqımızda səhifəsi; '
+        '«Ana səhifədə?» işarələnənlər ana səhifədə də görünür'
     )
     fields = (
         'value',
@@ -180,31 +183,38 @@ class AboutAdmin(AdminImageCompressMixin, AdminPageHelpMixin, admin.ModelAdmin):
         StatisticItemInline,
     ]
     fieldsets = (
-        ('Azərbaycan — məzmun', {
+        ('Azərbaycan — məzmun (Haqqımızda səhifəsi)', {
             'fields': ('mezmun_az',),
             'classes': ('wide',),
-            'description': 'Başlıq və mətn bir yerdə — CKEditor ilə yazın.',
+            'description': (
+                'Yalnız /about/ — video yanındakı başlıq və mətn (CKEditor). '
+                'Ana səhifə mətni aşağıdakı «Ana səhifə» blokundadır.'
+            ),
         }),
-        ('English — məzmun', {
+        ('English — məzmun (About page)', {
             'fields': ('mezmun_en',),
             'classes': ('wide', 'g-lang-en'),
         }),
-        ('Русский — məzmun', {
+        ('Русский — məzmun (страница О нас)', {
             'fields': ('mezmun_ru',),
             'classes': ('wide', 'g-lang-ru'),
         }),
         ('Tanıtım videosu', {
             'fields': ('video',),
             'description': (
-                'Poster yoxdur — brauzer ilk kadra düşəcək. '
-                'Aşağıda bölmələr, qalereya, tərəfdaş loqoları və statistika əlavə edin. '
-                'Səhifə banner şəkli və devizi «Səhifə bannerləri» bölməsindədir.'
+                'Yalnız Haqqımızda səhifəsi. Poster yoxdur — brauzer ilk kadra düşəcək. '
+                'Banner şəkli/deviz «Səhifə bannerləri» (page=about) bölməsindədir.'
             ),
         }),
-        ('Ana səhifə mətni', {
+        ('Ana səhifə — Haqqımızda bloku', {
             'fields': ('ana_sehife_metn_az', 'ana_sehife_metn_en', 'ana_sehife_metn_ru'),
             'classes': ('wide',),
-            'description': 'Ana səhifədəki «Haqqımızda» bloku — bir mətn bloku.',
+            'description': (
+                'Ana səhifədəki «Haqqımızda» mətn bloku (HTML). '
+                'Qalereya şəkilləri karusel, tərəfdaş loqoları marquee, '
+                'statistika isə aşağıda «Ana səhifədə?» işarəsi olan sətirlərdir. '
+                'Eyni model həm /about/, həm də gələcəkdə ana səhifə üçün istifadə olunur.'
+            ),
         }),
     )
 

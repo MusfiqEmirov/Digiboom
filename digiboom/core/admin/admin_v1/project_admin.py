@@ -36,18 +36,19 @@ class ProjectAdminForm(forms.ModelForm):
 
 
 class ProjectServiceTagInline(admin.TabularInline):
-    """Included service types — first 2 shown on the card."""
+    """Layihəyə daxil olan xidmətlər — mövcud Service-lərdən seçilir; ilk 2 kartlarda görünür."""
 
     model = ProjectServiceTag
     extra = 0
     ordering = ('id',)
     classes = ('wide',)
-    verbose_name = 'Xidmət teqi'
+    autocomplete_fields = ('service',)
+    verbose_name = 'Xidmət'
     verbose_name_plural = (
-        'Daxil olan xidmət növləri — ilk 2-si kartlarda görünəcək; '
-        'hansı ikon seçilsə, saytda həmin ikon görünəcək'
+        'Daxil olan xidmətlər — mövcud xidmətlərdən istədiyiniz qədər seçin; '
+        'ilk 2-si portfolio kartlarında görünəcək'
     )
-    fields = ('name_az', 'name_en', 'name_ru', 'icon')
+    fields = ('service',)
 
 
 class ProjectWhatWeDidInline(admin.TabularInline):

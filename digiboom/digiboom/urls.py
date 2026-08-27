@@ -10,7 +10,8 @@ urlpatterns = [
     path('', include('core.urls')),
 ]
 
-handler404 = 'core.views.views_v1.page_not_found'
+handler404 = 'core.views.page_not_found'
+
 
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns

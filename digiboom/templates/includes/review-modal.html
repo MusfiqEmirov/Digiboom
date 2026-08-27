@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n digiboom_tags %}
 <!--  Rəy bildirin modal -->
 <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered review-modal-dialog">
@@ -12,7 +12,8 @@
         <button type="button" class="btn-close review-modal-close" data-bs-dismiss="modal" aria-label="{% trans 'Bağlayın' %}"></button>
       </div>
       <div class="modal-body review-modal-body">
-        <form id="reviewForm" class="review-modal-form">
+        <form id="reviewForm" class="review-modal-form" method="post" action="{% url 'api_review' %}" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
           <div class="review-field">
             <label for="reviewName" class="review-modal-label">{% trans "Ad, Soyad" %} <span class="text-danger">*</span></label>
             <div class="review-input-wrap">
@@ -31,6 +32,7 @@
                 <iconify-icon icon="lucide:chevron-down" class="review-dropdown__chevron" aria-hidden="true"></iconify-icon>
               </button>
               <ul class="review-dropdown__menu" role="listbox" aria-labelledby="reviewCategoryLabel">
+                {% if review_services %}
                 <li class="review-dropdown__item has-submenu">
                   <button type="button" class="review-dropdown__option review-dropdown__parent" data-group="xidmet" data-icon="lucide:sparkles">
                     <iconify-icon icon="lucide:sparkles" aria-hidden="true"></iconify-icon>
@@ -38,12 +40,13 @@
                     <iconify-icon icon="lucide:chevron-right" class="review-dropdown__arrow" aria-hidden="true"></iconify-icon>
                   </button>
                   <ul class="review-dropdown__submenu" role="listbox">
-                    <li><button type="button" class="review-dropdown__option" role="option" data-value="xidmet-eneneyi" data-label="Ənənəvi marketinq" data-icon="lucide:megaphone"><iconify-icon icon="lucide:megaphone" aria-hidden="true"></iconify-icon><span>Ənənəvi marketinq</span></button></li>
-                    <li><button type="button" class="review-dropdown__option" role="option" data-value="xidmet-reqemsal" data-label="Rəqəmsal marketinq" data-icon="lucide:trending-up"><iconify-icon icon="lucide:trending-up" aria-hidden="true"></iconify-icon><span>Rəqəmsal marketinq</span></button></li>
-                    <li><button type="button" class="review-dropdown__option" role="option" data-value="xidmet-avtomat" data-label="Biznes avtomatlaşdırması" data-icon="lucide:settings-2"><iconify-icon icon="lucide:settings-2" aria-hidden="true"></iconify-icon><span>Biznes avtomatlaşdırması</span></button></li>
-                    <li><button type="button" class="review-dropdown__option" role="option" data-value="xidmet-brending" data-label="Brending və dizayn" data-icon="lucide:palette"><iconify-icon icon="lucide:palette" aria-hidden="true"></iconify-icon><span>Brending və dizayn</span></button></li>
+                    {% for service in review_services %}
+                    <li><button type="button" class="review-dropdown__option" role="option" data-value="service:{{ service.id }}" data-label="{{ service|localized:'name' }}" data-icon="lucide:briefcase"><iconify-icon icon="lucide:briefcase" aria-hidden="true"></iconify-icon><span>{{ service|localized:'name' }}</span></button></li>
+                    {% endfor %}
                   </ul>
                 </li>
+                {% endif %}
+                {% if review_trainings %}
                 <li class="review-dropdown__item has-submenu">
                   <button type="button" class="review-dropdown__option review-dropdown__parent" data-group="telim" data-icon="lucide:graduation-cap">
                     <iconify-icon icon="lucide:graduation-cap" aria-hidden="true"></iconify-icon>
@@ -51,24 +54,20 @@
                     <iconify-icon icon="lucide:chevron-right" class="review-dropdown__arrow" aria-hidden="true"></iconify-icon>
                   </button>
                   <ul class="review-dropdown__submenu" role="listbox">
-                    <li><button type="button" class="review-dropdown__option" role="option" data-value="telim-reqemsal" data-label="Rəqəmsal marketinq əsasları" data-icon="lucide:graduation-cap"><iconify-icon icon="lucide:graduation-cap" aria-hidden="true"></iconify-icon><span>Rəqəmsal marketinq əsasları</span></button></li>
-                    <li><button type="button" class="review-dropdown__option" role="option" data-value="telim-smm" data-label="SMM praktik kursu" data-icon="lucide:share-2"><iconify-icon icon="lucide:share-2" aria-hidden="true"></iconify-icon><span>SMM praktik kursu</span></button></li>
-                    <li><button type="button" class="review-dropdown__option" role="option" data-value="telim-seo" data-label="SEO və kontent marketinqi" data-icon="lucide:search"><iconify-icon icon="lucide:search" aria-hidden="true"></iconify-icon><span>SEO və kontent marketinqi</span></button></li>
-                    <li><button type="button" class="review-dropdown__option" role="option" data-value="telim-brending" data-label="Brendinq və vizual identitet" data-icon="lucide:pen-tool"><iconify-icon icon="lucide:pen-tool" aria-hidden="true"></iconify-icon><span>Brendinq və vizual identitet</span></button></li>
-                    <li><button type="button" class="review-dropdown__option" role="option" data-value="telim-ads" data-label="Google Ads kampaniyaları" data-icon="lucide:target"><iconify-icon icon="lucide:target" aria-hidden="true"></iconify-icon><span>Google Ads kampaniyaları</span></button></li>
-                    <li><button type="button" class="review-dropdown__option" role="option" data-value="telim-video" data-label="Video məzmun istehsalı" data-icon="lucide:video"><iconify-icon icon="lucide:video" aria-hidden="true"></iconify-icon><span>Video məzmun istehsalı</span></button></li>
-                    <li><button type="button" class="review-dropdown__option" role="option" data-value="telim-korporativ" data-label="Korporativ təlim paketi" data-icon="lucide:users"><iconify-icon icon="lucide:users" aria-hidden="true"></iconify-icon><span>Korporativ təlim paketi</span></button></li>
-                    <li><button type="button" class="review-dropdown__option" role="option" data-value="telim-eticaret" data-label="E-ticarət satış strategiyası" data-icon="lucide:shopping-cart"><iconify-icon icon="lucide:shopping-cart" aria-hidden="true"></iconify-icon><span>E-ticarət satış strategiyası</span></button></li>
+                    {% for training in review_trainings %}
+                    <li><button type="button" class="review-dropdown__option" role="option" data-value="training:{{ training.id }}" data-label="{{ training|localized:'name' }}" data-icon="lucide:graduation-cap"><iconify-icon icon="lucide:graduation-cap" aria-hidden="true"></iconify-icon><span>{{ training|localized:'name' }}</span></button></li>
+                    {% endfor %}
                   </ul>
                 </li>
+                {% endif %}
                 <li class="review-dropdown__item">
-                  <button type="button" class="review-dropdown__option" role="option" data-value="konsultasiya" data-label="Konsultasiya" data-icon="lucide:messages-square">
+                  <button type="button" class="review-dropdown__option" role="option" data-value="konsultasiya" data-label="{% trans 'Konsultasiya' %}" data-icon="lucide:messages-square">
                     <iconify-icon icon="lucide:messages-square" aria-hidden="true"></iconify-icon>
                     <span>{% trans "Konsultasiya" %}</span>
                   </button>
                 </li>
                 <li class="review-dropdown__item">
-                  <button type="button" class="review-dropdown__option" role="option" data-value="diger" data-label="Digər" data-icon="lucide:more-horizontal">
+                  <button type="button" class="review-dropdown__option" role="option" data-value="diger" data-label="{% trans 'Digər' %}" data-icon="lucide:more-horizontal">
                     <iconify-icon icon="lucide:more-horizontal" aria-hidden="true"></iconify-icon>
                     <span>{% trans "Digər" %}</span>
                   </button>
@@ -88,7 +87,7 @@
           </div>
           <div class="review-field">
             <label for="reviewText" class="review-modal-label">{% trans "Rəy" %} <span class="text-danger">*</span></label>
-            <textarea class="form-control review-textarea" id="reviewText" name="review" placeholder="{% trans 'Təcrübənizi qısaca paylaşın...' %}" rows="3" required></textarea>
+            <textarea class="form-control review-textarea" id="reviewText" name="message" placeholder="{% trans 'Təcrübənizi qısaca paylaşın...' %}" rows="3" required></textarea>
           </div>
           <div class="review-field">
             <span class="review-modal-label d-block" id="reviewImageLabel">{% trans "Şəkil" %}</span>

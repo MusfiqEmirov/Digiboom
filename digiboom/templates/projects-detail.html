@@ -1,11 +1,11 @@
-﻿{% load static i18n %}
+﻿{% load static i18n digiboom_tags %}
 <!doctype html>
 <html lang="{{ LANGUAGE_CODE|default:'az' }}">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DigiBoom — Layihə Ətraflı</title>
+  <title>DigiBoom — {{ project_name|default:'Layihə' }}</title>
   <link rel="shortcut icon" type="image/png" href="{% static 'images/logos/favicon.svg' %}" />
   <link rel="stylesheet" href="{% static 'css/fonts.css' %}" />
   <link rel="stylesheet" href="{% static 'libs/aos-master/dist/aos.css' %}">
@@ -29,20 +29,14 @@
 
   <div class="page-wrapper overflow-hidden">
 
+    {% if project.cover_image %}
     <section class="banner-section banner-inner-section position-relative overflow-hidden d-flex align-items-end"
-      style="background-image: url({% static 'images/backgrounds/projects-detail-banner.jpg' %});">
+      style="background-image: url({{ project.cover_image.url }});">
       <div class="container">
-        <div class="d-flex flex-column gap-4 pb-5 pb-xl-10 position-relative z-1">
-          <div class="row align-items-center">
-            <div class="col-xl-5">
-              <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                <p class="mb-0 fs-5 page-banner-tagline">Layihənin həll yolu, hədəflər və əldə etdiyimiz konkret nəticələr.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="d-flex flex-column gap-4 pb-5 pb-xl-10 position-relative z-1"></div>
       </div>
     </section>
+    {% endif %}
 
     <section class="project-detail project-detail-section project-detail--showcase project-detail-page">
       <div class="project-detail__atmosphere" aria-hidden="true"></div>
@@ -55,43 +49,52 @@
               class="btn-icon bg-white text-dark round-36 rounded-circle hstack justify-content-center fs-5 shadow-sm"></iconify-icon>
           </a>
 
-          <h1 class="project-detail-name project-detail-name--centered" id="projectDetailName" data-aos="fade-up" data-aos-delay="100" data-aos-duration="900">TemizXalı</h1>
+          {% if project_name %}
+          <h1 class="project-detail-name project-detail-name--centered" id="projectDetailName" data-aos="fade-up" data-aos-delay="100" data-aos-duration="900">{{ project_name }}</h1>
+          {% endif %}
 
+          {% if project_subtitle or project.service_tags.all or project.video or project.url_web or project.url_facebook or project.url_instagram or project.url_tiktok or project.url_linkedin %}
           <div class="project-detail-hero-grid project-detail-block" data-aos="fade-up" data-aos-delay="140" data-aos-duration="900">
             <header class="project-detail-hero">
-              <p class="project-detail-hero__subtitle mb-0" id="projectDetailSubtitle">
-                Brend kimliyi, veb platforma və rəqəmsal marketinq strategiyası
-              </p>
+              {% if project_subtitle %}
+              <p class="project-detail-hero__subtitle mb-0" id="projectDetailSubtitle">{{ project_subtitle }}</p>
+              {% endif %}
+              {% if project.service_tags.all %}
               <div class="project-detail-services">
                 <ul class="project-detail-tags list-unstyled mb-0">
-                  <li class="project-detail-tags__item">
-                    <iconify-icon icon="lucide:palette" aria-hidden="true"></iconify-icon>
-                    <span>Brand identity</span>
+                  {% for tag in project.service_tags.all %}
+                  {% if tag.service_id and tag.service.is_active %}
+                  <li>
+                    <a href="{% url 'services_detail' tag.service.slug %}" class="project-detail-tags__item">
+                      <iconify-icon icon="lucide:briefcase" aria-hidden="true"></iconify-icon>
+                      <span>{{ tag.service|localized:'name' }}</span>
+                    </a>
                   </li>
-                  <li class="project-detail-tags__item">
-                    <iconify-icon icon="lucide:code-2" aria-hidden="true"></iconify-icon>
-                    <span>Web development</span>
-                  </li>
-                  <li class="project-detail-tags__item">
-                    <iconify-icon icon="lucide:layout-template" aria-hidden="true"></iconify-icon>
-                    <span>UI/UX design</span>
-                  </li>
-                  <li class="project-detail-tags__item">
-                    <iconify-icon icon="lucide:pen-line" aria-hidden="true"></iconify-icon>
-                    <span>Content creation</span>
-                  </li>
+                  {% endif %}
+                  {% endfor %}
                 </ul>
               </div>
+              {% endif %}
+              {% if project.url_web or project.url_facebook or project.url_instagram or project.url_tiktok or project.url_linkedin %}
+              <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
+                {% if project.url_web %}<li><a href="{{ project.url_web }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>{% endif %}
+                {% if project.url_facebook %}<li><a href="{{ project.url_facebook }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>{% endif %}
+                {% if project.url_instagram %}<li><a href="{{ project.url_instagram }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>{% endif %}
+                {% if project.url_tiktok %}<li><a href="{{ project.url_tiktok }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>{% endif %}
+                {% if project.url_linkedin %}<li><a href="{{ project.url_linkedin }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>{% endif %}
+              </ul>
+              {% endif %}
             </header>
 
+            {% if project.video %}
             <div class="project-detail-video-block">
               <div class="project-detail-video-player" id="projectVideoPlayer">
                 <div class="project-detail-video-player__ratio ratio ratio-16x9">
                   <video
                     class="project-detail-video-el"
                     id="projectDetailVideo"
-                    src="{% static 'images/backgrounds/banner-video.mp4' %}"
-                    poster="{% static 'images/portfolio/portfolio-img-1.jpg' %}"
+                    src="{{ project.video.url }}"
+                    {% if project.cover_image %}poster="{{ project.cover_image.url }}"{% endif %}
                     loop
                     playsinline
                     preload="metadata"
@@ -106,50 +109,33 @@
                 </div>
               </div>
             </div>
+            {% endif %}
           </div>
+          {% endif %}
 
-          <!-- 3. Mətn (CKEditor) -->
+          {% if project_description or project.what_we_did.all %}
           <div class="project-detail-block project-detail-text-block position-relative overflow-hidden" data-aos="fade-up" data-aos-delay="180" data-aos-duration="900">
             <div class="project-detail-text__bg position-absolute bottom-0 start-0" aria-hidden="true" data-aos="zoom-in" data-aos-delay="140" data-aos-duration="1000">
               <img src="{% static 'images/backgrounds/stats-facts-bg.svg' %}" alt="" class="img-fluid">
             </div>
             <div class="project-detail-editor about-digiboom-editor project-digiboom-editor position-relative z-1" id="projectDetailContent">
-              <p class="project-detail-lead">
-                Müştərinin brend vizyonunu rəqəmsal ekosistemə çevirən tam dövriyyə layihə. Strategiyadan vizual
-                konseptə, interfeys dizaynından texniki inkişafa və məzmun istehsalına qədər hər addım vahid brend
-                dili və istifadəçi təcrübəsi prinsipləri ətrafında qurulub. Məqsəd sadəcə gözəl sayt yaratmaq deyil,
-                brendin bazarda güclü, tanınan və ölçülə bilən mövqe tutmasını təmin etmək idi.
-              </p>
-              <p>
-                Layihəyə başlamazdan əvvəl hədəf auditoriya, rəqib mühit və mövcud brend aktivlərini dərindən
-                analiz etdik. Bu mərhələdə müştəri ilə birgə işləyərək brend tonunu, vizual istiqaməti və
-                rəqəmsal kanallar üzrə prioritetləri müəyyənləşdirdik. Daha sonra marka kimliyini sistemli şəkildə
-                formalaşdıraraq loqo, rəng palitrası, tipografiya və dizayn komponentlərini vahid guideline
-                sənədinə topladıq.
-              </p>
-              <p>
-                Veb platformanın inkişafında mobil-first yanaşma tətbiq etdik: sürətli yüklənmə, aydın naviqasiya
-                və konversiyaya yönəlmiş CTA strukturu prioritet oldu. Backend tərəfdə məzmunun asan idarə olunması
-                üçün admin panel inteqrasiyası, SEO üçün semantic markup və analitika alətləri ilə tam izləmə
-                imkanı yaradıldı. Kampaniya dövründə sosial media, reklam və e-mail üçün uyğunlaşan vizual
-                materiallar hazırlandı.
-              </p>
+              {% if project_description %}{{ project_description|safe }}{% endif %}
+              {% if project.what_we_did.all %}
               <h3>{% trans "Layihədə nələr etdik" %}</h3>
               <ul class="project-detail-checklist">
-                <li>Marka strategiyası və vizual kimlik sisteminin hazırlanması</li>
-                <li>UX araşdırması, wireframe və interfeys dizaynı</li>
-                <li>Responsiv veb saytın frontend və backend inkişafı</li>
-                <li>Sosial media və reklam materiallarının yaradılması</li>
-                <li>SEO optimallaşdırması və analitika inteqrasiyası</li>
-                <li>Nəticə: 3× daha yüksək orqanik trafik və brend tanınması</li>
+                {% for item in project.what_we_did.all %}
+                <li>{{ item|localized:'text' }}</li>
+                {% endfor %}
               </ul>
+              {% endif %}
             </div>
           </div>
+          {% endif %}
 
         </div>
       </div>
 
-      <!-- 4. Qalereya — tam enlik, tək karusel -->
+      {% if project.gallery_images.all %}
       <div class="project-detail-gallery-fullbleed project-detail-block" data-aos="fade-up" data-aos-delay="220" data-aos-duration="900">
         <div class="container">
           <div class="project-detail-gallery-block__head">
@@ -163,30 +149,11 @@
             </button>
             <div class="project-gallery-marquee">
               <div class="project-gallery-marquee__track d-flex">
-                <button type="button" class="project-gallery-marquee__item" data-gallery-index="0" aria-label="Şəkil 1 — böyüt">
-                  <img src="{% static 'images/portfolio/portfolio-img-1.jpg' %}" alt="Layihə — əsas görünüş" loading="lazy">
+                {% for img in project.gallery_images.all %}
+                <button type="button" class="project-gallery-marquee__item" data-gallery-index="{{ forloop.counter0 }}" aria-label="Şəkil {{ forloop.counter }} — böyüt">
+                  <img src="{{ img.image.url }}" alt="{{ project_name }}" loading="lazy">
                 </button>
-                <button type="button" class="project-gallery-marquee__item" data-gallery-index="1" aria-label="Şəkil 2 — böyüt">
-                  <img src="{% static 'images/portfolio/portfolio-img-2.jpg' %}" alt="Layihə — interfeys" loading="lazy">
-                </button>
-                <button type="button" class="project-gallery-marquee__item" data-gallery-index="2" aria-label="Şəkil 3 — böyüt">
-                  <img src="{% static 'images/portfolio/portfolio-img-3.jpg' %}" alt="Layihə — mobil görünüş" loading="lazy">
-                </button>
-                <button type="button" class="project-gallery-marquee__item" data-gallery-index="3" aria-label="Şəkil 4 — böyüt">
-                  <img src="{% static 'images/portfolio/portfolio-img-4.jpg' %}" alt="Layihə — vizual konsept" loading="lazy">
-                </button>
-                <button type="button" class="project-gallery-marquee__item" data-gallery-index="4" aria-label="Şəkil 5 — böyüt">
-                  <img src="{% static 'images/portfolio/portfolio-img-5.jpg' %}" alt="Layihə — detallar" loading="lazy">
-                </button>
-                <button type="button" class="project-gallery-marquee__item" data-gallery-index="5" aria-label="Şəkil 6 — böyüt">
-                  <img src="{% static 'images/portfolio/portfolio-img-6.jpg' %}" alt="Layihə — nəticə" loading="lazy">
-                </button>
-                <button type="button" class="project-gallery-marquee__item" data-gallery-index="6" aria-label="Şəkil 7 — böyüt">
-                  <img src="{% static 'images/portfolio/portfolio-img-1.jpg' %}" alt="Layihə — kampaniya" loading="lazy">
-                </button>
-                <button type="button" class="project-gallery-marquee__item" data-gallery-index="7" aria-label="Şəkil 8 — böyüt">
-                  <img src="{% static 'images/portfolio/portfolio-img-2.jpg' %}" alt="Layihə — final görünüş" loading="lazy">
-                </button>
+                {% endfor %}
               </div>
             </div>
             <button type="button" class="project-gallery-carousel__nav project-gallery-carousel__nav--next" aria-label="Növbəti şəkil">
@@ -195,16 +162,18 @@
           </div>
         </div>
       </div>
+      {% endif %}
 
     </section>
 
   </div>
 
+  {% if project.gallery_images.all %}
   <div class="modal fade project-gallery-modal" id="projectImageModal" tabindex="-1" aria-labelledby="projectImageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content border-0 bg-transparent">
         <div class="modal-header border-0 position-absolute top-0 end-0 z-3 p-3 w-100 justify-content-between">
-          <span class="project-gallery-modal__counter text-white" id="projectGalleryCounter" aria-live="polite">1 / 8</span>
+          <span class="project-gallery-modal__counter text-white" id="projectGalleryCounter" aria-live="polite">1 / {{ project.gallery_images.all|length }}</span>
           <button type="button" class="project-gallery-modal__close" data-bs-dismiss="modal" aria-label="Bağlayın">
             <iconify-icon icon="lucide:x" aria-hidden="true"></iconify-icon>
           </button>
@@ -221,14 +190,11 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
   {% include 'includes/footer.html' %}
 
-  <aside class="floating-widgets" aria-label="Sürətli əlaqə">
-    <a href="tel:+994501234567" class="floating-widget-btn floating-widget-btn--call" aria-label="Zəng edin"><iconify-icon icon="lucide:phone"></iconify-icon></a>
-    <a href="https://wa.me/994501234567" target="_blank" rel="noopener" class="floating-widget-btn floating-widget-btn--whatsapp" aria-label="WhatsApp"><iconify-icon icon="mdi:whatsapp"></iconify-icon></a>
-    <button type="button" class="floating-widget-btn floating-widget-btn--top" id="scrollToTopBtn" aria-label="Başa qayıdın"><iconify-icon icon="lucide:arrow-up"></iconify-icon></button>
-  </aside>
+  {% include 'includes/floating-widgets.html' %}
 
   <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
   <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
@@ -237,8 +203,6 @@
   <script src="{% static 'js/includes.js' %}" defer></script>
   <script src="{% static 'js/i18n.js' %}"></script>
   <script src="{% static 'js/digiboom.js' %}"></script>
-  <script src="{% static 'js/projects-data.js' %}"></script>
-  <script src="{% static 'js/services-data.js' %}"></script>
   <script src="{% static 'js/portfolio-detail.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>

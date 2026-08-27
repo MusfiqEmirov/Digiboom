@@ -1,11 +1,11 @@
-﻿{% load static i18n %}
+{% load static i18n digiboom_tags %}
 <!doctype html>
 <html lang="{{ LANGUAGE_CODE|default:'az' }}">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DigiBoom — Xidmət Ətraflı</title>
+  <title>DigiBoom — {{ service_name|default:'Xidmət' }}</title>
   <link rel="shortcut icon" type="image/png" href="{% static 'images/logos/favicon.svg' %}" />
   <link rel="stylesheet" href="{% static 'css/fonts.css' %}" />
   <link rel="stylesheet" href="{% static 'libs/aos-master/dist/aos.css' %}">
@@ -29,20 +29,24 @@
 
   <div class="page-wrapper overflow-hidden">
 
+    {% if service.image %}
     <section class="banner-section banner-inner-section position-relative overflow-hidden d-flex align-items-end"
-      style="background-image: url({% static 'images/services/services-img-3.jpg' %});">
+      style="background-image: url({{ service.image.url }});">
       <div class="container">
         <div class="d-flex flex-column gap-4 pb-5 pb-xl-10 position-relative z-1">
           <div class="row align-items-center">
             <div class="col-xl-5">
+              {% if service.category %}
               <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="80" data-aos-duration="900">
-                <p class="mb-0 fs-5 page-banner-tagline">Seçilmiş xidmət haqqında proses, üstünlüklər və gözlənilən nəticələr.</p>
+                <p class="mb-0 fs-5 page-banner-tagline">{{ service.category|localized:'name' }}</p>
               </div>
+              {% endif %}
             </div>
           </div>
         </div>
       </div>
     </section>
+    {% endif %}
 
     <section class="service-detail-section">
       <div class="service-detail__mesh" aria-hidden="true"></div>
@@ -55,20 +59,20 @@
               class="btn-icon bg-white text-dark round-36 rounded-circle hstack justify-content-center fs-5 shadow-sm"></iconify-icon>
           </a>
 
-          <!-- 1. Ad + Video — split hero -->
           <header class="service-detail-hero" data-aos="fade-up" data-aos-delay="100" data-aos-duration="900">
             <div class="service-detail-hero__copy">
-              <h1 class="service-detail-hero__title" id="serviceDetailName">Rəqəmsal marketinq xidməti</h1>
+              {% if service_name %}<h1 class="service-detail-hero__title" id="serviceDetailName">{{ service_name }}</h1>{% endif %}
             </div>
 
+            {% if service.video %}
             <div class="service-detail-hero__media">
               <div class="service-detail-video" id="serviceVideoPlayer">
                 <div class="service-detail-video__ratio ratio ratio-16x9">
                   <video
                     class="service-detail-video__el"
                     id="serviceDetailVideo"
-                    src="{% static 'images/backgrounds/banner-video.mp4' %}"
-                    poster="{% static 'images/services/services-img-3.jpg' %}"
+                    src="{{ service.video.url }}"
+                    {% if service.image %}poster="{{ service.image.url }}"{% endif %}
                     loop
                     playsinline
                     preload="metadata"
@@ -87,73 +91,51 @@
                 </span>
               </div>
             </div>
+            {% endif %}
           </header>
 
-          <!-- 2. CKEditor mətn + checklist -->
+          {% if service_description or service.include_items.all or service.why_items.all %}
           <div class="service-detail-content" data-aos="fade-up" data-aos-delay="160" data-aos-duration="900">
             <div class="service-detail-content__panel">
               <div class="service-detail-editor service-digiboom-editor" id="serviceDetailContent">
-                <p class="service-detail-editor__lead">
-                  Bu xidmətimiz brendinizin rəqəmsal aləmdə güclü bir mövqe tutmasına kömək edir. SEO optimallaşdırması,
-                  sosial media idarəçiliyi, ödənişli reklam kampaniyaları və məzmun marketinqi — hamısı vahid bir strategiya
-                  çərçivəsində həyata keçirilir.
-                </p>
-                <p>
-                  Hər layihəyə başlamazdan əvvəl bazar araşdırması, rəqib analizi və mövcud rəqəmsal aktivlərin
-                  auditini aparırıq. Bu mərhələdə brend tonu, kanal prioritetləri və KPI-lar birgə müəyyənləşdirilir.
-                  Daha sonra fərdi marketinq planı hazırlanır və hər kanal üçün aydın məzmun təqvimi qurulur.
-                </p>
-                <p>
-                  Kampaniyaların gedişatı real vaxtda izlənilir, aylıq hesabatlar təqdim olunur və nəticələrə əsasən
-                  strategiya çevik şəkildə optimallaşdırılır. Məqsəd sadəcə trafik yaratmaq deyil — keyfiyyətli
-                  lead, satış və brend tanınması artımı təmin etməkdir.
-                </p>
-
+                {% if service_description %}{{ service_description|safe }}{% endif %}
+                {% if service.include_items.all %}
                 <h3>{% trans "Xidmətə daxildir" %}</h3>
                 <ul class="service-detail-checklist">
-                  <li>SEO audit və açar söz strategiyası</li>
-                  <li>Sosial media məzmun planı və idarəçilik</li>
-                  <li>Meta, Google və digər ödənişli reklam kampaniyaları</li>
-                  <li>Blog, video və vizual məzmun istehsalı</li>
-                  <li>E-mail marketinq və avtomatlaşdırma</li>
-                  <li>Aylıq analitika hesabatı və KPI izləmə</li>
+                  {% for item in service.include_items.all %}
+                  <li>{{ item|localized:'text' }}</li>
+                  {% endfor %}
                 </ul>
+                {% endif %}
               </div>
             </div>
 
+            {% if service.why_items.all %}
             <aside class="service-detail-aside" aria-label="Xidmət üstünlükləri">
               <div class="service-detail-aside__card">
                 <span class="service-detail-aside__label">{% trans "Niyə bu xidmət?" %}</span>
                 <ul class="service-detail-aside__list list-unstyled mb-0">
+                  {% for item in service.why_items.all %}
                   <li>
-                    <span class="service-detail-aside__icon"><iconify-icon icon="lucide:trending-up"></iconify-icon></span>
-                    <span>Ölçülə bilən trafik və konversiya artımı</span>
+                    {% if item.icon %}<span class="service-detail-aside__icon"><iconify-icon icon="{{ item.icon }}"></iconify-icon></span>{% endif %}
+                    <span>{{ item|localized:'text' }}</span>
                   </li>
-                  <li>
-                    <span class="service-detail-aside__icon"><iconify-icon icon="lucide:users"></iconify-icon></span>
-                    <span>Təcrübəli marketinq komandası</span>
-                  </li>
-                  <li>
-                    <span class="service-detail-aside__icon"><iconify-icon icon="lucide:bar-chart-3"></iconify-icon></span>
-                    <span>Şəffaf hesabat və real vaxt izləmə</span>
-                  </li>
-                  <li>
-                    <span class="service-detail-aside__icon"><iconify-icon icon="lucide:layers"></iconify-icon></span>
-                    <span>Çevik paket və kanal inteqrasiyası</span>
-                  </li>
+                  {% endfor %}
                 </ul>
-                <button type="button" class="service-detail-aside__cta" data-open-contact-modal>
+                <button type="button" class="service-detail-aside__cta" data-open-contact-modal data-service-id="{{ service.id }}" data-service-name="{{ service|localized:'name' }}">
                   {% trans "Konsultasiya" %}
                   <iconify-icon icon="lucide:arrow-right" aria-hidden="true"></iconify-icon>
                 </button>
               </div>
             </aside>
+            {% endif %}
           </div>
+          {% endif %}
 
         </div>
       </div>
 
-      <!-- 3. Bento qalereya -->
+      {% if service.gallery_images.all %}
       <div class="service-detail-gallery" data-aos="fade-up" data-aos-delay="200" data-aos-duration="900">
         <div class="container">
           <div class="service-detail-gallery__head">
@@ -164,33 +146,16 @@
 
         <div class="container container--gallery">
           <div class="service-detail-bento" id="serviceGallery">
-            <button type="button" class="service-detail-bento__item service-detail-bento__item--tall" data-gallery-index="0" aria-label="Şəkil 1 — böyüt">
-              <img src="{% static 'images/services/services-img-1.jpg' %}" alt="Marketinq kampaniyası" loading="lazy">
+            {% for img in service.gallery_images.all %}
+            <button type="button" class="service-detail-bento__item{% if forloop.first %} service-detail-bento__item--tall{% elif forloop.counter == 4 %} service-detail-bento__item--wide{% endif %}" data-gallery-index="{{ forloop.counter0 }}" aria-label="Şəkil {{ forloop.counter }} — böyüt">
+              <img src="{{ img.image.url }}" alt="{{ service_name }}" loading="lazy">
               <span class="service-detail-bento__zoom" aria-hidden="true"><iconify-icon icon="lucide:zoom-in"></iconify-icon></span>
             </button>
-            <button type="button" class="service-detail-bento__item" data-gallery-index="1" aria-label="Şəkil 2 — böyüt">
-              <img src="{% static 'images/services/services-img-2.jpg' %}" alt="Sosial media məzmunu" loading="lazy">
-              <span class="service-detail-bento__zoom" aria-hidden="true"><iconify-icon icon="lucide:zoom-in"></iconify-icon></span>
-            </button>
-            <button type="button" class="service-detail-bento__item" data-gallery-index="2" aria-label="Şəkil 3 — böyüt">
-              <img src="{% static 'images/services/services-img-3.jpg' %}" alt="Reklam strategiyası" loading="lazy">
-              <span class="service-detail-bento__zoom" aria-hidden="true"><iconify-icon icon="lucide:zoom-in"></iconify-icon></span>
-            </button>
-            <button type="button" class="service-detail-bento__item service-detail-bento__item--wide" data-gallery-index="3" aria-label="Şəkil 4 — böyüt">
-              <img src="{% static 'images/services/services-img-4.jpg' %}" alt="Analitika hesabatı" loading="lazy">
-              <span class="service-detail-bento__zoom" aria-hidden="true"><iconify-icon icon="lucide:zoom-in"></iconify-icon></span>
-            </button>
-            <button type="button" class="service-detail-bento__item" data-gallery-index="4" aria-label="Şəkil 5 — böyüt">
-              <img src="{% static 'images/services/services-img-1.jpg' %}" alt="Məzmun istehsalı" loading="lazy">
-              <span class="service-detail-bento__zoom" aria-hidden="true"><iconify-icon icon="lucide:zoom-in"></iconify-icon></span>
-            </button>
-            <button type="button" class="service-detail-bento__item" data-gallery-index="5" aria-label="Şəkil 6 — böyüt">
-              <img src="{% static 'images/services/services-img-2.jpg' %}" alt="Komanda işi" loading="lazy">
-              <span class="service-detail-bento__zoom" aria-hidden="true"><iconify-icon icon="lucide:zoom-in"></iconify-icon></span>
-            </button>
+            {% endfor %}
           </div>
         </div>
       </div>
+      {% endif %}
 
       <div class="container">
         <div class="service-detail-cta" data-aos="fade-up" data-aos-delay="220" data-aos-duration="900">
@@ -211,11 +176,12 @@
 
   </div>
 
+  {% if service.gallery_images.all %}
   <div class="modal fade service-gallery-modal" id="serviceImageModal" tabindex="-1" aria-labelledby="serviceImageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content border-0 bg-transparent">
         <div class="modal-header border-0 position-absolute top-0 end-0 z-3 p-3 w-100 justify-content-between">
-          <span class="service-gallery-modal__counter text-white" id="serviceGalleryCounter" aria-live="polite">1 / 6</span>
+          <span class="service-gallery-modal__counter text-white" id="serviceGalleryCounter" aria-live="polite">1 / {{ service.gallery_images.all|length }}</span>
           <button type="button" class="service-gallery-modal__close" data-bs-dismiss="modal" aria-label="Bağlayın">
             <iconify-icon icon="lucide:x" aria-hidden="true"></iconify-icon>
           </button>
@@ -232,14 +198,11 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
   {% include 'includes/footer.html' %}
 
-  <aside class="floating-widgets" aria-label="Sürətli əlaqə">
-    <a href="tel:+994501234567" class="floating-widget-btn floating-widget-btn--call" aria-label="Zəng edin"><iconify-icon icon="lucide:phone"></iconify-icon></a>
-    <a href="https://wa.me/994501234567" target="_blank" rel="noopener" class="floating-widget-btn floating-widget-btn--whatsapp" aria-label="WhatsApp"><iconify-icon icon="mdi:whatsapp"></iconify-icon></a>
-    <button type="button" class="floating-widget-btn floating-widget-btn--top" id="scrollToTopBtn" aria-label="Başa qayıdın"><iconify-icon icon="lucide:arrow-up"></iconify-icon></button>
-  </aside>
+  {% include 'includes/floating-widgets.html' %}
 
   <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
   <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
@@ -248,7 +211,6 @@
   <script src="{% static 'js/includes.js' %}" defer></script>
   <script src="{% static 'js/i18n.js' %}"></script>
   <script src="{% static 'js/digiboom.js' %}"></script>
-  <script src="{% static 'js/services-data.js' %}"></script>
   <script src="{% static 'js/services-detail.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>

@@ -14,30 +14,6 @@ from django.db import models
 from core.utils import unique_slug_for
 
 
-PROJECT_TAG_ICON_CHOICES = [
-    ('lucide:briefcase', 'Agentlik / iş'),
-    ('lucide:graduation-cap', 'Academy / təlim'),
-    ('lucide:sparkles', 'Missiya / dəyərlər'),
-    ('lucide:target', 'Hədəf'),
-    ('lucide:users', 'Komanda'),
-    ('lucide:lightbulb', 'İdeya'),
-    ('lucide:rocket', 'Artım / start'),
-    ('lucide:heart', 'Dəyərlər'),
-    ('lucide:award', 'Mükafat / keyfiyyət'),
-    ('lucide:globe', 'Qlobal / region'),
-    ('lucide:code-2', 'Texnologiya'),
-    ('lucide:palette', 'Dizayn / brend'),
-    ('lucide:check-circle', 'Keyfiyyət / təsdiq'),
-    ('lucide:clock', 'Vaxt / sürət'),
-    ('lucide:shield-check', 'Etibar / təhlükəsizlik'),
-    ('lucide:trending-up', 'Artım'),
-    ('lucide:monitor', 'Web / monitor'),
-    ('lucide:smartphone', 'Mobil'),
-    ('lucide:camera', 'Foto / media'),
-    ('lucide:megaphone', 'Marketinq'),
-]
-
-
 class Project(models.Model):
     """Project — portfolio card + detail content."""
 
@@ -177,7 +153,10 @@ class Project(models.Model):
 
 
 class ProjectServiceTag(models.Model):
-    """Included service types — inline on Project edit."""
+    """
+    Layihəyə daxil olan xidmətlər — mövcud Service siyahısından seçilir.
+    Detail səhifədə xidmət detail-ə link olur; kartlarda ilk 2-si badge kimi görünür.
+    """
 
     project = models.ForeignKey(
         Project,
@@ -185,35 +164,22 @@ class ProjectServiceTag(models.Model):
         related_name='service_tags',
         verbose_name='Layihə',
     )
-    name_az = models.CharField(max_length=120, verbose_name='Ad (AZ)')
-    name_en = models.CharField(
-        max_length=120,
-        null=True,
-        blank=True,
-        verbose_name='Ad (EN)',
-    )
-    name_ru = models.CharField(
-        max_length=120,
-        null=True,
-        blank=True,
-        verbose_name='Ad (RU)',
-    )
-    icon = models.CharField(
-        max_length=64,
-        choices=PROJECT_TAG_ICON_CHOICES,
-        blank=True,
-        null=True,
-        verbose_name='İkon',
-        help_text='Hansı ikon seçilsə, saytda həmin ikon görünəcək.',
+    service = models.ForeignKey(
+        'core.Service',
+        on_delete=models.CASCADE,
+        related_name='project_tags',
+        verbose_name='Xidmət',
+        help_text='Mövcud xidmətlərdən seçin. Eyni xidməti bir layihəyə iki dəfə əlavə etmək olmaz.',
     )
 
     class Meta:
-        verbose_name = 'Xidmət teqi'
-        verbose_name_plural = 'Xidmət teqləri'
+        verbose_name = 'Daxil olan xidmət'
+        verbose_name_plural = 'Daxil olan xidmətlər'
         ordering = ('id',)
+        unique_together = (('project', 'service'),)
 
     def __str__(self):
-        return self.name_az or f'Tag #{self.pk}'
+        return str(self.service) if self.service_id else f'Tag #{self.pk}'
 
 
 class ProjectWhatWeDid(models.Model):

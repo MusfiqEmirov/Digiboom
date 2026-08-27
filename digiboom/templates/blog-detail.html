@@ -1,11 +1,11 @@
-﻿{% load static i18n %}
+﻿{% load static i18n digiboom_tags %}
 <!doctype html>
 <html lang="{{ LANGUAGE_CODE|default:'az' }}">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DigiBoom — Blog Yazısı</title>
+  <title>DigiBoom — {{ blog_title|default:'Blog' }}</title>
   <link rel="shortcut icon" type="image/png" href="{% static 'images/logos/favicon.svg' %}" />
   <link rel="stylesheet" href="{% static 'css/fonts.css' %}" />
   <link rel="stylesheet" href="{% static 'libs/aos-master/dist/aos.css' %}">
@@ -29,20 +29,14 @@
 
   <div class="page-wrapper overflow-hidden">
 
+    {% if blog.image %}
     <section class="banner-section banner-inner-section position-relative overflow-hidden d-flex align-items-end blog-detail-banner"
-      style="background-image: url({% static 'images/backgrounds/blog-detail-banner.jpg' %});">
+      style="background-image: url({{ blog.image.url }});">
       <div class="container">
-        <div class="d-flex flex-column gap-4 pb-5 pb-xl-10 position-relative z-1">
-          <div class="row align-items-center">
-            <div class="col-xl-5">
-              <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                <p class="mb-0 fs-5 page-banner-tagline">Məqaləni oxuyun — praktik məsləhətlər və peşəkar yanaşmalar.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="d-flex flex-column gap-4 pb-5 pb-xl-10 position-relative z-1"></div>
       </div>
     </section>
+    {% endif %}
 
     <section class="blog-detail-section">
       <div class="container">
@@ -59,34 +53,45 @@
               <article class="blog-detail-article" id="blogDetailArticle">
 
                 <header class="blog-detail-header">
-                  <span class="blog-detail-category" id="blogDetailCategory">Marketinq</span>
-                  <h1 class="blog-detail-title" id="blogDetailTitle">Məqalə başlığı</h1>
+                  {% if blog.category %}
+                  <span class="blog-detail-category" id="blogDetailCategory">{{ blog.category|localized:'name' }}</span>
+                  {% endif %}
+                  {% if blog_title %}<h1 class="blog-detail-title" id="blogDetailTitle">{{ blog_title }}</h1>{% endif %}
                   <div class="blog-detail-meta">
-                    <time class="blog-detail-date" id="blogDetailDate" datetime="2025-12-24">
+                    {% if blog.date %}
+                    <time class="blog-detail-date" id="blogDetailDate" datetime="{{ blog.date|date:'Y-m-d' }}">
                       <iconify-icon icon="lucide:calendar" aria-hidden="true"></iconify-icon>
-                      <span>24.12.2025</span>
+                      <span>{{ blog.date|date:'d.m.Y' }}</span>
                     </time>
+                    {% endif %}
+                    {% if blog.view_count %}
                     <span class="blog-detail-meta-divider" aria-hidden="true"></span>
-                    <span class="blog-detail-views" id="blogDetailViews" title="{% trans 'Təxmini baxış sayı' %}" aria-live="polite">
+                    <span class="blog-detail-views is-loaded" id="blogDetailViews" title="{% trans 'Baxış sayı' %}" aria-live="polite">
                       <iconify-icon icon="lucide:eye" aria-hidden="true"></iconify-icon>
-                      <span class="blog-detail-views__count" id="blogViewCount">~2400</span>
+                      <span class="blog-detail-views__count" id="blogViewCount">{{ blog.view_count }}</span>
                       <span class="blog-detail-views__label">{% trans "baxış" %}</span>
                     </span>
+                    {% endif %}
                   </div>
                 </header>
 
+                {% if blog.image %}
                 <figure class="blog-detail-hero" id="blogDetailHero">
-                  <img src="{% static 'images/resources/resources-1.jpg' %}" alt="" class="blog-detail-hero__img" id="blogDetailImage">
-                  <figcaption class="visually-hidden" id="blogDetailImageCaption"></figcaption>
+                  <img src="{{ blog.image.url }}" alt="{{ blog_title }}" class="blog-detail-hero__img" id="blogDetailImage">
+                  <figcaption class="visually-hidden" id="blogDetailImageCaption">{{ blog_title }}</figcaption>
                 </figure>
+                {% endif %}
 
+                {% if blog_body %}
                 <div class="blog-detail-content prose" id="blogDetailContent">
-                  <p>Məzmun yüklənir...</p>
+                  {{ blog_body|safe }}
                 </div>
+                {% endif %}
 
               </article>
             </div>
 
+            {% if other_blogs %}
             <aside class="col-lg-4 blog-detail-aside">
               <div class="blog-detail-sidebar">
                 <div class="blog-detail-related">
@@ -95,7 +100,25 @@
                     <h2 class="blog-detail-related__title">{% trans "Digər məqalələr" %}</h2>
                   </div>
                   <ul class="blog-related-list" id="blogRelatedList" aria-label="{% trans 'Digər məqalələr' %}">
-                    <!-- JS ilə doldurulur -->
+                    {% for post in other_blogs %}
+                    <li class="blog-related-item">
+                      <a href="{% url 'blog_detail' post.slug %}" class="blog-related-link">
+                        {% if post.image %}
+                        <span class="blog-related-link__thumb">
+                          <img src="{{ post.image.url }}" alt="" loading="lazy" width="72" height="72">
+                        </span>
+                        {% endif %}
+                        <span class="blog-related-link__body">
+                          {% if post.category %}<span class="blog-related-link__cat">{{ post.category|localized:'name' }}</span>{% endif %}
+                          <span class="blog-related-link__title">{{ post|localized:'name' }}</span>
+                          <span class="blog-related-link__meta">
+                            {% if post.date %}<time class="blog-related-link__date" datetime="{{ post.date|date:'Y-m-d' }}">{{ post.date|date:'d.m.Y' }}</time>{% endif %}
+                            {% if post.view_count %}<span class="blog-related-link__views" title="{% trans 'Baxış sayı' %}">{{ post.view_count }} {% trans "baxış" %}</span>{% endif %}
+                          </span>
+                        </span>
+                      </a>
+                    </li>
+                    {% endfor %}
                   </ul>
                   <a href="{% url 'blog' %}" class="blog-detail-related__all">
                     {% trans "Bütün məqalələr" %}
@@ -104,6 +127,7 @@
                 </div>
               </div>
             </aside>
+            {% endif %}
           </div>
 
         </div>
@@ -114,11 +138,7 @@
 
   {% include 'includes/footer.html' %}
 
-  <aside class="floating-widgets" aria-label="Sürətli əlaqə">
-    <a href="tel:+994501234567" class="floating-widget-btn floating-widget-btn--call" aria-label="Zəng edin"><iconify-icon icon="lucide:phone"></iconify-icon></a>
-    <a href="https://wa.me/994501234567" target="_blank" rel="noopener" class="floating-widget-btn floating-widget-btn--whatsapp" aria-label="WhatsApp"><iconify-icon icon="mdi:whatsapp"></iconify-icon></a>
-    <button type="button" class="floating-widget-btn floating-widget-btn--top" id="scrollToTopBtn" aria-label="Başa qayıdın"><iconify-icon icon="lucide:arrow-up"></iconify-icon></button>
-  </aside>
+  {% include 'includes/floating-widgets.html' %}
 
   <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
   <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
@@ -126,8 +146,6 @@
   <script src="{% static 'js/custom.js' %}"></script>
   <script src="{% static 'js/includes.js' %}" defer></script>
   <script src="{% static 'js/digiboom.js' %}"></script>
-  <script src="{% static 'js/blog-articles-data.js' %}"></script>
-  <script src="{% static 'js/blog-detail.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
 

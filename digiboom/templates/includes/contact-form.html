@@ -2,10 +2,12 @@
 <form id="{{ formId }}" class="contact-form-modern {{ formClass }}"
   {% if aos %}data-aos="{{ aos }}"{% if aos_delay %} data-aos-delay="{{ aos_delay }}"{% endif %}{% if aos_duration %} data-aos-duration="{{ aos_duration }}"{% endif %}{% endif %}
   method="post" action="{{ smtpAction }}" data-smtp-form novalidate>
+  {% csrf_token %}
   <div class="contact-form-modern__fields">
     {% if show_service %}
     <div class="contact-form-modern__field contact-form-modern__field--full">
       <label for="{{ prefix }}-service" class="contact-form-modern__label">{% trans "Xidmət" %}</label>
+      <input type="hidden" id="{{ prefix }}-service-id" name="service_id" value="">
       <input type="text" class="contact-form-modern__input contact-form-modern__input--service" id="{{ prefix }}-service" name="service" readonly required tabindex="-1">
     </div>
     {% endif %}

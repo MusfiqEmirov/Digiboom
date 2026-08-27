@@ -1,4 +1,4 @@
-﻿{% load static i18n %}
+﻿{% load static i18n digiboom_tags %}
 <!doctype html>
 <html lang="{{ LANGUAGE_CODE|default:'az' }}">
 
@@ -31,413 +31,88 @@
 <!--  Page Wrapper -->
   <div class="page-wrapper overflow-hidden">
 
+    {% if page_header.image or portfolio_motto %}
     <!--  Banner Section -->
     <section class="banner-section banner-inner-section position-relative overflow-hidden d-flex align-items-end"
-      style="background-image: url({% static 'images/backgrounds/projects-banner.jpg' %});">
+      {% if page_header.image %}style="background-image: url({{ page_header.image.url }});"{% endif %}>
       <div class="container">
         <div class="d-flex flex-column gap-4 pb-5 pb-xl-10 position-relative z-1">
           <div class="row align-items-center">
             <div class="col-xl-4">
+              {% if portfolio_motto %}
               <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100"
                 data-aos-duration="1000">
-                <p class="mb-0 fs-5 page-banner-tagline">Tamamlanmış layihələrimiz, real nəticələr və müştəri uğurları bir yerdə.</p>
+                <div class="mb-0 fs-5 page-banner-tagline">{{ portfolio_motto|safe }}</div>
               </div>
+              {% endif %}
             </div>
           </div>
         </div>
       </div>
     </section>
+    {% endif %}
 
+    {% if projects %}
     <!-- Portfolio grid -->
     <section class="project featured-projects--showcase py-5 py-lg-11 py-xl-12">
       <div class="featured-projects__atmosphere" aria-hidden="true"></div>
       <div class="container container--portfolio-grid position-relative">
-        <!-- Layihə kartları – 2 sıralı grid (desktop 3 sütun, mobil 2 sütun) -->
         <div id="portfolio-projects-grid" class="projects-page-grid featured-projects--showcase mx-auto">
+          {% for project in projects %}
           <article class="portfolio portfolio-showcase-card">
             <div class="portfolio-showcase-card__frame">
               <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                <img src="{% static 'images/portfolio/portfolio-img-1.jpg' %}" alt="TemizXalı" class="img-fluid">
+                {% if project.cover_image %}
+                <img src="{{ project.cover_image.url }}" alt="{{ project|localized:'name' }}" class="img-fluid">
+                {% endif %}
+                {% if project.url_web or project.url_facebook or project.url_instagram or project.url_tiktok or project.url_linkedin %}
                 <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
                   <div class="d-flex align-items-center justify-content-end w-100">
                     <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
+                      {% if project.url_web %}<li><a href="{{ project.url_web }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>{% endif %}
+                      {% if project.url_facebook %}<li><a href="{{ project.url_facebook }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>{% endif %}
+                      {% if project.url_instagram %}<li><a href="{{ project.url_instagram }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>{% endif %}
+                      {% if project.url_tiktok %}<li><a href="{{ project.url_tiktok }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>{% endif %}
+                      {% if project.url_linkedin %}<li><a href="{{ project.url_linkedin }}" target="_blank" rel="noopener" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>{% endif %}
                     </ul>
                   </div>
                 </div>
+                {% endif %}
               </div>
               <div class="portfolio-showcase-card__meta">
                 <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                  <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                  <h3 class="mb-0">TemizXalı</h3>
-                  <div class="portfolio-showcase-card__tags hstack gap-2">
-                    <span class="badge text-dark border">UX Strategy</span>
-                    <span class="badge text-dark border">UI Design</span>
+                  <h3 class="mb-0">{{ project|localized:'name' }}</h3>
+                  {% with tags=project.service_tags.all|slice:":2" %}
+                  {% if tags %}
+                  <div class="portfolio-showcase-card__tags">
+                    {% for tag in tags %}
+                    {% if tag.service_id %}
+                    <span class="badge portfolio-showcase-card__tag">
+                      {% with cslug=tag.service.category.slug %}
+                      {% if cslug == 'dizayn-brend' %}
+                      <iconify-icon icon="lucide:palette" aria-hidden="true"></iconify-icon>
+                      {% elif cslug == 'marketinq' %}
+                      <iconify-icon icon="lucide:megaphone" aria-hidden="true"></iconify-icon>
+                      {% else %}
+                      <iconify-icon icon="lucide:code-2" aria-hidden="true"></iconify-icon>
+                      {% endif %}
+                      {% endwith %}
+                      <span class="portfolio-showcase-card__tag-label">{{ tag.service|localized:'name' }}</span>
+                    </span>
+                    {% endif %}
+                    {% endfor %}
                   </div>
+                  {% endif %}
+                  {% endwith %}
                 </div>
-                <a href="{% url 'projects_detail' %}?project=temizxali" class="btn portfolio-showcase-card__cta">
-                  <span class="btn-text">Ətraflı</span>
+                <a href="{% url 'projects_detail' project.slug %}" class="btn portfolio-showcase-card__cta">
+                  <span class="btn-text">{% trans "Ətraflı" %}</span>
                   <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
                 </a>
               </div>
             </div>
           </article>
-          <article class="portfolio portfolio-showcase-card">
-            <div class="portfolio-showcase-card__frame">
-              <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                <img src="{% static 'images/portfolio/portfolio-img-2.jpg' %}" alt="BusinessCup" class="img-fluid">
-                <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                  <div class="d-flex align-items-center justify-content-end w-100">
-                    <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="portfolio-showcase-card__meta">
-                <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                  <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                  <h3 class="mb-0">BusinessCup</h3>
-                  <div class="portfolio-showcase-card__tags hstack gap-2">
-                    <span class="badge text-dark border">Web development</span>
-                    <span class="badge text-dark border">Digital design</span>
-                  </div>
-                </div>
-                <a href="{% url 'projects_detail' %}?project=bunisesscup" class="btn portfolio-showcase-card__cta">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="portfolio portfolio-showcase-card">
-            <div class="portfolio-showcase-card__frame">
-              <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                <img src="{% static 'images/portfolio/portfolio-img-3.jpg' %}" alt="NewAway" class="img-fluid">
-                <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                  <div class="d-flex align-items-center justify-content-end w-100">
-                    <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="portfolio-showcase-card__meta">
-                <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                  <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                  <h3 class="mb-0">NewAway</h3>
-                  <div class="portfolio-showcase-card__tags hstack gap-2">
-                    <span class="badge text-dark border">UI/UX design</span>
-                    <span class="badge text-dark border">Web development</span>
-                  </div>
-                </div>
-                <a href="{% url 'projects_detail' %}?project=newawey" class="btn portfolio-showcase-card__cta">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="portfolio portfolio-showcase-card">
-            <div class="portfolio-showcase-card__frame">
-              <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                <img src="{% static 'images/portfolio/portfolio-img-4.jpg' %}" alt="Snacks" class="img-fluid">
-                <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                  <div class="d-flex align-items-center justify-content-end w-100">
-                    <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="portfolio-showcase-card__meta">
-                <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                  <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                  <h3 class="mb-0">Snacks</h3>
-                  <div class="portfolio-showcase-card__tags hstack gap-2">
-                    <span class="badge text-dark border">Brand identity</span>
-                    <span class="badge text-dark border">Digital design</span>
-                  </div>
-                </div>
-                <a href="{% url 'projects_detail' %}?project=snakcs" class="btn portfolio-showcase-card__cta">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="portfolio portfolio-showcase-card">
-            <div class="portfolio-showcase-card__frame">
-              <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                <img src="{% static 'images/portfolio/portfolio-img-5.jpg' %}" alt="Kahi" class="img-fluid">
-                <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                  <div class="d-flex align-items-center justify-content-end w-100">
-                    <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="portfolio-showcase-card__meta">
-                <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                  <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                  <h3 class="mb-0">Kahi</h3>
-                  <div class="portfolio-showcase-card__tags hstack gap-2">
-                    <span class="badge text-dark border">Photography</span>
-                    <span class="badge text-dark border">Studio</span>
-                  </div>
-                </div>
-                <a href="{% url 'projects_detail' %}?project=kahi" class="btn portfolio-showcase-card__cta">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="portfolio portfolio-showcase-card">
-            <div class="portfolio-showcase-card__frame">
-              <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                <img src="{% static 'images/portfolio/portfolio-img-6.jpg' %}" alt="AvertaTravel" class="img-fluid">
-                <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                  <div class="d-flex align-items-center justify-content-end w-100">
-                    <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="portfolio-showcase-card__meta">
-                <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                  <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                  <h3 class="mb-0">AvertaTravel</h3>
-                  <div class="portfolio-showcase-card__tags hstack gap-2">
-                    <span class="badge text-dark border">Digital design</span>
-                    <span class="badge text-dark border">Web development</span>
-                  </div>
-                </div>
-                <a href="{% url 'projects_detail' %}?project=avertatravel" class="btn portfolio-showcase-card__cta">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="portfolio portfolio-showcase-card">
-            <div class="portfolio-showcase-card__frame">
-              <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                <img src="{% static 'images/portfolio/portfolio-img-1.jpg' %}" alt="Ganaqro" class="img-fluid">
-                <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                  <div class="d-flex align-items-center justify-content-end w-100">
-                    <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="portfolio-showcase-card__meta">
-                <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                  <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                  <h3 class="mb-0">Ganaqro</h3>
-                  <div class="portfolio-showcase-card__tags hstack gap-2">
-                    <span class="badge text-dark border">UX Strategy</span>
-                    <span class="badge text-dark border">UI Design</span>
-                  </div>
-                </div>
-                <a href="{% url 'projects_detail' %}?project=ganaqro" class="btn portfolio-showcase-card__cta">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="portfolio portfolio-showcase-card">
-            <div class="portfolio-showcase-card__frame">
-              <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                <img src="{% static 'images/portfolio/portfolio-img-2.jpg' %}" alt="Conco" class="img-fluid">
-                <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                  <div class="d-flex align-items-center justify-content-end w-100">
-                    <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="portfolio-showcase-card__meta">
-                <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                  <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                  <h3 class="mb-0">Conco</h3>
-                  <div class="portfolio-showcase-card__tags hstack gap-2">
-                    <span class="badge text-dark border">Digital design</span>
-                    <span class="badge text-dark border">Web development</span>
-                  </div>
-                </div>
-                <a href="{% url 'projects_detail' %}?project=conco" class="btn portfolio-showcase-card__cta">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="portfolio portfolio-showcase-card">
-            <div class="portfolio-showcase-card__frame">
-              <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                <img src="{% static 'images/portfolio/portfolio-img-3.jpg' %}" alt="Zəfər Kursu" class="img-fluid">
-                <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                  <div class="d-flex align-items-center justify-content-end w-100">
-                    <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="portfolio-showcase-card__meta">
-                <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                  <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                  <h3 class="mb-0">Zəfər Kursu</h3>
-                  <div class="portfolio-showcase-card__tags hstack gap-2">
-                    <span class="badge text-dark border">Education</span>
-                    <span class="badge text-dark border">Branding</span>
-                  </div>
-                </div>
-                <a href="{% url 'projects_detail' %}?project=zefer-kursu" class="btn portfolio-showcase-card__cta">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="portfolio portfolio-showcase-card">
-            <div class="portfolio-showcase-card__frame">
-              <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                <img src="{% static 'images/portfolio/portfolio-img-4.jpg' %}" alt="NordCasa" class="img-fluid">
-                <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                  <div class="d-flex align-items-center justify-content-end w-100">
-                    <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="portfolio-showcase-card__meta">
-                <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                  <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                  <h3 class="mb-0">NordCasa</h3>
-                  <div class="portfolio-showcase-card__tags hstack gap-2">
-                    <span class="badge text-dark border">Real estate</span>
-                    <span class="badge text-dark border">Web development</span>
-                  </div>
-                </div>
-                <a href="{% url 'projects_detail' %}?project=nordcasa" class="btn portfolio-showcase-card__cta">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="portfolio portfolio-showcase-card">
-            <div class="portfolio-showcase-card__frame">
-              <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                <img src="{% static 'images/portfolio/portfolio-img-5.jpg' %}" alt="MediBloom" class="img-fluid">
-                <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                  <div class="d-flex align-items-center justify-content-end w-100">
-                    <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="portfolio-showcase-card__meta">
-                <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                  <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                  <h3 class="mb-0">MediBloom</h3>
-                  <div class="portfolio-showcase-card__tags hstack gap-2">
-                    <span class="badge text-dark border">Healthcare</span>
-                    <span class="badge text-dark border">UI Design</span>
-                  </div>
-                </div>
-                <a href="{% url 'projects_detail' %}?project=medibloom" class="btn portfolio-showcase-card__cta">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="portfolio portfolio-showcase-card">
-            <div class="portfolio-showcase-card__frame">
-              <div class="portfolio-img position-relative overflow-hidden portfolio-showcase-card__media">
-                <img src="{% static 'images/portfolio/portfolio-img-6.jpg' %}" alt="AzerCargo" class="img-fluid">
-                <div class="portfolio-overlay portfolio-overlay--team-style d-flex flex-column justify-content-end">
-                  <div class="d-flex align-items-center justify-content-end w-100">
-                    <ul class="portfolio-overlay-social list-unstyled mb-0 hstack">
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Web"><iconify-icon icon="lucide:globe" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Facebook"><iconify-icon icon="mdi:facebook" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="Instagram"><iconify-icon icon="mdi:instagram" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="TikTok"><iconify-icon icon="fa-brands:tiktok" class="text-dark"></iconify-icon></a></li>
-                      <li><a href="#!" class="btn bg-white rounded-circle" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin" class="text-dark"></iconify-icon></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="portfolio-showcase-card__meta">
-                <div class="portfolio-details portfolio-showcase-card__details d-flex flex-column">
-                  <span class="portfolio-showcase-card__eyebrow">Seçilmiş layihə</span>
-                  <h3 class="mb-0">AzerCargo</h3>
-                  <div class="portfolio-showcase-card__tags hstack gap-2">
-                    <span class="badge text-dark border">Logistics</span>
-                    <span class="badge text-dark border">Branding</span>
-                  </div>
-                </div>
-                <a href="{% url 'projects_detail' %}?project=azercargo" class="btn portfolio-showcase-card__cta">
-                  <span class="btn-text">Ətraflı</span>
-                  <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark rounded-circle hstack justify-content-center shadow-sm"></iconify-icon>
-                </a>
-              </div>
-            </div>
-          </article>
+          {% endfor %}
         </div>
 
         <nav class="projects-pagination-ui mt-5 d-flex justify-content-center" aria-label="Layihələr səhifələmə">
@@ -458,15 +133,12 @@
 
       </div>
     </section>
+    {% endif %}
   </div>
 
   {% include 'includes/footer.html' %}
 
-<aside class="floating-widgets" aria-label="Sürətli əlaqə">
-    <a href="tel:+994501234567" class="floating-widget-btn floating-widget-btn--call" aria-label="Zəng edin"><iconify-icon icon="lucide:phone"></iconify-icon></a>
-    <a href="https://wa.me/994501234567" target="_blank" rel="noopener" class="floating-widget-btn floating-widget-btn--whatsapp" aria-label="WhatsApp"><iconify-icon icon="mdi:whatsapp"></iconify-icon></a>
-    <button type="button" class="floating-widget-btn floating-widget-btn--top" id="scrollToTopBtn" aria-label="Başa qayıdın"><iconify-icon icon="lucide:arrow-up"></iconify-icon></button>
-  </aside>
+  {% include 'includes/floating-widgets.html' %}
 
   <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
   <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
@@ -476,20 +148,12 @@
   <script src="{% static 'js/includes.js' %}" defer></script>
   <script src="{% static 'js/i18n.js' %}"></script>
   <script src="{% static 'js/digiboom.js' %}"></script>
-  <script src="{% static 'js/projects-data.js' %}"></script>
   <script>
     $(function () {
       var $grid = $('#portfolio-projects-grid');
       if (!$grid.length) return;
 
       var perPage = 6;
-      var $originals = $grid.children('.portfolio');
-      var targetTotal = perPage * 12;
-
-      while ($grid.children('.portfolio').length < targetTotal) {
-        $grid.append($originals.eq($grid.children('.portfolio').length % $originals.length).clone(false));
-      }
-
       var $items = $grid.find('.portfolio');
       var total = $items.length;
       var totalPages = Math.max(1, Math.ceil(total / perPage));
@@ -497,6 +161,10 @@
       var $links = $ui.find('.projects-pagination-links');
       var $prev = $ui.find('.projects-pagination-prev');
       var $next = $ui.find('.projects-pagination-next');
+
+      if (total <= perPage) {
+        $ui.addClass('d-none');
+      }
 
       function setNavDisabled($btn, isDisabled) {
         if (isDisabled) {
@@ -509,17 +177,13 @@
       function getPageWindow(currentPage) {
         var windowSize = 3;
         var start = currentPage;
-
         if (currentPage > totalPages - windowSize) {
           start = Math.max(1, currentPage - windowSize + 1);
         }
-
         var end = Math.min(start + windowSize - 1, totalPages);
-
         if (end - start + 1 < windowSize) {
           start = Math.max(1, end - windowSize + 1);
         }
-
         return { start: start, end: end, size: windowSize };
       }
 
@@ -527,7 +191,6 @@
         $links.empty();
         setNavDisabled($prev, currentPage <= 1);
         setNavDisabled($next, currentPage >= totalPages);
-
         if (totalPages <= 1) return;
 
         var win = getPageWindow(currentPage);
@@ -565,10 +228,8 @@
       function showPage(page) {
         if (page < 1) page = 1;
         if (page > totalPages) page = totalPages;
-
         var start = (page - 1) * perPage;
         var end = start + perPage;
-
         $items.hide().slice(start, end).show();
         renderPagination(page);
       }
@@ -577,7 +238,6 @@
 
       $links.on('click', 'a.projects-pg-num', function (e) {
         e.preventDefault();
-        if ($(this).hasClass('projects-pg-num--disabled')) return;
         var p = parseInt($(this).data('page'), 10);
         if (!isNaN(p) && p >= 1 && p <= totalPages) {
           showPage(p);
@@ -605,7 +265,6 @@
     });
   </script>
   <script src="{% static 'js/portfolio-cards.js' %}"></script>
-  <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
 

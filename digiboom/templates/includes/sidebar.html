@@ -128,18 +128,22 @@
 
     <div class="mobile-nav__footer">
       <div class="mobile-nav__contact-info">
-        <a href="tel:+994501234567" class="mobile-nav__contact-row">
+        {% if site_contact.phone %}
+        <a href="tel:{{ site_contact.phone }}" class="mobile-nav__contact-row">
           <span class="mobile-nav__contact-icon">
             <iconify-icon icon="solar:phone-calling-linear" width="20" height="20"></iconify-icon>
           </span>
-          <span>+994 50 123 45 67</span>
+          <span>{{ site_contact.phone }}</span>
         </a>
-        <a href="mailto:info@digiboom.az" class="mobile-nav__contact-row">
+        {% endif %}
+        {% if site_contact.email %}
+        <a href="mailto:{{ site_contact.email }}" class="mobile-nav__contact-row">
           <span class="mobile-nav__contact-icon">
             <iconify-icon icon="solar:letter-linear" width="20" height="20"></iconify-icon>
           </span>
-          <span>info@digiboom.az</span>
+          <span>{{ site_contact.email }}</span>
         </a>
+        {% endif %}
       </div>
     </div>
   </div>
