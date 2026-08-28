@@ -14,8 +14,10 @@ __pycache__/
 *$py.class
 *.egg-info/
 .eggs/
-dist/
-build/
+# Root Python packaging only. A bare `dist/` also hid static/libs/*/dist/
+# (jQuery, Bootstrap, Owl, AOS) and those 404'd in production.
+/dist/
+/build/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
