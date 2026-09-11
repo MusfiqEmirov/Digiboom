@@ -379,11 +379,11 @@ body.site-splash-active {
   .hero-banner-nav--next { right: 12px; }
 }
 
-/* Banner — deviz / tagline (tək rəng) */
+/* Banner — deviz / tagline (default rəng; CKEditor inline color üstün gəlir) */
 .hero-banner-tagline,
 .page-banner-tagline,
 .cp-banner__lead {
-  color: rgba(255, 255, 255, 0.88) !important;
+  color: rgba(255, 255, 255, 0.88);
   line-height: 1.5;
   letter-spacing: 0.01em;
 }
@@ -3831,6 +3831,18 @@ body[data-active-page="services"] .services-page-section {
   display: flex;
   align-items: stretch;
 }
+.testimonial-slider-wrapper--few .testimonial-slider .owl-stage {
+  margin-left: auto;
+  margin-right: auto;
+}
+.testimonial-slider-wrapper--single .testimonial-nav-btn {
+  display: none !important;
+}
+@media (min-width: 992px) {
+  .testimonial-slider-wrapper--few .testimonial-nav-btn {
+    display: none !important;
+  }
+}
 .testimonial-slider .owl-item {
   display: flex;
   height: auto;
@@ -3886,6 +3898,20 @@ body[data-active-page="services"] .services-page-section {
 }
 .testimonial-card--dark .testimonial-stars iconify-icon.is-filled {
   color: #ffd166;
+}
+.testimonial-author img,
+.testimonial-slider .card-body img.rounded-circle {
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px;
+  min-height: 56px;
+  max-width: 56px !important;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: block;
 }
 .testimonial-author__avatar {
   width: 56px;
@@ -6793,9 +6819,11 @@ body.modal-open .floating-widgets {
   font-family: var(--db-font-display, 'Unbounded', sans-serif);
   font-size: clamp(1.1rem, 2vw, 1.35rem);
   font-weight: 700;
-  color: var(--db-dark);
   margin: 2rem 0 0.85rem;
   letter-spacing: -0.01em;
+}
+.blog-detail-content h2:not([style*="color"]) {
+  color: var(--db-dark);
 }
 .blog-detail-content blockquote {
   margin: 1.75rem 0;
@@ -7330,17 +7358,29 @@ a.project-detail-tags__item:hover,
     font-size: 1.12rem;
   }
 }
-.project-digiboom-editor p {
+.project-digiboom-editor p:not([style*="color"]) {
   font-size: 0.96rem;
   line-height: 1.8;
   color: rgba(var(--db-dark-rgb), 0.72);
   margin-bottom: 0.85rem;
 }
-.project-digiboom-editor h3 {
+.project-digiboom-editor p[style*="color"] {
+  font-size: 0.96rem;
+  line-height: 1.8;
+  margin-bottom: 0.85rem;
+}
+.project-digiboom-editor h3:not([style*="color"]) {
   font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--db-dark);
+  margin: 1.5rem 0 0.75rem;
+  letter-spacing: -0.01em;
+}
+.project-digiboom-editor h3[style*="color"] {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
   margin: 1.5rem 0 0.75rem;
   letter-spacing: -0.01em;
 }
@@ -8027,17 +8067,29 @@ body:has(.project-detail-page) .footer-modern {
   padding-bottom: 1.1rem;
   border-bottom: 1px solid rgba(var(--db-dark-rgb), 0.07);
 }
-.service-digiboom-editor p {
+.service-digiboom-editor p:not([style*="color"]) {
   font-size: 0.96rem;
   line-height: 1.82;
   color: rgba(var(--db-dark-rgb), 0.72);
   margin-bottom: 0.9rem;
 }
-.service-digiboom-editor h3 {
+.service-digiboom-editor p[style*="color"] {
+  font-size: 0.96rem;
+  line-height: 1.82;
+  margin-bottom: 0.9rem;
+}
+.service-digiboom-editor h3:not([style*="color"]) {
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 700;
   color: var(--db-dark);
+  margin: 1.75rem 0 1rem;
+  letter-spacing: -0.02em;
+}
+.service-digiboom-editor h3[style*="color"] {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
   margin: 1.75rem 0 1rem;
   letter-spacing: -0.02em;
 }
@@ -8515,25 +8567,33 @@ body:has(.project-detail-page) .footer-modern {
 /* About page — CMS HTML (motto / mezmun) keeps existing banner & promo look */
 .about-cms-motto p {
   margin: 0;
-  color: inherit;
   font-size: inherit;
   line-height: inherit;
+}
+.about-cms-motto p:not([style*="color"]) {
+  color: inherit;
 }
 .about-cms-mezmun > h1,
 .about-cms-mezmun > h2,
 .about-cms-mezmun > h3 {
   font-size: clamp(1.65rem, 2.8vw, 2.35rem);
   line-height: 1.15;
-  color: #fff;
   width: 100%;
   margin: 0;
+}
+.about-cms-mezmun > h1:not([style*="color"]),
+.about-cms-mezmun > h2:not([style*="color"]),
+.about-cms-mezmun > h3:not([style*="color"]) {
+  color: #fff;
 }
 .about-cms-mezmun > p {
   font-size: 1.1rem;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.78);
   width: 100%;
   margin: 0;
+}
+.about-cms-mezmun > p:not([style*="color"]) {
+  color: rgba(255, 255, 255, 0.78);
 }
 .about-cms-mezmun > * + * {
   margin-top: 1rem;

@@ -216,6 +216,12 @@ msgstr "What's included"
 msgid "Ofisimiz"
 msgstr "Our office"
 
+msgid "Online Təlimlər"
+msgstr "Online Trainings"
+
+msgid "Orta"
+msgstr "Intermediate"
+
 msgid "Orta səviyyə"
 msgstr "Intermediate"
 
@@ -372,6 +378,9 @@ msgstr "Proceed to payment"
 
 msgid "Ünvan"
 msgstr "Address"
+
+msgid "İrəli"
+msgstr "Advanced"
 
 msgid "İstəyə bağlı · PNG, JPG"
 msgstr "Optional · PNG, JPG"

@@ -112,7 +112,7 @@
             <ul class="training-spotlight__meta">
               {% if featured_training.duration_hours %}<li><iconify-icon icon="lucide:clock" aria-hidden="true"></iconify-icon> {{ featured_training.duration_hours }} {% trans "saat" %}</li>{% endif %}
               {% if featured_training.lesson_count %}<li><iconify-icon icon="lucide:layers" aria-hidden="true"></iconify-icon> {{ featured_training.lesson_count }} {% trans "dərs" %}</li>{% endif %}
-              {% if featured_training.level %}<li><iconify-icon icon="lucide:signal" aria-hidden="true"></iconify-icon> {{ featured_training.get_level_display }}</li>{% endif %}
+              {% if featured_training.level %}<li><iconify-icon icon="lucide:signal" aria-hidden="true"></iconify-icon> {% trans featured_training.get_level_display %}</li>{% endif %}
             </ul>
             <div class="training-spotlight__footer">
               {% if featured_training.price %}<span class="training-spotlight__price">{{ featured_training.price }} <small>AZN</small></span>{% endif %}
@@ -162,7 +162,7 @@
                 <div class="training-course__content">
                   <div class="training-course__top">
                     <span class="training-course__cat">{{ training.category|localized:'name' }}</span>
-                    {% if training.level %}<span class="training-course__level">{{ training.get_level_display }}</span>{% endif %}
+                    {% if training.level %}<span class="training-course__level">{% trans training.get_level_display %}</span>{% endif %}
                   </div>
                   <h3 class="training-course__title"><a href="{% url 'training_detail' training.slug %}">{{ training|localized:'name' }}</a></h3>
                   {% with excerpt=training|localized:'description'|plain_text|truncatewords:18 %}

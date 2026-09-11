@@ -208,3 +208,12 @@ DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
 CONTACT_RECEIVER_EMAIL = os.getenv('CONTACT_RECEIVER_EMAIL', EMAIL_HOST_USER)
 SITE_NAME = os.getenv('SITE_NAME', 'DigiBoom')
 SITE_DOMAIN = os.getenv('SITE_DOMAIN', 'www.digiboom.az')
+
+# Merges with django-ckeditor defaults (Bold, Link, Lists, Source, …).
+CKEDITOR_CONFIGS = {
+    'default': {
+        'extraPlugins': 'colorbutton,colordialog,panelbutton',
+        'colorButton_enableMore': True,
+        'allowedContent': True,
+    }
+}
