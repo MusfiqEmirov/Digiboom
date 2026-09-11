@@ -57,7 +57,7 @@
               <div class="training-detail__meta">
                 {% if training.duration_hours %}<span class="training-detail__meta-item"><iconify-icon icon="lucide:clock"></iconify-icon> {{ training.duration_hours }} {% trans "saat" %}</span>{% endif %}
                 {% if training.lesson_count %}<span class="training-detail__meta-item"><iconify-icon icon="lucide:play-circle"></iconify-icon> {{ training.lesson_count }} {% trans "dərs" %}</span>{% endif %}
-                {% if training.level %}<span class="training-detail__meta-item"><iconify-icon icon="lucide:bar-chart-2"></iconify-icon> {{ training.get_level_display }}</span>{% endif %}
+                {% if training.level %}<span class="training-detail__meta-item"><iconify-icon icon="lucide:bar-chart-2"></iconify-icon> {% trans training.get_level_display %}</span>{% endif %}
                 {% if training.price %}<span class="training-detail__meta-item"><iconify-icon icon="lucide:tag"></iconify-icon> {{ training.price }} AZN</span>{% endif %}
               </div>
             </div>

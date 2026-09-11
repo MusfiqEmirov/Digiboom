@@ -217,6 +217,12 @@ msgstr "Что входит"
 msgid "Ofisimiz"
 msgstr "Наш офис"
 
+msgid "Online Təlimlər"
+msgstr "Онлайн-обучение"
+
+msgid "Orta"
+msgstr "Средний"
+
 msgid "Orta səviyyə"
 msgstr "Средний уровень"
 
@@ -372,6 +378,9 @@ msgstr "Перейти к оплате"
 
 msgid "Ünvan"
 msgstr "Адрес"
+
+msgid "İrəli"
+msgstr "Продвинутый"
 
 msgid "İstəyə bağlı · PNG, JPG"
 msgstr "Необязательно · PNG, JPG"

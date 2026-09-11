@@ -332,16 +332,34 @@ $(function () {
 
         initTestimonialStars();
 
+        var testimonialItemCount = $testimonialSlider.children('.item').length;
+        var useLoopDesktop = testimonialItemCount > 3;
+        var useLoopMobile = testimonialItemCount > 1;
+        var $testimonialWrapper = $testimonialSlider.closest('.testimonial-slider-wrapper');
+        $testimonialWrapper.toggleClass('testimonial-slider-wrapper--single', testimonialItemCount <= 1);
+        $testimonialWrapper.toggleClass('testimonial-slider-wrapper--few', testimonialItemCount <= 3);
+
         $testimonialSlider.owlCarousel({
-            loop: true,
             margin: 24,
             nav: false,
             dots: false,
             autoplay: false,
             startPosition: 0,
             responsive: {
-                0: { items: 1 },
-                992: { items: 3 }
+                0: {
+                    items: 1,
+                    loop: useLoopMobile,
+                    mouseDrag: useLoopMobile,
+                    touchDrag: useLoopMobile,
+                    pullDrag: useLoopMobile
+                },
+                992: {
+                    items: 3,
+                    loop: useLoopDesktop,
+                    mouseDrag: useLoopDesktop,
+                    touchDrag: useLoopDesktop,
+                    pullDrag: useLoopDesktop
+                }
             }
         });
 
@@ -356,7 +374,13 @@ $(function () {
         $('.testimonial-nav-prev').on('click', goTestimonialPrev);
         $('.testimonial-nav-next').on('click', goTestimonialNext);
 
+        function canTestimonialAutoplay() {
+            return window.innerWidth >= 992 ? useLoopDesktop : useLoopMobile;
+        }
+
         function startAutoplay() {
+            stopAutoplay();
+            if (!canTestimonialAutoplay()) return;
             testimonialAutoplayTimer = setInterval(goTestimonialNext, 5000);
         }
         function stopAutoplay() {
@@ -366,7 +390,8 @@ $(function () {
             }
         }
         startAutoplay();
-        $('.testimonial-slider-wrapper').on('mouseenter', stopAutoplay).on('mouseleave', startAutoplay);
+        $testimonialWrapper.on('mouseenter', stopAutoplay).on('mouseleave', startAutoplay);
+        $(window).on('resize', startAutoplay);
 
         window.addSubmittedTestimonial = function (data) {
             var rating = Math.max(1, Math.min(5, parseInt(data.rating, 10) || 5));

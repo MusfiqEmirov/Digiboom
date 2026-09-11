@@ -65,7 +65,7 @@
           {% for svc in footer_services %}
           <li>
             <a href="{% url 'services_detail' svc.slug %}">
-              <img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{% firstof svc.name_az svc.name_en svc.name_ru "Xidmət" %}
+              <img src="{% static 'images/svgs/primary-leaf.svg' %}" alt="" width="20" height="20" class="img-fluid animate-spin">{{ svc|localized:'name' }}
             </a>
           </li>
           {% empty %}
